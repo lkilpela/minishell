@@ -25,7 +25,7 @@
 Minishell is a simple, minimalistic shell implemented in C. It provides a command line user interface for Unix-like operating systems.
 
 Features
-- Basic commands: echo, cd, setenv, unsetenv, env, exit
+- Basic commands: `echo`, `cd`, `setenv`, `unsetenv`, `env`, `exit`
 - Program execution with its parameters
-- Redirections (>, >>, <) and pipes (|)
+- Redirections (`>`, `>>`, `<`) and pipes (`|`)
 - Use of up and down arrows for the command history

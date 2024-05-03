@@ -10,7 +10,7 @@
 <p align="center">
     <img alt="score" src="https://img.shields.io/badge/score-0%2F100-brightgreen" />
 <p align="center">
-    <img alt="group" src="https://img.shields.io/badge/solo-yellow" />
+    <img alt="group" src="https://img.shields.io/badge/group-yellow" />
     <img alt="estimated time" src="https://img.shields.io/badge/estimation-70%20hours-blue" />
     <img alt="XP earned" src="https://img.shields.io/badge/XP-2814-orange" />
 <p align="center">

@@ -24,8 +24,16 @@
 
 Minishell is a simple, minimalistic shell implemented in C. It provides a command line user interface for Unix-like operating systems.
 
-Features
-- Basic commands: `echo`, `cd`, `setenv`, `unsetenv`, `env`, `exit`
-- Program execution with its parameters
-- Redirections (`>`, `>>`, `<`) and pipes (`|`)
-- Use of up and down arrows for the command history
+### Requirements
+- Display a prompt when waiting for a new command
+- Have a working history
+- Search and launch the right executable (based on the PATH variable or using a relative or an absolute path)
+- Avoid using more than one global variable to indicate a received signal
+- Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon)
+- Handle ’ (single quote) and " (double quote) in command input
+- Implement redirections: `<` for input, `>` for output, `<<` for input until a delimiter, `>>` for output in append mode
+- Implement pipes (`|`)
+- Handle environment variables (`$` followed by a sequence of characters)
+- Handle `$?` which should expand to the exit status of the most recently executed foreground pipeline
+- Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash
+- Implement the following builtins: `echo` with option `-n`, `cd` with only a relative or absolute path, `pwd` with no options, `export` with no options, `unset` with no options, `env` with no options or arguments, `exit` with no options

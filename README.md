@@ -8,18 +8,12 @@
 	<b><i>A Minimalistic Shell Implementation in C</i></b><br>
 </p>
 
-<p align="center">
-    <img alt="score" src="https://img.shields.io/badge/score-0%2F100-brightgreen" />
-<p align="center">
-    <img alt="group" src="https://img.shields.io/badge/group-yellow" />
-    <img alt="estimated time" src="https://img.shields.io/badge/estimation-210%20hours-blue" />
-    <img alt="XP earned" src="https://img.shields.io/badge/XP-2814-orange" />
-<p align="center">
-	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/lkilpela/pipex?color=lightblue" />
-	<img alt="Code language count" src="https://img.shields.io/github/languages/count/lkilpela/philosophers?color=yellow" />
-	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lkilpela/philosophers?color=blue" />
-	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/lkilpela/philosophers?color=green" />
-</p>
+## Resources
+
+1. https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
+2. https://github.com/Swoorup/mysh
+3. Shell syntax: https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
+4. https://minishell.simple.ink/
 
 ## About The Project
 
@@ -71,3 +65,18 @@ Minishell is a simple, minimalistic shell implemented in C. It provides a comman
 - `getenv`: Gets an environment variable.
 -  `tcsetattr, tcgetattr`: Functions to get and set terminal attributes.
 - `tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs`: Functions from the termcap library used for terminal handling.
+
+
+<!--
+<p align="center">
+    <img alt="score" src="https://img.shields.io/badge/score-0%2F100-brightgreen" />
+<p align="center">
+    <img alt="group" src="https://img.shields.io/badge/group-yellow" />
+    <img alt="estimated time" src="https://img.shields.io/badge/estimation-210%20hours-blue" />
+    <img alt="XP earned" src="https://img.shields.io/badge/XP-2814-orange" />
+<p align="center">
+	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/lkilpela/pipex?color=lightblue" />
+	<img alt="Code language count" src="https://img.shields.io/github/languages/count/lkilpela/philosophers?color=yellow" />
+	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lkilpela/philosophers?color=blue" />
+	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/lkilpela/philosophers?color=green" />
+</p> -->

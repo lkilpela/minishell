@@ -1,0 +1,16 @@
+{
+    "configurations": [
+      {
+        "name": "mine",
+        "includePath": [
+          "/home/aklein/minishell/include"
+        ],
+        "defines": [],
+        "compilerPath": "/usr/bin/gcc",
+        "cStandard": "${default}",
+        "cppStandard": "${default}",
+        "intelliSenseMode": "${default}"
+      }
+    ],
+    "version": 4
+  }

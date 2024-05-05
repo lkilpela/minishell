@@ -1,0 +1,4 @@
+obj/
+minishell
+archive/
+*.a

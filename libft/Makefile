@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/29 16:17:19 by aklein            #+#    #+#              #
-#    Updated: 2024/05/06 00:04:11 by aklein           ###   ########.fr        #
+#    Updated: 2024/05/06 00:44:46 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,7 @@ INCLUDES	=	./include
 ################################################################################
 CC				=	cc
 CC_STRICT		=	-Wall -Wextra -Werror
-CC_DEBUG		=	#-g #-fsanitize=leak
+CC_DEBUG		=	-g #-fsanitize=leak
 HEADERS			=	-I $(INCLUDES)
 CC_FULL			=	$(CC) $(CC_STRICT) $(HEADERS) $(CC_DEBUG)
 

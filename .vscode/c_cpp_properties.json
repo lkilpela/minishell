@@ -3,7 +3,7 @@
       {
         "name": "mine",
         "includePath": [
-          "/home/aklein/minishell/include"
+          "${workspaceFolder}/include"
         ],
         "defines": [],
         "compilerPath": "/usr/bin/gcc",

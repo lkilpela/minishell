@@ -43,7 +43,8 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 <img src="https://github.com/lkilpela/minishell/blob/main/doc/minishell_mindmap.png" />
 
 ### External functions
-
+<details>
+  <summary>Click to expand </summary>
 | Name | Description |
 | --- | --- |
 | `readline` | Reads a line from the terminal and returns it.|
@@ -69,7 +70,7 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 | `getenv`| Gets an environment variable.|
 |  `tcsetattr, tcgetattr`| Functions to get and set terminal attributes.|
 | `tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs`| Functions from the termcap library used for terminal handling.|
-
+</details>
 ## Resources
 
 ### unix

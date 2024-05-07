@@ -1,7 +1,7 @@
 ## In Collaboration with Allar Klein
 <h1 align="center">
 	<img src="https://github.com/lkilpela/42-project-badges/blob/main/badges/minishelle.png" />
-    <b><i>A Minimalistic Shell Implementation in C</i></b><br>
+    <b><i>A Mini Recreation of Bash</i></b><br>
 
 </h1>
 
@@ -14,7 +14,7 @@
 
 ## About The Project
 
-Minishell is a simple, minimalistic shell implemented in C. It provides a command line user interface for Unix-like operating systems.
+Minishell is a simple, mini shell implemented in C. It provides a command line user interface for Unix-like operating systems.
 
 ### Requirements
 - Display a prompt when waiting for a new command
@@ -23,11 +23,15 @@ Minishell is a simple, minimalistic shell implemented in C. It provides a comman
 - Avoid using more than one global variable to indicate a received signal
 - Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon)
 - Handle ’ (single quote) and " (double quote) in command input
-- Implement redirections: `<` for input, `>` for output, `<<` for input until a delimiter, `>>` for output in append mode
+- Implement redirections:
+	- `<` redirect input
+	- `>` redirect output
+ 	- `<<` for input until a delimiter (heredoc)
+  	- `>>` for output in append mode
 - Implement pipes (`|`)
 - Handle environment variables (`$` followed by a sequence of characters)
 - Handle `$?` which should expand to the exit status of the most recently executed foreground pipeline
-- Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash
+- Handle `ctrl-C`, `ctrl-D` and `ctrl-\` which should behave like in bash
 - Implement the following builtins: 
     - `echo` with option `-n`
     - `cd` with only a relative or absolute path
@@ -36,6 +40,15 @@ Minishell is a simple, minimalistic shell implemented in C. It provides a comman
     - `unset` with no options
     - `env` with no options or arguments
     - `exit` with no options
+ 
+🚫 No Implementation Needed
+- && and ||
+- wildcards
+- special symbols that were not specifically asked for
+
+## Implementation
+
+### Builtins
 
 ### External functions
 

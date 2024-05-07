@@ -38,6 +38,10 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 - wildcards
 - Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon)
 
+### Mindmap
+
+<img src="https://github.com/lkilpela/minishell/blob/main/doc/minishell_mindmap.png" />
+
 ## Implementation
 
 ### Builtins

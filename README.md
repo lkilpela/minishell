@@ -76,18 +76,6 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 4. https://minishell.simple.ink/
 5. https://github.com/maiadegraaf/minishell
 6. https://github.com/LucasKuhn/minishell_tester
+7. https://github.com/vportens/minishell
+8. https://github.com/paulahemsi/minishell
 
-
-<!--
-<p align="center">
-    <img alt="score" src="https://img.shields.io/badge/score-0%2F100-brightgreen" />
-<p align="center">
-    <img alt="group" src="https://img.shields.io/badge/group-yellow" />
-    <img alt="estimated time" src="https://img.shields.io/badge/estimation-210%20hours-blue" />
-    <img alt="XP earned" src="https://img.shields.io/badge/XP-2814-orange" />
-<p align="center">
-	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/lkilpela/pipex?color=lightblue" />
-	<img alt="Code language count" src="https://img.shields.io/github/languages/count/lkilpela/philosophers?color=yellow" />
-	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/lkilpela/philosophers?color=blue" />
-	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/lkilpela/philosophers?color=green" />
-</p> -->

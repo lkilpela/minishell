@@ -59,7 +59,8 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 ### External functions
 <details>
   <summary>Click to expand </summary>
-	
+
+| Name | Description |	
 | --- | --- |
 | **libft**| A library of reproduction standard C library functions.|
 

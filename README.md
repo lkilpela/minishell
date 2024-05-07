@@ -15,7 +15,7 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 - Search and launch the right executable (based on the PATH variable or using a relative or an absolute path)
 - Avoid using more than one global variable to indicate a received signal
 - Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon)
-- Handle ’ (single quote) and " (double quote) in command input
+- Handle `’` (single quote) and `"`(double quote) in command input
 - Implement redirections:
 	- `<` redirect input
 	- `>` redirect output

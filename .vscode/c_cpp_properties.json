@@ -3,7 +3,8 @@
       {
         "name": "mine",
         "includePath": [
-          "${workspaceFolder}/include"
+          "${workspaceFolder}/include",
+          "${workspaceFolder}/libft/include",
         ],
         "defines": [],
         "compilerPath": "/usr/bin/gcc",

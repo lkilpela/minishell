@@ -72,12 +72,30 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 
 ## Resources
 
-1. https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
-2. https://github.com/Swoorup/mysh
-3. Shell syntax: https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
-4. https://minishell.simple.ink/
-5. https://github.com/maiadegraaf/minishell
-6. https://github.com/LucasKuhn/minishell_tester
-7. https://github.com/vportens/minishell
-8. https://github.com/paulahemsi/minishell
+### unix
+1. [Writing Your Own Shell](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf)
+2. [Unix Processes in C -video](https://www.youtube.com/playlist?list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY)
+3. [Shell syntax](https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html)
+4. [Termination Signals](https://www.gnu.org/software/libc/manual/html_node/Termination-Signals.html)
+5. [Bash Guide for Beginners](https://tldp.org/LDP/Bash-Beginners-Guide/html/index.html)
+6. [Programming Terminal Devices -video](https://www.youtube.com/watch?v=t5sC6G73oo4)
+7. [Introduction to System Programming -video](https://www.youtube.com/watch?v=qThI-U34KYs&list=PL7B2bn3G_wfC-mRpG7cxJMnGWdPAQTViW)
+8. [Capturing exit status code of child process](https://stackoverflow.com/questions/27306764/capturing-exit-status-code-of-child-process)
+9. [Notion with details about Readline lib, Termcaps and Signals](https://www.notion.so/Minishell-e856e9af377f44b588e5fe120d4b6e2a)
+
+### hashtable
+10. [Hash Table in C/C++ – A Complete Implementation](https://www.journaldev.com/35238/hash-table-in-c-plus-plus)
+
+### tokenizer
+11. [Lexical Analysis](https://en.wikipedia.org/wiki/Lexical_analysis)
+
+### more
+12. [Notion with tons of materials](https://www.notion.so/Minishell-Materials-7bbd45a806e04395ab578ca3f805806c)
+
+### Other github's codes:
+1. https://github.com/Swoorup/mysh
+2. https://github.com/maiadegraaf/minishell
+3. https://github.com/LucasKuhn/minishell_tester
+4. https://github.com/vportens/minishell
+5. https://github.com/paulahemsi/minishell
 

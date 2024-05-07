@@ -40,7 +40,7 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 
 ### Mindmap
 (Source: paulahemsi)
-<img src="https://github.com/lkilpela/minishell/blob/main/doc/minishell_mindmap.png" />
+![mindmap](https://github.com/lkilpela/minishell/blob/main/doc/minishell_mindmap.png)
 
 ### External functions
 <details>
@@ -71,6 +71,7 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 |  `tcsetattr, tcgetattr`| Functions to get and set terminal attributes.|
 | `tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs`| Functions from the termcap library used for terminal handling.|
 </details>
+
 ## Resources
 
 ### unix

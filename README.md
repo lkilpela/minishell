@@ -5,13 +5,6 @@
 
 </h1>
 
-## Resources
-
-1. https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
-2. https://github.com/Swoorup/mysh
-3. Shell syntax: https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
-4. https://minishell.simple.ink/
-
 ## About The Project
 
 Minishell is a simple, mini shell implemented in C. It provides a command line user interface for Unix-like operating systems.
@@ -75,6 +68,13 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 - `getenv`: Gets an environment variable.
 -  `tcsetattr, tcgetattr`: Functions to get and set terminal attributes.
 - `tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs`: Functions from the termcap library used for terminal handling.
+
+## Resources
+
+1. https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
+2. https://github.com/Swoorup/mysh
+3. Shell syntax: https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
+4. https://minishell.simple.ink/
 
 
 <!--

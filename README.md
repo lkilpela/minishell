@@ -60,11 +60,8 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 <details>
   <summary>Click to expand </summary>
 
-| Name | Description |	
-| --- | --- |
-| **libft**| A library of reproduction standard C library functions.|
-
 | Name | Description |
+| **libft**| A library of reproduction standard C library functions.|
 | --- | --- |
 | `readline` | Reads a line from the terminal and returns it.|
 | `rl_clear_history`, `rl_on_new_line`, `rl_replace_line`, `rl_redisplay`, `add_history` | Functions from the readline library used to manipulate the command line history.|

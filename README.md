@@ -112,10 +112,10 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 12. [Notion with tons of materials](https://www.notion.so/Minishell-Materials-7bbd45a806e04395ab578ca3f805806c)
 
 ### References
-1. https://github.com/Swoorup/mysh
-2. https://github.com/maiadegraaf/minishell
-3. https://github.com/LucasKuhn/minishell_tester
-4. https://github.com/vportens/minishell
-5. https://github.com/paulahemsi/minishell
-6. https://github.com/madebypixel02/minishell?tab=readme-ov-file
+1. [Swoorup/mysh](https://github.com/Swoorup/mysh)
+2. [maiadegraaf/minishell](https://github.com/maiadegraaf/minishell)
+3. [LucasKuhn/minishell_tester](https://github.com/LucasKuhn/minishell_tester)
+4. [vportens/minishell](https://github.com/vportens/minishell)
+5. [paulahemsi/minishell](https://github.com/paulahemsi/minishell)
+6. [madebypixel02/minishell](https://github.com/madebypixel02/minishell?tab=readme-ov-file)
 

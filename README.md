@@ -42,35 +42,33 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 (Source: paulahemsi)
 <img src="https://github.com/lkilpela/minishell/blob/main/doc/minishell_mindmap.png" />
 
-## Implementation
-
-### Builtins
-
 ### External functions
 
-- `readline`: Reads a line from the terminal and returns it.
-- `rl_clear_history`, `rl_on_new_line`, `rl_replace_line`, `rl_redisplay`, `add_history` Functions from the readline library used to manipulate the command line history.
-- `printf`: Prints formatted output to stdout.
-- `malloc, free`: Functions for dynamic memory allocation.
-- `write`: Writes data to a file descriptor.
-- `access`: Checks the accessibility of a file.
-- `open, read, close`: Functions to open, read from, and close a file.
-- `fork`: Creates a new process by duplicating the existing process.
-- `wait, waitpid, wait3, wait4`: Functions to make a process wait until its child processes stop or terminate.
-- `signal, sigaction, sigemptyset, sigaddset, kill`: Functions for handling signals.
-- `exit`: Terminates a process.
-- `getcwd, chdir`: Functions to get and change the current working directory.
-- `stat, lstat, fstat`: Functions to get file status.
-- `unlink`: Deletes a name from the filesystem.
-- `execve`: Executes a program.
-- `dup, dup2`: Functions to duplicate a file descriptor.
-- `pipe`: Creates a pipe.
-- `opendir, readdir, closedir`: Functions to open, read from, and close a directory.
-- `strerror, perror`: Functions to handle errors.
-- `isatty, ttyname, ttyslot, ioctl`: Functions for handling terminal I/O.
-- `getenv`: Gets an environment variable.
--  `tcsetattr, tcgetattr`: Functions to get and set terminal attributes.
-- `tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs`: Functions from the termcap library used for terminal handling.
+| Name | Description |
+| --- | --- |
+| `readline` | Reads a line from the terminal and returns it.|
+| `rl_clear_history`, `rl_on_new_line`, `rl_replace_line`, `rl_redisplay`, `add_history` | Functions from the readline library used to manipulate the command line history.|
+| `printf`| Prints formatted output to stdout.|
+| `malloc, free`| Functions for dynamic memory allocation.|
+| `write`| Writes data to a file descriptor.|
+| `access`| Checks the accessibility of a file.|
+| `open, read, close`| Functions to open, read from, and close a file.|
+| `fork`| Creates a new process by duplicating the existing process.|
+| `wait, waitpid, wait3, wait4`| Functions to make a process wait until its child processes stop or terminate.|
+| `signal, sigaction, sigemptyset, sigaddset, kill`| Functions for handling signals.|
+| `exit`| Terminates a process.|
+| `getcwd, chdir`| Functions to get and change the current working directory.|
+| `stat, lstat, fstat`| Functions to get file status.|
+| `unlink`| Deletes a name from the filesystem.|
+| `execve`| Executes a program.|
+| `dup, dup2`| Functions to duplicate a file descriptor.|
+| `pipe`| Creates a pipe.|
+| `opendir, readdir, closedir`| Functions to open, read from, and close a directory.|
+| `strerror, perror`| Functions to handle errors.|
+| `isatty, ttyname, ttyslot, ioctl`| Functions for handling terminal I/O.|
+| `getenv`| Gets an environment variable.|
+|  `tcsetattr, tcgetattr`| Functions to get and set terminal attributes.|
+| `tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs`| Functions from the termcap library used for terminal handling.|
 
 ## Resources
 

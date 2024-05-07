@@ -38,6 +38,20 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 - wildcards
 - Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon)
 
+## step_by_step
+
+* Prompt implementation
+* HashTable functions implementation
+* Tokenizer implementation
+* Variables expansion implementation
+* Builtins implementation
+* Parse and execute sistem design
+* Signals implementation
+* Parsing implementation
+* Execute implementation
+* Norme
+* Bugs hunting
+
 ### Mindmap
 (Source: paulahemsi)
 ![mindmap](https://github.com/lkilpela/minishell/blob/main/doc/minishell_mindmap.png)
@@ -46,6 +60,9 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 <details>
   <summary>Click to expand </summary>
 	
+| --- | --- |
+| **libft**| A library of reproduction standard C library functions.|
+
 | Name | Description |
 | --- | --- |
 | `readline` | Reads a line from the terminal and returns it.|

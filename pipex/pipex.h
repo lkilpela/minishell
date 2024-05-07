@@ -6,14 +6,14 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:49:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/04/15 08:05:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/07 11:02:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# include "../lib/libft/include/libft.h"
+//# include "../lib/libft/include/libft.h"
 
 # include <sys/wait.h> // wait, waitpid
 # include <fcntl.h> //open

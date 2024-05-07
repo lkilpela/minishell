@@ -74,6 +74,8 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 2. https://github.com/Swoorup/mysh
 3. Shell syntax: https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
 4. https://minishell.simple.ink/
+5. https://github.com/maiadegraaf/minishell
+6. https://github.com/LucasKuhn/minishell_tester
 
 
 <!--

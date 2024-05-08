@@ -42,15 +42,14 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 ## step_by_step
 
 * Prompt implementation
-* HashTable functions implementation
 * Tokenizer implementation
 * Variables expansion implementation
 * Builtins implementation
-* Parse and execute sistem design
+* Parse and execute system design
 * Signals implementation
 * Parsing implementation
 * Execute implementation
-* Norme
+* Norm
 * Bugs hunting
 
 ### Mindmap
@@ -85,7 +84,7 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 | `strerror, perror`| Functions to handle errors.|
 | `isatty, ttyname, ttyslot, ioctl`| Functions for handling terminal I/O.|
 | `getenv`| Gets an environment variable.|
-|  `tcsetattr, tcgetattr`| Functions to get and set terminal attributes.|
+| `tcsetattr, tcgetattr`| Functions to get and set terminal attributes.|
 | `tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs`| Functions from the termcap library used for terminal handling.|
 	
 </details>

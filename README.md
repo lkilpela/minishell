@@ -105,9 +105,6 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 9. [Notion with details about Readline lib, Termcaps and Signals](https://www.notion.so/Minishell-e856e9af377f44b588e5fe120d4b6e2a)
 10. [Bash Manual](https://www.gnu.org/software/bash/manual/bash.html)
 
-### hashtable
-* [Hash Table in C/C++ – A Complete Implementation](https://www.journaldev.com/35238/hash-table-in-c-plus-plus)
-
 ### tokenizer
 * [Lexical Analysis](https://en.wikipedia.org/wiki/Lexical_analysis)
 

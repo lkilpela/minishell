@@ -32,11 +32,12 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
     - `unset` with no options
     - `env` with no options or arguments
     - `exit` with no options
- 
-🚫 No Implementation Needed
-- && and ||
+
+🚫 Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon)
+
+### ⭐ BONUS
+- && and || and parenthesis
 - wildcards
-- Not interpret unclosed quotes or special characters which are not required by the subject such as \ (backslash) or ; (semicolon)
 
 ## step_by_step
 

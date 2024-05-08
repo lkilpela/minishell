@@ -101,6 +101,7 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 7. [Introduction to System Programming -video](https://www.youtube.com/watch?v=qThI-U34KYs&list=PL7B2bn3G_wfC-mRpG7cxJMnGWdPAQTViW)
 8. [Capturing exit status code of child process](https://stackoverflow.com/questions/27306764/capturing-exit-status-code-of-child-process)
 9. [Notion with details about Readline lib, Termcaps and Signals](https://www.notion.so/Minishell-e856e9af377f44b588e5fe120d4b6e2a)
+10. [Bash Manual](https://www.gnu.org/software/bash/manual/bash.html)
 
 ### hashtable
 10. [Hash Table in C/C++ – A Complete Implementation](https://www.journaldev.com/35238/hash-table-in-c-plus-plus)

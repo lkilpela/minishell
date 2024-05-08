@@ -53,8 +53,8 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 * Bugs hunting
 
 ### Mindmap
-(Source: paulahemsi)
-![mindmap](https://github.com/lkilpela/minishell/blob/main/doc/minishell_mindmap.png)
+
+![mindmap]([https://github.com/lkilpela/minishell/blob/main/doc/minishell_mindmap.png](https://github.com/lkilpela/minishell/blob/main/doc/Mind%20Maps%20.jpg))
 
 ### External functions
 <details>

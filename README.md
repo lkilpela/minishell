@@ -55,6 +55,7 @@ Minishell is a simple, mini shell implemented in C. It provides a command line u
 ### Mindmap
 
 ![mindmap](https://github.com/lkilpela/minishell/blob/main/doc/Mind%20Maps.jpg)
+![mindmap_tool](https://miro.com/app/board/uXjVKKB8jvE=/)
 
 ### External functions
 <details>

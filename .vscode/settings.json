@@ -12,6 +12,7 @@
         "stdio.h": "c",
         "minishell.h": "c",
         "limits.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "sstream": "c"
     }
 }

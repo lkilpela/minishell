@@ -1,0 +1,16 @@
+{
+    "editor.insertSpaces": false,
+    "files.exclude": {
+        "**/.DS_Store": false,
+        "**/.git": false,
+        "**/.hg": false,
+        "**/.svn": false,
+        "**/CVS": false,
+        "**/Thumbs.db": false
+    },
+    "files.associations": {
+        "stdio.h": "c",
+        "minishell.h": "c",
+        "limits.h": "c"
+    }
+}

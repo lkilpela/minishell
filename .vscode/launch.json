@@ -1,0 +1,56 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "lldb",
+			"request": "launch",
+			"name": "(lldb) Minishell",
+			"program": "${workspaceFolder}/minishell",
+			"args": [],
+			"cwd": "${workspaceFolder}",
+			"preLaunchTask": "make",
+			"initCommands": [
+				// "process handle SIGUSR1 --stop false --notify true",
+				// "process handle SIGUSR2 --stop false --notify true"
+			  ]
+
+		},
+	  {
+		"name": "(gdb) minishell",
+		"type": "cppdbg",
+		"request": "launch",
+		"program": "${workspaceFolder}/minishell",
+		"args": [],
+		"stopAtEntry": false,
+		"cwd": "${workspaceFolder}",
+		"environment": [],
+		"externalConsole": false,
+		"MIMode": "gdb",
+		"preLaunchTask": "make",
+		"setupCommands": [
+		  {
+			"description": "Enable pretty-printing for gdb",
+			"text": "-enable-pretty-printing",
+			"ignoreFailures": true
+		  },
+		//   {
+		// 	"description": "Disable breaking on SIGUSR1",
+		// 	"text": "handle SIGUSR1 nostop noprint pass"
+		// },
+		// {
+		// 	"description": "Disable breaking on SIGUSR2",
+		// 	"text": "handle SIGUSR2 nostop noprint pass"
+		// },
+		]
+	  }
+	],
+	"inputs": [
+		{
+		  "id": "args",
+		  "type":"promptString",
+		  "description": "args",
+		  "default": "42",
+		},
+	  ]
+
+  }

@@ -23,7 +23,6 @@ typedef struct s_token
 	t_token_type type;	// token type
 }				t_token;
 
-
 // token list struct
 typedef struct s_token_list
 {
@@ -31,7 +30,7 @@ typedef struct s_token_list
 	struct s_token_list	*next;	// pointer to next token
 }				t_token_list;
 
-
+// state of the tokenizer while it's processing an input string
 typedef struct s_tokenizer
 {
 	char			*input; 		// input string to be tokenized

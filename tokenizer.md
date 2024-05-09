@@ -18,6 +18,8 @@ This command would be tokenized as follows:
 
 So the tokenized command would look something like this:
 
+```
 [WORD("echo"), SPACE, D_QUOTE, WORD("Hello, World!"), D_QUOTE, SPACE, GREAT, SPACE, WORD("output.txt")]
+```
 
 Each token in this list would be represented as a t_tok_list struct, with the str field containing the string representation of the token and the type field containing the type of the token. The next field would point to the next token in the list.

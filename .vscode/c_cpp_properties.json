@@ -1,17 +1,18 @@
 {
     "configurations": [
-      {
-        "name": "mine",
-        "includePath": [
-          "${workspaceFolder}/include",
-          "${workspaceFolder}/libft/include",
-        ],
-        "defines": [],
-        "compilerPath": "/usr/bin/gcc",
-        "cStandard": "${default}",
-        "cppStandard": "${default}",
-        "intelliSenseMode": "${default}"
-      }
+        {
+            "name": "mine",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/libft/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "${default}",
+            "cppStandard": "${default}",
+            "intelliSenseMode": "${default}",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
     ],
     "version": 4
-  }
+}

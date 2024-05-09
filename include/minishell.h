@@ -10,8 +10,6 @@
 # define TOKEN_BUFFER 64
 # define TOKENS "|<>\"\'$"
 
-typedef struct s_token t_token;
-
 
 typedef enum e_tok
 {
@@ -21,13 +19,13 @@ typedef enum e_tok
 	S_QUOTE = '\'',
 	D_QUOTE = '\"',
 	DOLLAR = '$',
-	WORD
+	WORD = 4242
 }	t_tok;
 
-struct s_token
+typedef struct s_tok_list
 {
-	char	*str;
-	t_tok	type;
-};
-
+	char				*str;
+	t_tok				type;	
+	struct s_tok_list	*next;
+}	t_tok_list;
 #endif

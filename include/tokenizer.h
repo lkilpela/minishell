@@ -28,7 +28,7 @@ typedef struct s_token
 typedef struct s_token_list
 {
 	t_token				token;	// current token
-	struct s_tok_list	*next;	// pointer to next token
+	struct s_token_list	*next;	// pointer to next token
 }				t_token_list;
 
 

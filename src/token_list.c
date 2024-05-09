@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tok_list.c                                         :+:      :+:    :+:   */
+/*   token_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/09 15:35:23 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/09 22:18:02 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <tokenizer.h>
 
-t_tok_list	*tok_lstlast(t_tok_list *lst)
+t_token_list	*tok_lstlast(t_token_list *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -21,20 +21,20 @@ t_tok_list	*tok_lstlast(t_tok_list *lst)
 	return (lst);
 }
 
-void	tok_lstadd_back(t_tok_list **lst, char *str, t_tok type)
+void	tok_lstadd_back(t_token_list **lst, char *str, t_token type)
 {
-	t_tok_list	*temp;
+	t_token_list	*temp;
 
 	if (!*lst)
 	{
-		*lst = ft_calloc(1, sizeof(t_tok_list)); //errorcheck
+		*lst = ft_calloc(1, sizeof(t_token_list)); //errorcheck
 		(*lst)->str = str;
 		(*lst)->type = type;
 	}
 	else
 	{
 		temp = tok_lstlast(*lst);
-		temp->next = ft_calloc(1, sizeof(t_tok_list)); //errorcheck
+		temp->next = ft_calloc(1, sizeof(t_token_list)); //errorcheck
 		temp->next->str = str;
 		temp->next->type = type;
 	}

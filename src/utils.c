@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/09 22:15:42 by lkilpela         ###   ########.fr       */
+/*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/05/09 22:15:21 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int main(void)
+int	ft_is_whitespace(char c)
 {
-	char *line;
-	t_tok_list *tok;
-
-	while (42)
-	{
-		line = readline("Minishell:<");
-		tok = lexer(line);
-		while (tok)
-		{
-			printf("<type: '%c' str: '%s'\n", tok->type, tok->str);
-			tok = tok->next;
-		}
-		// printf("%s\n", line);
-		free(line);
-	}
+	if (c == 32 || (c >= 9 && c <= 13))
+		return (1);
 	return (0);
 }
+
+int	word_length(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (*str && !ft_strchr(TOKENS, *str) && !ft_is_whitespace(*str))
+	{
+		i++;
+		str++;
+	}
+	return (i);
+}
+
+char	*ft_skip_whitespace(char *str)
+{
+	while (ft_is_whitespace(*str))
+		str++;
+	return (str);
+}
+

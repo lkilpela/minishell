@@ -13,17 +13,17 @@
 
 typedef enum e_tok_type
 {
-	PIPE,	// pipe (|)
-	LESS,	// redirect input from a file (<)
-	GREAT,	// redirect output to a file (>), overwriting file if exists
-	D_LESS,	// denote heredoc (<<)
-	D_GREAT,// redirect output to a file (>>), appending to file if exists
-	S_QUOTE,// start or end of a single-quoted string (')
-	D_QUOTE,// start or end of a double-quoted string (")
-	DOLLAR, // denote variables ($)
-	WORD	// a command (ls) or argument (-l)
-	//NEWLINE end of a command
-	//SPACE sperate different parts of a command
+	WORD,		// a command (ls) or argument (-l)
+	PIPE,		// pipe output of one cmd into another (|)
+	LESS,		// redirect input from a file (<)
+	GREAT,		// redirect output to a file (>), overwriting file if exists
+	D_LESS,		// denote heredoc (<<)
+	D_GREAT,	// redirect output to a file (>>), appending to file if exists
+	S_QUOTE,	// start or end of a single-quoted string (')
+	D_QUOTE,	// start or end of a double-quoted string (")
+	DOLLAR, 	// denote variables ($)
+	NEWLINE,	//end of a command
+	SPACE 		//sperate different parts of a command
 }			t_tok_type;
 
 typedef struct s_tok_list

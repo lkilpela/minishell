@@ -6,16 +6,23 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/09 22:15:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/09 22:22:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <tokenizer.h>
 
-int main(void)
+
+int main(int argc, char **argv, char **envp)
+{
+	
+}
+
+/*int main(void)
 {
 	char *line;
-	t_tok_list *tok;
+	t_token_list *tok;
 
 	while (42)
 	{
@@ -30,4 +37,4 @@ int main(void)
 		free(line);
 	}
 	return (0);
-}
+}*/

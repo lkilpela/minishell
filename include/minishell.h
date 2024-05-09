@@ -10,6 +10,6 @@
 //# define TOKEN_BUFFER 64
 //# define TOKENS "|<>\"\'$"
 
-void	tok_lstadd_back(t_token_list **lst, char *str, t_tok type);
+//void	tok_lstadd_back(t_token_list **lst, char *str, t_tok type);
 
 #endif

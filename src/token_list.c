@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/09 22:18:02 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/09 22:24:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-t_token_list	*tok_lstlast(t_token_list *lst)
+/*t_token_list	*tok_lstlast(t_token_list *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -38,4 +38,4 @@ void	tok_lstadd_back(t_token_list **lst, char *str, t_token type)
 		temp->next->str = str;
 		temp->next->type = type;
 	}
-}
+}*/

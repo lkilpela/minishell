@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/09 22:15:38 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/09 22:28:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-
+/*
 
 t_tok_list	*lexer(char *str)
 {
@@ -50,4 +50,4 @@ t_tok_list	*lexer(char *str)
 		}
 	}
 	return (tokens);
-}
+}*/

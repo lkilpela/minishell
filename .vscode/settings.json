@@ -13,6 +13,7 @@
         "minishell.h": "c",
         "limits.h": "c",
         "libft.h": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "complex": "c"
     }
 }

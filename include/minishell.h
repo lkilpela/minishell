@@ -11,7 +11,7 @@
 //# define TOKENS "|<>\"\'$"
 
 
-typedef enum e_tok_type
+typedef enum e_token_type
 {
 	WORD,		// a command (ls) or argument (-l)
 	PIPE,		// pipe output of one cmd into another (|)
@@ -24,14 +24,31 @@ typedef enum e_tok_type
 	DOLLAR, 	// denote variables ($)
 	NEWLINE,	//end of a command
 	SPACE 		//sperate different parts of a command
-}			t_tok_type;
+}			t_token_type;
 
-typedef struct s_tok_list
+// single token struct
+typedef struct s_token
 {
-	char				*str;
-	t_tok_type			type;
-	struct s_tok_list	*next;
-}	t_tok_list;
+	char		*value; // token string
+	t_token_type type;	// token type
+}				t_token;
+
+
+// token list struct
+typedef struct s_token_list
+{
+	t_token				token;	// current token
+	struct s_tok_list	*next;	// pointer to next token
+}				t_token_list;
+
+
+typedef struct s_tokenizer
+{
+	char			*input; 		// input string to be tokenized
+	int				pos;			// current position in input string
+	t_token			current_token; // current token being processed
+	t_token_list	*tokens; 		// list of all tokens parsed from the input
+}				t_tokenizer;
 
 void	tok_lstadd_back(t_tok_list **lst, char *str, t_tok type);
 

@@ -19,13 +19,16 @@ typedef enum e_tok
 	S_QUOTE = '\'',
 	D_QUOTE = '\"',
 	DOLLAR = '$',
-	WORD = 4242
+	WORD
 }	t_tok;
 
 typedef struct s_tok_list
 {
 	char				*str;
-	t_tok				type;	
+	t_tok				type;
 	struct s_tok_list	*next;
 }	t_tok_list;
+
+void	tok_lstadd_back(t_tok_list **lst, char *str, t_tok type);
+
 #endif

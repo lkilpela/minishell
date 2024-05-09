@@ -9,6 +9,12 @@
 
 //# define TOKEN_BUFFER 64
 //# define TOKENS "|<>\"\'$"
+typedef struct s_minishell
+{
+	char	**argv;
+	int		argc;
+	char	**envp;
+}				t_minishell;
 
 //void	tok_lstadd_back(t_token_list **lst, char *str, t_tok type);
 

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/10 13:03:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:09:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 t_token_list	*new_node(t_token_list *lst, t_token token)
 {
-	t_token_list *node;
+	t_token_list *new;
 
-	node = malloc(sizeof(t_token_list));
-	if (!node)
+	new = malloc(sizeof(t_token_list));
+	if (!new)
 		return (NULL);
-	node->token = token;
-	node->next = NULL;
-	return (node);
+	new->token = token;
+	new->next = NULL;
+	return (new);
 }
 t_token_list	*last_node(t_token_list *lst)
 {
@@ -48,7 +48,7 @@ t_token_list	*add_node(t_token_list **lst, t_token token)
 	return (*lst);
 }
 
-void	tok_lstadd_back(t_token_list **lst, char *str, t_token type)
+/*void	tok_lstadd_back(t_token_list **lst, char *str, t_token type)
 {
 	t_token_list	*temp;
 
@@ -65,4 +65,4 @@ void	tok_lstadd_back(t_token_list **lst, char *str, t_token type)
 		temp->next->str = str;
 		temp->next->type = type;
 	}
-}
+}*/

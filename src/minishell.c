@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/10 15:06:05 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:12:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int minishell_loop (t_minishell *m)
 {
-	
+	m->argv = readline(PROMPT);
 }
 int main(int argc, char **argv, char **envp)
 {

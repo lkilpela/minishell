@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 12:03:52 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:33:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,15 @@ static void init_token(t_token *token)
 	token->type = -1;
 }
 
-static void init_token_list(t_token_list *list)
+static void init_token_list(t_token_list *lst)
 {
-	list->token = NULL;
-	list-
+	if (lst)
+	{
+		init_token(&lst->token);
+		lst->next = NULL;
+	}
 }
+
 void init_tokenizer(t_tokenizer *t, char *input)
 {
 	t->input = input;

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 14:30:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:42:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void init_minishell(int argc, char **argv, char **envp, t_minishell *m)
 	m->argc = argc;
 	m->argv = argv;
 	m->envp = envp;
+	m->paths = NULL;
 }
 
 static void init_token(t_token *token)

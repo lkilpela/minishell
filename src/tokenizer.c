@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 20:54:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:17:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,7 @@
 
 void	tokenizer(t_tokenizer *t)
 {
+	if (!t->input)
+		return (NULL);
 	
 }

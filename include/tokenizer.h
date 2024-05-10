@@ -57,4 +57,7 @@ typedef struct s_var_array
 	int		size; // number of variable in the array
 }				t_var_array;
 
+
+void init_tokenizer(t_tokenizer *t, char *input);
+
 #endif

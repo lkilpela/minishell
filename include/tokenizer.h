@@ -50,7 +50,7 @@ typedef struct s_var
 typedef struct s_var_list
 {
 	int		size;	// number of variables
-	t_var	*var;	// pointer to an array of variables
+	t_var	*vars;	// pointer to an array of variables
 }				t_var_list;
 
 #endif

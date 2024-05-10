@@ -23,7 +23,7 @@ typedef struct s_token
 	t_token_type type;	// token type
 }				t_token;
 
-// token list struct
+// a token node in linked list
 typedef struct s_token_list
 {
 	t_token				token;	// current token
@@ -50,7 +50,7 @@ typedef struct s_var
 typedef struct s_var_list
 {
 	int		size;	// number of variables
-	t_var	*vars;	// pointer to an array of variables
+	t_var	vars;	// 
 }				t_var_list;
 
 #endif

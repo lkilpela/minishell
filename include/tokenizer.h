@@ -39,18 +39,18 @@ typedef struct s_tokenizer
 	t_token_list	*tokens; 		// list of all tokens parsed from the input
 }				t_tokenizer;
 
-
+// a shell variable
 typedef struct s_var
 {
 	const char	*name;	// name of variable
 	char		*value;	// value of variable
 }				t_var;
 
-
+// list of shell variables
 typedef struct s_var_list
 {
-	int		size;
-	t_var	*var;
+	int		size;	// number of variables
+	t_var	*var;	// pointer to an array of variables
 }				t_var_list;
 
 #endif

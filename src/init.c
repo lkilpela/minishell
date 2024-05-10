@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 13:34:36 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:30:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void init_tokenizer(t_tokenizer *t, char *input)
 	init_token_list(t->tokens);
 }
 
-void init_var(t_var_list *v)
+void init_var(t_var_array *v)
 {
 	v->size = 0;
 	v->vars = NULL;

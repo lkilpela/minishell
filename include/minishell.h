@@ -17,5 +17,6 @@ typedef struct s_minishell
 }				t_minishell;
 
 //void	tok_lstadd_back(t_token_list **lst, char *str, t_tok type);
+void init_minishell(int argc, char **argv, char **envp, t_minishell *m);
 
 #endif

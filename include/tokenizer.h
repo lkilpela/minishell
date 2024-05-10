@@ -1,6 +1,10 @@
 #ifndef TOKENIZER_H
 # define TOKENIZER_H
 
+# include <stdlib.h>
+
+# define DOLLAR	"$" // // denote variables ($)
+
 typedef enum e_token_type
 {
 	WORD,		// a command (ls) or argument (-l)
@@ -11,9 +15,9 @@ typedef enum e_token_type
 	D_GREAT,	// redirect output to a file (>>), appending to file if exists
 	S_QUOTE,	// start or end of a single-quoted string (')
 	D_QUOTE,	// start or end of a double-quoted string (")
-	DOLLAR, 	// denote variables ($)
-	NEWL,	//end of a command
-	SPC 		//sperate different parts of a command
+	VAR, 		// $HOME is treated as a single VAR token
+	NEWLINE,	// end of a command
+	SPACE 		// sperate different parts of a command
 }			t_token_type;
 
 // single token struct
@@ -23,7 +27,7 @@ typedef struct s_token
 	t_token_type type;	// token type
 }				t_token;
 
-// token list struct
+// a token node in linked list
 typedef struct s_token_list
 {
 	t_token				token;	// current token
@@ -39,18 +43,18 @@ typedef struct s_tokenizer
 	t_token_list	*tokens; 		// list of all tokens parsed from the input
 }				t_tokenizer;
 
-// a shell variable
+// single variable
 typedef struct s_var
 {
 	const char	*name;	// name of variable
 	char		*value;	// value of variable
 }				t_var;
 
-// list of shell variables
-typedef struct s_var_list
+// variables
+typedef struct s_var_array
 {
-	int		size;	// number of variables
-	t_var	*var;	// pointer to an array of variables
-}				t_var_list;
+	t_var	*vars; // a pointer to an array of t_var
+	int		size; // number of variable in the array
+}				t_var_array;
 
 #endif

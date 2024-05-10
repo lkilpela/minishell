@@ -36,8 +36,8 @@ So the tokenized command would look something like this:
 `"`: This is a `D_QUOTE` token that represents the opening double quote of the quoted string.
 
 `Your home directory is "`: This is a `WORD` token that represents the part of the quoted string before the variable.
-	- "Your home directory is " is a single word from the shell's perspective. When the shell executes the echo command, it passes "Your home directory is " (minus the quotes) as a single argument to the echo command.
-	- If you were to tokenize "Your home directory is " into individual words, you would need to handle quoted strings separately in your parser, as they don't follow the usual word separation rules. This would complicate your parser and potentially lead to errors. By treating "Your home directory is " as a single WORD token, you simplify your parser and make your tokenization more accurate.
+- "Your home directory is " is a single word from the shell's perspective. When the shell executes the echo command, it passes "Your home directory is " (minus the quotes) as a single argument to the echo command.
+- If tokenize "Your home directory is " into individual words -> need to handle quoted strings separately in parser, as they don't follow the usual word separation rules. This would complicate the parser and potentially lead to errors. By treating "Your home directory is " as a single WORD token, it simplify the parser and make tokenization more accurate.
 
 `HOME`: This is a `VAR` token that represents the `HOME` variable. This token is used for variable expansion.
 

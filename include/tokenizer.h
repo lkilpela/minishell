@@ -12,8 +12,8 @@ typedef enum e_token_type
 	S_QUOTE,	// start or end of a single-quoted string (')
 	D_QUOTE,	// start or end of a double-quoted string (")
 	DOLLAR, 	// denote variables ($)
-	NEWLINE,	//end of a command
-	SPACE 		//sperate different parts of a command
+	NEWL,	//end of a command
+	SPC 		//sperate different parts of a command
 }			t_token_type;
 
 // single token struct

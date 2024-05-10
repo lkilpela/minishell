@@ -1,43 +1,31 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 15:45:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/09 17:16:28 by aklein           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-//example list of t_tok elements with tokens for the input "ls -l | cat -e"
-
 #include <minishell.h>
+#include <tokenizer.h>
 #include <parser.h>
 
-t_tok_list	*init_test()
+t_token_list	*init_test()
 {
-	t_tok_list	*test;
-	test = malloc(sizeof(t_tok_list));
-	t_tok_list	*ptr = test;
-	test->str = "ls";
-	test->type = WORD;
-	test->next = malloc(sizeof(t_tok_list));
+	t_token_list	*test;
+	t_token_list	*ptr;
+	test = malloc(sizeof(t_token_list));
+	ptr = test;
+	test->token.value = "ls";
+	test->token.type = WORD;
+	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
-	test->str = "-l";
-	test->type = WORD;
-	test->next = malloc(sizeof(t_tok_list));
+	test->token.value = "-l";
+	test->token.type = WORD;
+	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
-	test->str = "|";
-	test->type = PIPE;
-	test->next = malloc(sizeof(t_tok_list));
+	test->token.value = "|";
+	test->token.type = PIPE;
+	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
-	test->str = "cat";
-	test->type = WORD;
-	test->next = malloc(sizeof(t_tok_list));
+	test->token.value = "cat";
+	test->token.type = WORD;
+	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
-	test->str = "-e";
-	test->type = WORD;
+	test->token.value = "-e";
+	test->token.type = WORD;
 	test->next = NULL;
 	return (ptr);
 }
@@ -51,62 +39,104 @@ char	*handle_dollar(char *str)
 
 }
 
-int	count_args(t_tok_list *tokens)
+int	count_args(t_token_list *tokens)
 {
 	int	count;
 
 	count = 0;
-	while (tokens && tokens->type != PIPE);
+	while (tokens && tokens->token.type != PIPE)
 	{
-		count++;
+		if (tokens->token.type == WORD)
+			count++;
 		tokens = tokens->next;
 	}
+	return (count);
 }
 
-void	parser(t_tok_list *tokens)
+t_commands	*parser(t_token_list *tokens)
 {
 	t_commands		*commands;
 	t_simple_cmd	*simple_cmd;
-	t_tok_list		*ptr;
 	int	i;
+	int	cmd_i;
 
 	commands = ft_calloc(1, sizeof(t_commands));
-	commands->commands = ft_calloc(10, sizeof(t_simple_cmd));
-	i = 0;
-	ptr = tokens;
-	while (ptr)
+	commands->commands = ft_calloc(10, sizeof(t_simple_cmd *));
+	cmd_i = 0;
+	while (tokens)
 	{
 		simple_cmd = ft_calloc(1, sizeof(t_simple_cmd));
-		if (ptr->type == DOLLAR)
+		if (tokens->token.type == DOLLAR)
 		{
-			ptr = ptr->next;
-			simple_cmd->command = handle_dollar(ptr->str);
+			tokens = tokens->next;
+			simple_cmd->command = handle_dollar(tokens->token.value);
+		}
+		else if (tokens->token.type == PIPE)
+		{
+			tokens = tokens->next;
+			continue ;
 		}
 		else
-			simple_cmd->command = ptr->str;
-		simple_cmd->num_of_args = count_args(ptr);
+			simple_cmd->command = tokens->token.value;
+		tokens = tokens->next;
+		simple_cmd->num_of_args = count_args(tokens);
 		simple_cmd->args = ft_calloc(simple_cmd->num_of_args, sizeof(char *));
-		ptr = ptr->next;
-		while (ptr && (ptr->type == WORD || ptr->type == DOLLAR))
+		i = 0;
+		while (tokens && (tokens->token.type == WORD || tokens->token.type == DOLLAR))
 		{
-			if (ptr->type == DOLLAR)
+			if (tokens->token.type == DOLLAR)
 			{
-				ptr = ptr->next;
-				if (ptr->type == WORD)
-					simple_cmd->args[i] = handle_dollar(ptr->str);
+				tokens = tokens->next;
+				if (tokens->token.type == WORD)
+					simple_cmd->args[i] = handle_dollar(tokens->token.value);
 			}
 			else
-				simple_cmd->args[i] = ptr->str;
+				simple_cmd->args[i] = tokens->token.value;
 			i++;
-			ptr = ptr->next;
+			tokens = tokens->next;
 		}
-		commands->commands[i] = simple_cmd;
+		commands->commands[cmd_i] = simple_cmd;
+		cmd_i++;
+	}
+	return (commands);
+}
+
+void print_simple_cmd(t_simple_cmd *cmd) {
+	if (cmd == NULL) {
+		ft_printf("NULL command\n");
+		return;
+	}
+
+	ft_printf("Command: %s\n", cmd->command);
+	ft_printf("Args (%d): ", cmd->num_of_args);
+	for (int i = 0; i < cmd->num_of_args; i++) {
+		ft_printf("\"%s\" ", cmd->args[i]);
+	}
+	ft_printf("\n");
+}
+
+void print_commands(t_commands *cmds) {
+	int i = 0;
+
+	if (cmds == NULL) {
+		ft_printf("NULL commands structure\n");
+		return;
+	}
+	if (cmds->in_file)
+		ft_printf("Input redirection: %s\n", cmds->in_file);
+	if (cmds->out_file)
+		ft_printf("Output redirection: %s\n", cmds->out_file);
+	while (cmds->commands && cmds->commands[i]) {
+		ft_printf("Command %d:\n", i + 1);
+		print_simple_cmd(cmds->commands[i]);
 		i++;
 	}
 }
 
 int	main()
 {
-	t_tok_list *test = init_test();
-	parser(test);
+	t_token_list *test = init_test();
+	t_commands *cmds = parser(test);
+	print_commands(cmds);
+
 }

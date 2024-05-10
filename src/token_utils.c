@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 21:22:38 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:32:00 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,14 @@ int	is_whitespace(char c)
 
 char	*skip_whitespaces(char *str)
 {
-	while (is_whitespace(*str))
+	while (*str && is_whitespace(*str))
+		str++;
+	return (str);
+}
+
+char	*skip_word(char *str)
+{
+	while (*str && !is_whitespace(*str))
 		str++;
 	return (str);
 }

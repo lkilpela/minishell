@@ -39,4 +39,12 @@ typedef struct s_tokenizer
 	t_token_list	*tokens; 		// list of all tokens parsed from the input
 }				t_tokenizer;
 
+
+typedef struct s_var
+{
+	const char	*name;	// name of variable
+	char		*value;	// value of variable
+}				t_var;
+
+
 #endif

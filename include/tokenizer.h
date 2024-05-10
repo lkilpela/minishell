@@ -47,4 +47,10 @@ typedef struct s_var
 }				t_var;
 
 
+typedef struct s_var_list
+{
+	int		size;
+	t_var	*var;
+}				t_var_list;
+
 #endif

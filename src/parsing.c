@@ -30,15 +30,6 @@ t_token_list	*init_test()
 	return (ptr);
 }
 
-char	*handle_dollar(char *str)
-{
-	char	*env;
-
-	env = getenv(str);
-	return (env);
-
-}
-
 int	count_args(t_token_list *tokens)
 {
 	int	count;
@@ -66,12 +57,7 @@ t_commands	*parser(t_token_list *tokens)
 	while (tokens)
 	{
 		simple_cmd = ft_calloc(1, sizeof(t_simple_cmd));
-		if (tokens->token.type == DOLLAR)
-		{
-			tokens = tokens->next;
-			simple_cmd->command = handle_dollar(tokens->token.value);
-		}
-		else if (tokens->token.type == PIPE)
+		if (tokens->token.type == PIPE)
 		{
 			tokens = tokens->next;
 			continue ;
@@ -82,16 +68,9 @@ t_commands	*parser(t_token_list *tokens)
 		simple_cmd->num_of_args = count_args(tokens);
 		simple_cmd->args = ft_calloc(simple_cmd->num_of_args, sizeof(char *));
 		i = 0;
-		while (tokens && (tokens->token.type == WORD || tokens->token.type == DOLLAR))
+		while (tokens && (tokens->token.type == WORD))
 		{
-			if (tokens->token.type == DOLLAR)
-			{
-				tokens = tokens->next;
-				if (tokens->token.type == WORD)
-					simple_cmd->args[i] = handle_dollar(tokens->token.value);
-			}
-			else
-				simple_cmd->args[i] = tokens->token.value;
+			simple_cmd->args[i] = tokens->token.value;
 			i++;
 			tokens = tokens->next;
 		}

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/10 20:45:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:05:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 
 void minishell_loop()
 {
-	char	*prompt;
+	char		*input;
+	t_tokenizer	t;
 
 	while (42)
 	{
-		prompt = readline(PROMPT);
-		if (!prompt)
+		input = readline(PROMPT);
+		if (!input)
 			break;
-		printf("You entered: %s\n", prompt);
-		add_history(prompt);
-		free(prompt);
+		printf("You entered: %s\n", input);
+		add_history(input);
+		init_tokenizer(&t, input);
+		free(input);
 	}
 }
 
@@ -34,4 +36,5 @@ int main(int argc, char **argv, char **envp)
 
 	init_minishell(argc, argv, envp, &m);
 	minishell_loop();
+	
 }

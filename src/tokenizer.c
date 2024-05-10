@@ -6,9 +6,14 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 11:03:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 20:54:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+#include <tokenizer.h>
 
+void	tokenizer(t_tokenizer *t)
+{
+	
+}

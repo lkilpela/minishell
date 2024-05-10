@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:37:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 14:39:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 14:40:55 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*find_command(t_minishell *m, char *cmd)
 	else if (ft_strchr(cmd, '/'))
 		return (ft_strdup(cmd));
 	if (!m->paths)
-		p->paths = get_envpaths(p);
+		m->paths = get_envpaths(m);
 	if (!m->paths)
 		return (NULL);
 	return (find_executable(m, cmd));

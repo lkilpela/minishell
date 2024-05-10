@@ -6,19 +6,23 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/10 11:16:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:06:05 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <tokenizer.h>
 
-
+int minishell_loop (t_minishell *m)
+{
+	
+}
 int main(int argc, char **argv, char **envp)
 {
 	t_minishell	*m;
 
 	init_minishell(argc, argv, envp, &m);
+	
 }
 
 /*int main(void)

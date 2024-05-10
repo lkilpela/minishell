@@ -7,6 +7,9 @@
 # include <stdlib.h>
 # include <libft.h>
 
+# define GREEN "\e[0;32m"
+# define RESET	"\e[0m"
+
 typedef struct s_minishell
 {
 	char	**argv;

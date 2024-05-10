@@ -1,4 +1,10 @@
-`echo "Hello, World!" > output.txt.`
+## `echo "Hello, World!" > output.txt.`
+
+```
+[WORD("echo"), SPACE, D_QUOTE, WORD("Hello, World!"), D_QUOTE, SPACE, GREAT, SPACE, WORD("output.txt")]
+```
+<details>
+  <summary>Click to expand </summary>
 
 This command would be tokenized as follows:
 
@@ -15,19 +21,15 @@ This command would be tokenized as follows:
 ` `(space) - This is another `SPACE` token. It separates the redirection operator from the file name.
 
 `output.txt` - This is another `WORD` token. It represents the name of the file to which the output should be redirected.
+</details>
 
-So the tokenized command would look something like this:
-
-```
-[WORD("echo"), SPACE, D_QUOTE, WORD("Hello, World!"), D_QUOTE, SPACE, GREAT, SPACE, WORD("output.txt")]
-```
-===========================================================================================================
-
-`echo "Your home directory is $HOME"`  > Output: Your home directory is /Users/lumik
+## `echo "Your home directory is $HOME"`  > Output: Your home directory is /Users/lumik
 
 ```
 [WORD("echo"), SPACE, D_QUOTE, WORD("Your home directory is "), VAR("HOME"), D_QUOTE]
 ```
+<details>
+  <summary>Click to expand </summary>
 
 `echo`: This is a `WORD` token that represents the echo command.
 
@@ -42,3 +44,4 @@ So the tokenized command would look something like this:
 `HOME`: This is a `VAR` token that represents the `HOME` variable. This token is used for variable expansion.
 
 `"`: This is a `D_QUOTE` token that represents the closing double quote of the quoted string.
+</details>

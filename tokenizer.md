@@ -1,4 +1,4 @@
-## `echo "Hello, World!" > output.txt.`
+### `echo "Hello, World!" > output.txt.`
 
 ```
 [WORD("echo"), SPACE, D_QUOTE, WORD("Hello, World!"), D_QUOTE, SPACE, GREAT, SPACE, WORD("output.txt")]
@@ -23,7 +23,9 @@ This command would be tokenized as follows:
 `output.txt` - This is another `WORD` token. It represents the name of the file to which the output should be redirected.
 </details>
 
-## `echo "Your home directory is $HOME"`  > Output: Your home directory is /Users/lumik
+### `echo "Your home directory is $HOME"`  
+
+> Output: Your home directory is /Users/lumik
 
 ```
 [WORD("echo"), SPACE, D_QUOTE, WORD("Your home directory is "), VAR("HOME"), D_QUOTE]

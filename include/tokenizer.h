@@ -3,7 +3,11 @@
 
 # include <stdlib.h>
 
-# define DOLLAR	"$" // // denote variables ($)
+# define DOLLAR_CHAR '$' // // denote variables ($)
+# define SPACE_CHAR ' '
+# define PIPE_CHAR '|'
+# define LESS_CHAR '<'
+# define GREAT_CHAR '>'
 
 typedef enum e_token_type
 {
@@ -17,7 +21,7 @@ typedef enum e_token_type
 	D_QUOTE,	// start or end of a double-quoted string (")
 	VAR, 		// $HOME is treated as a single VAR token
 	NEWLINE,	// end of a command
-	SPACE 		// sperate different parts of a command
+	SPACE	// sperate different parts of a command
 }			t_token_type;
 
 // single token struct
@@ -59,5 +63,9 @@ typedef struct s_var_array
 
 
 void init_tokenizer(t_tokenizer *t, char *input);
+
+// utils
+char	*skip_whitespaces(char *str);
+char	*skip_word(char *str);
 
 #endif

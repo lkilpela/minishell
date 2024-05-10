@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 21:32:00 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:46:49 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	is_whitespace(char c)
+static int	is_whitespace(char c)
 {
 	return (c == 32 || (c >= 9 && c <= 13));
 }

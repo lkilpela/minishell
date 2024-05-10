@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 21:20:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:22:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ char	*skip_whitespaces(char *str)
 	return (str);
 }
 
-int	word_length(char *str)
+
+
+/*int	word_length(char *str)
 {
 	int	i;
 
@@ -35,7 +37,7 @@ int	word_length(char *str)
 		str++;
 	}
 	return (i);
-}
+}*/
 
 
 

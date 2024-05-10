@@ -1,5 +1,6 @@
 ### `echo "Hello, World!" > output.txt.`
 
+#### Tokenizer
 ```
 [WORD("echo"), SPACE, D_QUOTE, WORD("Hello, World!"), D_QUOTE, SPACE, GREAT, SPACE, WORD("output.txt")]
 ```
@@ -27,6 +28,7 @@ This command would be tokenized as follows:
 
 > Output: Your home directory is /Users/lumik
 
+#### Tokenizer
 ```
 [WORD("echo"), SPACE, D_QUOTE, WORD("Your home directory is "), VAR("HOME"), D_QUOTE]
 ```

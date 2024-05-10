@@ -15,11 +15,21 @@ t_token_list	*init_test()
 	test = test->next;
 
 	test->token.value = ">";
-	test->token.type = GREAT;
+	test->token.type = D_GREAT;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
 
 	test->token.value = "myout";
+	test->token.type = WORD;
+	test->next = malloc(sizeof(t_token_list));
+	test = test->next;
+
+	test->token.value = ">";
+	test->token.type = GREAT;
+	test->next = malloc(sizeof(t_token_list));
+	test = test->next;
+
+	test->token.value = "test";
 	test->token.type = WORD;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
@@ -45,8 +55,6 @@ t_token_list	*init_test()
 
 	return (ptr);
 }
-
-
 
 int	count_args(t_token_list *tokens)
 {
@@ -91,6 +99,7 @@ t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens)
 	}
 	if (tokens->token.type == GREAT || tokens->token.type == D_GREAT)
 	{
+		simple->out_file.append = 0;
 		if (tokens->token.type == D_GREAT)
 			simple->out_file.append = 1;
 		tokens = tokens->next;
@@ -134,19 +143,19 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 
 t_commands	*parser(t_token_list *tokens)
 {
-	t_commands		*commands;
-	int	cmd_i;
+	t_commands	*cmds;
+	int	i;
 
-	commands = ft_calloc(1, sizeof(t_commands));
-	commands->commands = ft_calloc(10, sizeof(t_simple_cmd *)); //count commands and change this
-	cmd_i = 0;
+	cmds = ft_calloc(1, sizeof(t_commands));
+	cmds->simples = ft_calloc(10, sizeof(t_simple_cmd *)); //count simples and change this
+	i = 0;
 	while (tokens)
 	{
-		commands->commands[cmd_i++] = simple_cmd(&tokens);
+		cmds->simples[i++] = simple_cmd(&tokens);
 		if (tokens)
 			tokens = tokens->next;
 	}
-	return (commands);
+	return (cmds);
 }
 
 void print_simple_cmd(t_simple_cmd *cmd) {
@@ -154,8 +163,9 @@ void print_simple_cmd(t_simple_cmd *cmd) {
 		ft_printf("NULL command\n");
 		return;
 	}
-
 	ft_printf("Input redirection: %s\n", cmd->in_file.file);
+	if (cmd->out_file.append)
+		ft_printf("(APPEND) ");
 	ft_printf("Output redirection: %s\n", cmd->out_file.file);
 	ft_printf("Command: %s\n", cmd->command);
 	ft_printf("Args (%d): ", cmd->num_of_args);
@@ -173,10 +183,10 @@ void print_commands(t_commands *cmds) {
 		ft_printf("NULL commands structure\n");
 		return;
 	}
-	while (cmds->commands && cmds->commands[i])
+	while (cmds->simples && cmds->simples[i])
 	{
 		ft_printf("\e[0;32mCommand %d:\e[0m\n", i + 1);
-		print_simple_cmd(cmds->commands[i]);
+		print_simple_cmd(cmds->simples[i]);
 		i++;
 	}
 }

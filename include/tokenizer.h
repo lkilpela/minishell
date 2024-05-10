@@ -2,6 +2,9 @@
 # define TOKENIZER_H
 
 # include <stdlib.h>
+
+# define DOLLAR	"$" // // denote variables ($)
+
 typedef enum e_token_type
 {
 	WORD,		// a command (ls) or argument (-l)
@@ -12,9 +15,9 @@ typedef enum e_token_type
 	D_GREAT,	// redirect output to a file (>>), appending to file if exists
 	S_QUOTE,	// start or end of a single-quoted string (')
 	D_QUOTE,	// start or end of a double-quoted string (")
-	DOLLAR, 	// denote variables ($)
-	NEWLINE,	//end of a command
-	SPACE 		//sperate different parts of a command
+	VAR, 		// $HOME is treated as a single VAR token
+	NEWLINE,	// end of a command
+	SPACE 		// sperate different parts of a command
 }			t_token_type;
 
 // single token struct
@@ -50,8 +53,8 @@ typedef struct s_var
 // list of shell variables
 typedef struct s_var_list
 {
-	int		size;	// number of variables
-	t_var	vars;	// 
+	t_var				var;	//
+	struct s_var_list	*next;
 }				t_var_list;
 
 #endif

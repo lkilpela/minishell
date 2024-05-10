@@ -10,7 +10,7 @@
 # define GREEN "\e[0;32m"
 # define RESET	"\e[0m"
 
-# define PROMPT "minishell:<"
+# define PROMPT GREEN "minishell$" RESET
 
 typedef struct s_minishell
 {

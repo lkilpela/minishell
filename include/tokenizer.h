@@ -2,11 +2,12 @@
 # define TOKENIZER_H
 
 # include <stdlib.h>
+# include <stdio.h>
 
 # define DOLLAR_CHAR '$' // // denote variables ($)
 # define SPACE_CHAR ' '
-# define PIPE_CHAR '|'
-# define LESS_CHAR '<'
+# define PIPE_CHAR "|"
+# define LESS_CHAR "<"
 # define GREAT_CHAR '>'
 
 typedef enum e_token_type
@@ -68,7 +69,11 @@ void init_tokenizer(t_tokenizer *t, char *input);
 void	add_node(t_token_list **lst, t_token *token);
 void	clear_list(t_token_list **lst);
 void	print_tokens(t_token_list *lst);
+void	delone_node(t_token_list *lst);
 void	free_list(t_token_list **lst);
+
+// tokenizer
+void tokenizer();
 
 // utils
 char	*skip_whitespaces(char *str);

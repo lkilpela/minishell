@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/11 19:58:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/11 20:03:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ t_token *create_token(const char *value, t_token_type type)
 	token->type = type;
 	return (token);
 }
-
 
 void	tokenizer(t_tokenizer *t)
 {

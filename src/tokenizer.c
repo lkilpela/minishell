@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 22:31:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/11 19:58:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 #include <tokenizer.h>
 
 
-void	split_on_space(t_tokenizer *t)
+t_token *create_token(const char *value, t_token_type type)
 {
-	
+	t_token *token;
+
+	token = malloc(sizeof(t_token));
+	if (!token)
+		return ;
+	token->value = ft_strdup(value);
+	token->type = type;
+	return (token);
 }
+
 
 void	tokenizer(t_tokenizer *t)
 {

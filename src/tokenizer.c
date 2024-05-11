@@ -6,13 +6,12 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/11 20:03:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/11 20:25:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <tokenizer.h>
-
 
 t_token *create_token(const char *value, t_token_type type)
 {
@@ -46,7 +45,7 @@ void	tokenizer(t_tokenizer *t)
 	}
 }
 
-void	s_quote(t_tokenizer *t)
+/*void	s_quote(t_tokenizer *t)
 {
 	
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/11 20:23:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/11 20:26:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	delone_node(t_token_list *lst)
 {
 	if (!lst)
 		return ;
-	free(lst->token.value);
+	free(lst->token->value);
 	free(lst);
 }
 

@@ -64,6 +64,12 @@ typedef struct s_var_array
 
 void init_tokenizer(t_tokenizer *t, char *input);
 
+// token list
+void	add_node(t_token_list **lst, t_token *token);
+void	clear_list(t_token_list **lst);
+void	print_tokens(t_token_list *lst);
+void	free_list(t_token_list **lst);
+
 // utils
 char	*skip_whitespaces(char *str);
 char	*skip_word(char *str);

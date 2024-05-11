@@ -20,8 +20,8 @@ typedef enum e_token_type
 	S_QUOTE,	// start or end of a single-quoted string (')
 	D_QUOTE,	// start or end of a double-quoted string (")
 	VAR, 		// $HOME is treated as a single VAR token
-	NEWLINE,	// end of a command
-	SPACE	// sperate different parts of a command
+	T_NEWLINE,
+	T_SPACE	// sperate different parts of a command
 }			t_token_type;
 
 // single token struct

@@ -7,7 +7,10 @@ static int	is_whitespace(char c)
 	return (c == 32 || (c >= 9 && c <= 13));
 }
 
-
+int is_operator(char c)
+{
+	return (c == '|' || c == '<' || c == '>');
+}
 
 char	*skip_whitespaces(char *str)
 {
@@ -115,7 +118,7 @@ void	free_arrays(char **arrays)
 
 int main()
 {
-	char **tab = split_token("echo| grep");
+	char **tab = split_token("echo< > grep");
 	//int count = count_tokens(str);
 	//printf("count_token: %d\n", count);
 	for (int i = 0; tab[i]; i++)

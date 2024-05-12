@@ -91,18 +91,19 @@ char **split_token(char *str)
 	while (*str)
 	{
 		str = skip_whitespaces(str);
-		if (*str && !is_operator(*str))
+		if (!*str)
+			break;
+		if (!is_operator(*str))
 		{
 			tab[i] = create_a_token(str);
-			i++;
 			str = skip_word(str);
 		}
-		else if (*str && is_operator(*str))
+		else
 		{
 			tab[i] = create_a_token(str);
-			i++;
 			str = skip_op(str);
 		}
+		i++;
 	}
 	tab[i] = NULL;
 	return (tab);

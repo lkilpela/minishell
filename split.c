@@ -120,10 +120,10 @@ void	free_arrays(char **arrays)
 	}
 	free(arrays);
 }
-
+// "   echo<|grep >" -> bash: syntax error near unexpected token `|'
 int main()
 {
-	char **tab = split_token("echo < | grep >");
+	char **tab = split_token("   echo|ls");
 	//int count = count_tokens(str);
 	//printf("count_token: %d\n", count);
 	for (int i = 0; tab[i]; i++)

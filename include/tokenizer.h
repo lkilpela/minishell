@@ -2,11 +2,12 @@
 # define TOKENIZER_H
 
 # include <stdlib.h>
+# include <stdio.h>
 
 # define DOLLAR_CHAR '$' // // denote variables ($)
 # define SPACE_CHAR ' '
-# define PIPE_CHAR '|'
-# define LESS_CHAR '<'
+# define PIPE_CHAR "|"
+# define LESS_CHAR "<"
 # define GREAT_CHAR '>'
 
 typedef enum e_token_type
@@ -20,8 +21,8 @@ typedef enum e_token_type
 	S_QUOTE,	// start or end of a single-quoted string (')
 	D_QUOTE,	// start or end of a double-quoted string (")
 	VAR, 		// $HOME is treated as a single VAR token
-	NLINE,		// end of a command
-	SPC 		// sperate different parts of a command
+	T_NEWLINE,
+	T_SPACE	// sperate different parts of a command
 }			t_token_type;
 
 // single token struct
@@ -34,7 +35,7 @@ typedef struct s_token
 // a token node in linked list
 typedef struct s_token_list
 {
-	t_token				token;	// current token
+	t_token				*token;	// current token
 	struct s_token_list	*next;	// pointer to next token
 }				t_token_list;
 
@@ -63,6 +64,16 @@ typedef struct s_var_array
 
 
 void init_tokenizer(t_tokenizer *t, char *input);
+
+// token list
+void	add_node(t_token_list **lst, t_token *token);
+void	clear_list(t_token_list **lst);
+void	print_tokens(t_token_list *lst);
+void	delone_node(t_token_list *lst);
+void	free_list(t_token_list **lst);
+
+// tokenizer
+void tokenizer();
 
 // utils
 char	*skip_whitespaces(char *str);

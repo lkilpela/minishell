@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 14:42:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/11 20:51:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void init_token_list(t_token_list *lst)
 {
 	if (lst)
 	{
-		init_token(&lst->token);
+		init_token(lst->token);
 		lst->next = NULL;
 	}
 }

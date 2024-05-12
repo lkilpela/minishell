@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.c                                             :+:      :+:    :+:   */
+/*   token_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/10 13:36:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/11 20:55:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-t_token_list	*new_node(t_token_list *lst, t_token token)
+t_token_list	*new_node(t_token *token)
 {
 	t_token_list *new;
 
@@ -32,31 +32,28 @@ t_token_list	*last_node(t_token_list *lst)
 	return (lst);
 }
 
-t_token_list	*add_node(t_token_list **lst, t_token token)
+void	add_node(t_token_list **lst, t_token *token)
 {
 	t_token_list	*last;
 
-	if (!lst)
-		return (NULL);
 	if (!*lst)
-		new_node(lst, token);
+		*lst = new_node(token);
 	else
 	{
 		last = last_node(*lst);
-		new_node(&(last->next), token);
-	}
-	return (*lst);
+		last->next = new_node(token);
+	}	
 }
 
-static void	delone_node(t_token_list *lst)
+void	delone_node(t_token_list *lst)
 {
 	if (!lst)
 		return ;
-	free(lst->token.value);
+	free(lst->token->value);
 	free(lst);
 }
 
-void	clear_list(t_token_list **lst)
+void	free_list(t_token_list **lst)
 {
 	t_token_list	*temp;
 
@@ -71,23 +68,14 @@ void	clear_list(t_token_list **lst)
 	*lst = NULL;
 }
 
-
-
-/*void	tok_lstadd_back(t_token_list **lst, char *str, t_token type)
+void	print_tokens(t_token_list *lst)
 {
-	t_token_list	*temp;
+    t_token_list	*temp;
 
-	if (!*lst)
+	temp = lst;
+    while (temp) 
 	{
-		*lst = ft_calloc(1, sizeof(t_token_list)); //errorcheck
-		(*lst)->str = str;
-		(*lst)->type = type;
-	}
-	else
-	{
-		temp = tok_lstlast(*lst);
-		temp->next = ft_calloc(1, sizeof(t_token_list)); //errorcheck
-		temp->next->str = str;
-		temp->next->type = type;
-	}
-}*/
+        printf("Value: %s, Type: %d\n", temp->token->value, temp->token->type);
+        temp = temp->next;
+    }
+}

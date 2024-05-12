@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/10 15:40:44 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/05/11 21:02:58 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,13 +36,16 @@ READLINE		=	-lreadline
 ################################################################################
 NAME			=	minishell
 INCLUDES		=	./include
-M_HEADERS		=	$(INCLUDES)/minishell.h
+M_HEADERS		=	$(INCLUDES)/minishell.h \
+					$(INCLUDES)/tokenizer.h
 OBJ_DIR			=	./obj
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
 SRCS			=	minishell.c \
 					init.c \
-					# parsing.c \
+					token_list.c \
+					tokenizer.c \
+					# parsing.c 
 
 
 ################################################################################

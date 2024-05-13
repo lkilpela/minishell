@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:26:42 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:26:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:37:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-int	len_inquote(char *str)
+static int	len_inquote(char *str)
 {
 	char *end;
 	int len = 0;
@@ -25,7 +25,7 @@ int	len_inquote(char *str)
 	return (len);
 }
 
-char *find_token_end(char *str)
+static char	*find_token_end(char *str)
 {
 	char	*end;
 
@@ -38,7 +38,7 @@ char *find_token_end(char *str)
 	return (end);
 }
 
-int get_token_len(char *str)
+int	get_token_len(char *str)
 {
 	int		len;
 	char	*end;
@@ -58,4 +58,26 @@ int get_token_len(char *str)
 		len = end - str;
 	}
 	return (len);
+}
+
+t_token_type	get_token_type(char *str)
+{
+	if (*str == '\'')
+		return (S_QUOTE);
+	else if (*str == '\"')
+		return (D_QUOTE);
+	else if (ft_strcmp(str, "<<") == 0)
+		return (OP_DLESS);
+	else if (ft_strcmp(str, ">>") == 0)
+		return (OP_DGREAT);
+	else if (*str == '<')
+		return (OP_LESS);
+	else if (*str == '>')
+		return (OP_GREAT);
+	else if (*str == '|')
+		return (OP_PIPE);
+	else if (str[0] == '$')
+		return (VAR);
+	else
+		return (WORD);
 }

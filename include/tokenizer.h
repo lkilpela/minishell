@@ -59,18 +59,18 @@ typedef struct s_var_array
 }				t_var_array;
 
 // init
-void init_tokenizer(t_tokenizer *t, char *input);
+void			init_tokenizer(t_tokenizer *t, char *input);
 
 // token list
-void	append_node(t_token_list **lst, t_token token);
-void	free_list(t_token_list **lst);
+void			append_node(t_token_list **lst, t_token token);
+void			free_list(t_token_list **lst);
 
 // tokenizer
-void tokenizer();
+
 
 // utils
-char	*skip_whitespaces(char *str);
-char	*skip_word(char *str);
-char 	*ft_strndup(char *str, size_t len);
+int				get_token_len(char *str);
+t_token_type	get_token_type(char *str);
+
 
 #endif

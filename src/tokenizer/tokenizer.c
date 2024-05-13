@@ -6,33 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:31:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:37:13 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-t_token_type get_token_type(char *str)
-{
-	if (*str == '\'')
-		return (S_QUOTE);
-	else if (*str == '\"')
-		return (D_QUOTE);
-	else if (ft_strcmp(str, "<<") == 0)
-		return (OP_DLESS);
-	else if (ft_strcmp(str, ">>") == 0)
-		return (OP_DGREAT);
-	else if (*str == '<')
-		return (OP_LESS);
-	else if (*str == '>')
-		return (OP_GREAT);
-	else if (*str == '|')
-		return (OP_PIPE);
-	else if (str[0] == '$')
-		return (VAR);
-	else
-		return (WORD);
-}
+
 
 t_token	create_token(char *str)
 {

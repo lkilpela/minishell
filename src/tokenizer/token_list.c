@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/13 22:52:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 23:05:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	free_list(t_token_list **lst)
 	*lst = NULL;
 }
 
-/*void	print_tokens(t_token_list *lst)
+void	print_tokens(t_token_list *lst)
 {
 	t_token_list	*temp;
 
@@ -79,4 +79,4 @@ void	free_list(t_token_list **lst)
 		printf("Value: %s, Type: %d\n", temp->token.value, temp->token.type);
 		temp = temp->next;
 	}
-}*/
+}

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/11 21:05:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:55:14 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void minishell_loop()
 			break;
 		add_history(input);
 		init_tokenizer(&t, input);
-		tokenizer();
+		tokenize_input(input);
 		free(input);
 	}
 }

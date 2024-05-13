@@ -114,15 +114,20 @@ char	*create_a_token(char *str)
 	int		len;
 	char	*end;
 
-	end = find_token_end(str);
+	
 	i = 0;
 	if (is_quote(*str))
 	{
 		len = len_inquote(str);
 		str++;
 	}
+	else if (*str == '>' && *(str + 1) == '>')
+		len = 2;
 	else
+	{
+		end = find_token_end(str);
 		len = end - str;
+	}		
 	a_token = malloc(sizeof(char) * (len + 1));
 	if (!a_token)
 		return (NULL);
@@ -162,6 +167,8 @@ char **split_input(char *str)
 			else
 			{
 				tab[i] = create_a_token(str);
+				if (*str == '>' && *(str + 1) == '>')
+					str++;
 				str = skip_op(str);
 			}
 		}
@@ -185,7 +192,7 @@ void	free_arrays(char **tab)
 // "   echo<|grep >" -> bash: syntax error near unexpected token `|'
 int main()
 {
-	char **tab = split_input("   echo \"Hello\" |ls");
+	char **tab = split_input("   echo \"Hello\" >> |ls");
 	//char *str = "echo \"Hello\" |ls";
 	//int count = count_tokens(str);
 	//printf("count_token: %d\n", count);

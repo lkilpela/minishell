@@ -15,62 +15,35 @@
 			  ]
 
 		},
-	 {
-		"name": "(gdb) minishell",
-		"type": "cppdbg",
-		"request": "launch",
-		"program": "${workspaceFolder}/minishell",
-		"args": [],
-		"stopAtEntry": false,
-		"cwd": "${workspaceFolder}",
-		"environment": [],
-		"externalConsole": false,
-		"MIMode": "gdb",
-		"preLaunchTask": "make",
-		"setupCommands": [
-		  {
-			"description": "Enable pretty-printing for gdb",
-			"text": "-enable-pretty-printing",
-			"ignoreFailures": true
-		  },
-		  {
-			"description": "Disable breaking on SIGUSR1",
-			"text": "handle SIGUSR1 nostop noprint pass"
-		},
 		{
-			"description": "Disable breaking on SIGUSR2",
-			"text": "handle SIGUSR2 nostop noprint pass"
+			"name": "(gdb) minishell",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/minishell",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"preLaunchTask": "make",
+			"setupCommands": [
+			  {
+				"description": "Enable pretty-printing for gdb",
+				"text": "-enable-pretty-printing",
+				"ignoreFailures": true
+			  },
+			//   {
+			// 	"description": "Disable breaking on SIGUSR1",
+			// 	"text": "handle SIGUSR1 nostop noprint pass"
+			// },
+			// {
+			// 	"description": "Disable breaking on SIGUSR2",
+			// 	"text": "handle SIGUSR2 nostop noprint pass"
+			// },
+			]
 		},
-		]
-	},
-	{
-		"name": "(gdb) current file",
-		"type": "cppdbg",
-		"request": "launch",
-		"program": "${workspaceFolder}/a.out",
-		"args": [],
-		"stopAtEntry": false,
-		"cwd": "${workspaceFolder}",
-		"environment": [],
-		"externalConsole": false,
-		"MIMode": "gdb",
-		"preLaunchTask": "file",
-		"setupCommands": [
-		  {
-			"description": "Enable pretty-printing for gdb",
-			"text": "-enable-pretty-printing",
-			"ignoreFailures": true
-		  }
-		]
-	  },
-	],
-	"inputs": [
-		{
-		  "id": "args",
-		  "type":"promptString",
-		  "description": "args",
-		  "default": "42",
-		},
-	  ]
+	]
+}
 
   }

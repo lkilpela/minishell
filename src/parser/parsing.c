@@ -77,21 +77,14 @@ int	count_args(t_token_list *tokens)
 		{
 			tokens = tokens->next;
 			if (tokens->token.type == WORD)
-			{
 				tokens = tokens->next;
-				continue ;
-			}
+			continue ;
 		}
 		if (tokens->token.type == WORD)
 			count++;
 		tokens = tokens->next;
 	}
 	return (count);
-}
-
-char	*get_delim(t_token_list *tokens)
-{
-
 }
 
 char	*heredoc(t_token_list *tokens)
@@ -180,7 +173,8 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 			simple_cmd->command = (*tokens)->token.value;
 			(*tokens) = (*tokens)->next;
 			simple_cmd->num_of_args = count_args(*tokens);
-			simple_cmd->args = ft_calloc(simple_cmd->num_of_args, sizeof(char *));
+			if (simple_cmd->num_of_args)
+				simple_cmd->args = ft_calloc(simple_cmd->num_of_args, sizeof(char *));
 			i = 0;
 			continue ;
 		}
@@ -211,7 +205,8 @@ t_commands	*parser(t_token_list *tokens)
 	int	i;
 
 	cmds = ft_calloc(1, sizeof(t_commands));
-	cmds->simples = ft_calloc(count_cmd(tokens), sizeof(t_simple_cmd *));
+	cmds->num_of_cmds = count_cmd(tokens);
+	cmds->simples = ft_calloc(cmds->num_of_cmds, sizeof(t_simple_cmd *));
 	i = 0;
 	while (tokens)
 	{
@@ -235,21 +230,25 @@ void print_simple_cmd(t_simple_cmd *cmd) {
 	ft_printf("Output redirection: %s\n", cmd->out_file.file);
 	ft_printf("Command: %s\n", cmd->command);
 	ft_printf("Args (%d): ", cmd->num_of_args);
-	for (int i = 0; i < cmd->num_of_args; i++) {
+	int	i = 0;
+	while (i < cmd->num_of_args)
+	{
 		ft_printf("\"%s\" ", cmd->args[i]);
+		i++;
 	}
 	ft_printf("\n");
 }
 
-void print_commands(t_commands *cmds) {
-	int i = 0;
+void	print_commands(t_commands *cmds)
+{
+	int	i = 0;
 
 	if (cmds == NULL)
 	{
 		ft_printf("NULL commands structure\n");
 		return;
 	}
-	while (cmds->simples && cmds->simples[i])
+	while (i < cmds->num_of_cmds)
 	{
 		ft_printf("\e[0;32mCommand %d:\e[0m\n", i + 1);
 		print_simple_cmd(cmds->simples[i]);
@@ -257,10 +256,10 @@ void print_commands(t_commands *cmds) {
 	}
 }
 
-int	main()
-{
-	t_token_list *test = init_test();
-	t_commands *cmds = parser(test);
-	print_commands(cmds);
+// int	main()
+// {
+// 	t_token_list *test = init_test();
+// 	t_commands *cmds = parser(test);
+// 	print_commands(cmds);
 
-}
+// }

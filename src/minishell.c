@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/13 23:05:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/14 00:07:34 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <tokenizer.h>
+#include <parser.h>
 
 void minishell_loop()
 {
@@ -27,6 +28,7 @@ void minishell_loop()
 		//init_tokenizer(&t, input);
 		t_token_list *lst = tokenize_input(input);
 		print_tokens(lst);
+		print_commands(parser(lst));
 		free_list(&lst);
 		free(input);
 	}

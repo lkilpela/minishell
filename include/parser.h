@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 14:38:39 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/14 01:08:40 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,8 @@ typedef struct s_commands
 	t_simple_cmd	**simples;		// array of simple cmds
 	int				num_of_cmds;
 }				t_commands;
+
+void		print_commands(t_commands *cmds);
+t_commands	*parser(t_token_list *tokens);
+
 #endif

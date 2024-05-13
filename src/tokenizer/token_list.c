@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/13 23:05:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/14 00:04:05 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	print_tokens(t_token_list *lst)
 	temp = lst;
 	while (temp) 
 	{
-		printf("Value: %s, Type: %d\n", temp->token.value, temp->token.type);
+		printf("Value: '%s' Type: '%d'\n", temp->token.value, temp->token.type);
 		temp = temp->next;
 	}
 }

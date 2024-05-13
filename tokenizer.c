@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:15:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:17:37 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,29 +281,18 @@ t_token_list *tokenize_input(char *str)
 		str = skip_whitespaces(str);
 		if (!*str)
 			break;
+		token = create_token(str);
 		if (is_quote(*str))
-		{
-			token = create_token(str);
-			append_node(&lst, token);
 			str = skip_quote(str);
-		} 
+		else if (!is_operator(*str))
+			str = skip_word(str);
 		else
 		{
-			if (!is_operator(*str))
-			{
-				token = create_token(str);
-				append_node(&lst, token);
-				str = skip_word(str);
-			}
-			else
-			{
-				token = create_token(str);
-				append_node(&lst, token);
-				if (is_double_operator(str))
-					str++;
-				str = skip_op(str);
-			}
+			if (is_double_operator(str))
+				str++;
+			str = skip_op(str);
 		}
+		append_node(&lst, token);
 	}
 	return (lst);
 }

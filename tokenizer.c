@@ -6,12 +6,123 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 19:51:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 21:19:30 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/tokenizer.h"
-#include "split.c"
+
+static int	is_whitespace(char c)
+{
+	return (c == 32 || (c >= 9 && c <= 13));
+}
+
+int	is_quote(char c)
+{
+	return (c == '\"' || c == '\'');
+}
+
+int	is_operator(char c)
+{
+	return (c == '|' || c == '<' || c == '>');
+}
+
+int	is_double_operator(char *str)
+{
+	return (*str == '>' && *(str + 1) == '>') 
+		|| (*str == '<' && *(str + 1) == '<');
+}
+
+char	*skip_whitespaces(char *str)
+{
+	while (*str && is_whitespace(*str))
+		str++;
+	return (str);
+}
+
+char	*skip_word(char *str)
+{
+	while (*str && !is_whitespace(*str) && !is_operator(*str)
+		&& !is_quote(*str))
+		str++;
+	return (str);
+}
+
+char *skip_op(char *str)
+{
+	if (is_operator(*str))
+		str++;
+	return (str);
+}
+
+char *skip_quote(char *str)
+{
+	int	in_quote = 1;
+
+	str++;
+	while (in_quote)
+	{
+		if (is_quote(*str))
+			in_quote = 0;
+		else
+			str++;
+	}
+	if (!in_quote)
+		str++;
+	return (str);
+}
+
+int count_tokens(char *str)
+{
+	int count = 0;
+
+	while (*str)
+	{
+		str = skip_whitespaces(str);
+		if (*str && !is_operator(*str) && !is_quote(*str))
+		{
+			count++;
+			str = skip_word(str);
+		}
+		else if (*str && is_operator(*str))
+		{
+			count++;
+			str = skip_op(str);
+		}
+		else if (*str && is_quote(*str))
+		{
+			count++;
+			str = skip_quote(str);
+		}
+	}
+	return (count);
+}
+
+int	len_inquote(char *str)
+{
+	char *end;
+	int len = 0;
+
+	str++;
+	end = str;
+	end = skip_quote(str);
+	end--;
+	len = end - str;
+	return (len);
+}
+
+char *find_token_end(char *str)
+{
+	char	*end;
+
+	end = str;
+	if (is_operator(*str))
+		end++;
+	else
+		while (*end && !is_whitespace(*end) && !is_operator(*end))
+			end++;
+	return (end);
+}
 
 void init_token_list(t_token_list *lst)
 {
@@ -109,6 +220,7 @@ t_token	create_token(char *str)
 
 	init_token(&a_token);
 	len = get_token_len(str);
+	printf("token_len: %d\n", len);
 	a_token.type = get_token_type(str);
 	a_token.value = ft_strndup(str, len);
 	return (a_token);
@@ -162,6 +274,7 @@ t_token_list *tokenize_input(char *str)
 		if (is_quote(*str))
 		{
 			token = create_token(str);
+			printf("Token value: %s, Token type: %d\n", token.value, token.type);
 			append_node(&lst, token);
 			str = skip_quote(str);
 		} 
@@ -184,14 +297,46 @@ t_token_list *tokenize_input(char *str)
 	return (lst);
 }
 
+void	delone_node(t_token_list *lst)
+{
+	if (!lst)
+		return ;
+	free(lst->token.value);
+	free(lst);
+}
+
+void	free_list(t_token_list **lst)
+{
+	t_token_list	*temp;
+
+	if (!*lst)
+		return ;
+	while (*lst)
+	{
+		temp = (*lst)->next;
+		delone_node(*lst);
+		*lst = temp;
+	}
+	*lst = NULL;
+}
+
+void	print_tokens(t_token_list *lst)
+{
+    t_token_list	*temp;
+
+	temp = lst;
+    while (temp) 
+	{
+        printf("Value: %s, Type: %d\n", temp->token.value, temp->token.type);
+        temp = temp->next;
+    }
+}
+
+
 int main()
 {
-	char **str = split_input("   echo \" Hello\"  \'World!\' >> << |ls");
-	for(int i = 0; str[i]; i++)
-	{
-		t_token a_token = create_token(str[i]);
-		printf("a_token.value: %s\n", a_token.value);
-		printf("a_toke.type: %d\n", a_token.type);
-	}
-
+	char *str = "echo \" Hello\"  \'World!\' >> << |ls";
+	t_token_list *lst = tokenize_input(str);
+	print_tokens(lst);
+	free_list(&lst);
 }

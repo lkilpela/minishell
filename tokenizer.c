@@ -6,11 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:17:37 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:20:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/tokenizer.h"
+#include <tokenizer.h>
 
 static int	is_whitespace(char c)
 {
@@ -335,7 +335,7 @@ void	print_tokens(t_token_list *lst)
 
 int main()
 {
-	char *str = "echo \" Hello\"  \'World!\' >> << |ls";
+	char *str = "    echo \" Hello\"  \'World!\' >> << |ls";
 	t_token_list *lst = tokenize_input(str);
 	print_tokens(lst);
 	free_list(&lst);

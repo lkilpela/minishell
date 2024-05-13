@@ -67,8 +67,16 @@ void			free_list(t_token_list **lst);
 
 // tokenizer
 
-
 // utils
+int				is_quote(char c);
+int				is_operator(char c);
+int				is_double_operator(char *str);
+char			*skip_whitespaces(char *str);
+char			*skip_word(char *str);
+char			*skip_op(char *str);
+char			*skip_quote(char *str);
+
+// utils2
 int				get_token_len(char *str);
 t_token_type	get_token_type(char *str);
 

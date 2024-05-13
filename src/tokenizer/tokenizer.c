@@ -6,13 +6,31 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:39:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:43:53 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-t_token	create_token(char *str)
+static char *ft_strndup(char *str, size_t len)
+{
+	size_t		i;
+	char	*dup;
+
+	i = 0;
+	dup = malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	while (i < len)
+	{
+		dup[i] = str[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}
+
+static t_token	create_token(char *str)
 {
 	t_token	a_token;
 	int		len;

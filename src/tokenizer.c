@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 13:13:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 13:15:52 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_token_type get_type(char *str)
 	else
 		return (WORD);
 }
+
 int get_token_len(char *str)
 {
 	int		len;

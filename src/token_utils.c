@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/10 21:46:49 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 13:21:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,23 @@ char	*skip_word(char *str)
 	return (str);
 }
 
-
-
-/*int	word_length(char *str)
+char *ft_strndup(char *str, size_t len)
 {
-	int	i;
+	size_t		i;
+	char	*dup;
 
 	i = 0;
-	while (*str && !ft_strchr(TOKENS, *str) && !ft_is_whitespace(*str))
+	dup = malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	while (i < len)
 	{
+		dup[i] = str[i];
 		i++;
-		str++;
 	}
-	return (i);
-}*/
+	dup[i] = '\0';
+	return (dup);
+}
 
 
 

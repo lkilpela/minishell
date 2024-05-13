@@ -31,7 +31,7 @@ typedef struct s_token
 // a token node in linked list
 typedef struct s_token_list
 {
-	t_token				*token;	// current token
+	t_token				token;	// current token
 	struct s_token_list	*next;	// pointer to next token
 }				t_token_list;
 

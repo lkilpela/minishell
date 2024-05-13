@@ -63,11 +63,7 @@ void init_tokenizer(t_tokenizer *t, char *input);
 
 // token list
 void	append_node(t_token_list **lst, t_token token);
-void	clear_list(t_token_list **lst);
-void	print_tokens(t_token_list *lst);
-void	delone_node(t_token_list *lst);
 void	free_list(t_token_list **lst);
-t_token_list	*last_node(t_token_list *lst);
 
 // tokenizer
 void tokenizer();

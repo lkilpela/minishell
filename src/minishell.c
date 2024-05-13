@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/13 22:55:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 23:01:59 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void minishell_loop()
 		if (!input)
 			break;
 		add_history(input);
-		init_tokenizer(&t, input);
+		//init_tokenizer(&t, input);
 		tokenize_input(input);
 		free(input);
 	}

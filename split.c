@@ -129,7 +129,6 @@ char	*create_a_token(char *str)
 	while (i < len)
 	{
 		a_token[i] = str[i];
-		printf("a_token[i]: %c\n", a_token[i]);
 		i++;
 	}
 	a_token[len] = '\0';

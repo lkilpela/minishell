@@ -6,51 +6,63 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/11 21:04:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 13:13:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <tokenizer.h>
 
-t_token *create_token(const char *value, t_token_type type)
+t_token_type get_type(char *str)
 {
-	t_token *token;
-
-	token = malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
-	token->value = ft_strdup(value);
-	token->type = type;
-	return (token);
+	if (*str == '\'')
+		return (S_QUOTE);
+	else if (*str == '\"')
+		return (D_QUOTE);
+	else if (ft_strcmp(str, "<<") == 0)
+		return (OP_DLESS);
+	else if (ft_strcmp(str, ">>") == 0)
+		return (OP_DGREAT);
+	else if (*str == '<')
+		return (OP_LESS);
+	else if (*str == '>')
+		return (OP_GREAT);
+	else if (*str == '|')
+		return (OP_PIPE);
+	else if (str[0] == '$')
+		return (VAR);
+	else
+		return (WORD);
 }
-void tokenizer()
+int get_token_len(char *str)
 {
-	t_token_list 	*token_list;
-	t_token	*new;
+	int		len;
+	char	*end;
 
-	token_list = NULL;
-	new = create_token(PIPE_CHAR, PIPE);
-	add_node(&token_list, new);
-	new = create_token(LESS_CHAR, LESS);
-	add_node(&token_list, new);
-	new = create_token("echo", WORD);
-	add_node(&token_list, new);
-	printf("Tokens:\n");
-    print_tokens(token_list);
-	free_list(&token_list);
+	if (is_quote(*str))
+	{
+		len = len_inquote(str);
+		str++;
+	}
+	else if (is_double_operator(str))
+	{
+		len = 2;
+	}
+	else
+	{
+		end = find_token_end(str);
+		len = end - str;
+	}
+	return (len);
 }
 
-/*void	tokenizer_input(t_tokenizer *t)
+t_token	create_a_token(char *str)
 {
-	t_token_list *new;
+	t_token	a_token;
+	int		len;
 
-	new = NULL;
-	if (!t->input)
-		return (NULL);
-}*/
-
-/*void	s_quote(t_tokenizer *t)
-{
-	
-}*/
+	len = get_token_len(str);
+	a_token.type = get_type(str);
+	a_token.value = ft_strndup(str, len);
+	return (a_token);
+}

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <tokenizer.h>
 
 static int	is_whitespace(char c)
 {
@@ -210,4 +211,42 @@ int main()
 	/*char *str = "\"hello\"";
 	int len = len_inquote(str);
 	printf("len_inquote: %d\n", len);*/
+}
+
+t_token_list split_input(char *str)
+{
+	int	number_token = count_tokens(str);
+	char **tab = malloc(sizeof(char*) * (number_token + 1));
+	if (!tab)
+		return (NULL);
+	int i = 0;
+	while (*str)
+	{
+		str = skip_whitespaces(str);
+		if (!*str)
+			break;
+		if (is_quote(*str))
+		{
+			tab[i] = create_a_token(str);
+			str = skip_quote(str);
+		} 
+		else
+		{
+			if (!is_operator(*str))
+			{
+				tab[i] = create_a_token(str);
+				str = skip_word(str);
+			}
+			else
+			{
+				tab[i] = create_a_token(str);
+				if (is_double_operator(str))
+					str++;
+				str = skip_op(str);
+			}
+		}
+		i++;
+	}
+	tab[i] = NULL;
+	return (tab);
 }

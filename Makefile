@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
+#    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/13 23:02:58 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/05/13 23:56:35 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,25 +42,34 @@ OBJ_DIR			=	./obj
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
 SRCS			=	minishell.c \
-					tokenizer/tokenizer.c \
-					tokenizer/token_list.c \
-					tokenizer/token_utils.c \
-					tokenizer/token_utils2.c \
-					tokenizer/token_utils3.c \
+					tokenizer.c \
+					token_list.c \
+					token_utils.c \
+					token_utils2.c \
+					token_utils3.c \
 					init.c \
-					# parsing.c 
+					parsing.c 
 
 
 ################################################################################
 # RULES
 ################################################################################
 
+#this means that every time its looking for a match for %.c  
+#													in there
+#											$(OBJ_DIR)/%.o: %.c $(M_HEADERS)
+#
+#it will look throuhg all these directories to find the file
+#this way we dont have to specify folders in front of each file
+#just have to make sure each file in the $(SRCS) is a unique name
+vpath %.c $(SRC_DIR) $(SRC_DIR)/tokenizer $(SRC_DIR)/parser
+
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJECTS)
 	$(CC_FULL) $(OBJECTS) $(READLINE) $(LIBFT) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(M_HEADERS)
+$(OBJ_DIR)/%.o: %.c $(M_HEADERS)
 	mkdir -p $(@D)
 	$(CC_FULL) -c $< -o $@
 

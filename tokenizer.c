@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 21:19:30 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:15:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,14 @@ int	len_inquote(char *str)
 {
 	char *end;
 	int len = 0;
-
+	
+	//printf("str before increment: %s\n", str);
 	str++;
+	//printf("str after increment: %s\n", str);
 	end = str;
 	end = skip_quote(str);
 	end--;
+	//printf("end string: %s\n", end);
 	len = end - str;
 	return (len);
 }
@@ -195,10 +198,12 @@ int get_token_len(char *str)
 {
 	int		len;
 	char	*end;
-
+	
 	if (is_quote(*str))
 	{
+		//printf("inquote: %s\n", str);
 		len = len_inquote(str);
+		//printf("len_inquote: %d\n", len);
 		str++;
 	}
 	else if (is_double_operator(str))
@@ -217,12 +222,17 @@ t_token	create_token(char *str)
 {
 	t_token	a_token;
 	int		len;
+	int		start;
 
-	init_token(&a_token);
+	a_token.value = NULL;
+	a_token.type = -1;
 	len = get_token_len(str);
-	printf("token_len: %d\n", len);
+	
+	if (is_quote(str[0]))
+		a_token.value = ft_strndup(str + 1, len);
+	else
+		a_token.value = ft_strndup(str, len);
 	a_token.type = get_token_type(str);
-	a_token.value = ft_strndup(str, len);
 	return (a_token);
 }
 
@@ -233,8 +243,8 @@ t_token_list	*new_node(t_token token)
 	lst = malloc(sizeof(t_token_list));
 	if (!lst)
 		return (NULL);
-	init_token_list(lst);
 	lst->token = token;
+	lst->next = NULL;
 	return (lst);	
 }
 
@@ -274,7 +284,6 @@ t_token_list *tokenize_input(char *str)
 		if (is_quote(*str))
 		{
 			token = create_token(str);
-			printf("Token value: %s, Token type: %d\n", token.value, token.type);
 			append_node(&lst, token);
 			str = skip_quote(str);
 		} 
@@ -282,11 +291,13 @@ t_token_list *tokenize_input(char *str)
 		{
 			if (!is_operator(*str))
 			{
+				token = create_token(str);
 				append_node(&lst, token);
 				str = skip_word(str);
 			}
 			else
 			{
+				token = create_token(str);
 				append_node(&lst, token);
 				if (is_double_operator(str))
 					str++;

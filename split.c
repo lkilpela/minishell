@@ -78,8 +78,22 @@ int count_tokens(char *str)
 			str = skip_quote(str);
 		}
 	}
-	return count;
+	return (count);
 }
+
+int	len_inquote(char *str)
+{
+	char *end;
+	int len = 0;
+
+	str++;
+	end = str;
+	end = skip_quote(str);
+	end--;
+	len = end - str;
+	return (len);
+}
+
 char *find_token_end(char *str)
 {
 	char	*end;
@@ -87,13 +101,12 @@ char *find_token_end(char *str)
 	end = str;
 	if (is_operator(*str))
 		end++;
-	else if (is_quote(*str))
-		end = skip_quote(str);
 	else
 		while (*end && !is_whitespace(*end) && !is_operator(*end))
 			end++;
 	return (end);
 }
+
 char	*create_a_token(char *str)
 {
 	char	*a_token;
@@ -103,13 +116,20 @@ char	*create_a_token(char *str)
 
 	end = find_token_end(str);
 	i = 0;
-	len = end - str;
+	if (is_quote(*str))
+	{
+		len = len_inquote(str);
+		str++;
+	}
+	else
+		len = end - str;
 	a_token = malloc(sizeof(char) * (len + 1));
 	if (!a_token)
 		return (NULL);
 	while (i < len)
 	{
 		a_token[i] = str[i];
+		printf("a_token[i]: %c\n", a_token[i]);
 		i++;
 	}
 	a_token[len] = '\0';
@@ -128,41 +148,53 @@ char **split_input(char *str)
 		str = skip_whitespaces(str);
 		if (!*str)
 			break;
-		if (!is_operator(*str))
+		if (is_quote(*str))
 		{
 			tab[i] = create_a_token(str);
-			str = skip_word(str);
-		}
+			str = skip_quote(str);
+		} 
 		else
 		{
-			tab[i] = create_a_token(str);
-			str = skip_op(str);
+			if (!is_operator(*str))
+			{
+				tab[i] = create_a_token(str);
+				str = skip_word(str);
+			}
+			else
+			{
+				tab[i] = create_a_token(str);
+				str = skip_op(str);
+			}
 		}
 		i++;
 	}
 	tab[i] = NULL;
 	return (tab);
 }
-void	free_arrays(char **arrays)
+void	free_arrays(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while (arrays[i])
+	while (tab[i])
 	{
-		free(arrays[i]);
+		free(tab[i]);
 		i++;
 	}
-	free(arrays);
+	free(tab);
 }
 // "   echo<|grep >" -> bash: syntax error near unexpected token `|'
 int main()
 {
-	//char **tab = split_token("   echo \"Hello\" |ls");
-	char *str = "echo \"Hello\" |ls";
-	int count = count_tokens(str);
-	printf("count_token: %d\n", count);
-	/*for (int i = 0; tab[i]; i++)
+	char **tab = split_input("   echo \"Hello\" |ls");
+	//char *str = "echo \"Hello\" |ls";
+	//int count = count_tokens(str);
+	//printf("count_token: %d\n", count);
+	for (int i = 0; tab[i]; i++)
         printf("'%s'\n", tab[i]);
-	free_arrays(tab);*/
+	free_arrays(tab);
+
+	/*char *str = "\"hello\"";
+	int len = len_inquote(str);
+	printf("len_inquote: %d\n", len);*/
 }

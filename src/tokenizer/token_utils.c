@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:48:49 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 23:00:29 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-static int	is_whitespace(char c)
+int	is_whitespace(char c)
 {
 	return (c == 32 || (c >= 9 && c <= 13));
 }

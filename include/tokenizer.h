@@ -4,20 +4,16 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-# define DOLLAR_CHAR '$' // // denote variables ($)
-# define SPACE_CHAR ' '
-# define PIPE_CHAR "|"
-# define LESS_CHAR "<"
-# define GREAT_CHAR '>'
+# define DOLLAR '$' // // denote variables ($)
 
 typedef enum e_token_type
 {
 	WORD,		// a command (ls) or argument (-l)
-	PIPE,		// pipe output of one cmd into another (|)
-	LESS,		// redirect input from a file (<)
-	GREAT,		// redirect output to a file (>), overwriting file if exists
-	D_LESS,		// denote heredoc (<<)
-	D_GREAT,	// redirect output to a file (>>), appending to file if exists
+	OP_PIPE,		// pipe output of one cmd into another (|)
+	OP_LESS,		// redirect input from a file (<)
+	OP_GREAT,		// redirect output to a file (>), overwriting file if exists
+	OP_DLESS,		// denote heredoc (<<)
+	OP_DGREAT,	// redirect output to a file (>>), appending to file if exists
 	S_QUOTE,	// start or end of a single-quoted string (')
 	D_QUOTE,	// start or end of a double-quoted string (")
 	VAR, 		// $HOME is treated as a single VAR token
@@ -35,7 +31,7 @@ typedef struct s_token
 // a token node in linked list
 typedef struct s_token_list
 {
-	t_token				*token;	// current token
+	t_token				token;	// current token
 	struct s_token_list	*next;	// pointer to next token
 }				t_token_list;
 

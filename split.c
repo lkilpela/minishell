@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <tokenizer.h>
 
 static int	is_whitespace(char c)
 {
@@ -17,6 +18,12 @@ int	is_operator(char c)
 	return (c == '|' || c == '<' || c == '>');
 }
 
+int	is_double_operator(char *str)
+{
+	return (*str == '>' && *(str + 1) == '>') 
+		|| (*str == '<' && *(str + 1) == '<');
+}
+
 char	*skip_whitespaces(char *str)
 {
 	while (*str && is_whitespace(*str))
@@ -26,7 +33,8 @@ char	*skip_whitespaces(char *str)
 
 char	*skip_word(char *str)
 {
-	while (*str && !is_whitespace(*str) && !is_operator(*str) && !is_quote(*str))
+	while (*str && !is_whitespace(*str) && !is_operator(*str)
+		&& !is_quote(*str))
 		str++;
 	return (str);
 }
@@ -114,15 +122,20 @@ char	*create_a_token(char *str)
 	int		len;
 	char	*end;
 
-	end = find_token_end(str);
+	
 	i = 0;
 	if (is_quote(*str))
 	{
 		len = len_inquote(str);
 		str++;
 	}
+	else if (is_double_operator(str))
+		len = 2;
 	else
+	{
+		end = find_token_end(str);
 		len = end - str;
+	}		
 	a_token = malloc(sizeof(char) * (len + 1));
 	if (!a_token)
 		return (NULL);
@@ -162,6 +175,8 @@ char **split_input(char *str)
 			else
 			{
 				tab[i] = create_a_token(str);
+				if (is_double_operator(str))
+					str++;
 				str = skip_op(str);
 			}
 		}
@@ -185,15 +200,16 @@ void	free_arrays(char **tab)
 // "   echo<|grep >" -> bash: syntax error near unexpected token `|'
 int main()
 {
-	char **tab = split_input("   echo \"Hello\" |ls");
+	char **tab = split_input("   echo \" Hello\"  \'World!\' >> << |ls");
 	//char *str = "echo \"Hello\" |ls";
 	//int count = count_tokens(str);
 	//printf("count_token: %d\n", count);
 	for (int i = 0; tab[i]; i++)
-        printf("'%s'\n", tab[i]);
+        printf("%s\n", tab[i]);
 	free_arrays(tab);
 
 	/*char *str = "\"hello\"";
 	int len = len_inquote(str);
 	printf("len_inquote: %d\n", len);*/
 }
+

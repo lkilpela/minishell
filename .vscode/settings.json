@@ -18,14 +18,7 @@
         "queue": "c",
         "stack": "c",
         "random": "c",
-        "optional": "c",
-        "istream": "c",
-        "ostream": "c",
-        "system_error": "c",
-        "array": "c",
-        "functional": "c",
-        "tuple": "c",
-        "type_traits": "c",
-        "utility": "c"
+        "tokenizer.h": "c",
+        "stdlib.h": "c"
     }
 }

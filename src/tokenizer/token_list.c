@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/13 13:41:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:49:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-t_token_list	*new_node(t_token *token)
+t_token_list	*new_node(t_token token)
 {
 	t_token_list *new;
 
@@ -32,7 +32,7 @@ t_token_list	*last_node(t_token_list *lst)
 	return (lst);
 }
 
-void	add_node(t_token_list **lst, t_token *token)
+void	add_node(t_token_list **lst, t_token token)
 {
 	t_token_list	*last;
 
@@ -49,7 +49,7 @@ void	delone_node(t_token_list *lst)
 {
 	if (!lst)
 		return ;
-	free(lst->token->value);
+	free(lst->token.value);
 	free(lst);
 }
 
@@ -75,7 +75,7 @@ void	print_tokens(t_token_list *lst)
 	temp = lst;
     while (temp) 
 	{
-        printf("Value: %s, Type: %d\n", temp->token->value, temp->token->type);
+        printf("Value: %s, Type: %d\n", temp->token.value, temp->token.type);
         temp = temp->next;
     }
 }

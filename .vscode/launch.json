@@ -1,38 +1,59 @@
 {
 	"version": "0.2.0",
 	"configurations": [
+
 		{
-			"type": "lldb",
+			"name": "(lldb) Launch",
+			"type": "cppdbg",
 			"request": "launch",
-			"name": "(lldb) Minishell",
-			"program": "${workspaceFolder}/minishell",
+			"program": "${workspaceFolder}/a.out",
 			"args": [],
+			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
-			"preLaunchTask": "make",
-			"initCommands": [
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb"
+		},
+	]
+}
+
+
+
+//{
+	//"version": "0.2.0",
+	//"configurations": [
+	//	{
+	//		"type": "lldb",
+	//		"request": "launch",
+	//		"name": "(lldb) Minishell",
+	//		"program": "${workspaceFolder}/a.out",
+	//		"args": [],
+	//		"cwd": "${workspaceFolder}",
+	//		"preLaunchTask": "make",
+	//		"initCommands": [
 				// "process handle SIGUSR1 --stop false --notify true",
 				// "process handle SIGUSR2 --stop false --notify true"
-			  ]
+	//		  ]
 
-		},
-	  {
-		"name": "(gdb) minishell",
-		"type": "cppdbg",
-		"request": "launch",
-		"program": "${workspaceFolder}/minishell",
-		"args": [],
-		"stopAtEntry": false,
-		"cwd": "${workspaceFolder}",
-		"environment": [],
-		"externalConsole": false,
-		"MIMode": "gdb",
-		"preLaunchTask": "make",
-		"setupCommands": [
-		  {
-			"description": "Enable pretty-printing for gdb",
-			"text": "-enable-pretty-printing",
-			"ignoreFailures": true
-		  },
+	//	},
+	//  {
+	//	"name": "(gdb) minishell",
+	//	"type": "cppdbg",
+	//	"request": "launch",
+	//	"program": "${workspaceFolder}/minishell",
+	//	"args": [],
+	//	"stopAtEntry": false,
+	//	"cwd": "${workspaceFolder}",
+	//	"environment": [],
+	//	"externalConsole": false,
+	//	"MIMode": "gdb",
+	//	"preLaunchTask": "make",
+	//	"setupCommands": [
+	//	  {
+	//		"description": "Enable pretty-printing for gdb",
+	//		"text": "-enable-pretty-printing",
+	//		"ignoreFailures": true
+	//	  },
 		//   {
 		// 	"description": "Disable breaking on SIGUSR1",
 		// 	"text": "handle SIGUSR1 nostop noprint pass"

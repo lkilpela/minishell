@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:25:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:39:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,3 @@ char *ft_strndup(char *str, size_t len)
 	return (dup);
 }
 
-int    ft_strcmp(char *s1, char *s2)
-{
-    while (*s1 || *s2)
-    {
-        if (*s1 != *s2)
-            return ((unsigned char)*s1 - (unsigned char)*s2);
-        s1++;
-        s2++;
-    }
-    return (0);
-}

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <tokenizer.h>
 
 static int	is_whitespace(char c)
 {
@@ -185,6 +184,7 @@ char **split_input(char *str)
 	tab[i] = NULL;
 	return (tab);
 }
+
 void	free_arrays(char **tab)
 {
 	int	i;
@@ -198,18 +198,18 @@ void	free_arrays(char **tab)
 	free(tab);
 }
 // "   echo<|grep >" -> bash: syntax error near unexpected token `|'
+/*
 int main()
 {
 	char **tab = split_input("   echo \" Hello\"  \'World!\' >> << |ls");
-	//char *str = "echo \"Hello\" |ls";
-	//int count = count_tokens(str);
-	//printf("count_token: %d\n", count);
+
 	for (int i = 0; tab[i]; i++)
         printf("%s\n", tab[i]);
 	free_arrays(tab);
+	char *str = "   echo \" Hello\"  \'World!\' >> << |ls";
+	t_token a_token = create_a_token(str);
+	printf("a_token.value: %s\n", a_token.value);
+	printf("a_toke.type: %d\n", a_token.type);
 
-	/*char *str = "\"hello\"";
-	int len = len_inquote(str);
-	printf("len_inquote: %d\n", len);*/
-}
+}*/
 

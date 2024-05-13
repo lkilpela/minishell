@@ -17,6 +17,8 @@
         "complex": "c",
         "queue": "c",
         "stack": "c",
-        "random": "c"
+        "random": "c",
+        "tokenizer.h": "c",
+        "stdlib.h": "c"
     }
 }

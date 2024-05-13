@@ -17,6 +17,12 @@ int	is_operator(char c)
 	return (c == '|' || c == '<' || c == '>');
 }
 
+int	is_double_operator(char *str)
+{
+	return (*str == '>' && *(str + 1) == '>') 
+		|| (*str == '<' && *(str + 1) == '<');
+}
+
 char	*skip_whitespaces(char *str)
 {
 	while (*str && is_whitespace(*str))
@@ -26,7 +32,8 @@ char	*skip_whitespaces(char *str)
 
 char	*skip_word(char *str)
 {
-	while (*str && !is_whitespace(*str) && !is_operator(*str) && !is_quote(*str))
+	while (*str && !is_whitespace(*str) && !is_operator(*str)
+		&& !is_quote(*str))
 		str++;
 	return (str);
 }
@@ -121,7 +128,7 @@ char	*create_a_token(char *str)
 		len = len_inquote(str);
 		str++;
 	}
-	else if (*str == '>' && *(str + 1) == '>')
+	else if (is_double_operator(str))
 		len = 2;
 	else
 	{
@@ -167,7 +174,7 @@ char **split_input(char *str)
 			else
 			{
 				tab[i] = create_a_token(str);
-				if (*str == '>' && *(str + 1) == '>')
+				if (is_double_operator(str))
 					str++;
 				str = skip_op(str);
 			}
@@ -192,7 +199,7 @@ void	free_arrays(char **tab)
 // "   echo<|grep >" -> bash: syntax error near unexpected token `|'
 int main()
 {
-	char **tab = split_input("   echo \"Hello\" >> |ls");
+	char **tab = split_input("   echo \" Hello\" >> << |ls");
 	//char *str = "echo \"Hello\" |ls";
 	//int count = count_tokens(str);
 	//printf("count_token: %d\n", count);

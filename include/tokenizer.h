@@ -69,6 +69,7 @@ void			free_list(t_token_list **lst);
 t_token_list	*tokenize_input(char *str);
 
 // utils
+int				is_whitespace(char c);
 int				is_quote(char c);
 int				is_operator(char c);
 int				is_double_operator(char *str);

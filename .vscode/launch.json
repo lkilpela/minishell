@@ -14,6 +14,34 @@
 			"externalConsole": false,
 			"MIMode": "lldb"
 		},
+		{
+			"name": "(gdb) minishell",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/minishell",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "gdb",
+			"preLaunchTask": "make",
+			"setupCommands": [
+			  {
+				"description": "Enable pretty-printing for gdb",
+				"text": "-enable-pretty-printing",
+				"ignoreFailures": true
+			  },
+			//   {
+			// 	"description": "Disable breaking on SIGUSR1",
+			// 	"text": "handle SIGUSR1 nostop noprint pass"
+			// },
+			// {
+			// 	"description": "Disable breaking on SIGUSR2",
+			// 	"text": "handle SIGUSR2 nostop noprint pass"
+			// },
+			]
+		},
 	]
 }
 

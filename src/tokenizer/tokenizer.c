@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:50:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:58:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static t_token	create_token(char *str)
 {
 	t_token	a_token;
 	int		len;
-	int		start;
 
 	a_token.value = NULL;
 	a_token.type = -1;

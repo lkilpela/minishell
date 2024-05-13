@@ -199,12 +199,12 @@ void	free_arrays(char **tab)
 // "   echo<|grep >" -> bash: syntax error near unexpected token `|'
 int main()
 {
-	char **tab = split_input("   echo \" Hello\" >> << |ls");
+	char **tab = split_input("   echo \" Hello\"  \'World!\' >> << |ls");
 	//char *str = "echo \"Hello\" |ls";
 	//int count = count_tokens(str);
 	//printf("count_token: %d\n", count);
 	for (int i = 0; tab[i]; i++)
-        printf("'%s'\n", tab[i]);
+        printf("%s\n", tab[i]);
 	free_arrays(tab);
 
 	/*char *str = "\"hello\"";

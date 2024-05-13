@@ -202,7 +202,7 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 	return (simple_cmd);
 }
 
-int	simp_count(t_token_list *tokens)
+int	count_cmd(t_token_list *tokens)
 {
 	int	count;
 
@@ -222,7 +222,7 @@ t_commands	*parser(t_token_list *tokens)
 	int	i;
 
 	cmds = ft_calloc(1, sizeof(t_commands));
-	cmds->simples = ft_calloc(simp_count(tokens), sizeof(t_simple_cmd *));
+	cmds->simples = ft_calloc(count_cmd(tokens), sizeof(t_simple_cmd *));
 	i = 0;
 	while (tokens)
 	{

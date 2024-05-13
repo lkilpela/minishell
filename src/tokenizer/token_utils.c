@@ -6,14 +6,31 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 15:25:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:25:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <tokenizer.h>
 
-static int	is_whitespace(char c)
+int	is_whitespace(char c)
 {
 	return (c == 32 || (c >= 9 && c <= 13));
+}
+
+int	is_quote(char c)
+{
+	return (c == '\"' || c == '\'');
+}
+
+int	is_operator(char c)
+{
+	return (c == '|' || c == '<' || c == '>');
+}
+
+int	is_double_operator(char *str)
+{
+	return (*str == '>' && *(str + 1) == '>') 
+		|| (*str == '<' && *(str + 1) == '<');
 }
 
 char	*skip_whitespaces(char *str)
@@ -25,7 +42,32 @@ char	*skip_whitespaces(char *str)
 
 char	*skip_word(char *str)
 {
-	while (*str && !is_whitespace(*str))
+	while (*str && !is_whitespace(*str) && !is_operator(*str)
+		&& !is_quote(*str))
+		str++;
+	return (str);
+}
+
+char *skip_op(char *str)
+{
+	if (is_operator(*str))
+		str++;
+	return (str);
+}
+
+char *skip_quote(char *str)
+{
+	int	in_quote = 1;
+
+	str++;
+	while (in_quote)
+	{
+		if (is_quote(*str))
+			in_quote = 0;
+		else
+			str++;
+	}
+	if (!in_quote)
 		str++;
 	return (str);
 }
@@ -59,6 +101,3 @@ int    ft_strcmp(char *s1, char *s2)
     }
     return (0);
 }
-
-
-

@@ -6,15 +6,15 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:43:53 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:50:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-static char *ft_strndup(char *str, size_t len)
+static char	*ft_strndup(char *str, size_t len)
 {
-	size_t		i;
+	size_t	i;
 	char	*dup;
 
 	i = 0;
@@ -39,7 +39,6 @@ static t_token	create_token(char *str)
 	a_token.value = NULL;
 	a_token.type = -1;
 	len = get_token_len(str);
-	
 	if (is_quote(str[0]))
 		a_token.value = ft_strndup(str + 1, len);
 	else
@@ -48,7 +47,7 @@ static t_token	create_token(char *str)
 	return (a_token);
 }
 
-t_token_list *tokenize_input(char *str)
+t_token_list	*tokenize_input(char *str)
 {
 	t_token_list	*lst;
 	t_token			token;
@@ -58,7 +57,7 @@ t_token_list *tokenize_input(char *str)
 	{
 		str = skip_whitespaces(str);
 		if (!*str)
-			break;
+			break ;
 		token = create_token(str);
 		if (is_quote(*str))
 			str = skip_quote(str);
@@ -75,10 +74,10 @@ t_token_list *tokenize_input(char *str)
 	return (lst);
 }
 
-int main()
+/*int main()
 {
 	char *str = "    echo \" Hello\"  \'World!\' >> << |ls";
 	t_token_list *lst = tokenize_input(str);
 	print_tokens(lst);
 	free_list(&lst);
-}
+}*/

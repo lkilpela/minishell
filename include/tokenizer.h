@@ -66,6 +66,7 @@ void			append_node(t_token_list **lst, t_token token);
 void			free_list(t_token_list **lst);
 
 // tokenizer
+t_token_list	*tokenize_input(char *str);
 
 // utils
 int				is_quote(char c);

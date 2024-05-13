@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/11 21:02:58 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/05/13 23:02:58 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,9 +42,12 @@ OBJ_DIR			=	./obj
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
 SRCS			=	minishell.c \
+					tokenizer/tokenizer.c \
+					tokenizer/token_list.c \
+					tokenizer/token_utils.c \
+					tokenizer/token_utils2.c \
+					tokenizer/token_utils3.c \
 					init.c \
-					token_list.c \
-					tokenizer.c \
 					# parsing.c 
 
 

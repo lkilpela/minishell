@@ -6,24 +6,25 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/13 19:49:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 23:05:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-t_token_list	*new_node(t_token token)
+static t_token_list	*new_node(t_token token)
 {
-	t_token_list *new;
+	t_token_list	*lst;
 
-	new = malloc(sizeof(t_token_list));
-	if (!new)
+	lst = malloc(sizeof(t_token_list));
+	if (!lst)
 		return (NULL);
-	new->token = token;
-	new->next = NULL;
-	return (new);
+	lst->token = token;
+	lst->next = NULL;
+	return (lst);
 }
-t_token_list	*last_node(t_token_list *lst)
+
+static t_token_list	*last_node(t_token_list *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -32,7 +33,7 @@ t_token_list	*last_node(t_token_list *lst)
 	return (lst);
 }
 
-void	add_node(t_token_list **lst, t_token token)
+void	append_node(t_token_list **lst, t_token token)
 {
 	t_token_list	*last;
 
@@ -42,10 +43,10 @@ void	add_node(t_token_list **lst, t_token token)
 	{
 		last = last_node(*lst);
 		last->next = new_node(token);
-	}	
+	}
 }
 
-void	delone_node(t_token_list *lst)
+static void	delone_node(t_token_list *lst)
 {
 	if (!lst)
 		return ;
@@ -70,12 +71,12 @@ void	free_list(t_token_list **lst)
 
 void	print_tokens(t_token_list *lst)
 {
-    t_token_list	*temp;
+	t_token_list	*temp;
 
 	temp = lst;
-    while (temp) 
+	while (temp) 
 	{
-        printf("Value: %s, Type: %d\n", temp->token.value, temp->token.type);
-        temp = temp->next;
-    }
+		printf("Value: %s, Type: %d\n", temp->token.value, temp->token.type);
+		temp = temp->next;
+	}
 }

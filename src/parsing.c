@@ -40,6 +40,18 @@ t_token_list	*init_test()
 	test = test->next;
 	test->token = malloc(sizeof(t_token));
 
+	test->token->value = "<<";
+	test->token->type = D_LESS;
+	test->next = malloc(sizeof(t_token_list));
+	test = test->next;
+	test->token = malloc(sizeof(t_token));
+
+	test->token->value = "a";
+	test->token->type = WORD;
+	test->next = malloc(sizeof(t_token_list));
+	test = test->next;
+	test->token = malloc(sizeof(t_token));
+
 	test->token->value = "-l";
 	test->token->type = WORD;
 	test->next = malloc(sizeof(t_token_list));
@@ -88,17 +100,57 @@ int	count_args(t_token_list *tokens)
 	return (count);
 }
 
-void	heredoc(void)
+char	*get_delim(t_token_list *tokens)
 {
-	return ;
+
+}
+
+char	*heredoc(t_token_list *tokens)
+{
+	char	*line;
+	char	*heredoc;
+	char	*here_temp;
+	char	*delim;
+
+	ft_putstr_fd("heredoc> ", 1);
+	line = get_next_line(0);
+	heredoc = ft_calloc(1, 1);
+	if (tokens->token->type != WORD)
+		return (heredoc);
+	delim = tokens->token->value;
+	while (line)
+	{
+		if (ft_strncmp(line, delim, ft_strlen(delim)) == 0)
+		{
+			free(line);
+			return (heredoc);
+		}
+		here_temp = ft_strdup(heredoc);
+		free(heredoc);
+		heredoc = ft_strjoin(here_temp, line);
+		free(here_temp);
+		free(line);
+		ft_putstr_fd("heredoc> ", 1);
+		line = get_next_line(0);
+	}
+	free(line);
+	return (heredoc); //no delim warning (bash: warning: here-document at line 1 delimited by end-of-file (wanted `<delimiter-value>'))
 }
 
 t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens)
 {
 	if (tokens->token->type == D_LESS)
-		heredoc();
+	{
+		tokens = tokens->next;
+		simple->heredoc = heredoc(tokens);
+	}
 	if (tokens->token->type == LESS)
 	{
+		if (simple->heredoc)
+		{
+			free(simple->heredoc);
+			simple->heredoc = NULL;
+		}
 		tokens = tokens->next;
 		if (tokens->token->type == WORD)
 		{
@@ -150,13 +202,27 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 	return (simple_cmd);
 }
 
+int	simp_count(t_token_list *tokens)
+{
+	int	count;
+
+	count = 1;
+	while (tokens && tokens->token)
+	{
+		if (tokens->token->type == PIPE)
+			count++;
+		tokens = tokens->next;
+	}
+	return (count);
+}
+
 t_commands	*parser(t_token_list *tokens)
 {
 	t_commands	*cmds;
 	int	i;
 
 	cmds = ft_calloc(1, sizeof(t_commands));
-	cmds->simples = ft_calloc(10, sizeof(t_simple_cmd *)); //count simples and change this
+	cmds->simples = ft_calloc(simp_count(tokens), sizeof(t_simple_cmd *));
 	i = 0;
 	while (tokens)
 	{
@@ -172,6 +238,8 @@ void print_simple_cmd(t_simple_cmd *cmd) {
 		ft_printf("NULL command\n");
 		return;
 	}
+	if (cmd->heredoc)
+		ft_printf("Heredoc: %s\n", cmd->heredoc);
 	ft_printf("Input redirection: %s\n", cmd->in_file.file);
 	if (cmd->out_file.append)
 		ft_printf("(APPEND) ");

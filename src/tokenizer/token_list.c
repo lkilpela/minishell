@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/13 22:35:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:52:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static t_token_list	*new_node(t_token token)
 {
-	t_token_list *lst;
+	t_token_list	*lst;
 
 	lst = malloc(sizeof(t_token_list));
 	if (!lst)
 		return (NULL);
 	lst->token = token;
 	lst->next = NULL;
-	return (lst);	
+	return (lst);
 }
 
 static t_token_list	*last_node(t_token_list *lst)
@@ -43,7 +43,7 @@ void	append_node(t_token_list **lst, t_token token)
 	{
 		last = last_node(*lst);
 		last->next = new_node(token);
-	}	
+	}
 }
 
 static void	delone_node(t_token_list *lst)
@@ -69,15 +69,14 @@ void	free_list(t_token_list **lst)
 	*lst = NULL;
 }
 
-void	print_tokens(t_token_list *lst)
+/*void	print_tokens(t_token_list *lst)
 {
-    t_token_list	*temp;
+	t_token_list	*temp;
 
 	temp = lst;
-    while (temp) 
+	while (temp) 
 	{
-        printf("Value: %s, Type: %d\n", temp->token.value, temp->token.type);
-        temp = temp->next;
-    }
-}
-
+		printf("Value: %s, Type: %d\n", temp->token.value, temp->token.type);
+		temp = temp->next;
+	}
+}*/

@@ -59,8 +59,6 @@ typedef struct s_var_array
 }				t_var_array;
 
 // init
-void init_token(t_token *token);
-void init_token_list(t_token_list *lst);
 void init_tokenizer(t_tokenizer *t, char *input);
 
 // token list

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:29:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/13 22:31:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,6 @@ t_token	create_token(char *str)
 		a_token.value = ft_strndup(str, len);
 	a_token.type = get_token_type(str);
 	return (a_token);
-}
-
-void	append_node(t_token_list **lst, t_token token)
-{
-	t_token_list	*last;
-
-	if (!*lst)
-		*lst = new_node(token);
-	else
-	{
-		last = last_node(*lst);
-		last->next = new_node(token);
-	}	
 }
 
 t_token_list *tokenize_input(char *str)

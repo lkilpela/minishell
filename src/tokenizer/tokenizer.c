@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/14 22:29:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/14 22:33:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_token_list	*tokenize_input(char *str)
 				//create token for quoted string, performing var expansion
 			//else //single quote
 				//create token for quoted string, without performing
-			str = skip_quote(str);
+			str = handle_quotes(str, &var_expansion);
 		}
 		else if (*str = '$') // dollar sign
 		{
@@ -92,7 +92,7 @@ t_token_list	*tokenize_input(char *str)
 	return (lst);
 }
 
-
+// check quote type and set *var_expansion
 char	*handle_quotes(char *str, int *var_expansion)
 {
 	char	quote_type;

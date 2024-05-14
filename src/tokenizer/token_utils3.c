@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:46:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:47:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/14 22:38:40 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,13 @@ char	*skip_op(char *str)
 
 char	*skip_quote(char *str)
 {
-	int	in_quote;
+	char	*end;
+	char	quote_type;
 
-	in_quote = 1;
+	quote_type = *str;
 	str++;
-	while (in_quote)
-	{
-		if (is_quote(*str))
-			in_quote = 0;
-		else
-			str++;
-	}
-	if (!in_quote)
-		str++;
-	return (str);
+	end = ft_strchr(str, quote_type);
+	if (end == NULL)
+		return (NULL);
+	return (end + 1);
 }

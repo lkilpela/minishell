@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/14 22:33:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/14 22:40:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_token_list	*tokenize_input(char *str)
 		token = create_token(str);
 		if (is_quote(*str))
 		{
-			var_expansion;
+			var_expansion = 0;
 			//if (*str = '\"') //double quotes
 				//create token for quoted string, performing var expansion
 			//else //single quote

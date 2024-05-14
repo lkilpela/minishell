@@ -15,8 +15,9 @@
 static int	len_inquote(char *str)
 {
 	char *end;
-	int len = 0;
-	
+	int len;
+
+	len = 0;
 	str++;
 	end = str;
 	end = skip_quote(str);

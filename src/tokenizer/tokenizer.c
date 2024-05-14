@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 23:03:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/14 22:29:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*ft_strndup(char *str, size_t len)
 	return (dup);
 }
 
-static t_token	create_token(char *str)
+t_token	create_token(char *str)
 {
 	t_token	a_token;
 	int		len;
@@ -50,6 +50,7 @@ t_token_list	*tokenize_input(char *str)
 {
 	t_token_list	*lst;
 	t_token			token;
+	int				var_expansion;
 
 	lst = NULL;
 	while (*str)
@@ -59,18 +60,67 @@ t_token_list	*tokenize_input(char *str)
 			break ;
 		token = create_token(str);
 		if (is_quote(*str))
+		{
+			var_expansion;
+			//if (*str = '\"') //double quotes
+				//create token for quoted string, performing var expansion
+			//else //single quote
+				//create token for quoted string, without performing
 			str = skip_quote(str);
+		}
+		else if (*str = '$') // dollar sign
+		{
+			//create a token for variable name, replace it with variable's value
+		}
 		else if (!is_operator(*str))
 			str = skip_word(str);
-		else
+		else if (is_double_operator(str))
 		{
-			if (is_double_operator(str))
+			
+				// create a token for << operator
+				// read the next token as heredoc delimiter
+				// if the delim is quoted
+					//set a flg to disable variable expansion in heredoc
+				// else
+					//set a flag to enable variable expansion in heredoc
 				str++;
+		}	
+		else
 			str = skip_op(str);
-		}
 		append_node(&lst, token);
 	}
 	return (lst);
+}
+
+
+char	*handle_quotes(char *str, int *var_expansion)
+{
+	char	quote_type;
+	char	*end;
+
+	quote_type = *str;
+	if (quote_type == '\"')
+		*var_expansion = 1;
+	else
+		*var_expansion = 0;
+	str = skip_quote(str);
+	return (str);
+}
+
+void	handle_double_quote(char *str);
+void	handle_variable(char *str)
+{
+	// non-existent variable
+	// variable followed by non-whitespace character
+	// variable inside double quotes
+}
+void	handle_heredoc(char *str)
+{
+	// variable expansion inside heredoc
+	// variable expasion inside quoted heredoc
+	// variable as a heredoc delim
+	// non-existent variable inside heredoc
+	// variable followed by non-whitespace character inside heredoc
 }
 
 /*int main()

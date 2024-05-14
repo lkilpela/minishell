@@ -68,6 +68,7 @@ void			print_tokens(t_token_list *lst);
 
 // tokenizer
 t_token_list	*tokenize_input(char *str);
+t_token			create_token(char *str);
 
 // utils
 int				is_whitespace(char c);

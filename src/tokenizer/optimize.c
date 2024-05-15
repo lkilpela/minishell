@@ -6,12 +6,41 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 15:24:43 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:59:55 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
+char *lookup_var(char *var_name, t_var_list *v)
+{
+	while (v)
+	{
+		if (ft_strcmp(v->current_var->name, var_name) == 0)
+			return (ft_strdup(v->current_var->value));
+		v = v->next;
+	}
+	return (NULL);
+}
+
+char *expand_variable(char *str, t_var_list *v)
+{
+	char	*end;
+	char	*var_name;
+	char	*var_value;
+	char 	*expanded_str;
+
+	end = skip_variable(str);
+	var_name = ft_strndup(str + 1, end - str - 1);
+	var_value = lookup_var(var_name, v);
+	if (var_value)
+	{
+		expanded_str = ft_strjoin(var_value, end);
+		free(var_value);
+		return (expanded_str);
+	}
+	return (ft_strdup(str));
+}
 char *next_token(char *str)
 {
 	while (*str)
@@ -32,12 +61,12 @@ char *next_token(char *str)
 	return (str);
 }
 
-int get_token_len(char *str)
+int get_token_len(char *str, t_var_list *v)
 {
 	char	*end;
 	int		len;
 
-	end = next_token(str);
+	
 	len = end - str;
 	if (is_quote(*str))
 		len -= 2;

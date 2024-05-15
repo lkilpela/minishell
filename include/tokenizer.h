@@ -87,11 +87,13 @@ char			*skip_whitespaces(char *str);
 char			*skip_word(char *str);
 char			*skip_op(char *str);
 char			*skip_quote(char *str);
+char			*skip_variable(char *str);
 
 // utils2
 int				get_token_len(char *str);
 t_token_type	get_token_type(char *str);
 char			*ft_strndup(char *str, size_t len);
+int				ft_strcmp(char *s1, char *s2);
 
 
 #endif

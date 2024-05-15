@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 13:31:02 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:42:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void free_var_list(t_var_list *list)
 	}
 }
 
+// create a new t_var struct
 t_var	*create_var(char *env_str)
 {
 	char	*equal_sign;
@@ -43,7 +44,6 @@ t_var	*create_var(char *env_str)
 	equal_sign = ft_strchr(env_str, '=');
 		if (!equal_sign)
 			return ;
-	// create a new t_var struct
 	var = malloc(sizeof(t_var));
 	if (!var)
 		return (NULL);
@@ -63,7 +63,7 @@ t_var	*create_var(char *env_str)
 	return (var);	
 }
 
-void	add_env_var (t_var_list **lst, char *env_str)
+void	add_var(t_var_list **lst, char *env_str)
 {
 	t_var_list	*node;
 	t_var_list	*last;
@@ -72,9 +72,13 @@ void	add_env_var (t_var_list **lst, char *env_str)
 	node = malloc(sizeof(t_var_list));
 	if (!node)
 		return (NULL);
-	node->current_var = var;
+	node->current_var = create_var(env_str);
+	if (!node->current_var)
+	{
+		free(node);
+		return ;
+	}
 	node->next = NULL;
-	
 	// add new node to the end of list
 	if (*lst == NULL)
 		*lst = node;
@@ -85,36 +89,19 @@ void	add_env_var (t_var_list **lst, char *env_str)
 			last = last->next;
 		last->next = node;
 	}
-	
 }
-
 
 t_var_list *get_envp(char **envp)
 {
-	t_var_list *head = NULL;
-	t_var_list *tail = NULL;
-	t_var_list	*current_var;
-	t_var	*var_node;
-	char	*name;
-	char	*value;
-	size_t	*name_len;
-	
-	int i = 0;
+	t_var_list	*lst;
+	int			i;
 
+	lst = NULL;
+	i = 0;
 	while (envp[i])
 	{
-
-		name_len = equal_sign - envp[i];
-		
-		
-		current_var = create_var(name, value);
-		var_node = create_var_node(current_var);
-		if (!head)
-			head = var_node;
-		else
-			tail->next = var_node;
-		tail = var_node;
+		add_var(&lst, envp[i]);
 		i++;
 	}
-	return (head);
+	return (lst);
 }

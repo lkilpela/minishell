@@ -62,8 +62,8 @@ typedef struct s_var_list
 
 // init
 //void			init_tokenizer(t_tokenizer *t, char *input);
-// environment var
 
+// environment var
 void	free_var_list(t_var_list *list);
 t_var_list *get_envp(char **envp);
 void 	print_envp(t_var_list *lst);

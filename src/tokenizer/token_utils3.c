@@ -6,23 +6,31 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:46:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/14 22:38:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:26:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
+char	*skip_whitespaces(char *str)
+{
+	while (*str && is_whitespace(*str))
+		str++;
+	return (str);
+}
+
 char	*skip_word(char *str)
 {
-	while (*str && !is_whitespace(*str) && !is_operator(*str)
-		&& !is_quote(*str))
+	while (*str && is_word(*str))
 		str++;
 	return (str);
 }
 
 char	*skip_op(char *str)
 {
-	if (is_operator(*str))
+	if (is_double_operator(str))
+		str += 2;
+	else if (is_operator(*str))
 		str++;
 	return (str);
 }
@@ -38,4 +46,14 @@ char	*skip_quote(char *str)
 	if (end == NULL)
 		return (NULL);
 	return (end + 1);
+}
+
+char *skip_variable(char *str)
+{
+	if (*str == '$')
+	{
+		str++;
+		str = skip_word(str);
+	}
+	return (str);
 }

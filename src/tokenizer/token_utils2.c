@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:26:42 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 08:50:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 09:17:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char	*find_token_end(char *str)
 
 int	get_token_len(char *str)
 {
+	int		len;
 	char	*end;
 	
 	if (is_quote(*str))

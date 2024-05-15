@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 22:57:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 23:16:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,8 @@ void	add_var(t_var_list **lst, char *str)
 		if(ft_strcmp(v->current_var->name, name) == 0)
 		{
 			free(v->current_var->name);
+			v->current_var->name = name;
 			v->current_var->value = value;
-			free(name);
 			return ;
 		}
 		v = v->next;

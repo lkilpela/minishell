@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
+#    By: aklein <aklein@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/15 20:48:22 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/05/15 22:49:18 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ M_HEADERS		=	$(INCLUDES)/minishell.h \
 OBJ_DIR			=	./obj
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
-SRCS			=	minishell.c \
+SRCS			=	\
 					token_list.c \
 					token_utils.c \
 					token_utils2.c \
@@ -50,7 +50,8 @@ SRCS			=	minishell.c \
 					init.c \
 					parsing.c \
 					optimize.c \
-					#tokenizer.c \
+					tokenizer.c \
+					# minishell.c \
 
 ################################################################################
 # RULES

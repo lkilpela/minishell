@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 14:57:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 23:04:38 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ t_token	create_token(char *str)
 	a_token.value = NULL;
 	a_token.type = -1;
 	len = get_token_len(str);
-	if (is_quote(str[0]))
+	if (is_quote(*str))
+	{
+		a_token.quotes = *str;
 		a_token.value = ft_strndup(str + 1, len);
-	else if (str[0] == '$')
+	}
+	else if (*str == '$')
 		a_token.value = ft_strndup(str, len);
 	else
 		a_token.value = ft_strndup(str, len);
@@ -34,7 +37,6 @@ t_token_list	*tokenize_input(char *str)
 {
 	t_token_list	*lst;
 	t_token			token;
-	int				var_expansion;
 
 	lst = NULL;
 	while (*str)
@@ -45,7 +47,6 @@ t_token_list	*tokenize_input(char *str)
 		token = create_token(str);
 		if (is_quote(*str))
 		{
-			var_expansion = 0;
 			//str = handle_quotes(str, &var_expansion);
 			//if (var_expansion == 1)
 			//{
@@ -106,12 +107,11 @@ void	handle_heredoc(char *str)
 	// non-existent variable inside heredoc
 	// variable followed by non-whitespace character inside heredoc
 }
-
-/*int main()
+*/
+int main()
 {
 	char *str = "    echo \" Hello\"  \'World!\' >> << |ls";
 	t_token_list *lst = tokenize_input(str);
 	print_tokens(lst);
 	free_list(&lst);
 }
-*/

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/15 22:30:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 22:34:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,7 @@ void minishell_loop(t_var_list *lst)
 		//free_list(&lst);
 		equal_pos = ft_strchr(input, '=');
 		if (equal_pos)
-		{
-            add_var(&lst, input);
-		}
+			add_var(&lst, input);
 		else
 		{
 			char *temp = expand_variable(input, lst);

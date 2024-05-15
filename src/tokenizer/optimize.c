@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 15:59:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 20:17:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,29 @@ char *lookup_var(char *var_name, t_var_list *v)
 
 char *expand_variable(char *str, t_var_list *v)
 {
+	char	*start;
+	char	*prefix;
 	char	*end;
-	char	*var_name;
-	char	*var_value;
 	char 	*expanded_str;
+	char	*temp;
 
-	end = skip_variable(str);
-	var_name = ft_strndup(str + 1, end - str - 1);
-	var_value = lookup_var(var_name, v);
-	if (var_value)
+	start = ft_strchr(str, '$');
+	end = skip_variable(start);
+	prefix = ft_strndup(str, start - str);
+	v->current_var->name = ft_strndup(start + 1, end - str - 1);
+	v->current_var->value = lookup_var(v->current_var->name, v);
+	if (v->current_var->value)
 	{
-		expanded_str = ft_strjoin(var_value, end);
-		free(var_value);
-		return (expanded_str);
+		temp = ft_strjoin(prefix, v->current_var->value);
+		expanded_str = ft_strjoin(temp, end);
+		free(temp);
 	}
-	return (ft_strdup(str));
+	else	
+		expanded_str = ft_strdup(str);
+	free(prefix);
+	return (expanded_str);
 }
+
 char *next_token(char *str)
 {
 	while (*str)

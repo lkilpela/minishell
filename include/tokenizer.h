@@ -3,7 +3,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include "../libft/include/libft.h"
+# include <libft.h>
 
 # define DOLLAR '$' // // denote variables ($)
 
@@ -62,6 +62,11 @@ typedef struct s_var_list
 
 // init
 //void			init_tokenizer(t_tokenizer *t, char *input);
+// environment var
+
+void	free_var_list(t_var_list *list);
+t_var_list *get_envp(char **envp);
+void 	print_envp(t_var_list *lst);
 
 // token list
 void			append_node(t_token_list **lst, t_token token);

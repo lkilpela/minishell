@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 14:01:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:04:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-void free_var(t_var *var)
+static void free_var(t_var *var)
 {
 	if (var)
 	{
@@ -36,7 +36,7 @@ void free_var_list(t_var_list *list)
 }
 
 // create a new t_var struct
-t_var	*create_var(char *env_str)
+static t_var	*create_var(char *env_str)
 {
 	char	*equal_sign;
 	t_var	*var;
@@ -63,7 +63,7 @@ t_var	*create_var(char *env_str)
 	return (var);	
 }
 
-void	add_var(t_var_list **lst, char *env_str)
+static void	add_var(t_var_list **lst, char *env_str)
 {
 	t_var_list	*node;
 	t_var_list	*last;
@@ -113,11 +113,4 @@ void print_envp(t_var_list *lst)
 		printf("Name: %s, Value: %s\n", lst->current_var->name, lst->current_var->value);
 		lst = lst->next;
 	}
-}
-
-int main(char **envp)
-{
-	t_var_list *lst = get_envp(envp);
-	print_envp(lst);
-	free_var_list(lst);
 }

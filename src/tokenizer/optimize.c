@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 10:45:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:01:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,14 @@ int get_token_len(char *str)
 t_token	create_token(char *str)
 {
 	t_token	a_token;
+	char	*s;
 	int		len;
 
-	a_token.value = NULL;
-	a_token.type = -1;
+	s = str;
 	len = get_token_len(str);
-	if (is_quote(str[0]))
-		a_token.value = ft_strndup(str + 1, len);
-	else if (str[0] == '$')
-		a_token.value = ft_strndup(str, len);
-	else
-		a_token.value = ft_strndup(str, len);
+	if (is_quote(*str) || *str == '$')
+		s++;
+	a_token.value = ft_strndup(s, len);
 	a_token.type = get_token_type(str);
 	return (a_token);
 }

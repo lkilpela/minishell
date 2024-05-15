@@ -76,6 +76,7 @@ void			print_tokens(t_token_list *lst);
 // tokenizer
 t_token_list	*tokenize_input(char *str);
 t_token			create_token(char *str);
+char 			*expand_variable(char *str, t_var_list *v);
 
 // utils
 int 			is_word(char c);

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:46:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 15:47:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 21:10:05 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,11 @@ char	*skip_variable(char *str)
 	if (*str == '$')
 	{
 		str++; // skip dollar sign
+		printf("str: %s\n", str);
 		if (*str == '?')
 			str++; // special case for '$?'
 		str = skip_word(str);
+		printf("str after skip: %s\n", str);
 	}
 	return (str);
 }

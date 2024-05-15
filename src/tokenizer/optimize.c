@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 21:33:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 22:02:13 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,20 @@ char *expand_variable(char *str, t_var_list *v)
 	char	*end;
 	char 	*expanded_str;
 	char	*temp;
+	char	*var_name;
+	char	*var_value;
 
 	printf("input: %s\n", str);
 	start = ft_strchr(str, '$');
 	end = skip_variable(start);
 	prefix = ft_strndup(str, start - str);
-	v->current_var->name = ft_strndup(start + 1, end - start - 1);
-	printf("v->current_var->name: %s\n", v->current_var->name);
-	v->current_var->value = lookup_var(v->current_var->name, v);
-	printf("v->current_var->value: %s\n",v->current_var->value);
-	if (v->current_var->value)
+	var_name = ft_strndup(start + 1, end - start - 1);
+	printf("v->current_var->name: %s\n", var_name);
+	var_value = lookup_var(var_name, v);
+	printf("var_value: %s\n",var_value);
+	if (var_value)
 	{
-		temp = ft_strjoin(prefix, v->current_var->value);
+		temp = ft_strjoin(prefix, var_value);
 		expanded_str = ft_strjoin(temp, end);
 		free(temp);
 	}

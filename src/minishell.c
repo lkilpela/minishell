@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/15 21:37:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 21:55:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int argc, char **argv, char **envp)
 
 	init_minishell(argc, argv, envp, &m);
 	lst = get_envp(envp);
-	print_envp(lst);
-	free_var_list(lst);
+	//print_envp(lst);
+	//free_var_list(lst);
 	minishell_loop(lst);
 }

@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 20:17:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 22:20:14 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-char *lookup_var(char *var_name, t_var_list *v)
+static char *lookup_var(char *var_name, t_var_list *v)
 {
 	while (v)
 	{
@@ -30,15 +30,20 @@ char *expand_variable(char *str, t_var_list *v)
 	char	*end;
 	char 	*expanded_str;
 	char	*temp;
+	char	*var_name;
+	char	*var_value;
 
+	printf("input: %s\n", str);
 	start = ft_strchr(str, '$');
 	end = skip_variable(start);
 	prefix = ft_strndup(str, start - str);
-	v->current_var->name = ft_strndup(start + 1, end - str - 1);
-	v->current_var->value = lookup_var(v->current_var->name, v);
-	if (v->current_var->value)
+	var_name = ft_strndup(start + 1, end - start - 1);
+	printf("v->current_var->name: %s\n", var_name);
+	var_value = lookup_var(var_name, v);
+	printf("var_value: %s\n",var_value);
+	if (var_value)
 	{
-		temp = ft_strjoin(prefix, v->current_var->value);
+		temp = ft_strjoin(prefix, var_value);
 		expanded_str = ft_strjoin(temp, end);
 		free(temp);
 	}
@@ -68,7 +73,7 @@ char *next_token(char *str)
 	return (str);
 }
 
-int get_token_len(char *str, t_var_list *v)
+/*int get_token_len(char *str, t_var_list *v)
 {
 	char	*end;
 	int		len;
@@ -85,9 +90,9 @@ int get_token_len(char *str, t_var_list *v)
 			len -= 1;
 	}
 	return (len);
-}
+}*/
 
-t_token_type	get_token_type(char *str)
+/*t_token_type	get_token_type(char *str)
 {
 	if (*str == '\'')
 		return (S_QUOTE);
@@ -109,9 +114,9 @@ t_token_type	get_token_type(char *str)
 		return (WORD);
 	else
 		return (UNKNOWN);
-}
+}*/
 
-t_token	create_token(char *str)
+/*t_token	create_token(char *str)
 {
 	t_token	a_token;
 	char	*s;
@@ -124,9 +129,9 @@ t_token	create_token(char *str)
 	a_token.value = ft_strndup(s, len);
 	a_token.type = get_token_type(str);
 	return (a_token);
-}
+}*/
 
-t_token_list	*tokenizer(char **str)
+/*t_token_list	*tokenizer(char **str)
 {
 	
-}
+}*/

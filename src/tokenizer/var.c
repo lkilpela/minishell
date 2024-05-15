@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 14:14:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 22:28:49 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void free_var_list(t_var_list *list)
 }
 
 // create a new t_var struct
-static t_var	*create_var(char *env_str)
+t_var	*create_var(char *env_str)
 {
 	char	*equal_sign;
 	t_var	*var;
@@ -63,7 +63,7 @@ static t_var	*create_var(char *env_str)
 	return (var);	
 }
 
-static void	add_var(t_var_list **lst, char *env_str)
+void	add_var(t_var_list **lst, char *env_str)
 {
 	t_var_list	*node;
 	t_var_list	*last;

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/15 14:25:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:25:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 void minishell_loop()
 {
-	char		*input;
+	char			*input;
+	t_token_list	*lst;
 	//t_tokenizer	t;
 
 	while (42)
@@ -26,7 +27,7 @@ void minishell_loop()
 			break;
 		add_history(input);
 		//init_tokenizer(&t, input);
-		t_token_list *lst = tokenize_input(input);
+		lst = tokenize_input(input);
 		print_tokens(lst);
 		print_commands(parser(lst));
 		free_list(&lst);

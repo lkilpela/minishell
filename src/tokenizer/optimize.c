@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 10:39:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:45:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,12 @@ int get_token_len(char *str)
 	if (is_quote(*str))
 		len -= 2;
 	else if (*str == '$')
-		len -= 1;
+	{
+		if(*(str + 1) == '?')
+			len = 2;
+		else
+			len -= 1;
+	}
 	return (len);
 }
 

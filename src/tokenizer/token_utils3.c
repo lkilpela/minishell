@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:46:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 10:40:30 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:48:12 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*skip_quote(char *str)
 	return (end + 1);
 }
 
-char *skip_variable(char *str)
+char	*skip_variable(char *str)
 {
 	if (*str == '$')
 	{

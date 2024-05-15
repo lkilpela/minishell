@@ -64,9 +64,10 @@ typedef struct s_var_list
 //void			init_tokenizer(t_tokenizer *t, char *input);
 
 // environment var
-void	free_var_list(t_var_list *list);
-t_var_list *get_envp(char **envp);
-void 	print_envp(t_var_list *lst);
+void			free_var_list(t_var_list *list);
+t_var_list 		*get_envp(char **envp);
+void 			print_envp(t_var_list *lst);
+t_var			*create_var(char *env_str);
 
 // token list
 void			append_node(t_token_list **lst, t_token token);
@@ -77,6 +78,7 @@ void			print_tokens(t_token_list *lst);
 t_token_list	*tokenize_input(char *str);
 t_token			create_token(char *str);
 char 			*expand_variable(char *str, t_var_list *v);
+void			add_var(t_var_list **lst, char *env_str);
 
 // utils
 int 			is_word(char c);

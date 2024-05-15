@@ -3,7 +3,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
-# include <libft.h>
+# include "../libft/include/libft.h"
 
 # define DOLLAR '$' // // denote variables ($)
 
@@ -85,6 +85,7 @@ char			*skip_quote(char *str);
 // utils2
 int				get_token_len(char *str);
 t_token_type	get_token_type(char *str);
+char			*ft_strndup(char *str, size_t len);
 
 
 #endif

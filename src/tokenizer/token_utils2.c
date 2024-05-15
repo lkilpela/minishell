@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:26:42 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 11:17:02 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:59:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,22 @@ void	print_type(int e, const char *str)
 		ft_putstr_fd(message, STDERR_FILENO);
 	}
 	write(2, "\n", 1);
+}
+
+char	*ft_strndup(char *str, size_t len)
+{
+	size_t	i;
+	char	*dup;
+
+	i = 0;
+	dup = malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	while (i < len)
+	{
+		dup[i] = str[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }

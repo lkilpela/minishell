@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:26:42 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 09:17:38 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:17:02 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-static int	len_inquote(char *str)
+/*static int	len_inquote(char *str)
 {
 	char *end;
 	int len;
@@ -63,7 +63,7 @@ int	get_token_len(char *str)
 		len = end - str;
 	}
 	return (len);
-}
+}*/
 
 static int	ft_strcmp(char *s1, char *s2)
 {
@@ -97,4 +97,36 @@ t_token_type	get_token_type(char *str)
 		return (VAR);
 	else
 		return (WORD);
+}
+
+static const char	*get_type_str(int e)
+{
+	static const char	*type_str[] = {
+		"WORD",
+		"OP_PIPE",
+		"OP_LESS",
+		"OP_GREAT",
+		"OP_DLESS",
+		"OP_DGREAT",
+		"S_QUOTE",
+		"D_QUOTE",
+		"VAR",
+		"T_NEWLINE",
+		"T_SPACE",
+		"UNKNOWN"
+	};
+
+	return (type_str[e]);
+}
+
+void	print_type(int e, const char *str)
+{
+	const char	*message;
+
+	if (e >= 0 || e < UNKNOWN)
+	{
+		message = get_type_str(e);
+		ft_putstr_fd(message, STDERR_FILENO);
+	}
+	write(2, "\n", 1);
 }

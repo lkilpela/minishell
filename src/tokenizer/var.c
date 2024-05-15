@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 23:16:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 23:33:52 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void extract_var(char *str, char **name, char **value)
 		return ;
 	*name = ft_strndup(str, equal_sign - str);
 	*value = ft_strdup(equal_sign + 1);
-	
+	*value = remove_quotes(*value);
 }
 
 // create a new t_var struct

@@ -6,102 +6,109 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 12:40:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:31:02 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-t_var	*expand_variables(t_token *token)
+void free_var(t_var *var)
 {
-	t_var	*var;
-	char	*env_value;
+	if (var)
+	{
+		free(var->name);
+		free(var->value);
+		free(var);
+	}
+}
 
+void free_var_list(t_var_list *list)
+{
+	t_var_list *tmp;
+
+	while (list)
+	{
+		tmp = list;
+		list = list->next;
+		free_var(tmp->current_var);
+		free(tmp);
+	}
+}
+
+t_var	*create_var(char *env_str)
+{
+	char	*equal_sign;
+	t_var	*var;
+
+	equal_sign = ft_strchr(env_str, '=');
+		if (!equal_sign)
+			return ;
+	// create a new t_var struct
 	var = malloc(sizeof(t_var));
 	if (!var)
 		return (NULL);
-	if (token->type == VAR)
-	{
-		// store token.value to var.name
-		var->name = ft_strdup(token->value);
-		if (!var->name)
-		{
-			free(var);
-			return (NULL);
-		}
-		env_value = getenv(token->value);
-		if (env_value)
-		{
-			var->value = ft_strdup(env_value);
-			if (!var->value)
-			{
-				free(var->name);
-				free(var);
-				return (NULL);
-			}
-		}
-		else
-			var->value = NULL;
-	}
-	return (var);
-}
-
-t_envp	*get_a_var(char *name, char *value)
-{
-	t_envp	*a_var;
-
-	a_var = malloc(sizeof(t_envp));
-	if (!a_var)
-		return (NULL);
-	a_var->name = ft_strdup(name);
-	if (!a_var->name)
+	var->name = ft_strndup(env_str, equal_sign - env_str);
+	if (!var->name)
 	{
 		free(var);
 		return (NULL);
 	}
-	a_var->value = ft_strdup(value);
-	if (!a_var->value)
+	var->value = ft_strdup(equal_sign + 1);
+	if (!var->value)
 	{
 		free(var->name);
 		free(var);
 		return (NULL);
 	}
+	return (var);	
 }
 
-t_var *create_var_node(t_envp *var)
+void	add_env_var (t_var_list **lst, char *env_str)
 {
-	t_var	*var_node;
+	t_var_list	*node;
+	t_var_list	*last;
 
-	var_node = malloc(sizeof(t_var));
-	if (!var)
+	// create a new t_var_list node
+	node = malloc(sizeof(t_var_list));
+	if (!node)
 		return (NULL);
-	var_node->name = var;
-	var_node->value = NULL;
-	return (var);
+	node->current_var = var;
+	node->next = NULL;
+	
+	// add new node to the end of list
+	if (*lst == NULL)
+		*lst = node;
+	else
+	{
+		last = *lst;
+		while (last->next)
+			last = last->next;
+		last->next = node;
+	}
+	
 }
 
-t_envp *get_envp(char **envp)
+
+t_var_list *get_envp(char **envp)
 {
-	t_envp *head = NULL;
-	t_envp *tail = NULL;
-	t_envp	*var;
+	t_var_list *head = NULL;
+	t_var_list *tail = NULL;
+	t_var_list	*current_var;
 	t_var	*var_node;
 	char	*name;
 	char	*value;
 	size_t	*name_len;
-	char	*equal_sign;
+	
 	int i = 0;
 
 	while (envp[i])
 	{
-		equal_sign = ft_strchr(envp[i], '=');
-		if (!equal_sign)
-			continue;
+
 		name_len = equal_sign - envp[i];
-		name = ft_strndup(envp[i], name_len);
-		value = ft_strdup(equal_sign + 1);
-		var = get_a_var(name, value);
-		var_node = create_var_node(var);
+		
+		
+		current_var = create_var(name, value);
+		var_node = create_var_node(current_var);
 		if (!head)
 			head = var_node;
 		else

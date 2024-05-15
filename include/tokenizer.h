@@ -54,14 +54,14 @@ typedef struct s_var
 }				t_var;
 
 // variables
-typedef struct s_envp
+typedef struct s_var_list
 {
-	t_var			*a_var; 
-	struct s_envp	*next; 
-}				t_envp;
+	t_var				*current_var; 
+	struct s_envp_list	*next; 
+}				t_var_list;
 
 // init
-void			init_tokenizer(t_tokenizer *t, char *input);
+//void			init_tokenizer(t_tokenizer *t, char *input);
 
 // token list
 void			append_node(t_token_list **lst, t_token token);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/14 00:07:34 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:03:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ void minishell_loop()
 
 int main(int argc, char **argv, char **envp)
 {
-	t_minishell	m;
+	//t_minishell	m;
 
-	init_minishell(argc, argv, envp, &m);
+	//init_minishell(argc, argv, envp, &m);
+	t_var_list *lst = get_envp(envp);
+	print_envp(lst);
+	free_var_list(lst);
 	minishell_loop();
 }

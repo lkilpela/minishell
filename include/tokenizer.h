@@ -46,19 +46,19 @@ typedef struct s_tokenizer
 	t_token_list	*tokens; 		// list of all tokens parsed from the input
 }				t_tokenizer;
 
-// single variable
+// single env variable
 typedef struct s_var
 {
-	const char	*name;	// name of variable
-	char		*value;	// value of variable
+	char	*name;	// name of variable
+	char	*value;	// value of variable
 }				t_var;
 
 // variables
-typedef struct s_var_array
+typedef struct s_envp
 {
-	t_var	*vars; // a pointer to an array of t_var
-	int		size; // number of variable in the array
-}				t_var_array;
+	t_var			*a_var; 
+	struct s_envp	*next; 
+}				t_envp;
 
 // init
 void			init_tokenizer(t_tokenizer *t, char *input);

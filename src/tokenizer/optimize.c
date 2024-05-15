@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 21:14:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 21:33:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ char *expand_variable(char *str, t_var_list *v)
 	char 	*expanded_str;
 	char	*temp;
 
+	printf("input: %s\n", str);
 	start = ft_strchr(str, '$');
 	end = skip_variable(start);
 	prefix = ft_strndup(str, start - str);
-	v->current_var->name = ft_strndup(start + 1, end - str - 1);
+	v->current_var->name = ft_strndup(start + 1, end - start - 1);
+	printf("v->current_var->name: %s\n", v->current_var->name);
 	v->current_var->value = lookup_var(v->current_var->name, v);
+	printf("v->current_var->value: %s\n",v->current_var->value);
 	if (v->current_var->value)
 	{
 		temp = ft_strjoin(prefix, v->current_var->value);

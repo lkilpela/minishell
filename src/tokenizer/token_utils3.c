@@ -6,41 +6,56 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:46:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:47:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:47:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
+char	*skip_whitespaces(char *str)
+{
+	while (*str && is_whitespace(*str))
+		str++;
+	return (str);
+}
+
 char	*skip_word(char *str)
 {
-	while (*str && !is_whitespace(*str) && !is_operator(*str)
-		&& !is_quote(*str))
+	while (*str && is_word(*str))
 		str++;
 	return (str);
 }
 
 char	*skip_op(char *str)
 {
-	if (is_operator(*str))
+	if (is_double_operator(str))
+		str += 2;
+	else if (is_operator(*str))
 		str++;
 	return (str);
 }
 
 char	*skip_quote(char *str)
 {
-	int	in_quote;
+	char	*end;
+	char	quote_type;
 
-	in_quote = 1;
+	quote_type = *str;
 	str++;
-	while (in_quote)
+	end = ft_strchr(str, quote_type);
+	if (end == NULL)
+		return (NULL);
+	return (end + 1);
+}
+
+char	*skip_variable(char *str)
+{
+	if (*str == '$')
 	{
-		if (is_quote(*str))
-			in_quote = 0;
-		else
-			str++;
+		str++; // skip dollar sign
+		if (*str == '?')
+			str++; // special case for '$?'
+		str = skip_word(str);
 	}
-	if (!in_quote)
-		str++;
 	return (str);
 }

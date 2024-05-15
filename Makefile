@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
+#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/13 23:56:35 by aklein           ###   ########.fr        #
+#    Updated: 2024/05/15 14:08:38 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,14 +42,14 @@ OBJ_DIR			=	./obj
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
 SRCS			=	minishell.c \
-					tokenizer.c \
 					token_list.c \
 					token_utils.c \
 					token_utils2.c \
 					token_utils3.c \
+					var.c \
 					init.c \
-					parsing.c 
-
+					parsing.c \
+					#tokenizer.c \
 
 ################################################################################
 # RULES

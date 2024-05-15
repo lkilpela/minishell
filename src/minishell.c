@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/14 00:07:34 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:25:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 void minishell_loop()
 {
-	char		*input;
+	char			*input;
+	t_token_list	*lst;
 	//t_tokenizer	t;
 
 	while (42)
@@ -26,7 +27,7 @@ void minishell_loop()
 			break;
 		add_history(input);
 		//init_tokenizer(&t, input);
-		t_token_list *lst = tokenize_input(input);
+		lst = tokenize_input(input);
 		print_tokens(lst);
 		print_commands(parser(lst));
 		free_list(&lst);
@@ -37,7 +38,11 @@ void minishell_loop()
 int main(int argc, char **argv, char **envp)
 {
 	t_minishell	m;
+	t_var_list *lst;
 
 	init_minishell(argc, argv, envp, &m);
+	lst = get_envp(envp);
+	print_envp(lst);
+	free_var_list(lst);
 	minishell_loop();
 }

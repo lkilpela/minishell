@@ -6,61 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:26:42 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:40:49 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:39:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-static int	len_inquote(char *str)
-{
-	char *end;
-	int len = 0;
-	
-	str++;
-	end = str;
-	end = skip_quote(str);
-	end--;
-	len = end - str;
-	return (len);
-}
-
-static char	*find_token_end(char *str)
-{
-	char	*end;
-
-	end = str;
-	if (is_operator(*str))
-		end++;
-	else
-		while (*end && !is_whitespace(*end) && !is_operator(*end))
-			end++;
-	return (end);
-}
-
-int	get_token_len(char *str)
-{
-	int		len;
-	char	*end;
-	
-	if (is_quote(*str))
-	{
-		len = len_inquote(str);
-		str++;
-	}
-	else if (is_double_operator(str))
-	{
-		len = 2;
-	}
-	else
-	{
-		end = find_token_end(str);
-		len = end - str;
-	}
-	return (len);
-}
-
-static int	ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	while (*s1 || *s2)
 	{
@@ -92,4 +44,54 @@ t_token_type	get_token_type(char *str)
 		return (VAR);
 	else
 		return (WORD);
+}
+
+/*static const char	*get_type_str(int e)
+{
+	static const char	*type_str[] = {
+		"WORD",
+		"OP_PIPE",
+		"OP_LESS",
+		"OP_GREAT",
+		"OP_DLESS",
+		"OP_DGREAT",
+		"S_QUOTE",
+		"D_QUOTE",
+		"VAR",
+		"T_NEWLINE",
+		"T_SPACE",
+		"UNKNOWN"
+	};
+
+	return (type_str[e]);
+}
+
+void	print_type(int e, const char *str)
+{
+	const char	*message;
+
+	if (e >= 0 || e < UNKNOWN)
+	{
+		message = get_type_str(e);
+		ft_putstr_fd(message, STDERR_FILENO);
+	}
+	write(2, "\n", 1);
+}*/
+
+char	*ft_strndup(char *str, size_t len)
+{
+	size_t	i;
+	char	*dup;
+
+	i = 0;
+	dup = malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	while (i < len)
+	{
+		dup[i] = str[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
 }

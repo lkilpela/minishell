@@ -3,6 +3,7 @@
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <libft.h>
 
 # define DOLLAR '$' // // denote variables ($)
 
@@ -18,7 +19,8 @@ typedef enum e_token_type
 	D_QUOTE,	// start or end of a double-quoted string (")
 	VAR, 		// $HOME is treated as a single VAR token
 	T_NEWLINE,
-	T_SPACE	// sperate different parts of a command
+	T_SPACE,	// sperate different parts of a command
+	UNKNOWN
 }			t_token_type;
 
 // single token struct
@@ -44,22 +46,27 @@ typedef struct s_tokenizer
 	t_token_list	*tokens; 		// list of all tokens parsed from the input
 }				t_tokenizer;
 
-// single variable
+// single env variable
 typedef struct s_var
 {
-	const char	*name;	// name of variable
-	char		*value;	// value of variable
+	char	*name;	// name of variable
+	char	*value;	// value of variable
 }				t_var;
 
 // variables
-typedef struct s_var_array
+typedef struct s_var_list
 {
-	t_var	*vars; // a pointer to an array of t_var
-	int		size; // number of variable in the array
-}				t_var_array;
+	t_var				*current_var; 
+	struct s_var_list	*next; 
+}				t_var_list;
 
 // init
-void			init_tokenizer(t_tokenizer *t, char *input);
+//void			init_tokenizer(t_tokenizer *t, char *input);
+
+// environment var
+void	free_var_list(t_var_list *list);
+t_var_list *get_envp(char **envp);
+void 	print_envp(t_var_list *lst);
 
 // token list
 void			append_node(t_token_list **lst, t_token token);
@@ -68,8 +75,10 @@ void			print_tokens(t_token_list *lst);
 
 // tokenizer
 t_token_list	*tokenize_input(char *str);
+t_token			create_token(char *str);
 
 // utils
+int 			is_word(char c);
 int				is_whitespace(char c);
 int				is_quote(char c);
 int				is_operator(char c);
@@ -78,10 +87,13 @@ char			*skip_whitespaces(char *str);
 char			*skip_word(char *str);
 char			*skip_op(char *str);
 char			*skip_quote(char *str);
+char			*skip_variable(char *str);
 
 // utils2
 int				get_token_len(char *str);
 t_token_type	get_token_type(char *str);
+char			*ft_strndup(char *str, size_t len);
+int				ft_strcmp(char *s1, char *s2);
 
 
 #endif

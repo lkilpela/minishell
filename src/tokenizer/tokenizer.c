@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/14 22:43:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 07:54:55 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_token	create_token(char *str)
 	len = get_token_len(str);
 	if (is_quote(str[0]))
 		a_token.value = ft_strndup(str + 1, len);
+	else if (str[0] == $)
+		a_token.value = ft_strndup(str, len)
 	else
 		a_token.value = ft_strndup(str, len);
 	a_token.type = get_token_type(str);
@@ -68,7 +70,7 @@ t_token_list	*tokenize_input(char *str)
 				//performing var expansion
 			}
 		}
-		else if (*str = '$') // dollar sign
+		else if (*str == '$') // dollar sign
 		{
 			//create a token for variable name, replace it with variable's value
 		}

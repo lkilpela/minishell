@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:26:42 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/13 22:40:49 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 08:50:48 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	len_inquote(char *str)
 	len = end - str;
 	return (len);
 }
-
+// find the end of token OP_ and WORD
 static char	*find_token_end(char *str)
 {
 	char	*end;
@@ -34,14 +34,14 @@ static char	*find_token_end(char *str)
 	if (is_operator(*str))
 		end++;
 	else
-		while (*end && !is_whitespace(*end) && !is_operator(*end))
+		while (*end && !is_whitespace(*end) 
+			&& !is_operator(*end) && *end != '$')
 			end++;
 	return (end);
 }
 
 int	get_token_len(char *str)
 {
-	int		len;
 	char	*end;
 	
 	if (is_quote(*str))
@@ -50,8 +50,11 @@ int	get_token_len(char *str)
 		str++;
 	}
 	else if (is_double_operator(str))
-	{
 		len = 2;
+	else if (*str == '$')
+	{
+		end = find_var_end(str);
+		len = end - str;
 	}
 	else
 	{

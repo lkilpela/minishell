@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 14:01:36 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:07:11 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_token_list	*tokenize_input(char *str)
 	return (lst);
 }
 
-// check quote type and set *var_expansion
+/*// check quote type and set *var_expansion
 char	*handle_quotes(char *str, int *var_expansion)
 {
 	char	quote_type;
@@ -113,4 +113,5 @@ void	handle_heredoc(char *str)
 	t_token_list *lst = tokenize_input(str);
 	print_tokens(lst);
 	free_list(&lst);
-}*/
+}
+*/

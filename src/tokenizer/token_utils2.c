@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:26:42 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 14:02:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:09:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_token_type	get_token_type(char *str)
 		return (WORD);
 }
 
-static const char	*get_type_str(int e)
+/*static const char	*get_type_str(int e)
 {
 	static const char	*type_str[] = {
 		"WORD",
@@ -76,7 +76,7 @@ void	print_type(int e, const char *str)
 		ft_putstr_fd(message, STDERR_FILENO);
 	}
 	write(2, "\n", 1);
-}
+}*/
 
 char	*ft_strndup(char *str, size_t len)
 {

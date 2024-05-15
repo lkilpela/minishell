@@ -57,7 +57,7 @@ typedef struct s_var
 typedef struct s_var_list
 {
 	t_var				*current_var; 
-	struct s_envp_list	*next; 
+	struct s_var_list	*next; 
 }				t_var_list;
 
 // init
@@ -78,6 +78,7 @@ t_token_list	*tokenize_input(char *str);
 t_token			create_token(char *str);
 
 // utils
+int 			is_word(char c);
 int				is_whitespace(char c);
 int				is_quote(char c);
 int				is_operator(char c);

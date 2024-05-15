@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 09:45:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:09:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	is_double_operator(char *str)
 	return ((*str == '>' && *(str + 1) == '>')
 		|| (*str == '<' && *(str + 1) == '<'));
 }
+
 int is_word(char c)
 {
 	return (c == ft_isalnum(c) || c == '_');

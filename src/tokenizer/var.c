@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 14:04:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:14:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_var	*create_var(char *env_str)
 
 	equal_sign = ft_strchr(env_str, '=');
 		if (!equal_sign)
-			return ;
+			return (NULL);
 	var = malloc(sizeof(t_var));
 	if (!var)
 		return (NULL);
@@ -71,7 +71,7 @@ static void	add_var(t_var_list **lst, char *env_str)
 	// create a new t_var_list node
 	node = malloc(sizeof(t_var_list));
 	if (!node)
-		return (NULL);
+		return ;
 	node->current_var = create_var(env_str);
 	if (!node->current_var)
 	{
@@ -110,7 +110,7 @@ void print_envp(t_var_list *lst)
 {
 	while (lst)
 	{
-		printf("Name: %s, Value: %s\n", lst->current_var->name, lst->current_var->value);
+		printf("Name: %s \t\t\t\t Value: %s\n", lst->current_var->name, lst->current_var->value);
 		lst = lst->next;
 	}
 }

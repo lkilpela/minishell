@@ -6,107 +6,38 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 23:44:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:39:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-char *remove_quotes(char *str)
+static char *next_token(char *str)
 {
-	char *p = str;
-	char *q = str;
-	while (*p)
-	{
-		if (*p != '\"')
-			*q++ = *p;
-		p++;
-	}
-	*q = '\0';
+	if (is_whitespace(*str))
+		str = skip_whitespaces(str);
+	else if (is_word(*str))
+		str = skip_word(str);
+	else if (is_operator(*str))
+		str = skip_op(str);
+	else if (is_quote(*str))
+		str = skip_quote(str);
+	//else if (*str == '$')
+		//str = skip_variable(str);
 	return (str);
 }
 
-static char *lookup_var(char *var_name, t_var_list *v)
-{
-	while (v)
-	{
-		if (ft_strcmp(v->current_var->name, var_name) == 0)
-			return (ft_strdup(v->current_var->value));
-		v = v->next;
-	}
-	return (NULL);
-}
-
-char *expand_variable(char *str, t_var_list *v)
-{
-	char	*start;
-	char	*prefix;
-	char	*end;
-	char 	*expanded_str;
-	char	*temp;
-	char	*var_name;
-	char	*var_value;
-
-	printf("input: %s\n", str);
-	start = ft_strchr(str, '$');
-	end = skip_variable(start);
-	prefix = ft_strndup(str, start - str);
-	var_name = ft_strndup(start + 1, end - start - 1);
-	printf("var_name: %s\n", var_name);
-	var_value = lookup_var(var_name, v);
-	printf("var_value: %s\n",var_value);
-	if (var_value)
-	{
-		temp = ft_strjoin(prefix, var_value);
-		expanded_str = ft_strjoin(temp, end);
-		free(temp);
-	}
-	else	
-		expanded_str = ft_strdup(str);
-	free(prefix);
-	return (expanded_str);
-}
-
-char *next_token(char *str)
-{
-	while (*str)
-	{
-		if (is_whitespace(*str))
-			str = skip_whitespaces(str);
-		else if (is_word(*str))
-			str = skip_word(str);
-		else if (is_operator(*str))
-			str = skip_op(str);
-		else if (is_quote(*str))
-			str = skip_quote(str);
-		else if (*str == '$')
-			str = skip_variable(str);
-		else
-			break;
-	}
-	return (str);
-}
-
-/*int get_token_len(char *str, t_var_list *v)
+static int 	token_len(char *str)
 {
 	char	*end;
 	int		len;
 
-	
+	end = next_token(str);
 	len = end - str;
-	if (is_quote(*str))
-		len -= 2;
-	else if (*str == '$')
-	{
-		if(*(str + 1) == '?')
-			len = 2;
-		else
-			len -= 1;
-	}
 	return (len);
-}*/
+}
 
-/*t_token_type	get_token_type(char *str)
+static t_token_type	get_token_type(char *str)
 {
 	if (*str == '\'')
 		return (S_QUOTE);
@@ -128,7 +59,167 @@ char *next_token(char *str)
 		return (WORD);
 	else
 		return (UNKNOWN);
+}
+
+static void	extract_token(char *str, char **value, t_token_type *type)
+{
+	int	len;
+	
+	len = token_len(str);
+	*value = ft_strndup(str, len);
+	*type = get_token_type(str);
+}
+
+static t_token	*create_token(char *str)
+{
+	t_token 		*token;
+	char			*value;
+	t_token_type	type;
+
+	value = NULL;
+	type = -1;
+	extract_token(str, &value, &type);
+	if (!value)
+		return (NULL);
+	token = malloc(sizeof(t_token));
+	if (!token)
+		free(value);
+	token->value = value;
+	token->type = type;
+	return (token);
+}
+
+static t_token_list *create_token_node(char *str)
+{
+	t_token_list *node;
+
+	node = malloc(sizeof(t_token_list));
+	if (!node)
+		return (NULL);
+	node->token = create_token(str);
+	if (!node->token)
+	{
+		free(node);
+		return (NULL);		
+	}
+	node->next = NULL;
+	return (node);
+}
+
+// add a node to a list
+static void	add_token_to_list(t_token_list **lst, t_token_list *node)
+{
+	t_token_list	*last;
+
+	if (*lst == NULL)
+		*lst = node;
+	else
+	{
+		last = *lst;
+		while (last->next)
+			last = last->next;
+		last->next = node;
+	}
+}
+
+// create new token and add to a list
+static void	add_token(t_token_list **lst, char *str)
+{
+	t_token_list	*node;
+	char			*value;
+	t_token_type	type;
+
+	value = NULL;
+	type = -1;
+	extract_token(str, &value, &type);
+	if (!value)
+		return ;
+	node = create_token_node(str);
+	if (!node)
+		return ;
+	add_token_to_list(lst, node);
+}
+
+// converts a string into a list of tokens
+t_token_list	*list_of_tokens(char *str)
+{
+	t_token_list	*lst;
+	char			*next;
+
+	lst = NULL;
+	while (*str)
+	{
+		add_token(&lst, str);
+		next = next_token(str);
+		str = next;
+	}
+	return (lst);
+}
+
+static char	*get_type_str(int e)
+{
+	static char	*type_str[] = {
+		"WORD",
+		"OP_PIPE",
+		"OP_LESS",
+		"OP_GREAT",
+		"OP_DLESS",
+		"OP_DGREAT",
+		"S_QUOTE",
+		"D_QUOTE",
+		"VAR",
+		"T_NEWLINE",
+		"T_SPACE",
+		"UNKNOWN"
+	};
+
+	return (type_str[e]);
+}
+
+/*static void	print_type(int e)
+{
+	char	*message;
+
+	if (e >= 0 || e < UNKNOWN)
+	{
+		message = get_type_str(e);
+		ft_putstr_fd(message, STDERR_FILENO);
+	}
+	write(2, "\n", 1);
 }*/
+
+static void	delone_node(t_token_list *lst)
+{
+	if (!lst)
+		return ;
+	free(lst->token->value);
+	free(lst);
+}
+
+void	free_list(t_token_list **lst)
+{
+	t_token_list	*temp;
+
+	if (!*lst)
+		return ;
+	while (*lst)
+	{
+		temp = (*lst)->next;
+		delone_node(*lst);
+		*lst = temp;
+	}
+	*lst = NULL;
+}
+
+void print_tokens(t_token_list *lst)
+{
+	while (lst)
+	{
+		printf("Value: %s \t\t Type: %s\n", lst->token->value, get_type_str(lst->token->type));
+		lst = lst->next;
+	}
+}
+
 
 /*t_token	create_token(char *str)
 {
@@ -145,7 +236,21 @@ char *next_token(char *str)
 	return (a_token);
 }*/
 
-/*t_token_list	*tokenizer(char **str)
+/*int get_token_len(char *str, t_var_list *v)
 {
+	char	*end;
+	int		len;
+
 	
+	len = end - str;
+	if (is_quote(*str))
+		len -= 2;
+	else if (*str == '$')
+	{
+		if(*(str + 1) == '?')
+			len = 2;
+		else
+			len -= 1;
+	}
+	return (len);
 }*/

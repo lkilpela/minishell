@@ -33,7 +33,7 @@ typedef struct s_token
 // a token node in linked list
 typedef struct s_token_list
 {
-	t_token				token;	// current token
+	t_token				*token;	// current token
 	struct s_token_list	*next;	// pointer to next token
 }				t_token_list;
 
@@ -67,19 +67,22 @@ typedef struct s_var_list
 void			free_var_list(t_var_list *list);
 t_var_list 		*get_envp(char **envp);
 void 			print_envp(t_var_list *lst);
-t_var			*create_var(char *env_str);
+char 			*remove_quotes(char *str);
+char 			*expand_variable(char *str, t_var_list *v);
 
 // token list
-void			append_node(t_token_list **lst, t_token token);
-void			free_list(t_token_list **lst);
-void			print_tokens(t_token_list *lst);
+//void			append_node(t_token_list **lst, t_token token);
+//void			free_list(t_token_list **lst);
+//void			print_tokens(t_token_list *lst);
 
 // tokenizer
-t_token_list	*tokenize_input(char *str);
-t_token			create_token(char *str);
-char 			*expand_variable(char *str, t_var_list *v);
-void			add_var(t_var_list **lst, char *env_str);
-char 			*remove_quotes(char *str);
+//t_token_list	*tokenize_input(char *str);
+//t_token			create_token(char *str);
+
+//optimize
+t_token_list 	*list_of_tokens(char *str);
+void 			print_tokens(t_token_list *lst);
+void			free_list(t_token_list **lst);
 
 // utils
 int 			is_word(char c);
@@ -95,7 +98,6 @@ char			*skip_variable(char *str);
 
 // utils2
 int				get_token_len(char *str);
-t_token_type	get_token_type(char *str);
 char			*ft_strndup(char *str, size_t len);
 int				ft_strcmp(char *s1, char *s2);
 

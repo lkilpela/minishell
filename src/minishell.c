@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/15 22:34:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 14:39:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include <tokenizer.h>
 #include <parser.h>
 
-void minishell_loop(t_var_list *lst)
+void minishell_loop()
 {
 	char			*input;
-	char	*equal_pos;
-	//t_token_list	*lst;
+	//char			*equal_pos;
+	t_token_list	*lst;
 	//t_tokenizer	t;
 
 	while (42)
@@ -28,11 +28,11 @@ void minishell_loop(t_var_list *lst)
 			break;
 		add_history(input);
 		//init_tokenizer(&t, input);
-		//lst = tokenize_input(input);
-		//print_tokens(lst);
+		lst = tokenizer(input);
+		print_tokens(lst);
 		//print_commands(parser(lst));
-		//free_list(&lst);
-		equal_pos = ft_strchr(input, '=');
+		free_list(&lst);
+		/*equal_pos = ft_strchr(input, '=');
 		if (equal_pos)
 			add_var(&lst, input);
 		else
@@ -40,7 +40,7 @@ void minishell_loop(t_var_list *lst)
 			char *temp = expand_variable(input, lst);
 			printf("expanded_str: %s\n", temp);
 			free(temp);
-		}
+		}*/
 		free(input);
 	}
 }
@@ -48,11 +48,11 @@ void minishell_loop(t_var_list *lst)
 int main(int argc, char **argv, char **envp)
 {
 	t_minishell	m;
-	t_var_list *lst;
+	//t_var_list *lst;
 
 	init_minishell(argc, argv, envp, &m);
-	lst = get_envp(envp);
+	//lst = get_envp(envp);
 	//print_envp(lst);
 	//free_var_list(lst);
-	minishell_loop(lst);
+	minishell_loop();
 }

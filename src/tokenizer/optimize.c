@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 23:20:15 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/16 23:48:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ static int	token_len(char *str)
 
 	len = 0;
 	inquote = 0;
+	if (is_double_operator(str))
+		return (2);
+	if (is_operator(*str))
+		return (1);
 	while (*str)
 	{
 		if (inquote && is_quote(*str))

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 18:05:49 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:14:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,18 @@ static t_token_type	get_token_type(char *str)
 		return (S_QUOTE);
 	else if (*str == '\"')
 		return (D_QUOTE);
-	else if (ft_strcmp(str, "<<") == 0)
-		return (OP_DLESS);
-	else if (ft_strcmp(str, ">>") == 0)
-		return (OP_DGREAT);
+	else if (*str == '<')
+	{
+		if (*(str + 1) == '<')
+			return (OP_DLESS);
+		return (OP_LESS);
+	}
+	else if (*str == '>')
+	{
+		if (*(str + 1) == '>')
+			return (OP_DGREAT);
+		return (OP_GREAT);
+	}
 	else if (*str == '<')
 		return (OP_LESS);
 	else if (*str == '>')
@@ -196,18 +204,6 @@ static char	*get_type_str(int e)
 	return (type_str[e]);
 }
 
-/*static void	print_type(int e)
-{
-	char	*message;
-
-	if (e >= 0 || e < UNKNOWN)
-	{
-		message = get_type_str(e);
-		ft_putstr_fd(message, STDERR_FILENO);
-	}
-	write(2, "\n", 1);
-}*/
-
 static void	delone_node(t_token_list *lst)
 {
 	if (!lst)
@@ -239,38 +235,3 @@ void print_tokens(t_token_list *lst)
 		lst = lst->next;
 	}
 }
-
-
-/*t_token	create_token(char *str)
-{
-	t_token	a_token;
-	char	*s;
-	int		len;
-
-	s = str;
-	len = get_token_len(str);
-	if (is_quote(*str) || *str == '$')
-		s++;
-	a_token.value = ft_strndup(s, len);
-	a_token.type = get_token_type(str);
-	return (a_token);
-}*/
-
-/*int get_token_len(char *str, t_var_list *v)
-{
-	char	*end;
-	int		len;
-
-	
-	len = end - str;
-	if (is_quote(*str))
-		len -= 2;
-	else if (*str == '$')
-	{
-		if(*(str + 1) == '?')
-			len = 2;
-		else
-			len -= 1;
-	}
-	return (len);
-}*/

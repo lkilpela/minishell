@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 14:47:38 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:01:37 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int 	token_len(char *str)
 	int		len;
 
 	end = next_token(str);
+	printf("end: %s\n", end);
 	len = end - str;
 	return (len);
 }
@@ -72,7 +73,9 @@ static void	extract_token(char *str, char **value, t_token_type *type)
 	
 	len = token_len(str);
 	*value = ft_strndup(str, len);
+	printf("*value: %s:\n", *value);
 	*type = get_token_type(str);
+	printf("*type: %u:\n", *type);
 }
 
 static t_token	*create_token(char *str)
@@ -151,6 +154,9 @@ t_token_list	*tokenizer(char *str)
 	lst = NULL;
 	while (*str)
 	{
+		str = skip_whitespaces(str);
+		if (!*str)
+			break ;
 		add_token(&lst, str);
 		next = next_token(str);
 		str = next;

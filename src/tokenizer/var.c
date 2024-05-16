@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 23:33:52 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 14:11:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_var	*create_var(char *str)
 }
 
 // create a new t_var_list node
-t_var_list *create_node(char *str)
+t_var_list *create_var_node(char *str)
 {
 	t_var_list	*node;
 	
@@ -90,7 +90,7 @@ t_var_list *create_node(char *str)
 }
 
 // add new node to the end of list
-void	add_node_to_list(t_var_list **lst, t_var_list *node)
+void	add_var_to_list(t_var_list **lst, t_var_list *node)
 {
 	t_var_list	*last;
 
@@ -129,10 +129,10 @@ void	add_var(t_var_list **lst, char *str)
 		}
 		v = v->next;
 	}
-	node = create_node(str);
+	node = create_var(str);
 	if (!node)
 		return;
-	add_node_to_list(lst, node);
+	add_var_to_list(lst, node);
 	free(name);
 	free(value);
 }

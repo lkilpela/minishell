@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 23:44:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 14:18:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,26 +87,17 @@ char *next_token(char *str)
 	return (str);
 }
 
-/*int get_token_len(char *str, t_var_list *v)
+int 	token_len(char *str)
 {
 	char	*end;
 	int		len;
 
-	
+	end = next_token(str);
 	len = end - str;
-	if (is_quote(*str))
-		len -= 2;
-	else if (*str == '$')
-	{
-		if(*(str + 1) == '?')
-			len = 2;
-		else
-			len -= 1;
-	}
 	return (len);
-}*/
+}
 
-/*t_token_type	get_token_type(char *str)
+t_token_type	get_token_type(char *str)
 {
 	if (*str == '\'')
 		return (S_QUOTE);
@@ -128,7 +119,102 @@ char *next_token(char *str)
 		return (WORD);
 	else
 		return (UNKNOWN);
-}*/
+}
+
+void	extract_token(char *str, char **value, t_token_type *type)
+{
+	int	len;
+	
+	len = token_len(str);
+	*value = ft_strndup(str, len);
+	*type = get_token_type(str);
+}
+
+t_token	*create_token(char *str)
+{
+	t_token 		*token;
+	char			*value;
+	t_token_type	type;
+
+	value = NULL;
+	type = -1;
+	extract_token(str, &value, &type);
+	if (!value)
+		return (NULL);
+	token = malloc(sizeof(t_token));
+	if (!token)
+		free(value);
+	token->value = value;
+	token->type = type;
+	return (token);
+}
+
+t_token_list *create_token_node(char *str)
+{
+	t_token_list *node;
+
+	node = malloc(sizeof(t_token_list));
+	if (!node)
+		return (NULL);
+	node->token = create_token(str);
+	if (!node->token)
+	{
+		free(node);
+		return (NULL);		
+	}
+	node->next = NULL;
+	return (node);
+}
+
+void	add_token_to_list(t_token_list **lst, t_token *node)
+{
+	t_token_list	*last;
+
+	if (*lst == NULL)
+		*lst = node;
+	else
+	{
+		last = *lst;
+		while (last->next)
+			last = last->next;
+		last->next = node;
+	}
+}
+
+void	add_token(t_token_list **lst, char *str)
+{
+	t_token_list	*node;
+	t_token_list	*t;
+	char			*value;
+	t_token_type	type;
+
+	value = NULL;
+	type = -1;
+	extract_token(str, &value, &type);
+	if (!value)
+		return ;
+	t = *lst;
+	node = create_token(str);
+	if (!node)
+		return ;
+	add_token_to_list(lst, node);
+}
+
+t_token_list tonkenizer(char *str)
+{
+	t_token_list	*lst;
+	char			*next;
+
+	lst = NULL;
+	while (*str)
+	{
+		add_token(&lst, str);
+		next = next_token(str);
+		str = next;
+	}
+	return (lst);
+}
+
 
 /*t_token	create_token(char *str)
 {
@@ -145,7 +231,21 @@ char *next_token(char *str)
 	return (a_token);
 }*/
 
-/*t_token_list	*tokenizer(char **str)
+/*int get_token_len(char *str, t_var_list *v)
 {
+	char	*end;
+	int		len;
+
 	
+	len = end - str;
+	if (is_quote(*str))
+		len -= 2;
+	else if (*str == '$')
+	{
+		if(*(str + 1) == '?')
+			len = 2;
+		else
+			len -= 1;
+	}
+	return (len);
 }*/

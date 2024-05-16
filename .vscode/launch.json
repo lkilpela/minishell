@@ -4,8 +4,7 @@
 		{
 			"type": "lldb",
 			"request": "launch",
-			"name": "(lldb) Minishell",
-			"program": "${workspaceFolder}/a.out",
+			"program": "${workspaceFolder}/minishell",
 			"args": [],
 			"cwd": "${workspaceFolder}",
 			"preLaunchTask": "make",

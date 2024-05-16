@@ -21,7 +21,7 @@ typedef enum e_token_type
 	VAR, 		// $HOME is treated as a single VAR token
 	T_NEWLINE,
 	T_SPACE,	// sperate different parts of a command
-	COMPLEX_WORD,
+	//COMPLEX_WORD,
 	UNKNOWN
 }			t_token_type;
 
@@ -87,8 +87,7 @@ void 			print_tokens(t_token_list *lst);
 void			free_list(t_token_list **lst);
 
 // utils
-int				is_simple_word(char c);
-int				is_complex_word(char c);
+int				is_word(char c);
 int				is_whitespace(char c);
 int				is_quote(char c);
 int				is_operator(char c);

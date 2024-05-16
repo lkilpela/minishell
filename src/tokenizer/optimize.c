@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 15:25:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:34:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ static void	extract_token(char *str, char **value, t_token_type *type)
 	
 	len = token_len(str);
 	*value = ft_strndup(str, len);
-	printf("*value: %s:\n", *value);
 	*type = get_token_type(str);
-	printf("*type: %u:\n", *type);
 }
 
 static t_token	*create_token(char *str)

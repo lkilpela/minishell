@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 18:14:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 22:00:33 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	has_special_char(char *str)
 	{
 		if (*str == '$' || is_quote(*str))
 			return (1);
-		str++;		
+		str++;
 	}
 	return (0);
 }
@@ -76,10 +76,10 @@ static t_token_type	get_token_type(char *str)
 		return (VAR);
 	else if (is_word(*str))
 	{
-		if (has_special_char(str) == 1)
-			return (COMPLEX_WORD);
-		else
-			return (WORD);
+		//if (has_special_char(str) == 1)
+		//	return (COMPLEX_WORD);
+		//else
+		return (WORD);
 	}
 	else
 		return (UNKNOWN);

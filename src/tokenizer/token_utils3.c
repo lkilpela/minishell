@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:46:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 16:03:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:01:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*skip_whitespaces(char *str)
 
 char	*skip_word(char *str)
 {
-	while (*str && (is_simple_word(*str) || is_complex_word(*str)))
+	while (*str && (is_word(*str)))
 		str++;
 	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 16:11:28 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:05:49 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char *next_token(char *str)
 {
 	if (is_whitespace(*str))
 		str = skip_whitespaces(str);
-	else if (is_simple_word(*str) || is_complex_word(*str))
+	else if (is_word(*str))
 		str = skip_word(str);
 	else if (is_operator(*str))
 		str = skip_op(str);
@@ -37,6 +37,17 @@ static int 	token_len(char *str)
 	return (len);
 }
 
+int	has_special_char(char *str)
+{
+	while (*str)
+	{
+		if (*str == '$' || is_quote(*str))
+			return (1);
+		str++;		
+	}
+	return (0);
+}
+
 static t_token_type	get_token_type(char *str)
 {
 	if (*str == '\'')
@@ -55,10 +66,13 @@ static t_token_type	get_token_type(char *str)
 		return (OP_PIPE);
 	else if (str[0] == '$')
 		return (VAR);
-	else if (is_simple_word(*str))
-		return (WORD);
-	else if (is_complex_word(*str))
-		return (COMPLEX_WORD);
+	else if (is_word(*str))
+	{
+		if (has_special_char(str) == 1)
+			return (COMPLEX_WORD);
+		else
+			return (WORD);
+	}
 	else
 		return (UNKNOWN);
 }
@@ -70,7 +84,6 @@ static void	extract_token(char *str, char **value, t_token_type *type)
 	len = token_len(str);
 	*value = ft_strndup(str, len);
 	*type = get_token_type(str);
-	printf("value: %s\n, type: %d\n", *value, *type);
 }
 
 static t_token	*create_token(char *str)
@@ -161,8 +174,6 @@ t_token_list	*tokenizer(char *str)
 	}
 	return (lst);
 }
-
-
 
 static char	*get_type_str(int e)
 {

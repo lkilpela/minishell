@@ -5,7 +5,8 @@
 # include <stdio.h>
 # include <libft.h>
 
-# define DOLLAR '$' // // denote variables ($)
+# define DOLLAR '$' // denote variables ($)
+# define UNDERSCORE '_' 
 
 typedef enum e_token_type
 {
@@ -20,6 +21,7 @@ typedef enum e_token_type
 	VAR, 		// $HOME is treated as a single VAR token
 	T_NEWLINE,
 	T_SPACE,	// sperate different parts of a command
+	COMPLEX_WORD,
 	UNKNOWN
 }			t_token_type;
 
@@ -80,12 +82,13 @@ char 			*expand_variable(char *str, t_var_list *v);
 //t_token			create_token(char *str);
 
 //optimize
-t_token_list 	*list_of_tokens(char *str);
+t_token_list 	*tokenizer(char *str);
 void 			print_tokens(t_token_list *lst);
 void			free_list(t_token_list **lst);
 
 // utils
-int 			is_word(char c);
+int				is_simple_word(char c);
+int				is_complex_word(char c);
 int				is_whitespace(char c);
 int				is_quote(char c);
 int				is_operator(char c);

@@ -6,11 +6,25 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 22:20:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 23:44:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
+
+char *remove_quotes(char *str)
+{
+	char *p = str;
+	char *q = str;
+	while (*p)
+	{
+		if (*p != '\"')
+			*q++ = *p;
+		p++;
+	}
+	*q = '\0';
+	return (str);
+}
 
 static char *lookup_var(char *var_name, t_var_list *v)
 {
@@ -38,7 +52,7 @@ char *expand_variable(char *str, t_var_list *v)
 	end = skip_variable(start);
 	prefix = ft_strndup(str, start - str);
 	var_name = ft_strndup(start + 1, end - start - 1);
-	printf("v->current_var->name: %s\n", var_name);
+	printf("var_name: %s\n", var_name);
 	var_value = lookup_var(var_name, v);
 	printf("var_value: %s\n",var_value);
 	if (var_value)

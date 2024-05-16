@@ -79,6 +79,7 @@ t_token_list	*tokenize_input(char *str);
 t_token			create_token(char *str);
 char 			*expand_variable(char *str, t_var_list *v);
 void			add_var(t_var_list **lst, char *env_str);
+char 			*remove_quotes(char *str);
 
 // utils
 int 			is_word(char c);

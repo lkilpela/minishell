@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 22:28:49 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/15 23:33:52 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,51 +35,65 @@ void free_var_list(t_var_list *list)
 	}
 }
 
-// create a new t_var struct
-t_var	*create_var(char *env_str)
+void extract_var(char *str, char **name, char **value)
 {
 	char	*equal_sign;
-	t_var	*var;
 
-	equal_sign = ft_strchr(env_str, '=');
-		if (!equal_sign)
-			return (NULL);
+	equal_sign = ft_strchr(str, '=');
+	if (!equal_sign)
+		return ;
+	*name = ft_strndup(str, equal_sign - str);
+	*value = ft_strdup(equal_sign + 1);
+	*value = remove_quotes(*value);
+}
+
+// create a new t_var struct
+t_var	*create_var(char *str)
+{
+	t_var	*var;
+	char	*name;
+	char	*value;
+
+	name = NULL;
+	value = NULL;
+	extract_var(str, &name, &value);
+	if (!name || !value)
+		return (NULL);
 	var = malloc(sizeof(t_var));
 	if (!var)
-		return (NULL);
-	var->name = ft_strndup(env_str, equal_sign - env_str);
-	if (!var->name)
 	{
-		free(var);
+		free(name);
+		free(value);
 		return (NULL);
 	}
-	var->value = ft_strdup(equal_sign + 1);
-	if (!var->value)
-	{
-		free(var->name);
-		free(var);
-		return (NULL);
-	}
+	var->name = name;
+	var->value = value;
 	return (var);	
 }
 
-void	add_var(t_var_list **lst, char *env_str)
+// create a new t_var_list node
+t_var_list *create_node(char *str)
 {
 	t_var_list	*node;
-	t_var_list	*last;
-
-	// create a new t_var_list node
+	
 	node = malloc(sizeof(t_var_list));
 	if (!node)
-		return ;
-	node->current_var = create_var(env_str);
+		return (NULL);
+	node->current_var = create_var(str);
 	if (!node->current_var)
 	{
 		free(node);
-		return ;
+		return (NULL);
 	}
 	node->next = NULL;
-	// add new node to the end of list
+	return (node);
+}
+
+// add new node to the end of list
+void	add_node_to_list(t_var_list **lst, t_var_list *node)
+{
+	t_var_list	*last;
+
 	if (*lst == NULL)
 		*lst = node;
 	else
@@ -89,6 +103,38 @@ void	add_var(t_var_list **lst, char *env_str)
 			last = last->next;
 		last->next = node;
 	}
+}
+
+void	add_var(t_var_list **lst, char *str)
+{
+	t_var_list	*node;
+	t_var_list	*v;
+	char		*name;
+	char		*value;
+
+	name = NULL;
+	value = NULL;
+	extract_var(str, &name, &value);
+	if (!name || !value)
+		return ;
+	v = *lst;
+	while (v)
+	{
+		if(ft_strcmp(v->current_var->name, name) == 0)
+		{
+			free(v->current_var->name);
+			v->current_var->name = name;
+			v->current_var->value = value;
+			return ;
+		}
+		v = v->next;
+	}
+	node = create_node(str);
+	if (!node)
+		return;
+	add_node_to_list(lst, node);
+	free(name);
+	free(value);
 }
 
 t_var_list *get_envp(char **envp)

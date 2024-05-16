@@ -9,58 +9,58 @@ t_token_list	*init_test()
 	test = malloc(sizeof(t_token_list));
 	ptr = test;
 
-	test->token.value = "ls";
-	test->token.type = WORD;
+	test->token->value = "ls";
+	test->token->type = WORD;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
 
-	test->token.value = ">";
-	test->token.type = OP_DGREAT;
+	test->token->value = ">";
+	test->token->type = OP_DGREAT;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
 
-	test->token.value = "myout";
-	test->token.type = WORD;
+	test->token->value = "myout";
+	test->token->type = WORD;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
 
-	test->token.value = ">";
-	test->token.type = OP_GREAT;
+	test->token->value = ">";
+	test->token->type = OP_GREAT;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
 
-	test->token.value = "test";
-	test->token.type = WORD;
+	test->token->value = "test";
+	test->token->type = WORD;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
 
-	test->token.value = "<<";
-	test->token.type = OP_DLESS;
+	test->token->value = "<<";
+	test->token->type = OP_DLESS;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
 
-	test->token.value = "a";
-	test->token.type = WORD;
+	test->token->value = "a";
+	test->token->type = WORD;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
 
-	test->token.value = "-l";
-	test->token.type = WORD;
+	test->token->value = "-l";
+	test->token->type = WORD;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
 
-	test->token.value = "|";
-	test->token.type = OP_PIPE;
+	test->token->value = "|";
+	test->token->type = OP_PIPE;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
 
-	test->token.value = "cat";
-	test->token.type = WORD;
+	test->token->value = "cat";
+	test->token->type = WORD;
 	test->next = malloc(sizeof(t_token_list));
 	test = test->next;
 
-	test->token.value = "-e";
-	test->token.type = WORD;
+	test->token->value = "-e";
+	test->token->type = WORD;
 	test->next = NULL;
 
 	return (ptr);
@@ -71,16 +71,16 @@ int	count_args(t_token_list *tokens)
 	int	count;
 
 	count = 0;
-	while (tokens && tokens->token.type != OP_PIPE)
+	while (tokens && tokens->token->type != OP_PIPE)
 	{
-		if (tokens->token.type >= OP_LESS && tokens->token.type <= OP_DGREAT)
+		if (tokens->token->type >= OP_LESS && tokens->token->type <= OP_DGREAT)
 		{
 			tokens = tokens->next;
-			if (tokens->token.type == WORD)
+			if (tokens->token->type == WORD)
 				tokens = tokens->next;
 			continue ;
 		}
-		if (tokens->token.type == WORD)
+		if (tokens->token->type == WORD)
 			count++;
 		tokens = tokens->next;
 	}
@@ -97,9 +97,9 @@ char	*heredoc(t_token_list *tokens)
 	ft_putstr_fd("heredoc> ", 1);
 	line = get_next_line(0);
 	heredoc = ft_calloc(1, 1);
-	if (tokens->token.type != WORD)
+	if (tokens->token->type != WORD)
 		return (heredoc);
-	delim = tokens->token.value;
+	delim = tokens->token->value;
 	while (line)
 	{
 		if (ft_strncmp(line, delim, ft_strlen(delim)) == 0)
@@ -121,12 +121,12 @@ char	*heredoc(t_token_list *tokens)
 
 t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens)
 {
-	if (tokens->token.type == OP_DLESS)
+	if (tokens->token->type == OP_DLESS)
 	{
 		tokens = tokens->next;
 		simple->heredoc = heredoc(tokens);
 	}
-	if (tokens->token.type == OP_LESS)
+	if (tokens->token->type == OP_LESS)
 	{
 		if (simple->heredoc)
 		{
@@ -134,21 +134,21 @@ t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens)
 			simple->heredoc = NULL;
 		}
 		tokens = tokens->next;
-		if (tokens->token.type == WORD)
+		if (tokens->token->type == WORD)
 		{
-			simple->in_file.file = tokens->token.value;
+			simple->in_file.file = tokens->token->value;
 			return (tokens->next);
 		}
 	}
-	if (tokens->token.type == OP_GREAT || tokens->token.type == OP_DGREAT)
+	if (tokens->token->type == OP_GREAT || tokens->token->type == OP_DGREAT)
 	{
 		simple->out_file.append = 0;
-		if (tokens->token.type == OP_DGREAT)
+		if (tokens->token->type == OP_DGREAT)
 			simple->out_file.append = 1;
 		tokens = tokens->next;
-		if (tokens->token.type == WORD)
+		if (tokens->token->type == WORD)
 		{
-			simple->out_file.file = tokens->token.value;
+			simple->out_file.file = tokens->token->value;
 			return (tokens->next);
 		}
 	}
@@ -161,16 +161,16 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 	int				i;
 
 	simple_cmd = ft_calloc(1, sizeof(t_simple_cmd));
-	while ((*tokens) && (*tokens)->token.type != OP_PIPE)
+	while ((*tokens) && (*tokens)->token->type != OP_PIPE)
 	{
-		if ((*tokens)->token.type >= OP_LESS && (*tokens)->token.type <= OP_DGREAT)
+		if ((*tokens)->token->type >= OP_LESS && (*tokens)->token->type <= OP_DGREAT)
 		{
 			(*tokens) = get_redir(simple_cmd, *tokens);
 			continue ;
 		}
-		if (simple_cmd->command == NULL && (*tokens)->token.type == WORD)
+		if (simple_cmd->command == NULL && (*tokens)->token->type == WORD)
 		{
-			simple_cmd->command = (*tokens)->token.value;
+			simple_cmd->command = (*tokens)->token->value;
 			(*tokens) = (*tokens)->next;
 			simple_cmd->num_of_args = count_args(*tokens);
 			if (simple_cmd->num_of_args)
@@ -178,8 +178,8 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 			i = 0;
 			continue ;
 		}
-		if (simple_cmd->command != NULL && (*tokens)->token.type == WORD)
-			simple_cmd->args[i++] = (*tokens)->token.value;
+		if (simple_cmd->command != NULL && (*tokens)->token->type == WORD)
+			simple_cmd->args[i++] = (*tokens)->token->value;
 		(*tokens) = (*tokens)->next;
 	}
 	return (simple_cmd);
@@ -192,7 +192,7 @@ int	count_cmd(t_token_list *tokens)
 	count = 1;
 	while (tokens)
 	{
-		if (tokens->token.type == OP_PIPE)
+		if (tokens->token->type == OP_PIPE)
 			count++;
 		tokens = tokens->next;
 	}

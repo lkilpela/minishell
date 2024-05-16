@@ -6,11 +6,66 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 14:11:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 14:40:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
+
+char *remove_quotes(char *str)
+{
+	char *p = str;
+	char *q = str;
+	while (*p)
+	{
+		if (*p != '\"')
+			*q++ = *p;
+		p++;
+	}
+	*q = '\0';
+	return (str);
+}
+
+static char *lookup_var(char *var_name, t_var_list *v)
+{
+	while (v)
+	{
+		if (ft_strcmp(v->current_var->name, var_name) == 0)
+			return (ft_strdup(v->current_var->value));
+		v = v->next;
+	}
+	return (NULL);
+}
+
+char *expand_variable(char *str, t_var_list *v)
+{
+	char	*start;
+	char	*prefix;
+	char	*end;
+	char 	*expanded_str;
+	char	*temp;
+	char	*var_name;
+	char	*var_value;
+
+	printf("input: %s\n", str);
+	start = ft_strchr(str, '$');
+	end = skip_variable(start);
+	prefix = ft_strndup(str, start - str);
+	var_name = ft_strndup(start + 1, end - start - 1);
+	printf("var_name: %s\n", var_name);
+	var_value = lookup_var(var_name, v);
+	printf("var_value: %s\n",var_value);
+	if (var_value)
+	{
+		temp = ft_strjoin(prefix, var_value);
+		expanded_str = ft_strjoin(temp, end);
+		free(temp);
+	}
+	else	
+		expanded_str = ft_strdup(str);
+	free(prefix);
+	return (expanded_str);
+}
 
 static void free_var(t_var *var)
 {
@@ -35,7 +90,7 @@ void free_var_list(t_var_list *list)
 	}
 }
 
-void extract_var(char *str, char **name, char **value)
+static void extract_var(char *str, char **name, char **value)
 {
 	char	*equal_sign;
 
@@ -48,7 +103,7 @@ void extract_var(char *str, char **name, char **value)
 }
 
 // create a new t_var struct
-t_var	*create_var(char *str)
+static t_var	*create_var(char *str)
 {
 	t_var	*var;
 	char	*name;
@@ -72,7 +127,7 @@ t_var	*create_var(char *str)
 }
 
 // create a new t_var_list node
-t_var_list *create_var_node(char *str)
+static t_var_list *create_var_node(char *str)
 {
 	t_var_list	*node;
 	
@@ -90,7 +145,7 @@ t_var_list *create_var_node(char *str)
 }
 
 // add new node to the end of list
-void	add_var_to_list(t_var_list **lst, t_var_list *node)
+static void	add_var_to_list(t_var_list **lst, t_var_list *node)
 {
 	t_var_list	*last;
 
@@ -105,7 +160,7 @@ void	add_var_to_list(t_var_list **lst, t_var_list *node)
 	}
 }
 
-void	add_var(t_var_list **lst, char *str)
+static void	add_var(t_var_list **lst, char *str)
 {
 	t_var_list	*node;
 	t_var_list	*v;
@@ -129,7 +184,7 @@ void	add_var(t_var_list **lst, char *str)
 		}
 		v = v->next;
 	}
-	node = create_var(str);
+	node = create_var_node(str);
 	if (!node)
 		return;
 	add_var_to_list(lst, node);

@@ -6,68 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 14:18:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 14:47:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-char *remove_quotes(char *str)
-{
-	char *p = str;
-	char *q = str;
-	while (*p)
-	{
-		if (*p != '\"')
-			*q++ = *p;
-		p++;
-	}
-	*q = '\0';
-	return (str);
-}
-
-static char *lookup_var(char *var_name, t_var_list *v)
-{
-	while (v)
-	{
-		if (ft_strcmp(v->current_var->name, var_name) == 0)
-			return (ft_strdup(v->current_var->value));
-		v = v->next;
-	}
-	return (NULL);
-}
-
-char *expand_variable(char *str, t_var_list *v)
-{
-	char	*start;
-	char	*prefix;
-	char	*end;
-	char 	*expanded_str;
-	char	*temp;
-	char	*var_name;
-	char	*var_value;
-
-	printf("input: %s\n", str);
-	start = ft_strchr(str, '$');
-	end = skip_variable(start);
-	prefix = ft_strndup(str, start - str);
-	var_name = ft_strndup(start + 1, end - start - 1);
-	printf("var_name: %s\n", var_name);
-	var_value = lookup_var(var_name, v);
-	printf("var_value: %s\n",var_value);
-	if (var_value)
-	{
-		temp = ft_strjoin(prefix, var_value);
-		expanded_str = ft_strjoin(temp, end);
-		free(temp);
-	}
-	else	
-		expanded_str = ft_strdup(str);
-	free(prefix);
-	return (expanded_str);
-}
-
-char *next_token(char *str)
+static char *next_token(char *str)
 {
 	while (*str)
 	{
@@ -87,7 +32,7 @@ char *next_token(char *str)
 	return (str);
 }
 
-int 	token_len(char *str)
+static int 	token_len(char *str)
 {
 	char	*end;
 	int		len;
@@ -97,7 +42,7 @@ int 	token_len(char *str)
 	return (len);
 }
 
-t_token_type	get_token_type(char *str)
+static t_token_type	get_token_type(char *str)
 {
 	if (*str == '\'')
 		return (S_QUOTE);
@@ -121,7 +66,7 @@ t_token_type	get_token_type(char *str)
 		return (UNKNOWN);
 }
 
-void	extract_token(char *str, char **value, t_token_type *type)
+static void	extract_token(char *str, char **value, t_token_type *type)
 {
 	int	len;
 	
@@ -130,7 +75,7 @@ void	extract_token(char *str, char **value, t_token_type *type)
 	*type = get_token_type(str);
 }
 
-t_token	*create_token(char *str)
+static t_token	*create_token(char *str)
 {
 	t_token 		*token;
 	char			*value;
@@ -149,7 +94,7 @@ t_token	*create_token(char *str)
 	return (token);
 }
 
-t_token_list *create_token_node(char *str)
+static t_token_list *create_token_node(char *str)
 {
 	t_token_list *node;
 
@@ -166,7 +111,7 @@ t_token_list *create_token_node(char *str)
 	return (node);
 }
 
-void	add_token_to_list(t_token_list **lst, t_token *node)
+static void	add_token_to_list(t_token_list **lst, t_token_list *node)
 {
 	t_token_list	*last;
 
@@ -181,10 +126,9 @@ void	add_token_to_list(t_token_list **lst, t_token *node)
 	}
 }
 
-void	add_token(t_token_list **lst, char *str)
+static void	add_token(t_token_list **lst, char *str)
 {
 	t_token_list	*node;
-	t_token_list	*t;
 	char			*value;
 	t_token_type	type;
 
@@ -193,14 +137,13 @@ void	add_token(t_token_list **lst, char *str)
 	extract_token(str, &value, &type);
 	if (!value)
 		return ;
-	t = *lst;
-	node = create_token(str);
+	node = create_token_node(str);
 	if (!node)
 		return ;
 	add_token_to_list(lst, node);
 }
 
-t_token_list tonkenizer(char *str)
+t_token_list	*tokenizer(char *str)
 {
 	t_token_list	*lst;
 	char			*next;
@@ -213,6 +156,70 @@ t_token_list tonkenizer(char *str)
 		str = next;
 	}
 	return (lst);
+}
+
+static char	*get_type_str(int e)
+{
+	static char	*type_str[] = {
+		"WORD",
+		"OP_PIPE",
+		"OP_LESS",
+		"OP_GREAT",
+		"OP_DLESS",
+		"OP_DGREAT",
+		"S_QUOTE",
+		"D_QUOTE",
+		"VAR",
+		"T_NEWLINE",
+		"T_SPACE",
+		"UNKNOWN"
+	};
+
+	return (type_str[e]);
+}
+
+/*static void	print_type(int e)
+{
+	char	*message;
+
+	if (e >= 0 || e < UNKNOWN)
+	{
+		message = get_type_str(e);
+		ft_putstr_fd(message, STDERR_FILENO);
+	}
+	write(2, "\n", 1);
+}*/
+
+static void	delone_node(t_token_list *lst)
+{
+	if (!lst)
+		return ;
+	free(lst->token->value);
+	free(lst);
+}
+
+void	free_list(t_token_list **lst)
+{
+	t_token_list	*temp;
+
+	if (!*lst)
+		return ;
+	while (*lst)
+	{
+		temp = (*lst)->next;
+		delone_node(*lst);
+		*lst = temp;
+	}
+	*lst = NULL;
+}
+
+void print_tokens(t_token_list *lst)
+{
+	while (lst)
+	{
+		printf("Value: %s \t\t Type: %s\n", lst->token->value, get_type_str(lst->token->type));
+		lst = lst->next;
+	}
 }
 
 

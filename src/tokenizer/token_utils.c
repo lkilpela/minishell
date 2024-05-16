@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 15:32:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:03:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,14 @@ int	is_double_operator(char *str)
 		|| (*str == '<' && *(str + 1) == '<'));
 }
 
-int is_word(char c)
+int is_simple_word(char c)
 {
-	return ((ft_isalnum(c) || c == '_' || c == '$' || is_quote(c)) && !is_whitespace(c)
-			&& !is_operator(c));
+	return ((ft_isalnum(c) || c == UNDERSCORE) 
+		&& !is_whitespace(c) && !is_operator(c));
+}
+
+int is_complex_word(char c)
+{
+	return ((c == DOLLAR || is_quote(c))) 
+		&& !is_whitespace(c) && !is_operator(c);
 }

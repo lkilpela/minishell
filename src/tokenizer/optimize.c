@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 15:39:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 16:11:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char *next_token(char *str)
 {
 	if (is_whitespace(*str))
 		str = skip_whitespaces(str);
-	else if (is_word(*str))
+	else if (is_simple_word(*str) || is_complex_word(*str))
 		str = skip_word(str);
 	else if (is_operator(*str))
 		str = skip_op(str);
@@ -55,8 +55,10 @@ static t_token_type	get_token_type(char *str)
 		return (OP_PIPE);
 	else if (str[0] == '$')
 		return (VAR);
-	else if (is_word(*str))
+	else if (is_simple_word(*str))
 		return (WORD);
+	else if (is_complex_word(*str))
+		return (COMPLEX_WORD);
 	else
 		return (UNKNOWN);
 }
@@ -68,6 +70,7 @@ static void	extract_token(char *str, char **value, t_token_type *type)
 	len = token_len(str);
 	*value = ft_strndup(str, len);
 	*type = get_token_type(str);
+	printf("value: %s\n, type: %d\n", *value, *type);
 }
 
 static t_token	*create_token(char *str)
@@ -141,7 +144,7 @@ static void	add_token(t_token_list **lst, char *str)
 }
 
 // converts a string into a list of tokens
-t_token_list	*list_of_tokens(char *str)
+t_token_list	*tokenizer(char *str)
 {
 	t_token_list	*lst;
 	char			*next;
@@ -149,12 +152,17 @@ t_token_list	*list_of_tokens(char *str)
 	lst = NULL;
 	while (*str)
 	{
+		str = skip_whitespaces(str);
+		if (!*str)
+			break ;
 		add_token(&lst, str);
 		next = next_token(str);
 		str = next;
 	}
 	return (lst);
 }
+
+
 
 static char	*get_type_str(int e)
 {
@@ -170,6 +178,7 @@ static char	*get_type_str(int e)
 		"VAR",
 		"T_NEWLINE",
 		"T_SPACE",
+		"COMPLEX_WORD",
 		"UNKNOWN"
 	};
 

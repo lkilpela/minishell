@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 15:38:45 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:39:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,6 @@ t_token_list	*list_of_tokens(char *str)
 	lst = NULL;
 	while (*str)
 	{
-		str = skip_whitespaces(str);
-		if (!*str)
-			break ;
 		add_token(&lst, str);
 		next = next_token(str);
 		str = next;

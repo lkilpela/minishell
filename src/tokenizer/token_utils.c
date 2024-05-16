@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 17:58:52 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 21:34:15 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,13 @@ int	is_double_operator(char *str)
 		|| (*str == '<' && *(str + 1) == '<'));
 }
 
+// int is_word(char c)
+// {
+// 	return ((ft_isalnum(c) || c == '_' || c == '$' || is_quote(c)) && !is_whitespace(c)
+// 			&& !is_operator(c));
+// }
+
 int is_word(char c)
 {
-	return ((ft_isalnum(c) || c == '_' || c == '$' || is_quote(c)) && !is_whitespace(c)
-			&& !is_operator(c));
+	return (!is_whitespace(c) && !is_operator(c));
 }

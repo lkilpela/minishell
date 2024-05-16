@@ -3,37 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   optimize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 22:00:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 23:20:15 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-static char *next_token(char *str)
-{
-	if (is_whitespace(*str))
-		str = skip_whitespaces(str);
-	else if (is_word(*str))
-		str = skip_word(str);
-	else if (is_operator(*str))
-		str = skip_op(str);
-	else if (is_quote(*str))
-		str = skip_quote(str);
-	//else if (*str == '$')
-		//str = skip_variable(str);
-	return (str);
-}
+// static char *next_token(char *str)
+// {
+// 	if (is_whitespace(*str))
+// 		str = skip_whitespaces(str);
+// 	else if (is_word(*str))
+// 		str = skip_word(str);
+// 	else if (is_operator(*str))
+// 		str = skip_op(str);
+// 	else if (is_quote(*str))
+// 		str = skip_quote(str);
+// 	//else if (*str == '$')
+// 		//str = skip_variable(str);
+// 	return (str);
+// }
 
-static int 	token_len(char *str)
-{
-	char	*end;
-	int		len;
+// static int 	token_len(char *str)
+// {
+// 	char	*end;
+// 	int		len;
 
-	end = next_token(str);
-	len = end - str;
+// 	end = next_token(str);
+// 	len = end - str;
+// 	return (len);
+// }
+
+static int	token_len(char *str)
+{
+	int	inquote;
+	int	len;
+
+	len = 0;
+	inquote = 0;
+	while (*str)
+	{
+		if (inquote && is_quote(*str))
+			inquote -= *str;
+		else if (is_quote(*str))
+			inquote += *str;
+		else if (!inquote && !is_word(*str))
+			return (len);
+		len++;
+		str++;
+	}
 	return (len);
 }
 
@@ -50,22 +71,18 @@ int	has_special_char(char *str)
 
 static t_token_type	get_token_type(char *str)
 {
-	if (*str == '\'')
-		return (S_QUOTE);
-	else if (*str == '\"')
-		return (D_QUOTE);
+	// if (*str == '\'')
+	// 	return (S_QUOTE);
+	// else if (*str == '\"')
+	// 	return (D_QUOTE);
+	if (!ft_strncmp(str, "<<", 2))
+		return (OP_DLESS);
+	else if (!ft_strncmp(str, ">>", 2))
+		return (OP_DGREAT);
 	else if (*str == '<')
-	{
-		if (*(str + 1) == '<')
-			return (OP_DLESS);
 		return (OP_LESS);
-	}
 	else if (*str == '>')
-	{
-		if (*(str + 1) == '>')
-			return (OP_DGREAT);
 		return (OP_GREAT);
-	}
 	else if (*str == '<')
 		return (OP_LESS);
 	else if (*str == '>')
@@ -75,12 +92,7 @@ static t_token_type	get_token_type(char *str)
 	else if (str[0] == '$')
 		return (VAR);
 	else if (is_word(*str))
-	{
-		//if (has_special_char(str) == 1)
-		//	return (COMPLEX_WORD);
-		//else
-		return (WORD);
-	}
+			return (WORD);
 	else
 		return (UNKNOWN);
 }
@@ -168,7 +180,6 @@ static void	add_token(t_token_list **lst, char *str)
 t_token_list	*tokenizer(char *str)
 {
 	t_token_list	*lst;
-	char			*next;
 
 	lst = NULL;
 	while (*str)
@@ -177,8 +188,7 @@ t_token_list	*tokenizer(char *str)
 		if (!*str)
 			break ;
 		add_token(&lst, str);
-		next = next_token(str);
-		str = next;
+		str += token_len(str);
 	}
 	return (lst);
 }

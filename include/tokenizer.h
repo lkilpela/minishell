@@ -21,7 +21,7 @@ typedef enum e_token_type
 	VAR, 		// $HOME is treated as a single VAR token
 	T_NEWLINE,
 	T_SPACE,	// sperate different parts of a command
-	COMPLEX_WORD,
+	//COMPLEX_WORD,
 	UNKNOWN
 }			t_token_type;
 

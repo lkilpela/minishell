@@ -80,7 +80,7 @@ char 			*expand_variable(char *str, t_var_list *v);
 //t_token			create_token(char *str);
 
 //optimize
-t_token_list 	*tokenizer(char *str);
+t_token_list 	*list_of_tokens(char *str);
 void 			print_tokens(t_token_list *lst);
 void			free_list(t_token_list **lst);
 

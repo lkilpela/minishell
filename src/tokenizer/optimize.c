@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 15:34:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:38:45 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ static t_token_list *create_token_node(char *str)
 	return (node);
 }
 
+// add a node to a list
 static void	add_token_to_list(t_token_list **lst, t_token_list *node)
 {
 	t_token_list	*last;
@@ -121,6 +122,7 @@ static void	add_token_to_list(t_token_list **lst, t_token_list *node)
 	}
 }
 
+// create new token and add to a list
 static void	add_token(t_token_list **lst, char *str)
 {
 	t_token_list	*node;
@@ -138,7 +140,8 @@ static void	add_token(t_token_list **lst, char *str)
 	add_token_to_list(lst, node);
 }
 
-t_token_list	*tokenizer(char *str)
+// converts a string into a list of tokens
+t_token_list	*list_of_tokens(char *str)
 {
 	t_token_list	*lst;
 	char			*next;

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 15:21:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:25:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int 	token_len(char *str)
 
 	end = next_token(str);
 	len = end - str;
-	printf("end: %s len: %d\n" , end, len);
 	return (len);
 }
 

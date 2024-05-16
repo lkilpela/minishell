@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 15:20:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/16 15:32:46 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	is_double_operator(char *str)
 
 int is_word(char c)
 {
-	return ((ft_isalnum(c) || c == '_' || c == '$') && !is_whitespace(c)
+	return ((ft_isalnum(c) || c == '_' || c == '$' || is_quote(c)) && !is_whitespace(c)
 			&& !is_operator(c));
 }

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 15:48:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:48:33 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,8 @@ void	process_token(t_token *token, t_var_list *v)
 			// expanded = echo la hello wolrdeeee
 			token->value = expanded;
 		}
-		token->value = unquoted;
+		else
+			token->value = unquoted;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 15:12:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:25:52 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	process_token(char *str, char **value,
 	t_token_type	type;
 
 	extract_token(str, value, type);
-	//len = ft_strlen(&value);
 	if (is_quote(*value[0]))
 	{
 		unquoted = remove_quotes(*value);

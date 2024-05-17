@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/17 21:24:05 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:49:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ void minishell_loop(t_var_list *v)
 		if(ft_strchr(input, '='))
 			process_var_assigment(input, v);
 		t = tokenizer(input, v);
+		print_var_list(v);
 		print_tokens(t);
 		//print_commands(parser(lst));
+		free_var_list(v);
 		free_token_list(&t);
 		free(input);
 	}
@@ -42,7 +44,5 @@ int main(int argc, char **argv, char **envp)
 
 	init_minishell(argc, argv, envp, &m);
 	v = get_envp(envp);
-	//print_envp(lst);
-	//free_var_list(lst);
 	minishell_loop(v);
 }

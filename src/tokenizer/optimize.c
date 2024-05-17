@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 15:56:25 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:57:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	process_token(t_token *token, t_var_list *v)
 	char	*expanded;
 	int		i;
 
-	// "echo$ARG"eee"" or "echo"eee""
+	// "echo$ARG"eee"" or "echo"eee"" or 'echo"eee"'
 	if (token->type == D_QUOTE || token->type == S_QUOTE)
 	{
 		unquoted = remove_quotes(token->value);
@@ -123,7 +123,7 @@ void	process_token(t_token *token, t_var_list *v)
 			// expanded = echo la hello wolrdeeee
 			token->value = expanded;
 		}
-		else // token->value = echoeee
+		else // token->value = echoeee(D_QUOTE) or echo"eee" (S_QUOTE)
 			token->value = unquoted;
 	}
 }

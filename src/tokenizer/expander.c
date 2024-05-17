@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 22:39:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 23:00:24 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ void	process_var_assigment(char **input, t_var_list *v)
 			expanded = expand_variable(equal_pos + 1, v);
 			printf("expanded_var: %s\n", expanded);
 			new_input = ft_strjoin(prefix, expanded);
-			printf("new_input: %s\n", new_input);
 			add_var(&v, new_input);// name: ARG value: lumik
-			printf("var_name: %s\n", v->current_var->name);
-			printf("var_value: %s\n", v->current_var->value);
 			free(prefix);
 			free(*input);
 			*input = new_input;

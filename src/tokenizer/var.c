@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 22:43:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 23:02:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void extract_var(char *str, char **name, char **value)
 {
 	char	*equal_sign;
 
+	//printf("input: %s\n", str);
 	equal_sign = ft_strchr(str, '=');
 	if (!equal_sign)
 		return ;
@@ -98,6 +99,8 @@ static void	add_var_to_list(t_var_list **lst, t_var_list *node)
 			last = last->next;
 		last->next = node;
 	}
+	printf("Added new variable:\n");
+	printf("Name: %s\n \t\t Value: %s\n", node->current_var->name, node->current_var->value);
 }
 
 void	add_var(t_var_list **lst, char *str)
@@ -110,10 +113,12 @@ void	add_var(t_var_list **lst, char *str)
 	name = NULL;
 	value = NULL;
 	extract_var(str, &name, &value);
+	//printf("var_name: %s\n", name);
+	//printf("var_value: %s\n", value);
 	if (!name || !value)
 		return ;
 	v = *lst;
-	while (v)
+	while (v) // if the name is existed, update it with new one
 	{
 		if(ft_strcmp(v->current_var->name, name) == 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 09:28:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 11:40:36 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,38 @@ t_token_list	*tokenizer(char *str)
 	}
 	return (lst);
 }
+
+void	process_token(t_token_list *lst)
+{
+	t_token_list	*current;
+	const char		*str;
+	size_t			len;
+	char			*unquoted;
+	char			*expanded;
+
+	current = lst;
+	while (current)
+	{
+		str = current->token->value;
+		len = ft_strlen(str);
+		// Process token
+		if (str[0] == '"' && str[len - 1] == '"'
+			|| str[0] == '\'' && str[len - 1] == '\'')
+		{
+			unquoted = ft_strndup(str + 1, len - 2);
+			if (str[0] == '"')
+				expanded = expand_variable(unquoted);
+				//process expanded string
+			else
+				//single quoted string, leave it as is.
+				// process unquoted string
+		}
+		else
+			// not quoted string, process it as usual.
+		current = current->next;
+	}
+}
+
 
 static char	*get_type_str(int e)
 {

@@ -16,6 +16,6 @@
 | 14 | `echo $username` | token_value: echo, token_type: WORD; token_value: John Doe (or whatever the expanded value of $username is), token_type: WORD|
 | 15 | `echo $count` | token_value: echo, token_type: WORD; token_value: 10 (or whatever the expanded value of $count is), token_type: NUMBER |
 | 16 | `new_var=$username` | token_value: ???, token_type: ???;|
-| 17 | `echo$USEReee` | token_value: echo$USEReee, token_type: WORD;|
+| 17 | `echo$USEReee` | expanded_token: echolumikeee; token_value: echo, token_type: WORD; token_value: lumikeee, token_type: WORD;|
 | 18 | `ARG=$USER` | expanded_var: ARG=lumik; var_name: ARG, var_value: lumik;|
-| 18 | `echo $USER` | token_value: echo, token_type: WORD; token_value: lumik, token_type: WORD;|
+| 19 | `echo $USER` | token_value: echo, token_type: WORD; token_value: lumik, token_type: WORD;|

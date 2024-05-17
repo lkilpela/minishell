@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 21:38:53 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:43:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ void	process_var_assigment(char *input, t_var_list *v)
 		//ARG=$NAME -> ARG=lumik
 		if (ft_strchr(equal_pos, '$'))
 		{
-			temp = expand_variable(equal_pos + 1, v);
-			expanded = ft_strdup(temp);
+			expanded = expand_variable(equal_pos + 1, v);
 			add_var(&v, expanded);// name: ARG value: lumik
-			free(temp);
 		}
 	}
 	else // ARG=value or ARG=" la hello"

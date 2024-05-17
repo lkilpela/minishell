@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 20:41:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 20:43:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ static void	add_token_to_list(t_token_list **lst, t_token_list *node)
 }
 
 // create new token and add to a list
-static void	add_token(t_token_list **lst, char *str)
+static void	add_token(t_token_list **lst, char *str, t_var_list *v)
 {
 	t_token_list	*node;
 	char			*value;
@@ -176,14 +176,14 @@ static void	add_token(t_token_list **lst, char *str)
 	extract_token(str, &value, &type);
 	if (!value)
 		return ;
-	node = create_token_node(str);
+	node = create_token_node(str, v);
 	if (!node)
 		return ;
 	add_token_to_list(lst, node);
 }
 
 // converts a string into a list of tokens
-t_token_list	*tokenizer(char *str)
+t_token_list	*tokenizer(char *str, t_var_list *v)
 {
 	t_token_list	*lst;
 
@@ -193,7 +193,7 @@ t_token_list	*tokenizer(char *str)
 		str = skip_whitespaces(str);
 		if (!*str)
 			break ;
-		add_token(&lst, str);
+		add_token(&lst, str, v);
 		str += token_len(str);
 	}
 	return (lst);
@@ -251,39 +251,6 @@ void print_tokens(t_token_list *lst)
 		lst = lst->next;
 	}
 }
-
-char	*handle_quotes(char *str)
-{
-	char	*result;
-	char	quote_char;
-	char 	*expanded;
-	int 	len;
-	int 	i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	len = ft_strlen(str);
-    result = malloc(len + 1);
-	quote_char = '\0'; // used to handle nested quotes
-	while (i < len)
-	{
-		if (str[i] == quote_char)
-			quote_char = '\0'; // handle closing quote
-		else if (quote_char == '\0' && (is_quote(str[i]))
-			quote_char = str[i]; // handle opening quote
-		else if (str[i] == '$')
-			expanded = expand_variable(str);
-		else
-			result[j++] = str[i];
-		i++;
-	}
-	result[j] = '\0'; // null-terminate the result
-    return (result);
-}
-
-
-
 
 // static char *next_token(char *str)
 // {

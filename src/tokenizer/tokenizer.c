@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 23:04:38 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/17 18:02:42 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_token_list	*tokenize_input(char *str)
 			str = skip_word(str);
 		else if (is_double_operator(str))
 		{
-			
+
 				// create a token for << operator
 				// read the next token as heredoc delimiter
 				// if the delim is quoted
@@ -69,7 +69,7 @@ t_token_list	*tokenize_input(char *str)
 				// else
 					//set a flag to enable variable expansion in heredoc
 				str++;
-		}	
+		}
 		else
 			str = skip_op(str);
 		append_node(&lst, token);

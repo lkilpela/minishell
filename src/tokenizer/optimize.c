@@ -6,36 +6,11 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 02:24:50 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/17 18:02:43 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
-
-// static char *next_token(char *str)
-// {
-// 	if (is_whitespace(*str))
-// 		str = skip_whitespaces(str);
-// 	else if (is_word(*str))
-// 		str = skip_word(str);
-// 	else if (is_operator(*str))
-// 		str = skip_op(str);
-// 	else if (is_quote(*str))
-// 		str = skip_quote(str);
-// 	//else if (*str == '$')
-// 		//str = skip_variable(str);
-// 	return (str);
-// }
-
-// static int 	token_len(char *str)
-// {
-// 	char	*end;
-// 	int		len;
-
-// 	end = next_token(str);
-// 	len = end - str;
-// 	return (len);
-// }
 
 static int	token_len(char *str)
 {
@@ -104,7 +79,7 @@ static t_token_type	get_token_type(char *str)
 static void	extract_token(char *str, char **value, t_token_type *type)
 {
 	int	len;
-	
+
 	len = token_len(str);
 	*value = ft_strndup(str, len);
 	*type = get_token_type(str);
@@ -129,6 +104,28 @@ static t_token	*create_token(char *str)
 	return (token);
 }
 
+void	process_token(t_token *token, t_var_list *v)
+{
+	char	*unquoted;
+	char	*expanded;
+
+	// "echo$ARG"eee"" or "echo"eee"" or 'echo"eee"'
+	if (token->type == D_QUOTE || token->type == S_QUOTE)
+	{
+		unquoted = remove_quotes(token->value);
+		// unquoted = echo$ARGeee or echoeee
+		// ARG=" la hello world"
+		if (token->type == D_QUOTE && ft_strchr(unquoted, '$') != NULL)
+		{
+			expanded = expand_variable(unquoted, v);
+			// expanded = echo la hello wolrdeeee
+			token->value = expanded;
+		}
+		else // token->value = echoeee(D_QUOTE) or echo"eee" (S_QUOTE)
+			token->value = unquoted;
+	}
+}
+
 static t_token_list *create_token_node(char *str)
 {
 	t_token_list *node;
@@ -140,7 +137,7 @@ static t_token_list *create_token_node(char *str)
 	if (!node->token)
 	{
 		free(node);
-		return (NULL);		
+		return (NULL);
 	}
 	node->next = NULL;
 	return (node);
@@ -197,6 +194,9 @@ t_token_list	*tokenizer(char *str)
 	return (lst);
 }
 
+
+
+
 static char	*get_type_str(int e)
 {
 	static char	*type_str[] = {
@@ -249,3 +249,61 @@ void print_tokens(t_token_list *lst)
 		lst = lst->next;
 	}
 }
+
+char	*handle_quotes(char *str)
+{
+	char	*result;
+	char	quote_char;
+	char 	*expanded;
+	int 	len;
+	int 	i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	len = ft_strlen(str);
+    result = malloc(len + 1);
+	quote_char = '\0'; // used to handle nested quotes
+	while (i < len)
+	{
+		if (str[i] == quote_char)
+			quote_char = '\0'; // handle closing quote
+		else if (quote_char == '\0' && (is_quote(str[i]))
+			quote_char = str[i]; // handle opening quote
+		else if (str[i] == '$')
+			expanded = expand_variable(str);
+		else
+			result[j++] = str[i];
+		i++;
+	}
+	result[j] = '\0'; // null-terminate the result
+    return (result);
+}
+
+
+
+
+// static char *next_token(char *str)
+// {
+// 	if (is_whitespace(*str))
+// 		str = skip_whitespaces(str);
+// 	else if (is_word(*str))
+// 		str = skip_word(str);
+// 	else if (is_operator(*str))
+// 		str = skip_op(str);
+// 	else if (is_quote(*str))
+// 		str = skip_quote(str);
+// 	//else if (*str == '$')
+// 		//str = skip_variable(str);
+// 	return (str);
+// }
+
+// static int 	token_len(char *str)
+// {
+// 	char	*end;
+// 	int		len;
+
+// 	end = next_token(str);
+// 	len = end - str;
+// 	return (len);
+// }

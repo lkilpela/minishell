@@ -6,19 +6,21 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 21:56:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:39:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-void	process_var_assigment(char *input, t_var_list *v)
+void	process_var_assigment(char **input, t_var_list *v)
 {
 	char	*equal_pos;
 	char	*expanded;
+	char	*prefix;
+	char 	*new_input;
 
-	
-	equal_pos = ft_strchr(input, '=');
+	equal_pos = ft_strchr(*input, '=');
+	prefix = ft_strndup(*input, (equal_pos + 1) - *input);
 	if (equal_pos)
 	{
 		//ARG=$USER-> ARG=lumik
@@ -26,11 +28,18 @@ void	process_var_assigment(char *input, t_var_list *v)
 		{
 			expanded = expand_variable(equal_pos + 1, v);
 			printf("expanded_var: %s\n", expanded);
-			add_var(&v, expanded);// name: ARG value: lumik
+			new_input = ft_strjoin(prefix, expanded);
+			printf("new_input: %s\n", new_input);
+			add_var(&v, new_input);// name: ARG value: lumik
+			printf("var_name: %s\n", v->current_var->name);
+			printf("var_value: %s\n", v->current_var->value);
+			free(prefix);
+			free(*input);
+			*input = new_input;
 		}
 	}
 	else // ARG=value or ARG=" la hello"
-		add_var(&v, input);
+		add_var(&v, *input);
 }
 
 static char *lookup_var(char *var_name, t_var_list *v)

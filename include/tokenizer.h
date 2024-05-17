@@ -89,7 +89,7 @@ void			free_token_list(t_token_list **lst);
 
 //expander
 char 			*expand_variable(char *str, t_var_list *v);
-void			process_var_assigment(char *input, t_var_list *v);
+void			process_var_assigment(char **input, t_var_list *v);
 
 // utils
 int				is_word(char c);

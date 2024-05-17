@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 00:50:39 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/18 01:11:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ static t_token_list *create_token_node(char *str, t_var_list *v)
 {
 	t_token_list *node;
 
+	(void)v;
 	node = malloc(sizeof(t_token_list));
 	if (!node)
 		return (NULL);
@@ -128,7 +129,7 @@ static t_token_list *create_token_node(char *str, t_var_list *v)
 		free(node);
 		return (NULL);
 	}
-	process_token(node->token, v);
+	//process_token(node->token, v);
 	node->next = NULL;
 	return (node);
 }

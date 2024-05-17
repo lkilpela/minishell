@@ -6,11 +6,32 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 20:56:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:31:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
+
+void	process_var_assigment(char *input, t_var_list *v)
+{
+	char	*equal_pos;
+	char	*temp;
+	char	*expanded;
+
+	equal_pos = ft_strchr(input, '=');
+	if (equal_pos)
+	{
+		if (ft_strchr(equal_pos, '$'))
+		{
+			temp = expand_variable(equal_pos + 1, v);
+			expanded = ft_strndup(temp, equal_pos + 1);
+			add_var(&v, expanded);
+			free(temp);
+		}
+	}
+	else
+		add_var(&v, input);
+}
 
 static char *lookup_var(char *var_name, t_var_list *v)
 {

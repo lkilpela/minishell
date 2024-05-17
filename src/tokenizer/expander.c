@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 21:43:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:45:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	process_var_assigment(char *input, t_var_list *v)
 {
 	char	*equal_pos;
-	char	*temp;
 	char	*expanded;
 
 	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/16 14:39:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 02:21:05 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void minishell_loop()
 		//init_tokenizer(&t, input);
 		lst = tokenizer(input);
 		print_tokens(lst);
-		//print_commands(parser(lst));
+		print_commands(parser(lst));
 		free_list(&lst);
 		/*equal_pos = ft_strchr(input, '=');
 		if (equal_pos)

@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/16 15:58:26 by aklein           ###   ########.fr        #
+#    Updated: 2024/05/17 02:23:06 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ SRCS			=	minishell.c \
 					var.c \
 					init.c \
 					optimize.c \
-					#parsing.c \
+					parsing.c \
 					#token_list.c \
 					#tokenizer.c \
 

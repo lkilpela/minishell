@@ -2,69 +2,69 @@
 #include <tokenizer.h>
 #include <parser.h>
 
-t_token_list	*init_test()
-{
-	t_token_list	*test;
-	t_token_list	*ptr;
-	test = malloc(sizeof(t_token_list));
-	ptr = test;
+// t_token_list	*init_test()
+// {
+// 	t_token_list	*test;
+// 	t_token_list	*ptr;
+// 	test = malloc(sizeof(t_token_list));
+// 	ptr = test;
 
-	test->token->value = "ls";
-	test->token->type = WORD;
-	test->next = malloc(sizeof(t_token_list));
-	test = test->next;
+// 	test->token->value = "ls";
+// 	test->token->type = WORD;
+// 	test->next = malloc(sizeof(t_token_list));
+// 	test = test->next;
 
-	test->token->value = ">";
-	test->token->type = OP_DGREAT;
-	test->next = malloc(sizeof(t_token_list));
-	test = test->next;
+// 	test->token->value = ">";
+// 	test->token->type = OP_DGREAT;
+// 	test->next = malloc(sizeof(t_token_list));
+// 	test = test->next;
 
-	test->token->value = "myout";
-	test->token->type = WORD;
-	test->next = malloc(sizeof(t_token_list));
-	test = test->next;
+// 	test->token->value = "myout";
+// 	test->token->type = WORD;
+// 	test->next = malloc(sizeof(t_token_list));
+// 	test = test->next;
 
-	test->token->value = ">";
-	test->token->type = OP_GREAT;
-	test->next = malloc(sizeof(t_token_list));
-	test = test->next;
+// 	test->token->value = ">";
+// 	test->token->type = OP_GREAT;
+// 	test->next = malloc(sizeof(t_token_list));
+// 	test = test->next;
 
-	test->token->value = "test";
-	test->token->type = WORD;
-	test->next = malloc(sizeof(t_token_list));
-	test = test->next;
+// 	test->token->value = "test";
+// 	test->token->type = WORD;
+// 	test->next = malloc(sizeof(t_token_list));
+// 	test = test->next;
 
-	test->token->value = "<<";
-	test->token->type = OP_DLESS;
-	test->next = malloc(sizeof(t_token_list));
-	test = test->next;
+// 	test->token->value = "<<";
+// 	test->token->type = OP_DLESS;
+// 	test->next = malloc(sizeof(t_token_list));
+// 	test = test->next;
 
-	test->token->value = "a";
-	test->token->type = WORD;
-	test->next = malloc(sizeof(t_token_list));
-	test = test->next;
+// 	test->token->value = "a";
+// 	test->token->type = WORD;
+// 	test->next = malloc(sizeof(t_token_list));
+// 	test = test->next;
 
-	test->token->value = "-l";
-	test->token->type = WORD;
-	test->next = malloc(sizeof(t_token_list));
-	test = test->next;
+// 	test->token->value = "-l";
+// 	test->token->type = WORD;
+// 	test->next = malloc(sizeof(t_token_list));
+// 	test = test->next;
 
-	test->token->value = "|";
-	test->token->type = OP_PIPE;
-	test->next = malloc(sizeof(t_token_list));
-	test = test->next;
+// 	test->token->value = "|";
+// 	test->token->type = OP_PIPE;
+// 	test->next = malloc(sizeof(t_token_list));
+// 	test = test->next;
 
-	test->token->value = "cat";
-	test->token->type = WORD;
-	test->next = malloc(sizeof(t_token_list));
-	test = test->next;
+// 	test->token->value = "cat";
+// 	test->token->type = WORD;
+// 	test->next = malloc(sizeof(t_token_list));
+// 	test = test->next;
 
-	test->token->value = "-e";
-	test->token->type = WORD;
-	test->next = NULL;
+// 	test->token->value = "-e";
+// 	test->token->type = WORD;
+// 	test->next = NULL;
 
-	return (ptr);
-}
+// 	return (ptr);
+// }
 
 int	count_args(t_token_list *tokens)
 {
@@ -155,6 +155,95 @@ t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens)
 	return (tokens);
 }
 
+int	var_len(char *var, int quoted)
+{
+	int		len;
+
+	len = 0;
+	while (*var)
+	{
+		if (quoted)
+		{
+			while (*var && *var != '\"' && !is_operator(*var) && *var != '$')
+			{
+				var++;
+				len++;
+			}
+			break ;
+		}
+		else
+		{
+			while (*var && !is_whitespace(*var) && !is_operator(*var))
+			{
+				var++;
+				len++;
+			}
+			break;
+		}
+	}
+	return (len);
+}
+
+var_to_tokens(t_token_list *tokens, char *var, int quoted)
+{
+	char	*var_name;
+	int		len;
+	char	*var_value;
+
+	len = var_len(var, quoted);
+	var_name = ft_substr(var, 0, len);
+	var_value = getenv(var_name);
+	free(var_name);
+	
+}
+
+find_var(t_token_list *tokens, char *word)
+{
+	int	quoted;
+
+	quoted = 0;
+	while (*word)
+	{
+		if (is_quote(*word))
+			quoted = *word;
+		if (quoted != '\'' && *word == '$')
+		{
+			var_to_tokens(tokens, word + 1, quoted);
+		}
+		word++;
+	}
+}
+
+exp_vars(t_token_list *tokens)
+{
+	int	heredoc;
+
+	heredoc = 0;
+	while (tokens)
+	{
+		if (tokens->token->type == OP_DLESS)
+			heredoc = 1;
+		if (!heredoc && tokens->token->type == WORD)
+			find_var(tokens, tokens->token->value);
+	}
+}
+
+void	parse_command(t_simple_cmd **simp, t_token_list **tokens)
+{
+	if ((*tokens)->token->type == WORD)
+	{
+		(*simp)->command = (*tokens)->token->value;
+		(*tokens) = (*tokens)->next;
+	}
+}
+
+void	parse_args(t_simple_cmd **simp, t_token_list **tokens)
+{
+	(*simp)->num_of_args = count_args(*tokens);
+	if ((*simp)->num_of_args > 0)
+		(*simp)->args = ft_calloc((*simp)->num_of_args, sizeof(char *));
+}
+
 t_simple_cmd	*simple_cmd(t_token_list **tokens)
 {
 	t_simple_cmd	*simple_cmd;
@@ -170,11 +259,8 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 		}
 		if (simple_cmd->command == NULL && (*tokens)->token->type == WORD)
 		{
-			simple_cmd->command = (*tokens)->token->value;
-			(*tokens) = (*tokens)->next;
-			simple_cmd->num_of_args = count_args(*tokens);
-			if (simple_cmd->num_of_args)
-				simple_cmd->args = ft_calloc(simple_cmd->num_of_args, sizeof(char *));
+			parse_command(&simple_cmd, tokens);
+			parse_args(&simple_cmd, tokens);
 			i = 0;
 			continue ;
 		}
@@ -233,7 +319,7 @@ void print_simple_cmd(t_simple_cmd *cmd) {
 	int	i = 0;
 	while (i < cmd->num_of_args)
 	{
-		ft_printf("\"%s\" ", cmd->args[i]);
+		ft_printf("<%s> ", cmd->args[i]);
 		i++;
 	}
 	ft_printf("\n");

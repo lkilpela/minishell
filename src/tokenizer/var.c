@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 15:27:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:28:00 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,6 @@ char *remove_quotes(char *str)
 	}
 	*q = '\0';
 	return (str);
-}
-
-static void free_var(t_var *var)
-{
-	if (var)
-	{
-		free(var->name);
-		free(var->value);
-		free(var);
-	}
-}
-
-void free_var_list(t_var_list *list)
-{
-	t_var_list *tmp;
-
-	while (list)
-	{
-		tmp = list;
-		list = list->next;
-		free_var(tmp->current_var);
-		free(tmp);
-	}
 }
 
 static void extract_var(char *str, char **name, char **value)

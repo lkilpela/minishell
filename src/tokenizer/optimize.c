@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 15:25:52 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:47:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,43 +85,6 @@ static void	extract_token(char *str, char **value, t_token_type *type)
 	*type = get_token_type(str);
 }
 
-void	process_token(char *str, char **value,
-					t_token_type *type, t_var_list *v)
-{
-	size_t	len;
-	char	*unquoted;
-	char	*expanded;
-	int		i;
-	char	*value;
-	t_token_type	type;
-
-	extract_token(str, value, type);
-	if (is_quote(*value[0]))
-	{
-		unquoted = remove_quotes(*value);
-		*value = unquoted;
-	}
-	else
-		*value = unquoted;
-		
-	len = ft_strlen(&value);
-	while (i < len)
-	{
-		// ARG=" la hello world"
-		// echo$ARG"eee"
-		// find variable and expand it
-		if (ft_strchr(*value, '$') != NULL)
-		{
-			expanded = expand_variable(*value, v);
-			// echo$ARG"eee" -> echo la hello wolrdeeee
-			*value = expanded;
-		}
-
-	}
-	else
-		// not quoted string, process it as usual.
-}
-
 static t_token	*create_token(char *str)
 {
 	t_token 		*token;
@@ -130,7 +93,7 @@ static t_token	*create_token(char *str)
 
 	value = NULL;
 	type = -1;
-	process_token(str, &value, &type);
+	extract_token(str, &value, &type);
 	if (!value)
 		return (NULL);
 	token = malloc(sizeof(t_token));
@@ -139,6 +102,32 @@ static t_token	*create_token(char *str)
 	token->value = value;
 	token->type = type;
 	return (token);
+}
+
+void	process_token(t_token *token, t_var_list *v)
+{
+	size_t	len;
+	char	*unquoted;
+	char	*expanded;
+	int		i;
+
+	// "echo$ARG"eee""
+	if (token->type == D_QUOTE)
+	{
+		unquoted = remove_quotes(token->value);
+		// ARG=" la hello world"
+		// unquoted = echo$ARGeee
+		while (token->value)
+		{
+			if (ft_strchr(token->value, '$') != NULL)
+			{
+				expanded = expand_variable(token->value, v);
+				// expanded = echo la hello wolrdeeee
+				token->value = expanded;
+			}
+			token->value = unquoted;
+		}
+	}
 }
 
 static t_token_list *create_token_node(char *str)

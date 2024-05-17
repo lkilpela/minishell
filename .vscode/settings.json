@@ -19,6 +19,9 @@
         "stack": "c",
         "random": "c",
         "tokenizer.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "__locale": "c",
+        "chrono": "c",
+        "functional": "c"
     }
 }

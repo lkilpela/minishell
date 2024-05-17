@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 12:19:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:12:10 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,30 +85,39 @@ static void	extract_token(char *str, char **value, t_token_type *type)
 	*type = get_token_type(str);
 }
 
-void	process_token(char *str, char **value, t_token_type *type)
+void	process_token(char *str, char **value,
+					t_token_type *type, t_var_list *v)
 {
 	size_t	len;
 	char	*unquoted;
 	char	*expanded;
+	int		i;
+	char	*value;
+	t_token_type	type;
 
 	extract_token(str, value, type);
-	len = ft_strlen(&value);
-	if (*value[0] == '"' && *value[len - 1] == '"'
-		|| *value[0] == '\'' && *value[len - 1] == '\'')
+	//len = ft_strlen(&value);
+	if (is_quote(*value[0]))
 	{
-		unquoted = ft_strndup(*value + 1, len - 2);
-		free(*value);
-		if (*value[0] == '"')
+		unquoted = remove_quotes(*value);
+		*value = unquoted;
+	}
+	else
+		*value = unquoted;
+		
+	len = ft_strlen(&value);
+	while (i < len)
+	{
+		// ARG=" la hello world"
+		// echo$ARG"eee"
+		// find variable and expand it
+		if (ft_strchr(*value, '$') != NULL)
 		{
-			expanded = expand_variable(unquoted);
+			expanded = expand_variable(*value, v);
+			// echo$ARG"eee" -> echo la hello wolrdeeee
 			*value = expanded;
-			
-			//process expanded string
 		}
-		else
-			*value = unquoted;
-			//single quoted string, leave it as is.
-			// process unquoted string
+
 	}
 	else
 		// not quoted string, process it as usual.
@@ -256,6 +265,38 @@ void print_tokens(t_token_list *lst)
 		lst = lst->next;
 	}
 }
+
+char	*handle_quotes(char *str)
+{
+	char	*result;
+	char	quote_char;
+	char 	*expanded;
+	int 	len;
+	int 	i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	len = ft_strlen(str);
+    result = malloc(len + 1);
+	quote_char = '\0'; // used to handle nested quotes
+	while (i < len)
+	{
+		if (str[i] == quote_char)
+			quote_char = '\0'; // handle closing quote
+		else if (quote_char == '\0' && (is_quote(str[i]))
+			quote_char = str[i]; // handle opening quote
+		else if (str[i] == '$')
+			expanded = expand_variable(str);
+		else
+			result[j++] = str[i];
+		i++;
+	}
+	result[j] = '\0'; // null-terminate the result
+    return (result);
+}
+
+
 
 
 // static char *next_token(char *str)

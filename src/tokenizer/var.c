@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 11:42:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 14:01:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ char *remove_quotes(char *str)
 	*q = '\0';
 	return (str);
 }
-
-
 
 char *expand_variable(char *str, t_var_list *v)
 {

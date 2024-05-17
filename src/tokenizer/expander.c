@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 15:29:05 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 20:56:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char *lookup_var(char *var_name, t_var_list *v)
 	return (NULL);
 }
 
-char *expand_variable(char *str, t_var_list *v)
+char	*expand_variable(char *str, t_var_list *v)
 {
 	char	*start;
 	char	*prefix;

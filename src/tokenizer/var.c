@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 15:28:00 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 20:52:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	add_var_to_list(t_var_list **lst, t_var_list *node)
 	}
 }
 
-static void	add_var(t_var_list **lst, char *str)
+void	add_var(t_var_list **lst, char *str)
 {
 	t_var_list	*node;
 	t_var_list	*v;

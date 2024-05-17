@@ -70,7 +70,7 @@ void			free_var_list(t_var_list *list);
 t_var_list 		*get_envp(char **envp);
 void 			print_envp(t_var_list *lst);
 char 			*remove_quotes(char *str);
-char 			*expand_variable(char *str, t_var_list *v);
+void			add_var(t_var_list **lst, char *str);
 
 // token list
 //void			append_node(t_token_list **lst, t_token token);
@@ -82,9 +82,13 @@ char 			*expand_variable(char *str, t_var_list *v);
 //t_token			create_token(char *str);
 
 //optimize
-t_token_list 	*tokenizer(char *str);
+t_token_list	*tokenizer(char *str, t_var_list *v);
 void 			print_tokens(t_token_list *lst);
-void			free_list(t_token_list **lst);
+void			free_token_list(t_token_list **lst);
+
+//expander
+char 			*expand_variable(char *str, t_var_list *v);
+
 
 // utils
 int				is_word(char c);

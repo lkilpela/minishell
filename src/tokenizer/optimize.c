@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   optimize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 23:16:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 00:50:39 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static t_token_type	get_token_type(char *str)
 static void	extract_token(char *str, char **value, t_token_type *type)
 {
 	int	len;
-	
+
 	len = token_len(str);
 	*value = ft_strndup(str, len);
 	*type = get_token_type(str);
@@ -93,31 +93,27 @@ static t_token	*create_token(char *str)
 	return (token);
 }
 
-static void	process_token(t_token *token, t_var_list *v)
-{
-	char	*unquoted;
-	char	*expanded;
+// void	process_token(t_token *token, t_var_list *v)
+// {
+// 	char	*unquoted;
+// 	char	*expanded;
 
-	// "echo$ARG"eee"" or "echo"eee"" or 'echo"eee"'
-	if (token->type == D_QUOTE || token->type == S_QUOTE)
-	{
-		unquoted = remove_quotes(token->value);
-		// unquoted = echo$ARGeee or echoeee
-		// ARG=" la hello world"
-		if (token->type == D_QUOTE && ft_strchr(unquoted, '$') != NULL)
-		{
-			expanded = expand_variable(unquoted, v);
-			free(token->value);
-			// expanded = echo la hello wolrdeeee
-			token->value = expanded;
-		}
-		else // token->value = echoeee(D_QUOTE) or echo"eee" (S_QUOTE)
-		{
-			free(token->value);
-			token->value = unquoted;
-		}
-	}
-}
+// 	// "echo$ARG"eee"" or "echo"eee"" or 'echo"eee"'
+// 	if (token->type == D_QUOTE || token->type == S_QUOTE)
+// 	{
+// 		unquoted = remove_quotes(token->value);
+// 		// unquoted = echo$ARGeee or echoeee
+// 		// ARG=" la hello world"
+// 		if (token->type == D_QUOTE && ft_strchr(unquoted, '$') != NULL)
+// 		{
+// 			expanded = expand_variable(unquoted, v);
+// 			// expanded = echo la hello wolrdeeee
+// 			token->value = expanded;
+// 		}
+// 		else // token->value = echoeee(D_QUOTE) or echo"eee" (S_QUOTE)
+// 			token->value = unquoted;
+// 	}
+// }
 
 static t_token_list *create_token_node(char *str, t_var_list *v)
 {
@@ -130,7 +126,7 @@ static t_token_list *create_token_node(char *str, t_var_list *v)
 	if (!node->token)
 	{
 		free(node);
-		return (NULL);		
+		return (NULL);
 	}
 	process_token(node->token, v);
 	node->next = NULL;

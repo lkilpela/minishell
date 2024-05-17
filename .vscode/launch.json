@@ -3,16 +3,13 @@
 	"configurations": [
 
 		{
-			"name": "(lldb) Launch",
-			"type": "cppdbg",
+			"type": "lldb",
 			"request": "launch",
+			"name": "(lldb) Minishell",
 			"program": "${workspaceFolder}/minishell",
 			"args": [],
-			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "lldb"
+			"preLaunchTask": "make"
 		},
 		{
 			"name": "(gdb) minishell",

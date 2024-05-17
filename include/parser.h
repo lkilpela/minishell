@@ -6,12 +6,14 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/14 00:07:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/17 18:48:37 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+# include <tokenizer.h>
 //single command
 typedef struct s_redir
 {

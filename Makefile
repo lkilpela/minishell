@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
+#    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/17 20:57:29 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/05/18 00:53:21 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,9 +48,8 @@ SRCS			=	minishell.c \
 					var.c \
 					init.c \
 					optimize.c \
-					free.c \
-					expander.c \
-					#parsing.c \
+					echo.c \
+					parsing.c \
 					#token_list.c \
 					#tokenizer.c \
 
@@ -58,14 +57,14 @@ SRCS			=	minishell.c \
 # RULES
 ################################################################################
 
-#this means that every time its looking for a match for %.c  
+#this means that every time its looking for a match for %.c
 #													in there
 #											$(OBJ_DIR)/%.o: %.c $(M_HEADERS)
 #
 #it will look throuhg all these directories to find the file
 #this way we dont have to specify folders in front of each file
 #just have to make sure each file in the $(SRCS) is a unique name
-vpath %.c $(SRC_DIR) $(SRC_DIR)/tokenizer $(SRC_DIR)/parser
+vpath %.c $(SRC_DIR) $(SRC_DIR)/tokenizer $(SRC_DIR)/parser $(SRC_DIR)/builtins
 
 all: $(NAME)
 

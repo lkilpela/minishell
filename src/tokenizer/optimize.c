@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 21:00:13 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:55:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,7 +213,7 @@ void print_tokens(t_token_list *lst)
 {
 	while (lst)
 	{
-		printf("Value: %s \t\t Type: %s\n", lst->token->value, get_type_str(lst->token->type));
+		printf("T_value: %s \t\t T_type: %s\n", lst->token->value, get_type_str(lst->token->type));
 		lst = lst->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/17 20:55:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:19:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <tokenizer.h>
 #include <parser.h>
 
-void	process_input(char *input, t_var_list *v)
+void	process_var_assigment(char *input, t_var_list *v)
 {
 	char	*equal_pos;
 	char	*temp;
@@ -22,12 +22,7 @@ void	process_input(char *input, t_var_list *v)
 	equal_pos = ft_strchr(input, '=');
 	if (equal_pos)
 		add_var(&v, input);
-	else
-	{
-		temp = expand_variable(input, v);
-		printf("expanded_str: %s\n", temp);
-		free(temp);
-	}
+	//print_var_list(v);
 }
 
 void minishell_loop(t_var_list *v)
@@ -41,10 +36,10 @@ void minishell_loop(t_var_list *v)
 		if (!input)
 			break;
 		add_history(input);
+		process_input(input, v);
 		t = tokenizer(input, v);
 		print_tokens(t);
 		//print_commands(parser(lst));
-		process_input(input, v);
 		free_token_list(&t);
 		free(input);
 	}

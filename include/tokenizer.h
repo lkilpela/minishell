@@ -68,7 +68,7 @@ typedef struct s_var_list
 // environment var
 void			free_var_list(t_var_list *list);
 t_var_list 		*get_envp(char **envp);
-void 			print_envp(t_var_list *lst);
+void 			print_var_list(t_var_list *v);
 char 			*remove_quotes(char *str);
 void			add_var(t_var_list **lst, char *str);
 

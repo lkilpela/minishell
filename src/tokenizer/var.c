@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 20:52:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:04:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,11 +143,11 @@ t_var_list *get_envp(char **envp)
 	return (lst);
 }
 
-void print_envp(t_var_list *lst)
+void print_var_list(t_var_list *v)
 {
-	while (lst)
+	while (v)
 	{
-		printf("Name: %s \t\t\t\t Value: %s\n", lst->current_var->name, lst->current_var->value);
-		lst = lst->next;
+		printf("Name: %s \t\t\t\t Value: %s\n", v->current_var->name, v->current_var->value);
+		v = v->next;
 	}
 }

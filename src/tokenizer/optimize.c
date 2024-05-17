@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 20:43:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 20:43:46 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,6 @@ static int	token_len(char *str)
 		str++;
 	}
 	return (len);
-}
-
-int	has_special_char(char *str)
-{
-	while (*str)
-	{
-		if (*str == '$' || is_quote(*str))
-			return (1);
-		str++;
-	}
-	return (0);
 }
 
 static t_token_type	get_token_type(char *str)
@@ -104,7 +93,7 @@ static t_token	*create_token(char *str)
 	return (token);
 }
 
-void	process_token(t_token *token, t_var_list *v)
+static void	process_token(t_token *token, t_var_list *v)
 {
 	char	*unquoted;
 	char	*expanded;

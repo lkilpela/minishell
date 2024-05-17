@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 21:54:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:56:46 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*expand_variable(char *str, t_var_list *v)
 	char	*var_name;
 	char	*var_value;
 
-	printf("input: %s\n", str);
 	start = ft_strchr(str, '$');
 	end = skip_variable(start);
 	prefix = ft_strndup(str, start - str);

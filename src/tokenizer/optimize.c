@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 20:31:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 20:41:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	process_token(t_token *token, t_var_list *v)
 	}
 }
 
-static t_token_list *create_token_node(char *str)
+static t_token_list *create_token_node(char *str, t_var_list *v)
 {
 	t_token_list *node;
 
@@ -143,6 +143,7 @@ static t_token_list *create_token_node(char *str)
 		free(node);
 		return (NULL);		
 	}
+	process_token(node->token, v);
 	node->next = NULL;
 	return (node);
 }

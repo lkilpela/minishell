@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 15:57:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:58:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,8 @@ static t_token	*create_token(char *str)
 
 void	process_token(t_token *token, t_var_list *v)
 {
-	size_t	len;
 	char	*unquoted;
 	char	*expanded;
-	int		i;
 
 	// "echo$ARG"eee"" or "echo"eee"" or 'echo"eee"'
 	if (token->type == D_QUOTE || token->type == S_QUOTE)

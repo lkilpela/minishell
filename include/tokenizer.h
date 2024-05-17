@@ -72,6 +72,7 @@ void 			print_var_list(t_var_list *v);
 char 			*remove_quotes(char *str);
 void			add_var(t_var_list **lst, char *str);
 
+
 // token list
 //void			append_node(t_token_list **lst, t_token token);
 //void			free_list(t_token_list **lst);
@@ -88,7 +89,7 @@ void			free_token_list(t_token_list **lst);
 
 //expander
 char 			*expand_variable(char *str, t_var_list *v);
-
+void			process_var_assigment(char *input, t_var_list *v);
 
 // utils
 int				is_word(char c);

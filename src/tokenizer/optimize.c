@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 11:40:36 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 12:19:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,35 @@ static void	extract_token(char *str, char **value, t_token_type *type)
 	*type = get_token_type(str);
 }
 
+void	process_token(char *str, char **value, t_token_type *type)
+{
+	size_t	len;
+	char	*unquoted;
+	char	*expanded;
+
+	extract_token(str, value, type);
+	len = ft_strlen(&value);
+	if (*value[0] == '"' && *value[len - 1] == '"'
+		|| *value[0] == '\'' && *value[len - 1] == '\'')
+	{
+		unquoted = ft_strndup(*value + 1, len - 2);
+		free(*value);
+		if (*value[0] == '"')
+		{
+			expanded = expand_variable(unquoted);
+			*value = expanded;
+			
+			//process expanded string
+		}
+		else
+			*value = unquoted;
+			//single quoted string, leave it as is.
+			// process unquoted string
+	}
+	else
+		// not quoted string, process it as usual.
+}
+
 static t_token	*create_token(char *str)
 {
 	t_token 		*token;
@@ -93,7 +122,7 @@ static t_token	*create_token(char *str)
 
 	value = NULL;
 	type = -1;
-	extract_token(str, &value, &type);
+	process_token(str, &value, &type);
 	if (!value)
 		return (NULL);
 	token = malloc(sizeof(t_token));
@@ -172,36 +201,7 @@ t_token_list	*tokenizer(char *str)
 	return (lst);
 }
 
-void	process_token(t_token_list *lst)
-{
-	t_token_list	*current;
-	const char		*str;
-	size_t			len;
-	char			*unquoted;
-	char			*expanded;
 
-	current = lst;
-	while (current)
-	{
-		str = current->token->value;
-		len = ft_strlen(str);
-		// Process token
-		if (str[0] == '"' && str[len - 1] == '"'
-			|| str[0] == '\'' && str[len - 1] == '\'')
-		{
-			unquoted = ft_strndup(str + 1, len - 2);
-			if (str[0] == '"')
-				expanded = expand_variable(unquoted);
-				//process expanded string
-			else
-				//single quoted string, leave it as is.
-				// process unquoted string
-		}
-		else
-			// not quoted string, process it as usual.
-		current = current->next;
-	}
-}
 
 
 static char	*get_type_str(int e)

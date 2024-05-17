@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/18 01:43:39 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/18 02:14:07 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,18 @@ void minishell_loop(t_var_list *v)
 		free(input);
 	}
 }
+t_ms	*ms(void)
+{
+	static t_ms	ms;
+
+	return (&ms);
+}
 
 int main(int argc, char **argv, char **envp)
 {
-	t_minishell	m;
 	t_var_list *v;
 
-	init_minishell(argc, argv, envp, &m);
+	init_minishell(argc, argv, envp);
 	v = get_envp(envp);
 	minishell_loop(v);
 }

@@ -6,8 +6,13 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/18 01:19:19 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/18 01:26:52 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <builtins.h>
+
+void	built_env(void)
+{
+	return ;
+}

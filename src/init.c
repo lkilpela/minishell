@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/15 12:21:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 02:13:24 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <tokenizer.h>
 
-void init_minishell(int argc, char **argv, char **envp, t_minishell *m)
+void init_minishell(int argc, char **argv, char **envp)
 {
-	m->argc = argc;
-	m->argv = argv;
-	m->envp = envp;
-	m->paths = NULL;
+	ms()->argc = argc;
+	ms()->argv = argv;
+	ms()->envp = envp;
+	ms()->paths = NULL;
 }
 
 /*void init_tokenizer(t_tokenizer *t, char *input)

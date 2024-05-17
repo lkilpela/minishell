@@ -13,14 +13,15 @@
 
 # define PROMPT GREEN "minishell$ " RESET
 
-typedef struct s_minishell
+typedef struct s_ms
 {
 	char	**argv;
 	int		argc;
 	char	**envp;
 	char	**paths;	// Array of paths for executable lookup
-}				t_minishell;
+}				t_ms;
 
-void init_minishell(int argc, char **argv, char **envp, t_minishell *m);
+t_ms		*ms(void);
+void		init_minishell(int argc, char **argv, char **envp);
 
 #endif

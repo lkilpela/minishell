@@ -5,6 +5,10 @@
 # include <stdio.h>
 # include <libft.h>
 
+# define BLUE "\e[0;34m"
+# define CYAN "\e[0;36m"
+# define RESET	"\e[0m"
+
 # define DOLLAR '$' // denote variables ($)
 # define UNDERSCORE '_' 
 

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 23:02:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/17 23:10:00 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,8 @@ static void	add_var_to_list(t_var_list **lst, t_var_list *node)
 			last = last->next;
 		last->next = node;
 	}
-	printf("Added new variable:\n");
-	printf("Name: %s\n \t\t Value: %s\n", node->current_var->name, node->current_var->value);
+	printf(CYAN "Added new variable:\n" RESET);
+	printf("Name: %s \t\t\t Value: %s\n", node->current_var->name, node->current_var->value);
 }
 
 void	add_var(t_var_list **lst, char *str)

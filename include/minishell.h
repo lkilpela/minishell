@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <libft.h>
+# include <unistd.h>
 
 # define GREEN "\e[0;32m"
 # define RESET	"\e[0m"

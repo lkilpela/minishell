@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/18 01:00:27 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/18 01:43:39 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void minishell_loop(t_var_list *v)
 		t = tokenizer(input, v);
 		//print_var_list(v);
 		print_tokens(t);
-		//print_commands(parser(lst));
+		built_pwd();
+		// print_commands(parser(lst));
 		//free_var_list(v);
 		free_token_list(&t);
 		free(input);

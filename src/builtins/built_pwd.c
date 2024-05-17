@@ -6,8 +6,17 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:17:23 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/18 01:17:32 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/18 01:46:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <builtins.h>
+
+void	built_pwd(void)
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, (size_t)0);
+	ft_printf("%s\n", pwd);
+	free(pwd);
+}

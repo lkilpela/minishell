@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 13:52:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:59:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	is_double_quoted(char *str)
 	if (*str != '"')
 		return (0);
 	end = skip_quote(str);
-	if (!end || end != str + ft_strlen(str));
+	if (!end || end != str + ft_strlen(str))
 		return (0);
 	return (1);
 }
@@ -111,7 +111,7 @@ int	is_single_quoted(char *str)
 	if (*str != '\'')
 		return (0);
 	end = skip_quote(str);
-	if (!end || end != str + ft_strlen(str));
+	if (!end || end != str + ft_strlen(str))
 		return (0);
 	return (1);
 }
@@ -126,7 +126,7 @@ static void	process_word_token(t_token *token, t_var_list *v)
 		// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
 		if (is_double_quoted(token->value))
 		{
-			unquoted = remove_quotes(token->value);
+			unquoted = remove_outer_quotes(token->value);
 			// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
 			// ARG=" la hello world"
 			if (ft_strchr(unquoted, '$') != NULL)
@@ -145,7 +145,7 @@ static void	process_word_token(t_token *token, t_var_list *v)
 		// 'echo$ARG"eee"' or 'echo$ARG' or 'echo"eee"'
 		else if (is_single_quoted (token->value))
 		{
-			unquoted = remove_quotes(token->value);
+			unquoted = remove_outer_quotes(token->value);
 			free(token->value);
 			token->value = unquoted;
 			// unquoted: echo$ARG"eee" or echo$ARG or echo"eee"

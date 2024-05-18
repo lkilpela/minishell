@@ -6,24 +6,25 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 23:16:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:59:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-char *remove_quotes(char *str)
+char	*remove_outer_quotes(char *str)
 {
-	char *p = str;
-	char *q = str;
-	while (*p)
-	{
-		if (*p != '\"')
-			*q++ = *p;
-		p++;
-	}
-	*q = '\0';
-	return (str);
+    size_t	len;
+
+	len = ft_strlen(str);
+    if (len < 2)
+        return str;
+    if (str[0] == '\"' && str[len - 1] == '\"')
+    {
+        ft_memmove(str, str + 1, len - 2);
+        str[len - 2] = '\0';
+    }
+    return str;
 }
 
 static void extract_var(char *str, char **name, char **value)
@@ -161,3 +162,18 @@ void print_var_list(t_var_list *v)
 		v = v->next;
 	}
 }
+
+
+/*char *remove_quotes(char *str)
+{
+	char *p = str;
+	char *q = str;
+	while (*p)
+	{
+		if (*p != '\"')
+			*q++ = *p;
+		p++;
+	}
+	*q = '\0';
+	return (str);
+}*/

@@ -43,15 +43,6 @@ typedef struct s_token_list
 	struct s_token_list	*next;	// pointer to next token
 }				t_token_list;
 
-// state of the tokenizer while it's processing an input string
-typedef struct s_tokenizer
-{
-	char			*input; 		// input string to be tokenized
-	int				pos;			// current position in input string
-	t_token			current_token; // current token being processed
-	t_token_list	*tokens; 		// list of all tokens parsed from the input
-}				t_tokenizer;
-
 // single env variable
 typedef struct s_var
 {
@@ -66,32 +57,19 @@ typedef struct s_var_list
 	struct s_var_list	*next; 
 }				t_var_list;
 
-// init
-//void			init_tokenizer(t_tokenizer *t, char *input);
-
 // environment var
 void			free_var_list(t_var_list *list);
 t_var_list 		*get_envp(char **envp);
 void 			print_var_list(t_var_list *v);
-char 			*remove_quotes(char *str);
+char 			*remove_outer_quotes(char *str);
 void			add_var(t_var_list **lst, char *str);
 
-
-// token list
-//void			append_node(t_token_list **lst, t_token token);
-//void			free_list(t_token_list **lst);
-//void			print_tokens(t_token_list *lst);
-
 // tokenizer
-//t_token_list	*tokenize_input(char *str);
-//t_token			create_token(char *str);
-
-//optimize
 t_token_list	*tokenizer(char *str, t_var_list *v);
 void 			print_tokens(t_token_list *lst);
 void			free_token_list(t_token_list **lst);
 
-//expander
+// expander
 char 			*expand_variable(char *str, t_var_list *v);
 void			process_var_assigment(char **input, t_var_list *v);
 

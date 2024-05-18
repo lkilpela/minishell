@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:12:17 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:12:33 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	process_var_assigment(char **input, t_var_list *v)
 	equal_pos = ft_strchr(*input, '=');
 	if (equal_pos)
 	{
+		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
 		unquoted = remove_outer_quotes(equal_pos + 1);
 		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
 		expanded = expand_if_needed(unquoted, v);
@@ -59,9 +60,10 @@ void	process_var_assigment(char **input, t_var_list *v)
 		}
 		else
 		{
-			free(*input);
+			free(*input); // If the token is not quoted at all, free the original value
 			*input = unquoted;
 		}
+		add_var(&v, new_input);// name: ARG value: lumik
 	}
 	else
 		add_var(&v, *input);

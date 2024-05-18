@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:13:42 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:13:52 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,8 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 		str = skip_whitespaces(str);
 		if (!*str)
 			break ;
+		if (ft_strchr(str, '='))
+			process_var_assigment(&str, v);
 		add_token(&lst, str, v);
 		str += token_len(str);
 	}

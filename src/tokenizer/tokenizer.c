@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 21:56:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 22:08:54 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,8 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 		str = skip_whitespaces(str);
 		if (!*str)
 			break ;
+		if (ft_strchr(str, '='))
+			process_var_assigment(&str, v);
 		add_token(&lst, str, v);
 		str += token_len(str);
 	}

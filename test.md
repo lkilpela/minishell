@@ -27,37 +27,3 @@
 | 1 | `\"echo\"` | token_value: echo, token_type: WORD;|
 | 2 | `\"echo 'hello'\"` | token_value: echo 'hello', token_type: WORD;| -> RETOKENIZE
 | 3 | `\"echo "hello"\"` | token_value: echo "hello" . , token_type: WORD;|
-
-## VAR ASSIGNMENT
-
-`ARG=" la hello world"`
-
-| 1 | `\"echo$ARG\"eee\"\"` | token_value: echo$ARG"eee", token_type: WORD;|
-**After expanded**
-
-### DOUBLE QUOTES
-
-1. `ARG=" la"`: The value is double quoted but does not contain a dollar sign. 
-
-2. `ARG="$USER"`: 
-- The value is double quoted and contains a dollar sign.
-- $USER will be **expanded** to the value of the USER environment variable.
-
-### SINGLE QUOTES
-
-1. `ARG='la'`: 
-- The value is single quoted and does not contain a dollar sign.
-
-2. `ARG='$USER'`: 
-- The value is single quoted and contains a dollar sign. 
-- Variables inside single quotes are **not expanded**.
-
-### REGULAR 
-
-1. `ARG=la`: The value is not quoted and does not contain a dollar sign.
-
-2. `ARG=€USER`: 
-- The value is not quoted.
-- Does contain a dollar sign. $USER will be **expanded** to the value of the USER environment variable.
-
-

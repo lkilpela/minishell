@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 02:56:47 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 02:57:13 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,12 @@ static char	*get_type_str(int e)
 		"OP_GREAT",
 		"OP_DLESS",
 		"OP_DGREAT",
+		//"S_QUOTE",
+		//"D_QUOTE",
 		"VAR",
+		//"T_NEWLINE",
+		//"T_SPACE",
+		//"COMPLEX_WORD",
 		"UNKNOWN"
 	};
 

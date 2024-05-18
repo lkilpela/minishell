@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 21:52:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:54:59 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	process_var_assigment(char **input, t_var_list *v)
 	char 	*new_input;
 	char	*unquoted;
 	
-	// assign a variable with an empty string
-	// var is created, value = empty string
 	if (*input == NULL || **input == '\0')
 	{
 		add_var(&v, *input);
@@ -51,7 +49,6 @@ void	process_var_assigment(char **input, t_var_list *v)
 		expanded = expand_if_needed(unquoted, v);
 		if (expanded)
 		{
-			//ARG=$USER-> ARG=lumik
 			new_input = ft_strjoin(prefix, expanded);
 			free(prefix);
 			if (new_input)
@@ -61,7 +58,7 @@ void	process_var_assigment(char **input, t_var_list *v)
 			}
 		}
     }
-	else // ARG=value or ARG=" la hello"
+	else
 		add_var(&v, *input);
 }
 

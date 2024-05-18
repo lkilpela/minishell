@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 02:54:41 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 02:57:38 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	process_var_assigment(char **input, t_var_list *v)
 	if (equal_pos)
 	{
 		unquoted = remove_outer_quotes(equal_pos + 1);
-		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
-		expanded = expand_if_needed(unquoted, v);
-		if (expanded)
+		//ARG=$USER-> ARG=lumik
+		if (is_double_quoted(equal_pos + 1) && ft_strchr(unquoted, '$'))
 		{
+			expanded = expand_variable(unquoted, v);
 			new_input = ft_strjoin(prefix, expanded);
 			free(prefix);
 			if (new_input)
@@ -56,6 +56,11 @@ void	process_var_assigment(char **input, t_var_list *v)
 				add_var(&v, new_input);
 				free(new_input);
 			}
+		}
+		else
+		{
+			free(*input);
+			*input = unquoted;
 		}
 	}
 	else

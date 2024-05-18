@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 02:57:28 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 02:57:35 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ static void	process_word_token(t_token *token, t_var_list *v)
 			free(token->value);
 			// expanded = echo la hello worldd"eee" or echo la hello world
 			token->value = expanded;
-			}
+		}
 		else // not double quoted or it doesn't contain a $
 			token->value = unquoted;
 	}

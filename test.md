@@ -30,6 +30,11 @@
 
 ## VAR ASSIGNMENT
 
+`ARG=" la hello world"`
+
+| 1 | `\"echo$ARG\"eee\"\"` | token_value: echo$ARG"eee", token_type: WORD;|
+**After expanded**
+
 ### DOUBLE QUOTES
 
 1. `ARG=" la"`: The value is double quoted but does not contain a dollar sign. 

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/19 01:01:43 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 02:59:54 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void minishell_loop(t_var_list *v)
 		if (!input)
 			break;
 		add_history(input);
-		// if (ft_strchr(input, '='))
-		// 	process_var_assigment(&input, v);
 		t = tokenizer(input, v);
 		//print_var_list(v);
 		print_tokens(t);

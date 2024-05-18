@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 02:59:52 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:07:53 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ static int	token_len(char *str)
 
 static t_token_type	get_token_type(char *str)
 {
+	// if (*str == '\'')
+	// 	return (S_QUOTE);
+	// else if (*str == '\"')
+	// 	return (D_QUOTE);
 	if (!ft_strncmp(str, "<<", 2))
 		return (OP_DLESS);
 	else if (!ft_strncmp(str, ">>", 2))
@@ -53,7 +57,7 @@ static t_token_type	get_token_type(char *str)
 		return (OP_GREAT);
 	else if (*str == '|')
 		return (OP_PIPE);
-	else if (*str == '$')
+	else if (str[0] == '$')
 		return (VAR);
 	else if (is_word(*str))
 			return (WORD);
@@ -83,58 +87,35 @@ static t_token	*create_token(char *str)
 		return (NULL);
 	token = malloc(sizeof(t_token));
 	if (!token)
-	{
 		free(value);
-		return (NULL);
-	}
 	token->value = value;
 	token->type = type;
 	return (token);
 }
 
-int	is_double_quoted(char *str)
+static void	process_token(t_token *token, t_var_list *v)
 {
-	char	*end;
-
-	if (*str != '"')
-		return (0);
-	end = skip_quote(str);
-	if (!end || end != str + ft_strlen(str))
-		return (0);
-	return (1);
-}
-
-int	is_single_quoted(char *str)
-{
-	char	*end;
-
-	if (*str != '\'')
-		return (0);
-	end = skip_quote(str);
-	if (!end || end != str + ft_strlen(str))
-		return (0);
-	return (1);
-}
-
-static void	process_word_token(t_token *token, t_var_list *v)
-{
+	char	*unquoted;
 	char	*expanded;
 
-	if (token->type == WORD || token->type == VAR)
+	// "echo$ARG"eee"" or "echo"eee"" or 'echo"eee"'
+	if (token->type == D_QUOTE || token->type == S_QUOTE)
 	{
-		// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
-		// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
+		unquoted = remove_quotes(token->value);
+		// unquoted = echo$ARGeee or echoeee
 		// ARG=" la hello world"
-		unquoted = remove_outer_quotes(token->value);
-		if (ft_strchr(unquoted, '$') != NULL)
+		if (token->type == D_QUOTE && ft_strchr(unquoted, '$') != NULL)
 		{
 			expanded = expand_variable(unquoted, v);
 			free(token->value);
-			// expanded = echo la hello worldd"eee" or echo la hello world
+			// expanded = echo la hello wolrdeeee
 			token->value = expanded;
 		}
-		else // not double quoted or it doesn't contain a $
+		else // token->value = echoeee(D_QUOTE) or echo"eee" (S_QUOTE)
+		{
+			free(token->value);
 			token->value = unquoted;
+		}
 	}
 }
 
@@ -151,7 +132,7 @@ static t_token_list *create_token_node(char *str, t_var_list *v)
 		free(node);
 		return (NULL);		
 	}
-	process_word_token(node->token, v);
+	process_token(node->token, v);
 	node->next = NULL;
 	return (node);
 }
@@ -201,8 +182,6 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 		str = skip_whitespaces(str);
 		if (!*str)
 			break ;
-		if (ft_strchr(str, '='))
-			process_var_assigment(&str, v);
 		add_token(&lst, str, v);
 		str += token_len(str);
 	}
@@ -218,7 +197,12 @@ static char	*get_type_str(int e)
 		"OP_GREAT",
 		"OP_DLESS",
 		"OP_DGREAT",
+		"S_QUOTE",
+		"D_QUOTE",
 		"VAR",
+		"T_NEWLINE",
+		"T_SPACE",
+		"COMPLEX_WORD",
 		"UNKNOWN"
 	};
 
@@ -229,7 +213,33 @@ void print_tokens(t_token_list *lst)
 {
 	while (lst)
 	{
-		printf(BLUE "token_value: %-20s token_type: %s\n" RESET, lst->token->value, get_type_str(lst->token->type));
+		printf(BLUE "Added new token:\n" RESET);
+		printf("token_value: %-20s token_type: %s\n", lst->token->value, get_type_str(lst->token->type));
 		lst = lst->next;
 	}
 }
+
+// static char *next_token(char *str)
+// {
+// 	if (is_whitespace(*str))
+// 		str = skip_whitespaces(str);
+// 	else if (is_word(*str))
+// 		str = skip_word(str);
+// 	else if (is_operator(*str))
+// 		str = skip_op(str);
+// 	else if (is_quote(*str))
+// 		str = skip_quote(str);
+// 	//else if (*str == '$')
+// 		//str = skip_variable(str);
+// 	return (str);
+// }
+
+// static int 	token_len(char *str)
+// {
+// 	char	*end;
+// 	int		len;
+
+// 	end = next_token(str);
+// 	len = end - str;
+// 	return (len);
+// }

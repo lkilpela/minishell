@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 02:57:53 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 02:58:28 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ char	*expand_if_needed(char *str, t_var_list *v)
 	char	*expanded;
 
 	expanded = NULL;
-	if (ft_strchr(str, '$'))
+	if (is_double_quoted(str) && ft_strchr(str, '$') != NULL)
 	{
 		expanded = expand_variable(str, v);
 		if (!expanded)
 			return (NULL);
 		return (expanded);
 	}
+	printf("expand_if_needed: %s\n", expanded);
 	return (str);
 }
 
@@ -33,7 +34,7 @@ void	process_var_assigment(char **input, t_var_list *v)
 	char	*expanded;
 	char	*prefix;
 	char 	*new_input;
-	char	*unquoted;
+	//char	*unquoted;
 	
 	if (*input == NULL || **input == '\0')
 	{
@@ -45,21 +46,15 @@ void	process_var_assigment(char **input, t_var_list *v)
 	if (equal_pos)
 	{
 		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
-		unquoted = remove_outer_quotes(equal_pos + 1);
+		expanded = expand_if_needed((equal_pos + 1), v);
 		//ARG=$USER-> ARG=lumik
-		if (is_double_quoted(equal_pos + 1) && ft_strchr(unquoted, '$'))
+		if (expanded)
 		{
-			expanded = expand_variable(unquoted, v);
 			new_input = ft_strjoin(prefix, expanded);
 			//printf("expanded_var_input: %s\n", new_input);
 			free(prefix);
 			if (new_input)
-				*input = new_input;
-		}
-		else
-		{
-			free(*input); // If the token is not quoted at all, free the original value
-			*input = unquoted;
+				*input = remove_outer_quotes(new_input);
 		}
 		if (new_input)
             add_var(&v, new_input);

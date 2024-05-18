@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 03:00:06 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 03:00:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ char	*expand_variable(char *str, t_var_list *v)
 	if (start + 1 == end)
 		return (ft_strdup(str));
 	prefix = ft_strndup(str, start - str);
-	
 	var_name = ft_strndup(start + 1, end - start - 1);
 	var_value = lookup_var(var_name, v);
 	free(var_name);

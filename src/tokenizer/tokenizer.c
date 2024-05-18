@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 02:54:39 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 02:55:21 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,20 +120,35 @@ static void	process_word_token(t_token *token, t_var_list *v)
 {
 	char	*expanded;
 
-	if (token->type == WORD || token->type == VAR)
+	if (token->type == WORD)
 	{
 		// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
-		// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
-		// ARG=" la hello world"
-		if (ft_strchr(token->value, '$') != NULL)
+		if (is_double_quoted(token->value))
 		{
-			expanded = expand_variable(token->value, v);
-			free(token->value);
-			// expanded = echo la hello worldd"eee" or echo la hello world
-			token->value = expanded;
+			unquoted = remove_quotes(token->value);
+			// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
+			// ARG=" la hello world"
+			if (ft_strchr(unquoted, '$') != NULL)
+			{
+				expanded = expand_variable(unquoted, v);
+				free(token->value);
+				// expanded = echo la hello worldd"eee" or echo la hello world
+				token->value = expanded;
+			}
+			else // token->value = echo"eee"
+			{
+				free(token->value);
+				token->value = unquoted;
+			}
 		}
-		else // not double quoted or it doesn't contain a $
-			token->value = remove_outer_quotes(token->value);
+		// 'echo$ARG"eee"' or 'echo$ARG' or 'echo"eee"'
+		else if (is_single_quoted (token->value))
+		{
+			unquoted = remove_quotes(token->value);
+			free(token->value);
+			token->value = unquoted;
+			// unquoted: echo$ARG"eee" or echo$ARG or echo"eee"
+		}
 	}
 }
 

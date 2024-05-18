@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 22:08:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/19 01:58:24 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ int	is_single_quoted(char *str)
 
 static void	process_word_token(t_token *token, t_var_list *v)
 {
-	char	*unquoted;
 	char	*expanded;
 
 	if (token->type == WORD || token->type == VAR)
@@ -126,16 +125,15 @@ static void	process_word_token(t_token *token, t_var_list *v)
 		// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
 		// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
 		// ARG=" la hello world"
-		unquoted = remove_outer_quotes(token->value);
-		if (ft_strchr(unquoted, '$') != NULL)
+		if (ft_strchr(token->value, '$') != NULL)
 		{
-			expanded = expand_variable(unquoted, v);
+			expanded = expand_variable(token->value, v);
 			free(token->value);
 			// expanded = echo la hello worldd"eee" or echo la hello world
 			token->value = expanded;
 		}
 		else // not double quoted or it doesn't contain a $
-			token->value = unquoted;
+			token->value = remove_outer_quotes(token->value);
 	}
 }
 

@@ -6,28 +6,31 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:17:12 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/14 19:47:08 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 02:23:40 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	char		*temp;
+	unsigned char	*source_cast;
+	unsigned char	*destination_cast;
 
-	if ((!dst && !src) && len != 0)
-		return (NULL);
-	temp = dst;
-	if (dst <= src)
-		while (len--)
-			*temp++ = *(char *)src++;
-	else
+	if ((dest == NULL && src == NULL) || len == 0)
+		return (dest);
+	if (src < dest)
 	{
-		temp += len;
-		src += len;
+		source_cast = (unsigned char *)src + len - 1;
+		destination_cast = (unsigned char *)dest + len - 1;
 		while (len--)
-			*(--temp) = *(char *)(--src);
+		{
+			*destination_cast = *source_cast;
+			destination_cast--;
+			source_cast--;
+		}
 	}
-	return (dst);
+	else
+		ft_memcpy(dest, src, len);
+	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 22:17:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 22:27:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,12 @@ char	*expand_variable(char *str, t_var_list *v)
 	char	*var_value;
 
 	start = ft_strchr(str, '$');
+	if (start == NULL || *(start + 1) == '\0' || *(start + 1) == '\0')
+		return (ft_strdup(str));
 	end = skip_variable(start);
+	if (start + 1 == end)
+		return (ft_strdup(str));
 	prefix = ft_strndup(str, start - str);
-	
 	var_name = ft_strndup(start + 1, end - start - 1);
 	var_value = lookup_var(var_name, v);
 	if (var_value)

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 21:50:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:56:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,12 +217,7 @@ static char	*get_type_str(int e)
 		"OP_GREAT",
 		"OP_DLESS",
 		"OP_DGREAT",
-		//"S_QUOTE",
-		//"D_QUOTE",
 		"VAR",
-		//"T_NEWLINE",
-		//"T_SPACE",
-		//"COMPLEX_WORD",
 		"UNKNOWN"
 	};
 

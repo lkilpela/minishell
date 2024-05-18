@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:10:28 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:11:22 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_token_type	get_token_type(char *str)
 		return (OP_GREAT);
 	else if (*str == '|')
 		return (OP_PIPE);
-	else if (str[0] == '$')
+	else if (*str == '$')
 		return (VAR);
 	else if (is_word(*str))
 			return (WORD);
@@ -217,12 +217,12 @@ static char	*get_type_str(int e)
 		"OP_GREAT",
 		"OP_DLESS",
 		"OP_DGREAT",
-		"S_QUOTE",
-		"D_QUOTE",
+		//"S_QUOTE",
+		//"D_QUOTE",
 		"VAR",
-		"T_NEWLINE",
-		"T_SPACE",
-		"COMPLEX_WORD",
+		//"T_NEWLINE",
+		//"T_SPACE",
+		//"COMPLEX_WORD",
 		"UNKNOWN"
 	};
 

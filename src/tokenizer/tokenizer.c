@@ -1,40 +1,180 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   optimize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 21:09:48 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 14:49:42 by lkilpela         ###   ########.fr       */
+/*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/05/17 23:16:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <tokenizer.h>
 
-t_token	create_token(char *str)
+static int	token_len(char *str)
 {
-	t_token	a_token;
-	int		len;
+	int	inquote;
+	int	len;
 
-	a_token.value = NULL;
-	a_token.type = -1;
-	len = get_token_len(str);
-	if (is_quote(str[0]))
-		a_token.value = ft_strndup(str + 1, len);
-	else if (str[0] == '$')
-		a_token.value = ft_strndup(str, len);
-	else
-		a_token.value = ft_strndup(str, len);
-	a_token.type = get_token_type(str);
-	return (a_token);
+	len = 0;
+	inquote = 0;
+	if (is_double_operator(str))
+		return (2);
+	if (is_operator(*str))
+		return (1);
+	while (*str)
+	{
+		if (inquote && is_quote(*str))
+			inquote -= *str;
+		else if (is_quote(*str))
+			inquote += *str;
+		else if (!inquote && !is_word(*str))
+			return (len);
+		len++;
+		str++;
+	}
+	return (len);
 }
 
-t_token_list	*tokenize_input(char *str)
+static t_token_type	get_token_type(char *str)
+{
+	// if (*str == '\'')
+	// 	return (S_QUOTE);
+	// else if (*str == '\"')
+	// 	return (D_QUOTE);
+	if (!ft_strncmp(str, "<<", 2))
+		return (OP_DLESS);
+	else if (!ft_strncmp(str, ">>", 2))
+		return (OP_DGREAT);
+	else if (*str == '<')
+		return (OP_LESS);
+	else if (*str == '>')
+		return (OP_GREAT);
+	else if (*str == '<')
+		return (OP_LESS);
+	else if (*str == '>')
+		return (OP_GREAT);
+	else if (*str == '|')
+		return (OP_PIPE);
+	else if (str[0] == '$')
+		return (VAR);
+	else if (is_word(*str))
+			return (WORD);
+	else
+		return (UNKNOWN);
+}
+
+static void	extract_token(char *str, char **value, t_token_type *type)
+{
+	int	len;
+	
+	len = token_len(str);
+	*value = ft_strndup(str, len);
+	*type = get_token_type(str);
+}
+
+static t_token	*create_token(char *str)
+{
+	t_token 		*token;
+	char			*value;
+	t_token_type	type;
+
+	value = NULL;
+	type = -1;
+	extract_token(str, &value, &type);
+	if (!value)
+		return (NULL);
+	token = malloc(sizeof(t_token));
+	if (!token)
+		free(value);
+	token->value = value;
+	token->type = type;
+	return (token);
+}
+
+static void	process_token(t_token *token, t_var_list *v)
+{
+	char	*unquoted;
+	char	*expanded;
+
+	// "echo$ARG"eee"" or "echo"eee"" or 'echo"eee"'
+	if (token->type == D_QUOTE || token->type == S_QUOTE)
+	{
+		unquoted = remove_quotes(token->value);
+		// unquoted = echo$ARGeee or echoeee
+		// ARG=" la hello world"
+		if (token->type == D_QUOTE && ft_strchr(unquoted, '$') != NULL)
+		{
+			expanded = expand_variable(unquoted, v);
+			free(token->value);
+			// expanded = echo la hello wolrdeeee
+			token->value = expanded;
+		}
+		else // token->value = echoeee(D_QUOTE) or echo"eee" (S_QUOTE)
+		{
+			free(token->value);
+			token->value = unquoted;
+		}
+	}
+}
+
+static t_token_list *create_token_node(char *str, t_var_list *v)
+{
+	t_token_list *node;
+
+	node = malloc(sizeof(t_token_list));
+	if (!node)
+		return (NULL);
+	node->token = create_token(str);
+	if (!node->token)
+	{
+		free(node);
+		return (NULL);		
+	}
+	process_token(node->token, v);
+	node->next = NULL;
+	return (node);
+}
+
+// add a node to a list
+static void	add_token_to_list(t_token_list **lst, t_token_list *node)
+{
+	t_token_list	*last;
+
+	if (*lst == NULL)
+		*lst = node;
+	else
+	{
+		last = *lst;
+		while (last->next)
+			last = last->next;
+		last->next = node;
+	}
+}
+
+// create new token and add to a list
+static void	add_token(t_token_list **lst, char *str, t_var_list *v)
+{
+	t_token_list	*node;
+	char			*value;
+	t_token_type	type;
+
+	value = NULL;
+	type = -1;
+	extract_token(str, &value, &type);
+	if (!value)
+		return ;
+	node = create_token_node(str, v);
+	if (!node)
+		return ;
+	add_token_to_list(lst, node);
+}
+
+// converts a string into a list of tokens
+t_token_list	*tokenizer(char *str, t_var_list *v)
 {
 	t_token_list	*lst;
-	t_token			token;
-	int				var_expansion;
 
 	lst = NULL;
 	while (*str)
@@ -42,76 +182,64 @@ t_token_list	*tokenize_input(char *str)
 		str = skip_whitespaces(str);
 		if (!*str)
 			break ;
-		token = create_token(str);
-		if (is_quote(*str))
-		{
-			var_expansion = 0;
-			//str = handle_quotes(str, &var_expansion);
-			//if (var_expansion == 1)
-			//{
-				//performing var expansion
-			//}
-		}
-		else if (*str == '$') // dollar sign
-		{
-			//create a token for variable name, replace it with variable's value
-		}
-		else if (!is_operator(*str))
-			str = skip_word(str);
-		else if (is_double_operator(str))
-		{
-			
-				// create a token for << operator
-				// read the next token as heredoc delimiter
-				// if the delim is quoted
-					//set a flg to disable variable expansion in heredoc
-				// else
-					//set a flag to enable variable expansion in heredoc
-				str++;
-		}	
-		else
-			str = skip_op(str);
-		append_node(&lst, token);
+		add_token(&lst, str, v);
+		str += token_len(str);
 	}
 	return (lst);
 }
 
-/*// check quote type and set *var_expansion
-char	*handle_quotes(char *str, int *var_expansion)
+static char	*get_type_str(int e)
 {
-	char	quote_type;
-	char	*end;
+	static char	*type_str[] = {
+		"WORD",
+		"OP_PIPE",
+		"OP_LESS",
+		"OP_GREAT",
+		"OP_DLESS",
+		"OP_DGREAT",
+		"S_QUOTE",
+		"D_QUOTE",
+		"VAR",
+		"T_NEWLINE",
+		"T_SPACE",
+		"COMPLEX_WORD",
+		"UNKNOWN"
+	};
 
-	quote_type = *str;
-	if (quote_type == '\"')
-		*var_expansion = 1;
-	else
-		*var_expansion = 0;
-	str = skip_quote(str);
-	return (str);
-}
-
-void	handle_double_quote(char *str);
-void	handle_variable(char *str)
-{
-	// non-existent variable
-	// variable followed by non-whitespace character
-	// variable inside double quotes
-}
-void	handle_heredoc(char *str)
-{
-	// variable expansion inside heredoc
-	// variable expasion inside quoted heredoc
-	// variable as a heredoc delim
-	// non-existent variable inside heredoc
-	// variable followed by non-whitespace character inside heredoc
+	return (type_str[e]);
 }
 
-/*int main()
+void print_tokens(t_token_list *lst)
 {
-	char *str = "    echo \" Hello\"  \'World!\' >> << |ls";
-	t_token_list *lst = tokenize_input(str);
-	print_tokens(lst);
-	free_list(&lst);
+	while (lst)
+	{
+		printf(BLUE "Added new token:\n" RESET);
+		printf("token_value: %-20s token_type: %s\n", lst->token->value, get_type_str(lst->token->type));
+		lst = lst->next;
+	}
 }
-*/
+
+// static char *next_token(char *str)
+// {
+// 	if (is_whitespace(*str))
+// 		str = skip_whitespaces(str);
+// 	else if (is_word(*str))
+// 		str = skip_word(str);
+// 	else if (is_operator(*str))
+// 		str = skip_op(str);
+// 	else if (is_quote(*str))
+// 		str = skip_quote(str);
+// 	//else if (*str == '$')
+// 		//str = skip_variable(str);
+// 	return (str);
+// }
+
+// static int 	token_len(char *str)
+// {
+// 	char	*end;
+// 	int		len;
+
+// 	end = next_token(str);
+// 	len = end - str;
+// 	return (len);
+// }

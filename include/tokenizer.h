@@ -68,6 +68,7 @@ void			add_var(t_var_list **lst, char *str);
 t_token_list	*tokenizer(char *str, t_var_list *v);
 void 			print_tokens(t_token_list *lst);
 void			free_token_list(t_token_list **lst);
+int				is_double_quoted(char *str);
 
 // expander
 char 			*expand_variable(char *str, t_var_list *v);

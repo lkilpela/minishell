@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:10:17 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:10:28 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,10 +135,7 @@ static void	process_word_token(t_token *token, t_var_list *v)
 			token->value = expanded;
 			}
 		else // not double quoted or it doesn't contain a $
-		{
-			free(token->value);
 			token->value = unquoted;
-		}
 	}
 }
 

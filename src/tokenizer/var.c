@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 13:59:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:04:36 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ char	*remove_outer_quotes(char *str)
 	len = ft_strlen(str);
     if (len < 2)
         return str;
-    if (str[0] == '\"' && str[len - 1] == '\"')
+    if (is_quote(str[0])&& is_quote(str[len - 1]))
     {
         ft_memmove(str, str + 1, len - 2);
         str[len - 2] = '\0';
     }
-    return str;
+    return (str);
 }
 
 static void extract_var(char *str, char **name, char **value)
@@ -41,7 +41,7 @@ static void extract_var(char *str, char **name, char **value)
 	*value = ft_strdup(equal_sign + 1);
 	if (!*value)
 		return ;
-	*value = remove_quotes(*value);
+	*value = remove_outer_quotes(*value);
 }
 
 // create a new t_var struct

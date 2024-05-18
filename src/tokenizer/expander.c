@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 17:57:28 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 18:01:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,19 @@ void	process_var_assigment(char **input, t_var_list *v)
 			new_input = ft_strjoin(prefix, expanded);
 			//printf("expanded_var_input: %s\n", new_input);
 			free(prefix);
-			*input = new_input;
+			if (new_input)
+				*input = new_input;
 		}
 		else
 		{
 			free(*input); // If the token is not quoted at all, free the original value
 			*input = unquoted;
 		}
-		add_var(&v, new_input);// name: ARG value: lumik
-	}
+		if (new_input)
+            add_var(&v, new_input);
+        else
+            add_var(&v, *input);
+    }
 	else // ARG=value or ARG=" la hello"
 		add_var(&v, *input);
 }

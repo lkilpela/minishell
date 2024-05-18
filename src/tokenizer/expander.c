@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 21:54:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 22:17:50 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	process_var_assigment(char **input, t_var_list *v)
 				free(new_input);
 			}
 		}
-    }
+	}
 	else
 		add_var(&v, *input);
 }

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 17:39:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 17:40:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,28 +238,3 @@ void print_tokens(t_token_list *lst)
 		lst = lst->next;
 	}
 }
-
-// static char *next_token(char *str)
-// {
-// 	if (is_whitespace(*str))
-// 		str = skip_whitespaces(str);
-// 	else if (is_word(*str))
-// 		str = skip_word(str);
-// 	else if (is_operator(*str))
-// 		str = skip_op(str);
-// 	else if (is_quote(*str))
-// 		str = skip_quote(str);
-// 	//else if (*str == '$')
-// 		//str = skip_variable(str);
-// 	return (str);
-// }
-
-// static int 	token_len(char *str)
-// {
-// 	char	*end;
-// 	int		len;
-
-// 	end = next_token(str);
-// 	len = end - str;
-// 	return (len);
-// }

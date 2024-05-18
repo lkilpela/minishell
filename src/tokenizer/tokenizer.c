@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:13:33 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:13:42 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,8 +228,7 @@ void print_tokens(t_token_list *lst)
 {
 	while (lst)
 	{
-		printf(BLUE "Added new token:\n" RESET);
-		printf("token_value: %-20s token_type: %s\n", lst->token->value, get_type_str(lst->token->type));
+		printf(BLUE "token_value: %-20s token_type: %s\n" RESET, lst->token->value, get_type_str(lst->token->type));
 		lst = lst->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:12:59 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:13:08 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	process_var_assigment(char **input, t_var_list *v)
 	char	*expanded;
 	char	*prefix;
 	char 	*new_input;
-	//char	*unquoted;
+	char	*unquoted;
 	
 	if (*input == NULL || **input == '\0')
 	{
@@ -44,12 +44,14 @@ void	process_var_assigment(char **input, t_var_list *v)
 	equal_pos = ft_strchr(*input, '=');
 	if (equal_pos)
 	{
+		unquoted = remove_outer_quotes(equal_pos + 1);
 		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
 		unquoted = remove_outer_quotes(equal_pos + 1);
 		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
 		expanded = expand_if_needed(unquoted, v);
 		if (expanded)
 		{
+			//ARG=$USER-> ARG=lumik
 			new_input = ft_strjoin(prefix, expanded);
 			free(prefix);
 			if (new_input)
@@ -98,6 +100,7 @@ char	*expand_variable(char *str, t_var_list *v)
 	if (start + 1 == end)
 		return (ft_strdup(str));
 	prefix = ft_strndup(str, start - str);
+	
 	var_name = ft_strndup(start + 1, end - start - 1);
 	var_value = lookup_var(var_name, v);
 	free(var_name);

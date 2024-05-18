@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 14:04:36 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 19:16:14 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ void	add_var(t_var_list **lst, char *str)
 	name = NULL;
 	value = NULL;
 	extract_var(str, &name, &value);
-	//printf("var_name: %s\n", name);
-	//printf("var_value: %s\n", value);
+	printf("var_name: %s\n", name);
+	printf("var_value: %s\n", value);
 	if (!name || !value)
 		return ;
 	v = *lst;

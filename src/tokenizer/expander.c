@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 19:18:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:52:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ char	*expand_if_needed(char *str, t_var_list *v)
 	char	*expanded;
 
 	expanded = NULL;
-	if (is_double_quoted(str) && ft_strchr(str, '$') != NULL)
+	if (ft_strchr(str, '$'))
 	{
 		expanded = expand_variable(str, v);
 		if (!expanded)
 			return (NULL);
 		return (expanded);
 	}
-	printf("expand_if_needed: %s\n", expanded);
 	return (str);
 }
 
@@ -34,7 +33,7 @@ void	process_var_assigment(char **input, t_var_list *v)
 	char	*expanded;
 	char	*prefix;
 	char 	*new_input;
-	//char	*unquoted;
+	char	*unquoted;
 	
 	// assign a variable with an empty string
 	// var is created, value = empty string
@@ -47,21 +46,20 @@ void	process_var_assigment(char **input, t_var_list *v)
 	equal_pos = ft_strchr(*input, '=');
 	if (equal_pos)
 	{
+		unquoted = remove_outer_quotes(equal_pos + 1);
 		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
-		expanded = expand_if_needed((equal_pos + 1), v);
-		//ARG=$USER-> ARG=lumik
+		expanded = expand_if_needed(unquoted, v);
 		if (expanded)
 		{
+			//ARG=$USER-> ARG=lumik
 			new_input = ft_strjoin(prefix, expanded);
-			//printf("expanded_var_input: %s\n", new_input);
 			free(prefix);
 			if (new_input)
-				*input = remove_outer_quotes(new_input);
+			{
+				add_var(&v, new_input);
+				free(new_input);
+			}
 		}
-		if (new_input)
-            add_var(&v, new_input);
-        else
-            add_var(&v, *input);
     }
 	else // ARG=value or ARG=" la hello"
 		add_var(&v, *input);
@@ -91,6 +89,7 @@ char	*expand_variable(char *str, t_var_list *v)
 	start = ft_strchr(str, '$');
 	end = skip_variable(start);
 	prefix = ft_strndup(str, start - str);
+	
 	var_name = ft_strndup(start + 1, end - start - 1);
 	var_value = lookup_var(var_name, v);
 	if (var_value)

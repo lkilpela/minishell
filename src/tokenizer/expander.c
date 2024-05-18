@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 02:58:42 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 02:58:54 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	process_var_assigment(char **input, t_var_list *v)
 		expanded = expand_if_needed(unquoted, v);
 		if (expanded)
 		{
-			//ARG=$USER-> ARG=lumik
 			new_input = ft_strjoin(prefix, expanded);
 			free(prefix);
 			if (new_input)
@@ -59,7 +58,7 @@ void	process_var_assigment(char **input, t_var_list *v)
 			}
 		}
     }
-	else // ARG=value or ARG=" la hello"
+	else
 		add_var(&v, *input);
 }
 

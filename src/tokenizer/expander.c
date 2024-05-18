@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:08:55 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:12:17 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ void	process_var_assigment(char **input, t_var_list *v)
 				add_var(&v, new_input);
 				free(new_input);
 			}
+		}
+		else
+		{
+			free(*input);
+			*input = unquoted;
 		}
 	}
 	else

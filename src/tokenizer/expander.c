@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 13:43:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 17:49:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	process_var_assigment(char **input, t_var_list *v)
 	char	*expanded;
 	char	*prefix;
 	char 	*new_input;
+	char	*unquoted;
 	
 	// assign a variable with an empty string
 	// var is created, value = empty string
@@ -30,16 +31,22 @@ void	process_var_assigment(char **input, t_var_list *v)
 	prefix = ft_strndup(*input, (equal_pos + 1) - *input);
 	if (equal_pos)
 	{
+		unquoted = remove_outer_quotes(equal_pos + 1);
 		//ARG=$USER-> ARG=lumik
-		if (ft_strchr(equal_pos, '$'))
+		if (is_double_quoted(equal_pos + 1) && ft_strchr(unquoted, '$'))
 		{
-			expanded = expand_variable(equal_pos + 1, v);
+			expanded = expand_variable(unquoted, v);
 			new_input = ft_strjoin(prefix, expanded);
 			//printf("expanded_var_input: %s\n", new_input);
 			add_var(&v, new_input);// name: ARG value: lumik
 			free(prefix);
 			free(*input);
 			*input = new_input;
+		}
+		else
+		{
+			free(*input);
+			*input = unquoted;
 		}
 	}
 	else // ARG=value or ARG=" la hello"

@@ -19,3 +19,11 @@
 | 17 | `echo$USEReee` | expanded_token: echolumikeee; token_value: echo, token_type: WORD; token_value: lumikeee, token_type: WORD;|
 | 18 | `ARG=$USER` | expanded_var: ARG=lumik; var_name: ARG, var_value: lumik;|
 | 19 | `echo $USER` | token_value: echo, token_type: WORD; token_value: lumik, token_type: WORD;|
+
+## DOUBLE QUOTE
+
+| Test Case Number | Input | Expected Output |
+| --- | --- | --- |
+| 1 | `\"echo\"` | token_value: echo, token_type: WORD;|
+| 2 | `\"echo 'hello'\"` | token_value: echo 'hello', token_type: WORD;| -> RETOKENIZE
+| 3 | `\"echo "hello"\"` | token_value: echo "hello" . , token_type: WORD;|

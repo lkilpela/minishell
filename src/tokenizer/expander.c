@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 02:57:38 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 02:57:45 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,23 @@ void	process_var_assigment(char **input, t_var_list *v)
 	equal_pos = ft_strchr(*input, '=');
 	if (equal_pos)
 	{
+		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
 		unquoted = remove_outer_quotes(equal_pos + 1);
 		//ARG=$USER-> ARG=lumik
 		if (is_double_quoted(equal_pos + 1) && ft_strchr(unquoted, '$'))
 		{
 			expanded = expand_variable(unquoted, v);
 			new_input = ft_strjoin(prefix, expanded);
+			//printf("expanded_var_input: %s\n", new_input);
 			free(prefix);
-			if (new_input)
-			{
-				add_var(&v, new_input);
-				free(new_input);
-			}
+			*input = new_input;
 		}
 		else
 		{
-			free(*input);
+			free(*input); // If the token is not quoted at all, free the original value
 			*input = unquoted;
 		}
+		add_var(&v, new_input);// name: ARG value: lumik
 	}
 	else
 		add_var(&v, *input);

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 23:09:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:43:54 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@ void	process_var_assigment(char **input, t_var_list *v)
 	char	*expanded;
 	char	*prefix;
 	char 	*new_input;
-
+	
+	// assign a variable with an empty string
+	// var is created, value = empty string
+	if (*input == NULL || **input == '\0')
+	{
+		add_var(&v, *input);
+		return ;
+	}
 	equal_pos = ft_strchr(*input, '=');
 	prefix = ft_strndup(*input, (equal_pos + 1) - *input);
 	if (equal_pos)

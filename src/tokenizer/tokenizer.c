@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:07:53 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:09:02 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ static int	token_len(char *str)
 
 static t_token_type	get_token_type(char *str)
 {
-	// if (*str == '\'')
-	// 	return (S_QUOTE);
-	// else if (*str == '\"')
-	// 	return (D_QUOTE);
 	if (!ft_strncmp(str, "<<", 2))
 		return (OP_DLESS);
 	else if (!ft_strncmp(str, ">>", 2))
@@ -87,34 +83,64 @@ static t_token	*create_token(char *str)
 		return (NULL);
 	token = malloc(sizeof(t_token));
 	if (!token)
+	{
 		free(value);
+		return (NULL);
+	}
 	token->value = value;
 	token->type = type;
 	return (token);
 }
 
-static void	process_token(t_token *token, t_var_list *v)
+int	is_double_quoted(char *str)
+{
+	char	*end;
+
+	if (*str != '"')
+		return (0);
+	end = skip_quote(str);
+	if (!end || end != str + ft_strlen(str));
+		return (0);
+	return (1);
+}
+
+int	is_single_quoted(char *str)
+{
+	char	*end;
+
+	if (*str != '\'')
+		return (0);
+	end = skip_quote(str);
+	if (!end || end != str + ft_strlen(str));
+		return (0);
+	return (1);
+}
+
+static void	process_word_token(t_token *token, t_var_list *v)
 {
 	char	*unquoted;
 	char	*expanded;
 
-	// "echo$ARG"eee"" or "echo"eee"" or 'echo"eee"'
-	if (token->type == D_QUOTE || token->type == S_QUOTE)
+	// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
+	if (token->type == WORD)
 	{
-		unquoted = remove_quotes(token->value);
-		// unquoted = echo$ARGeee or echoeee
-		// ARG=" la hello world"
-		if (token->type == D_QUOTE && ft_strchr(unquoted, '$') != NULL)
+		if (is_double_quoted(token->value))
 		{
-			expanded = expand_variable(unquoted, v);
-			free(token->value);
-			// expanded = echo la hello wolrdeeee
-			token->value = expanded;
-		}
-		else // token->value = echoeee(D_QUOTE) or echo"eee" (S_QUOTE)
-		{
-			free(token->value);
-			token->value = unquoted;
+			unquoted = remove_quotes(token->value);
+			// unquoted = echo$ARG"eee" or echo"eee"
+			// ARG=" la hello world"
+			if (ft_strchr(unquoted, '$') != NULL)
+			{
+				expanded = expand_variable(unquoted, v);
+				free(token->value);
+				// expanded = echo la hello wolrdeeee
+				token->value = expanded;
+			}
+			else // token->value = echo"eee" or echo'eee'
+			{
+				free(token->value);
+				token->value = unquoted;
+			}
 		}
 	}
 }

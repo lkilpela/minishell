@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 21:54:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 21:55:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	add_var_to_list(t_var_list **lst, t_var_list *node)
 			last = last->next;
 		last->next = node;
 	}
-	printf(CYAN "var_name: %-20s var_value: %s\n", node->current_var->name, node->current_var->value RESET);
+	printf(CYAN "var_name: %-20s var_value: %s\n" RESET, node->current_var->name, node->current_var->value);
 }
 
 void	add_var(t_var_list **lst, char *str)

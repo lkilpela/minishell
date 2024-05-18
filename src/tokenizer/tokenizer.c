@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 14:11:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:11:59 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ static void	process_word_token(t_token *token, t_var_list *v)
 	if (token->type == WORD)
 	{
 		// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
-		
 		// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
 		// ARG=" la hello world"
 		unquoted = remove_outer_quotes(token->value);
@@ -135,7 +134,7 @@ static void	process_word_token(t_token *token, t_var_list *v)
 			// expanded = echo la hello worldd"eee" or echo la hello world
 			token->value = expanded;
 			}
-		else // token->value = echo"eee"
+		else // not double quoted or it doesn't contain a $
 		{
 			free(token->value);
 			token->value = unquoted;

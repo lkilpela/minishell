@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 17:49:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 17:57:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ void	process_var_assigment(char **input, t_var_list *v)
 		add_var(&v, *input);
 		return ;
 	}
+	new_input = NULL;
 	equal_pos = ft_strchr(*input, '=');
-	prefix = ft_strndup(*input, (equal_pos + 1) - *input);
 	if (equal_pos)
 	{
+		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
 		unquoted = remove_outer_quotes(equal_pos + 1);
 		//ARG=$USER-> ARG=lumik
 		if (is_double_quoted(equal_pos + 1) && ft_strchr(unquoted, '$'))
@@ -38,16 +39,15 @@ void	process_var_assigment(char **input, t_var_list *v)
 			expanded = expand_variable(unquoted, v);
 			new_input = ft_strjoin(prefix, expanded);
 			//printf("expanded_var_input: %s\n", new_input);
-			add_var(&v, new_input);// name: ARG value: lumik
 			free(prefix);
-			free(*input);
 			*input = new_input;
 		}
 		else
 		{
-			free(*input);
+			free(*input); // If the token is not quoted at all, free the original value
 			*input = unquoted;
 		}
+		add_var(&v, new_input);// name: ARG value: lumik
 	}
 	else // ARG=value or ARG=" la hello"
 		add_var(&v, *input);

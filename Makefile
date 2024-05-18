@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/19 00:02:21 by aklein           ###   ########.fr        #
+#    Updated: 2024/05/19 01:02:49 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,11 +47,12 @@ SRCS			=	minishell.c \
 					token_utils3.c \
 					var.c \
 					init.c \
-					optimize.c \
+					tokenizer.c \
 					built_echo.c \
 					built_pwd.c \
 					parsing.c \
 					free.c \
+					expander.c \
 					#token_list.c \
 					
 ################################################################################

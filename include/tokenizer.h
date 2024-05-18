@@ -80,6 +80,7 @@ int				is_whitespace(char c);
 int				is_quote(char c);
 int				is_operator(char c);
 int				is_double_operator(char *str);
+int				is_var_name(char c);
 char			*skip_whitespaces(char *str);
 char			*skip_word(char *str);
 char			*skip_op(char *str);

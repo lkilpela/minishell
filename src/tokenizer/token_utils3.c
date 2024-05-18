@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:46:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 13:50:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/19 01:48:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ char	*skip_variable(char *str)
 		str++; // skip dollar sign
 		if (*str == '?')
 			str++; // special case for '$?'
-		str = skip_word(str);
+		// str = skip_word(str);
+		while (*str && is_var_name(*str))
+			str++;
 	}
 	return (str);
 }

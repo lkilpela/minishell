@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:13:08 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:13:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	process_var_assigment(char **input, t_var_list *v)
 		expanded = expand_if_needed(unquoted, v);
 		if (expanded)
 		{
-			//ARG=$USER-> ARG=lumik
 			new_input = ft_strjoin(prefix, expanded);
 			free(prefix);
 			if (new_input)

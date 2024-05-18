@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 22:17:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/19 02:55:44 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 char	*remove_outer_quotes(char *str)
 {
-	size_t	len;
+    size_t	len;
 
 	len = ft_strlen(str);
-	if (len < 2)
-		return str;
-	if (is_quote(str[0])&& is_quote(str[len - 1]))
-	{
-		ft_memmove(str, str + 1, len - 2);
-		str[len - 2] = '\0';
-	}
-	return (str);
+    if (len < 2)
+        return str;
+    if (str[0] == '\"' && str[len - 1] == '\"')
+    {
+        ft_memmove(str, str + 1, len - 2);
+        str[len - 2] = '\0';
+    }
+    return str;
 }
 
 static void extract_var(char *str, char **name, char **value)

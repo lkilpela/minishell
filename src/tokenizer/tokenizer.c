@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 13:59:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:11:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,31 +124,21 @@ static void	process_word_token(t_token *token, t_var_list *v)
 	if (token->type == WORD)
 	{
 		// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
-		if (is_double_quoted(token->value))
+		
+		// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
+		// ARG=" la hello world"
+		unquoted = remove_outer_quotes(token->value);
+		if (is_double_quoted(token->value) && ft_strchr(unquoted, '$') != NULL)
 		{
-			unquoted = remove_outer_quotes(token->value);
-			// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
-			// ARG=" la hello world"
-			if (ft_strchr(unquoted, '$') != NULL)
-			{
-				expanded = expand_variable(unquoted, v);
-				free(token->value);
-				// expanded = echo la hello worldd"eee" or echo la hello world
-				token->value = expanded;
+			expanded = expand_variable(unquoted, v);
+			free(token->value);
+			// expanded = echo la hello worldd"eee" or echo la hello world
+			token->value = expanded;
 			}
-			else // token->value = echo"eee"
-			{
-				free(token->value);
-				token->value = unquoted;
-			}
-		}
-		// 'echo$ARG"eee"' or 'echo$ARG' or 'echo"eee"'
-		else if (is_single_quoted (token->value))
+		else // token->value = echo"eee"
 		{
-			unquoted = remove_outer_quotes(token->value);
 			free(token->value);
 			token->value = unquoted;
-			// unquoted: echo$ARG"eee" or echo$ARG or echo"eee"
 		}
 	}
 }
@@ -166,7 +156,7 @@ static t_token_list *create_token_node(char *str, t_var_list *v)
 		free(node);
 		return (NULL);		
 	}
-	process_token(node->token, v);
+	process_word_token(node->token, v);
 	node->next = NULL;
 	return (node);
 }

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 13:51:06 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 14:39:25 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,18 @@ void	process_var_assigment(char **input, t_var_list *v)
 				free(new_input);
 			}
 		}
+		else
+		{
+			free(*input); // If the token is not quoted at all, free the original value
+			*input = unquoted;
+		}
+		add_var(&v, new_input);// name: ARG value: lumik
 	}
 	else
 		add_var(&v, *input);
 }
 
-static char *lookup_var(char *var_name, t_var_list *v)
+char *lookup_var(char *var_name, t_var_list *v)
 {
 	while (v)
 	{

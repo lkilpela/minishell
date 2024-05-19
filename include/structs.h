@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 14:02:04 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 14:31:22 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
  * MINISHELL
 \******************************************************************************/
 
-typedef struct s_minishell
+typedef struct s_ms
 {
 	char	**argv;
 	int		argc;
 	char	**envp;
 	char	**paths;	// Array of paths for executable lookup
-}				t_minishell;
+}				t_ms;
 
 /******************************************************************************\
  * FILES

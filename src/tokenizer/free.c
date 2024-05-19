@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:51:27 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/17 20:48:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/19 13:51:11 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-#include <tokenizer.h>
 
 void	free_arrays(char **arrays)
 {

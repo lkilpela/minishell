@@ -6,11 +6,11 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/16 21:34:15 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 13:51:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <tokenizer.h>
+#include <minishell.h>
 
 int	is_whitespace(char c)
 {

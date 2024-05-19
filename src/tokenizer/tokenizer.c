@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 22:08:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/19 13:51:33 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <tokenizer.h>
+#include <minishell.h>
 
 static int	token_len(char *str)
 {

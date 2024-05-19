@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/14 00:07:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 13:47:02 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
-//single command
+#ifndef STRUCTS_H
+# define STRUCTS_H
+
+/******************************************************************************\
+ * MINISHELL
+\******************************************************************************/
+
+typedef struct s_minishell
+{
+	char	**argv;
+	int		argc;
+	char	**envp;
+	char	**paths;	// Array of paths for executable lookup
+}				t_minishell;
+
+/******************************************************************************\
+ * FILES
+\******************************************************************************/
 typedef struct s_redir
 {
 	char	*file;
@@ -20,7 +35,9 @@ typedef struct s_redir
 	int		fd;
 }	t_redir;
 
-
+/******************************************************************************\
+ * PARSER
+\******************************************************************************/
 typedef struct s_simple_cmd
 {
 	char	*command;	// value of the command
@@ -31,14 +48,10 @@ typedef struct s_simple_cmd
 	char	**args;
 }			t_simple_cmd;
 
-// collection of commands
 typedef struct s_commands
 {
 	t_simple_cmd	**simples;		// array of simple cmds
 	int				num_of_cmds;
 }				t_commands;
-
-void		print_commands(t_commands *cmds);
-t_commands	*parser(t_token_list *tokens);
 
 #endif

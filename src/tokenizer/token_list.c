@@ -6,11 +6,11 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:18:16 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/14 00:04:05 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 13:51:16 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <tokenizer.h>
+#include <minishell.h>
 
 static t_token_list	*new_node(t_token token)
 {

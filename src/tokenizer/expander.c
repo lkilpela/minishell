@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/18 22:27:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/19 04:45:17 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char *lookup_var(char *var_name, t_var_list *v)
 			return (ft_strdup(v->current_var->value));
 		v = v->next;
 	}
-	return (NULL);
+	return (ft_strdup(""));
 }
 
 char	*expand_variable(char *str, t_var_list *v)
@@ -91,15 +91,11 @@ char	*expand_variable(char *str, t_var_list *v)
 		return (ft_strdup(str));
 	prefix = ft_strndup(str, start - str);
 	var_name = ft_strndup(start + 1, end - start - 1);
-	var_value = lookup_var(var_name, v);
-	if (var_value)
-	{
-		temp = ft_strjoin(prefix, var_value);
-		expanded_str = ft_strjoin(temp, end);
-		free(temp);
-	}
-	else	
-		expanded_str = ft_strdup(str);
+	var_value = lookup_var(var_name, v); //empty string if doesnt exist, othervise the value
+	free(var_name);
+	temp = ft_strjoin(prefix, var_value);
+	expanded_str = ft_strjoin(temp, expand_variable(end, v)); //recursively solve all the rest of the variables in the same WORD
+	free(temp);
 	free(prefix);
 	return (expanded_str);
 }

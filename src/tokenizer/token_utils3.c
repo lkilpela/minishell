@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:46:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:14:49 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 13:11:25 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*skip_quote(char *str)
 int	is_var_name(char c)
 {
 	return (!is_whitespace(c) && !is_operator(c)
-		&& !is_quote(c) && c != ':');
+		&& !is_quote(c) && c != ':' && c != '$');
 }
 
 char	*skip_variable(char *str)

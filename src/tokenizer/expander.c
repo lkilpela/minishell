@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:21:40 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 13:09:09 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ char	*expand_variable(char *str, t_var_list *v)
 	char	*var_name;
 	char	*var_value;
 
-	remove_outer_quotes(str);
 	start = ft_strchr(str, '$');
 	if (start == NULL || *(start + 1) == '\0' || *(start + 1) == '\0')
 		return (ft_strdup(str));

@@ -5,7 +5,7 @@
 # include <readline/history.h> //readline
 # include <stdio.h> //readline
 # include <stdlib.h> //malloc, free
-# include <unistd.h> //write 
+# include <unistd.h> //write, access, getcwd, chdir
 
 # include <libft.h>
 # include <structs.h>
@@ -47,7 +47,8 @@ t_commands		*parser(t_token_list *tokens);
 
 //builtins
 void			built_echo(t_simple_cmd *cmd);
-void			built_pwd(t_var_list *v);
+void			built_pwd();
+void			built_cd(int argc, char **argv, t_var_list *v);
 
 // utils
 int				is_word(char c);

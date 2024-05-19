@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/19 14:04:58 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 14:09:02 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,79 +99,6 @@ t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens)
 		}
 	}
 	return (tokens);
-}
-
-int	var_len(char *var, int quoted)
-{
-	int		len;
-
-	len = 0;
-	while (*var)
-	{
-		if (quoted)
-		{
-			while (*var && *var != '\"' && !is_operator(*var) && *var != '$')
-			{
-				var++;
-				len++;
-			}
-			break ;
-		}
-		else
-		{
-			while (*var && !is_whitespace(*var) && !is_operator(*var))
-			{
-				var++;
-				len++;
-			}
-			break;
-		}
-	}
-	return (len);
-}
-
-var_to_tokens(t_token_list *tokens, char *var, int quoted)
-{
-	char	*var_name;
-	int		len;
-	char	*var_value;
-
-	len = var_len(var, quoted);
-	var_name = ft_substr(var, 0, len);
-	var_value = getenv(var_name);
-	free(var_name);
-	
-}
-
-find_var(t_token_list *tokens, char *word)
-{
-	int	quoted;
-
-	quoted = 0;
-	while (*word)
-	{
-		if (is_quote(*word))
-			quoted = *word;
-		if (quoted != '\'' && *word == '$')
-		{
-			var_to_tokens(tokens, word + 1, quoted);
-		}
-		word++;
-	}
-}
-
-exp_vars(t_token_list *tokens)
-{
-	int	heredoc;
-
-	heredoc = 0;
-	while (tokens)
-	{
-		if (tokens->token->type == OP_DLESS)
-			heredoc = 1;
-		if (!heredoc && tokens->token->type == WORD)
-			find_var(tokens, tokens->token->value);
-	}
 }
 
 void	parse_command(t_simple_cmd **simp, t_token_list **tokens)

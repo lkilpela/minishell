@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/19 14:58:49 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/20 00:01:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,13 @@ void	builtin_tests(t_commands *cmds, t_var_list *v)
 {
 		built_echo(cmds->simples[0]);
 		if (strcmp(cmds->simples[0]->command, "pwd") == 0)
-			built_pwd(v);
+			built_pwd();
+		if (strcmp(cmds->simples[0]->command, "cd") == 0)
+		{
+			ft_printf("old pwd: %s\n", getcwd(NULL, 0));
+			built_cd(cmds->simples[0]->num_of_args, cmds->simples[0]->args, v);
+			ft_printf("new pwd: %s\n", getcwd(NULL, 0));
+		}
 }
 
 void minishell_loop(t_var_list *v)
@@ -55,5 +61,6 @@ int main(int argc, char **argv, char **envp)
 
 	init_minishell(argc, argv, envp);
 	v = get_envp(envp);
+	built_cd(0, NULL, v); //set cwd to home
 	minishell_loop(v);
 }

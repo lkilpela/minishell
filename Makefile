@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
+#    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/18 17:35:21 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/05/19 14:08:21 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ SRCS			=	minishell.c \
 					tokenizer.c \
 					free.c \
 					expander.c \
-					#parsing.c \
+					parsing.c \
 					#token_list.c \
 					
 ################################################################################

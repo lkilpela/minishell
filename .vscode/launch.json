@@ -4,15 +4,11 @@
 		{
 			"type": "lldb",
 			"request": "launch",
+			"name": "(lldb) Minishell",
 			"program": "${workspaceFolder}/minishell",
 			"args": [],
 			"cwd": "${workspaceFolder}",
-			"preLaunchTask": "make",
-			"initCommands": [
-				"process handle SIGUSR1 --stop false --notify true",
-				"process handle SIGUSR2 --stop false --notify true"
-			  ]
-
+			"preLaunchTask": "make"
 		},
 		{
 			"name": "(gdb) minishell",

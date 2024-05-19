@@ -6,6 +6,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <libft.h>
+# include <unistd.h>
 
 # include <structs.h>
 # include <tokenizer.h>
@@ -16,7 +17,8 @@
 # define PROMPT GREEN "minishell$ " RESET
 
 // minishell
-void			init_minishell(int argc, char **argv, char **envp, t_minishell *m);
+t_ms			*ms(void);
+void			init_minishell(int argc, char **argv, char **envp);
 
 // environment var
 void			free_var_list(t_var_list *list);
@@ -24,6 +26,7 @@ t_var_list 		*get_envp(char **envp);
 void 			print_var_list(t_var_list *v);
 char 			*remove_outer_quotes(char *str);
 void			add_var(t_var_list **lst, char *str);
+char			*lookup_var(char *var_name, t_var_list *v);
 
 // tokenizer
 t_token_list	*tokenizer(char *str, t_var_list *v);
@@ -38,6 +41,10 @@ void			process_var_assigment(char **input, t_var_list *v);
 // parser
 t_commands		*parser(t_token_list *tokens);
 void			print_commands(t_commands *cmds);
+
+//builtins
+void			built_echo(t_simple_cmd *cmd);
+void			built_pwd(t_var_list *v);
 
 // utils
 int				is_word(char c);

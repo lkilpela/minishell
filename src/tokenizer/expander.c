@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:14:09 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:14:41 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,10 @@ char	*expand_variable(char *str, t_var_list *v)
 		return (ft_strdup(str));
 	prefix = ft_strndup(str, start - str);
 	var_name = ft_strndup(start + 1, end - start - 1);
-	var_value = lookup_var(var_name, v);
+	var_value = lookup_var(var_name, v); //empty string if doesnt exist, othervise the value
 	free(var_name);
 	temp = ft_strjoin(prefix, var_value);
-	expanded_str = ft_strjoin(temp, expand_variable(end, v));
+	expanded_str = ft_strjoin(temp, expand_variable(end, v)); //recursively solve all the rest of the variables in the same WORD
 	free(temp);
 	free(prefix);
 	return (expanded_str);

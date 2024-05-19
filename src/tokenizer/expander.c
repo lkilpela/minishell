@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 12:14:41 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:21:40 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	process_var_assigment(char **input, t_var_list *v)
 		add_var(&v, *input);
 }
 
-static char *lookup_var(char *var_name, t_var_list *v)
+char *lookup_var(char *var_name, t_var_list *v)
 {
 	while (v)
 	{

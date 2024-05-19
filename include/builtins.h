@@ -6,6 +6,6 @@
 # include <tokenizer.h>
 
 void	built_echo(t_simple_cmd *cmd);
-void	built_pwd(void);
+void	built_pwd(t_var_list *v);
 
 #endif

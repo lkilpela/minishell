@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 22:15:09 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 01:49:44 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 12:27:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,6 @@ int	is_double_operator(char *str)
 {
 	return ((*str == '>' && *(str + 1) == '>')
 		|| (*str == '<' && *(str + 1) == '<'));
-}
-
-int	is_var_name(char c)
-{
-	return (!is_whitespace(c) && !is_operator(c)
-		&& !is_quote(c) && c != ':');
 }
 
 // int is_word(char c)

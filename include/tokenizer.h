@@ -63,6 +63,7 @@ t_var_list 		*get_envp(char **envp);
 void 			print_var_list(t_var_list *v);
 char 			*remove_outer_quotes(char *str);
 void			add_var(t_var_list **lst, char *str);
+char			*lookup_var(char *var_name, t_var_list *v);
 
 // tokenizer
 t_token_list	*tokenizer(char *str, t_var_list *v);

@@ -6,11 +6,11 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 04:45:17 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/19 13:51:06 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <tokenizer.h>
+#include <minishell.h>
 
 char	*expand_if_needed(char *str, t_var_list *v)
 {

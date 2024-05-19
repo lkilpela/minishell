@@ -18,7 +18,7 @@
 	},
 	{
 		"type": "cppbuild",
-		"label": "build current file",
+		"label": "file",
 		"command": "/usr/bin/gcc",
 		"args": [
 			"-fdiagnostics-color=always",

@@ -1,13 +1,13 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <libft.h>
-# include <unistd.h>
+# include <readline/readline.h> //readline
+# include <readline/history.h> //readline
+# include <stdio.h> //readline
+# include <stdlib.h> //malloc, free
+# include <unistd.h> //write 
 
+# include <libft.h>
 # include <structs.h>
 # include <tokenizer.h>
 

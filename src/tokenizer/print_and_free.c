@@ -63,7 +63,7 @@ void print_var_list(t_var_list *v)
 {
 	while (v)
 	{
-		printf(CYAN "Name: %s \t\t\t\t Value: %s\n" RESET, v->current_var->name, v->current_var->value);
+		printf(CYAN "var_name: %s \t\t\t var_value: %s\n" RESET, v->current_var->name, v->current_var->value);
 		v = v->next;
 	}
 }
@@ -83,6 +83,6 @@ void print_last_node(t_var_list *v)
     }
 
     // Now v points to the last node
-    printf(CYAN "Name: %s \t\t\t\t Value: %s\n" RESET, v->current_var->name, v->current_var->value);
+    printf(CYAN "var_name: %s \t\t\t var_value: %s\n" RESET, v->current_var->name, v->current_var->value);
 }
 

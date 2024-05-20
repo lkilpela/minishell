@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 15:38:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:40:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static char	*expand_if_needed(char *str, t_var_list *v)
 	if (ft_strchr(str, DOLLAR_SIGN))
 	{
 		expanded = expand_variable(str, v);
-		printf("Expanded token: %s\n", expanded);
 		if (!expanded)
 			return (NULL);
 		return (expanded);

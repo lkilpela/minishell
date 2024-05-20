@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 23:28:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 23:45:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,15 +157,16 @@ static void	add_token(t_token_list **lst, char *str)
 	add_token_to_list(lst, node);
 }
 
-static void	process_token(t_token_list *t, t_var_list *v)
+static void	process_token(t_token_list **t, t_var_list *v)
 {
 	char	*new_value;
 
-	new_value = handle_quotes(t->token->value, v);
+	new_value = handle_quotes((*t)->token->value, v);
+	printf("new_value: %s\n", new_value);
 	if (new_value)
 	{
-		free(t->token->value);
-		t->token->value = new_value;
+		free((*t)->token->value);
+		(*t)->token->value = new_value;
 	}
 }
 
@@ -181,14 +182,16 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 		if (!*str)
 			break ;
 		add_token(&t, str);
-		process_token(t, v);
+		process_token(&t, v);
 		if (ft_strchr(t->token->value, ' '))
 		{
 			add_token(&t, t->token->value);
+			t->token->value += token_len(t->token->value);
+			printf("re_tokenize: %s\n", t->token->value);
 			t = t->next;
 		}
 		str += token_len(str);
-		printf("value_str: %s and len: %d\n", str, token_len(str));
+		//printf("value_str: %s and len: %d\n", str, token_len(str));
 	}
 	return (t);
 }

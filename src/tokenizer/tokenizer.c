@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 15:11:45 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:26:59 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,9 @@ static void	process_word_token(t_token *token, t_var_list *v)
 {
 	char	*value;
 
-	// Check if the token is a variable assignment
-	if (ft_strchr(token->value, EQUAL_SIGN) != NULL)
-	{
-		process_var_assignment(&(token->value), v);
-			return ;
-	}
-	else
-		value = handle_quotes(token->value + 1, v);
-		if (value)
-			return ;		
+	value = handle_quotes(token->value, v);
+	if (value)
+		return ;	
 }
 
 static t_token_list *create_token_node(char *str, t_var_list *v)

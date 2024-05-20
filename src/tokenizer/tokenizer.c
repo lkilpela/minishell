@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 15:10:25 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:11:45 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,27 +177,3 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 	return (lst);
 }
 
-static char	*get_type_str(int e)
-{
-	static char	*type_str[] = {
-		"WORD",
-		"OP_PIPE",
-		"OP_LESS",
-		"OP_GREAT",
-		"OP_DLESS",
-		"OP_DGREAT",
-		"VAR",
-		"UNKNOWN"
-	};
-
-	return (type_str[e]);
-}
-
-void print_tokens(t_token_list *lst)
-{
-	while (lst)
-	{
-		printf(BLUE "token_value: %-20s token_type: %s\n" RESET, lst->token->value, get_type_str(lst->token->type));
-		lst = lst->next;
-	}
-}

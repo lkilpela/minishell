@@ -86,3 +86,27 @@ void print_last_node(t_var_list *v)
     printf(CYAN "var_name: %s \t\t\t var_value: %s\n" RESET, v->current_var->name, v->current_var->value);
 }
 
+static char	*get_type_str(int e)
+{
+	static char	*type_str[] = {
+		"WORD",
+		"OP_PIPE",
+		"OP_LESS",
+		"OP_GREAT",
+		"OP_DLESS",
+		"OP_DGREAT",
+		"VAR",
+		"UNKNOWN"
+	};
+
+	return (type_str[e]);
+}
+
+void print_tokens(t_token_list *lst)
+{
+	while (lst)
+	{
+		printf(BLUE "token_value: %-20s token_type: %s\n" RESET, lst->token->value, get_type_str(lst->token->type));
+		lst = lst->next;
+	}
+}

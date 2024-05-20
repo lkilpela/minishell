@@ -24,18 +24,12 @@ t_ms			*ms(void);
 void			init_minishell(int argc, char **argv, char **envp);
 
 // environment var
-void			free_var_list(t_var_list *list);
 t_var_list 		*get_envp(char **envp);
-void 			print_var_list(t_var_list *v);
 void			add_var(t_var_list **lst, char *str);
 char			*lookup_var(char *var_name, t_var_list *v);
-void 			print_last_node(t_var_list *v);
 
 // tokenizer
 t_token_list	*tokenizer(char *str, t_var_list *v);
-void 			print_tokens(t_token_list *lst);
-void			free_token_list(t_token_list **lst);
-int				is_double_quoted(char *str);
 
 // expander
 char 			*expand_variable(char *str, t_var_list *v);
@@ -45,7 +39,6 @@ char 			*handle_quotes(char *str, t_var_list *v);
 
 // parser
 t_commands		*parser(t_token_list *tokens);
-void			print_commands(t_commands *cmds);
 
 //builtins
 void			built_echo(t_simple_cmd *cmd);
@@ -67,5 +60,13 @@ char			*skip_variable(char *str);
 int				get_token_len(char *str);
 char			*ft_strndup(char *str, size_t len);
 int				ft_strcmp(char *s1, char *s2);
+
+// FOR TESTING **REMOVE WHEN SUBMIT**
+void 			print_var_list(t_var_list *v);
+void			free_var_list(t_var_list *list);
+void 			print_last_node(t_var_list *v);
+void 			print_tokens(t_token_list *lst);
+void			free_token_list(t_token_list **lst);
+void			print_commands(t_commands *cmds);
 
 #endif

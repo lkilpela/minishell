@@ -6,21 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 13:53:53 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:16:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-typedef enum e_quote_type
-{
-	NO_QUOTE,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE
-}			t_quote_type;
-
-
-static t_quote_type	identify_quotes(char **str)
+t_quote_type	identify_quotes(char **str)
 {
 	size_t	len;
 	t_quote_type quote_type = NO_QUOTE;
@@ -102,6 +94,7 @@ void	process_var_assigment(char **input, t_var_list *v)
 	}
 	else
 		add_var(&v, *input);
+	print_last_node(v);
 }
 
 char *lookup_var(char *var_name, t_var_list *v)

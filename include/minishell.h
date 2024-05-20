@@ -29,6 +29,7 @@ t_var_list 		*get_envp(char **envp);
 void 			print_var_list(t_var_list *v);
 void			add_var(t_var_list **lst, char *str);
 char			*lookup_var(char *var_name, t_var_list *v);
+void 			print_last_node(t_var_list *v);
 
 // tokenizer
 t_token_list	*tokenizer(char *str, t_var_list *v);
@@ -39,6 +40,8 @@ int				is_double_quoted(char *str);
 // expander
 char 			*expand_variable(char *str, t_var_list *v);
 void			process_var_assigment(char **input, t_var_list *v);
+t_quote_type	identify_quotes(char **str);
+char 			*handle_quotes(char *str, t_var_list *v);
 
 // parser
 t_commands		*parser(t_token_list *tokens);

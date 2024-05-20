@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 09:38:47 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:05:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ typedef enum e_token_type
 	VAR, 		// $HOME is treated as a single VAR token´
 	UNKNOWN
 }			t_token_type;
+
+typedef enum e_quote_type
+{
+	NO_QUOTE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE
+}			t_quote_type;
 
 // single token struct
 typedef struct s_token

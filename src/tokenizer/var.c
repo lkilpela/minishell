@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 13:43:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:14:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void extract_var(char *str, char **name, char **value)
 {
 	char	*equal_sign;
 
-	//printf("input: %s\n", str);
 	equal_sign = ft_strchr(str, '=');
 	if (!equal_sign)
 		return ;
@@ -85,7 +84,6 @@ static void	add_var_to_list(t_var_list **lst, t_var_list *node)
 			last = last->next;
 		last->next = node;
 	}
-	printf(CYAN "var_name: %-20s var_value: %s\n" RESET, node->current_var->name, node->current_var->value);
 }
 
 void	add_var(t_var_list **lst, char *str)
@@ -140,7 +138,25 @@ void print_var_list(t_var_list *v)
 {
 	while (v)
 	{
-		printf("Name: %s \t\t\t\t Value: %s\n", v->current_var->name, v->current_var->value);
+		printf(CYAN "Name: %s \t\t\t\t Value: %s\n" RESET, v->current_var->name, v->current_var->value);
 		v = v->next;
 	}
+}
+
+void print_last_node(t_var_list *v)
+{
+    if (v == NULL)
+    {
+        printf("The list is empty.\n");
+        return;
+    }
+
+    // Traverse the list to find the last node
+    while (v->next != NULL)
+    {
+        v = v->next;
+    }
+
+    // Now v points to the last node
+    printf(CYAN "Name: %s \t\t\t\t Value: %s\n" RESET, v->current_var->name, v->current_var->value);
 }

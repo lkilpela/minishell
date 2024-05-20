@@ -36,7 +36,6 @@ char 			*handle_quotes(char *str, t_var_list *v);
 
 // tokenizer
 t_token_list	*tokenizer(char *str, t_var_list *v);
-void 			retokenizer(char *str, t_var_list *v, t_token_list **lst);
 
 // expander
 char 			*expand_variable(char *str, t_var_list *v);

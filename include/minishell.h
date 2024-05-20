@@ -13,8 +13,12 @@
 
 # define GREEN "\e[0;32m"
 # define RESET	"\e[0m"
+# define BLUE "\e[0;34m"
+# define CYAN "\e[0;36m"
 
 # define PROMPT GREEN "minishell$ " RESET
+# define DOLLAR '$'
+# define UNDERSCORE '_' 
 
 // minishell
 t_ms			*ms(void);

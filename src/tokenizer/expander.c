@@ -6,60 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 14:16:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:25:10 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_quote_type	identify_quotes(char **str)
-{
-	size_t	len;
-	t_quote_type quote_type = NO_QUOTE;
 
-	len = ft_strlen(*str);
-	if ((*str)[0] == '\'' && (*str)[len - 1] == '\'')
-	{
-		(*str)[len - 1] = '\0';
-		(*str)++;
-		quote_type = SINGLE_QUOTE;
-	}
-	else if ((*str)[0] == '\"' && (*str)[len - 1] == '\"')
-	{
-		(*str)[len - 1] = '\0';
-		(*str)++;
-		quote_type = DOUBLE_QUOTE;
-	}
-	return quote_type;
-}
-
-char	*expand_if_needed(char *str, t_var_list *v)
-{
-	char	*expanded;
-
-	expanded = NULL;
-	if (ft_strchr(str, '$'))
-	{
-		expanded = expand_variable(str, v);
-		if (!expanded)
-			return (NULL);
-		return (expanded);
-	}
-	return (str);
-}
-
-char 	*handle_quotes(char *str, t_var_list *v)
-{
-	t_quote_type quote_type;
-	char *expanded;
-
-	quote_type = identify_quotes(&str);
-    if (quote_type == DOUBLE_QUOTE)
-        expanded = expand_if_needed(str, v);
-    else
-        expanded = ft_strdup(str);
-    return (expanded);
-}
 
 static void	handle_empty_var_assignment(char **input, t_var_list *v)
 {
@@ -82,8 +35,8 @@ void	process_var_assigment(char **input, t_var_list *v)
 	equal_pos = ft_strchr(*input, '=');
 	if (equal_pos)
 	{
-        prefix = ft_strndup(*input, (equal_pos + 1) - *input);
-        value = handle_quotes(equal_pos + 1, v);
+		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
+		value = handle_quotes(equal_pos + 1, v);
 		new_input = ft_strjoin(prefix, value);
 		if (new_input)
 		{

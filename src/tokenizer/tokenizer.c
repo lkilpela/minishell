@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 13:45:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:28:36 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ static char	*remove_outer_quotes(char *str)
 
 static void	process_word_token(t_token *token, t_var_list *v)
 {
-	char	*unquoted;
+	char	*value;
 	char	*expanded;
 
 	if (token->type == WORD || token->type == VAR)
@@ -141,16 +141,10 @@ static void	process_word_token(t_token *token, t_var_list *v)
 		// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
 		// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
 		// ARG=" la hello world"
-		unquoted = remove_outer_quotes(token->value);
-		if (ft_strchr(unquoted, '$') != NULL)
-		{
-			expanded = expand_variable(unquoted, v);
-			free(token->value);
-			// expanded = echo la hello worldd"eee" or echo la hello world
-			token->value = expanded;
-		}
-		else // not double quoted or it doesn't contain a $
-			token->value = unquoted;
+		// expanded = echo la hello worldd"eee" or echo la hello world
+		// not double quoted or it doesn't contain a $
+		value = handle_quotes(token->value, v);
+		
 	}
 }
 

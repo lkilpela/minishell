@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/19 14:58:49 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/20 10:42:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ void minishell_loop(t_var_list *v)
 
 	while (42)
 	{
-		input = readline(PROMPT);
-		if (!input)
-			break;
-		add_history(input);
 		t = tokenizer(input, v);
 		//print_var_list(v);
 		print_tokens(t);
@@ -55,5 +51,6 @@ int main(int argc, char **argv, char **envp)
 
 	init_minishell(argc, argv, envp);
 	v = get_envp(envp);
+	manage_history();
 	minishell_loop(v);
 }

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 15:03:00 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:38:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static char	*expand_if_needed(char *str, t_var_list *v)
 	if (ft_strchr(str, DOLLAR_SIGN))
 	{
 		expanded = expand_variable(str, v);
+		printf("Expanded token: %s\n", expanded);
 		if (!expanded)
 			return (NULL);
 		return (expanded);
@@ -54,7 +55,7 @@ char 	*handle_quotes(char *str, t_var_list *v)
 	char			*expanded;
 
 	quote_type = identify_quotes(&str);
-	if (quote_type == DOUBLE_QUOTE)
+	if (quote_type == DOUBLE_QUOTE || quote_type == NO_QUOTE)
 		expanded = expand_if_needed(str, v);
 	else
 		expanded = ft_strdup(str);

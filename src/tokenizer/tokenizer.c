@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 22:19:00 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 22:20:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static t_token	*create_token(char *str)
 	return (token);
 }
 
-static void	process_word_token(t_token *token, t_var_list *v)
+static void	process_token(t_token *token, t_var_list *v)
 {
 	char	*value;
 

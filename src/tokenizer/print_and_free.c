@@ -110,3 +110,9 @@ void print_tokens(t_token_list *lst)
 		lst = lst->next;
 	}
 }
+
+void print_a_token(t_token_list *lst)
+{
+	printf(BLUE "a_token_value: %-20s a_token_type: %s\n" RESET, lst->token->value, get_type_str(lst->token->type));
+
+}

@@ -36,6 +36,7 @@ char 			*handle_quotes(char *str, t_var_list *v);
 
 // tokenizer
 t_token_list	*tokenizer(char *str, t_var_list *v);
+void 			retokenizer(char *str, t_var_list *v, t_token_list **lst);
 
 // expander
 char 			*expand_variable(char *str, t_var_list *v);
@@ -73,5 +74,6 @@ void 			print_tokens(t_token_list *lst);
 void			free_token_list(t_token_list **lst);
 void			print_commands(t_commands *cmds);
 void 			print_a_token(t_token_list *lst);
+void			free_arrays(char **arrays);
 
 #endif              

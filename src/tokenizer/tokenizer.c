@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 22:20:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 23:13:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,18 +96,12 @@ static void	process_token(t_token *token, t_var_list *v)
 {
 	char	*value;
 
-	if (token->type == WORD || token->type == VAR)
+	value = handle_quotes(token->value, v);
+	if (value)
 	{
-		value = handle_quotes(token->value, v);
-		if (value)
-		{
-			free(token->value);
-			token->value = value;
-		}
+		free(token->value);
+		token->value = value;
 	}
-	else
-		return ;
-	
 }
 
 static t_token_list *create_token_node(char *str, t_var_list *v)
@@ -123,8 +117,7 @@ static t_token_list *create_token_node(char *str, t_var_list *v)
 		free(node);
 		return (NULL);		
 	}
-	process_token(&(node->token), v);
-	print_a_token(node);
+	process_token(node->token, v);
 	node->next = NULL;
 	return (node);
 }
@@ -158,10 +151,28 @@ static void	add_token(t_token_list **lst, char *str, t_var_list *v)
 	if (!value)
 		return ;
 	node = create_token_node(str, v);
+	print_a_token(node);
 	if (!node)
 		return ;
 	add_token_to_list(lst, node);
 }
+
+/*void retokenizer(char *str, t_var_list *v, t_token_list **lst)
+{
+	char	**words;
+	int		i;
+
+	words = ft_split(str, ' ');
+	if (!words)
+		return;
+	i = 0;
+	while (words[i])
+	{
+		add_token(lst, words[i], v);
+		i++;
+	}
+	free_arrays(words);
+}*/
 
 // converts a string into a list of tokens
 t_token_list	*tokenizer(char *str, t_var_list *v)
@@ -175,8 +186,13 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 		if (!*str)
 			break ;
 		add_token(&lst, str, v);
+		if (ft_strchr(lst->token->value, ' '))
+		{
+			add_token(&lst, lst->token->value, v);
+			lst = lst->next;
+		}
 		str += token_len(str);
+		printf("value_str: %s and len: %d\n", str, token_len(str));
 	}
 	return (lst);
 }
-

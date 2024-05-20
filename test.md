@@ -62,4 +62,9 @@ echo test$HOME" I'm ""end $USER ""I'm another e$sda$tsda"nd
 - The value is not quoted.
 - Does contain a dollar sign. $USER will be **expanded** to the value of the USER environment variable.
 
+	// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
+	// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
+	// ARG=" la hello world"
+	// expanded = echo la hello worldd"eee" or echo la hello world
+	// not double quoted or it doesn't contain a $
 

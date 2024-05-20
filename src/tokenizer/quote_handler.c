@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 14:25:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:03:00 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static t_quote_type	identify_quotes(char **str)
 
 	quote_type = NO_QUOTE;
 	len = ft_strlen(*str);
-	if ((*str)[0] == '\'' && (*str)[len - 1] == '\'')
+	if ((*str)[0] == S_QUOTE && (*str)[len - 1] == S_QUOTE)
 	{
 		(*str)[len - 1] = '\0';
 		(*str)++;
 		quote_type = SINGLE_QUOTE;
 	}
-	else if ((*str)[0] == '\"' && (*str)[len - 1] == '\"')
+	else if ((*str)[0] == D_QUOTE && (*str)[len - 1] == D_QUOTE)
 	{
 		(*str)[len - 1] = '\0';
 		(*str)++;
@@ -38,7 +38,7 @@ static char	*expand_if_needed(char *str, t_var_list *v)
 	char	*expanded;
 
 	expanded = NULL;
-	if (ft_strchr(str, '$'))
+	if (ft_strchr(str, DOLLAR_SIGN))
 	{
 		expanded = expand_variable(str, v);
 		if (!expanded)
@@ -50,8 +50,8 @@ static char	*expand_if_needed(char *str, t_var_list *v)
 
 char 	*handle_quotes(char *str, t_var_list *v)
 {
-	t_quote_type quote_type;
-	char *expanded;
+	t_quote_type	quote_type;
+	char			*expanded;
 
 	quote_type = identify_quotes(&str);
 	if (quote_type == DOUBLE_QUOTE)

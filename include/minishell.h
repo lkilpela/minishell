@@ -16,8 +16,11 @@
 # define CYAN "\e[0;36m"
 
 # define PROMPT GREEN "minishell$ " RESET
-# define DOLLAR '$'
-# define UNDERSCORE '_' 
+# define DOLLAR_SIGN '$'
+# define UNDERSCORE '_'
+# define EQUAL_SIGN '='
+# define S_QUOTE '\''
+# define D_QUOTE '"' 
 
 // minishell
 t_ms			*ms(void);
@@ -36,7 +39,7 @@ t_token_list	*tokenizer(char *str, t_var_list *v);
 
 // expander
 char 			*expand_variable(char *str, t_var_list *v);
-void			process_var_assigment(char **input, t_var_list *v);
+void			process_var_assignment(char **input, t_var_list *v);
 
 // parser
 t_commands		*parser(t_token_list *tokens);

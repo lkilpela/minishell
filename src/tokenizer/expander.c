@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 14:29:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:06:49 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	handle_empty_var_assignment(char **input, t_var_list *v)
 	}
 }
 
-void	process_var_assigment(char **input, t_var_list *v)
+void	process_var_assignment(char **input, t_var_list *v)
 {
 	char	*equal_pos;
 	char	*value;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 14:35:00 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/20 13:45:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,21 @@ int	is_single_quoted(char *str)
 	if (!end || end != str + ft_strlen(str))
 		return (0);
 	return (1);
+}
+
+static char	*remove_outer_quotes(char *str)
+{
+	size_t	len;
+
+	len = ft_strlen(str);
+	if (len < 2)
+		return str;
+	if (is_quote(str[0])&& is_quote(str[len - 1]))
+	{
+		ft_memmove(str, str + 1, len - 2);
+		str[len - 2] = '\0';
+	}
+	return (str);
 }
 
 static void	process_word_token(t_token *token, t_var_list *v)

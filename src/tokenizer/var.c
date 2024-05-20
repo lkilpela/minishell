@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 14:34:53 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/20 13:43:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-char	*remove_outer_quotes(char *str)
-{
-	size_t	len;
-
-	len = ft_strlen(str);
-	if (len < 2)
-		return str;
-	if (is_quote(str[0])&& is_quote(str[len - 1]))
-	{
-		ft_memmove(str, str + 1, len - 2);
-		str[len - 2] = '\0';
-	}
-	return (str);
-}
 
 static void extract_var(char *str, char **name, char **value)
 {
@@ -41,7 +26,7 @@ static void extract_var(char *str, char **name, char **value)
 	*value = ft_strdup(equal_sign + 1);
 	if (!*value)
 		return ;
-	*value = remove_outer_quotes(*value);
+	//*value = remove_outer_quotes(*value);
 }
 
 // create a new t_var struct
@@ -159,18 +144,3 @@ void print_var_list(t_var_list *v)
 		v = v->next;
 	}
 }
-
-
-/*char *remove_quotes(char *str)
-{
-	char *p = str;
-	char *q = str;
-	while (*p)
-	{
-		if (*p != '\"')
-			*q++ = *p;
-		p++;
-	}
-	*q = '\0';
-	return (str);
-}*/

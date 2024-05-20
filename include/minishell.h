@@ -22,13 +22,11 @@
 // minishell
 t_ms			*ms(void);
 void			init_minishell(int argc, char **argv, char **envp);
-void			manage_history(void);
 
 // environment var
 void			free_var_list(t_var_list *list);
 t_var_list 		*get_envp(char **envp);
 void 			print_var_list(t_var_list *v);
-char 			*remove_outer_quotes(char *str);
 void			add_var(t_var_list **lst, char *str);
 char			*lookup_var(char *var_name, t_var_list *v);
 

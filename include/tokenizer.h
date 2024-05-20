@@ -16,12 +16,7 @@ typedef enum e_token_type
 	OP_GREAT,		// redirect output to a file (>), overwriting file if exists
 	OP_DLESS,		// denote heredoc (<<)
 	OP_DGREAT,	// redirect output to a file (>>), appending to file if exists
-	//S_QUOTE,	// start or end of a single-quoted string (')
-	//D_QUOTE,	// start or end of a double-quoted string (")
-	VAR, 		// $HOME is treated as a single VAR token
-	//T_NEWLINE,
-	//T_SPACE,	// sperate different parts of a command
-	//COMPLEX_WORD,
+	VAR, 		// $HOME is treated as a single VAR token´
 	UNKNOWN
 }			t_token_type;
 

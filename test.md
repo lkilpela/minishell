@@ -35,6 +35,8 @@
 | 1 | `\"echo$ARG\"eee\"\"` | token_value: echo$ARG"eee", token_type: WORD;|
 **After expanded**
 
+echo test$HOME" I'm ""end $USER ""I'm another e$sda$tsda"nd
+
 ### DOUBLE QUOTES
 
 1. `ARG=" la"`: The value is double quoted but does not contain a dollar sign. 

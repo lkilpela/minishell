@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/20 11:10:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 11:37:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ void minishell_loop(t_var_list *v)
 	while (42)
 	{
 		input = readline(PROMPT);
-		if (!input || ft_strcmp(input, "exit\n") == 0)
+		if (!input || ft_strcmp(input, "exit") == 0)
 			break ;
-		printf("input: %s\n", input);
 		add_history(input);
 		t = tokenizer(input, v);
 		//print_var_list(v);
@@ -56,9 +55,7 @@ int main(int argc, char **argv, char **envp)
 
 	init_minishell(argc, argv, envp);
 	v = get_envp(envp);
-	//read_history_from_file();
-	read_history("history_file.txt");
+	read_history("history_file.txt"); // for testing
 	minishell_loop(v);
-	write_history("history_file.txt");
-	//save_history();
+	write_history("history_file.txt");  // for testing
 }

@@ -53,3 +53,42 @@ void	process_var_assigment(char **input, t_var_list *v)
 	else
 		add_var(&v, *input);
 }
+
+int	is_double_quoted(char *str)
+{
+	char	*end;
+
+	if (*str != '"')
+		return (0);
+	end = skip_quote(str);
+	if (!end || end != str + ft_strlen(str))
+		return (0);
+	return (1);
+}
+
+int	is_single_quoted(char *str)
+{
+	char	*end;
+
+	if (*str != '\'')
+		return (0);
+	end = skip_quote(str);
+	if (!end || end != str + ft_strlen(str))
+		return (0);
+	return (1);
+}
+
+static char	*remove_outer_quotes(char *str)
+{
+	size_t	len;
+
+	len = ft_strlen(str);
+	if (len < 2)
+		return str;
+	if (is_quote(str[0])&& is_quote(str[len - 1]))
+	{
+		ft_memmove(str, str + 1, len - 2);
+		str[len - 2] = '\0';
+	}
+	return (str);
+}

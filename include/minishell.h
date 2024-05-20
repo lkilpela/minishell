@@ -37,8 +37,6 @@ t_token_list	*tokenizer(char *str, t_var_list *v);
 // expander
 char 			*expand_variable(char *str, t_var_list *v);
 void			process_var_assigment(char **input, t_var_list *v);
-t_quote_type	identify_quotes(char **str);
-
 
 // parser
 t_commands		*parser(t_token_list *tokens);

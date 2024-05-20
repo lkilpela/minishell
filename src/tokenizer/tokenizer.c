@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 14:28:36 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:35:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,60 +92,17 @@ static t_token	*create_token(char *str)
 	return (token);
 }
 
-int	is_double_quoted(char *str)
-{
-	char	*end;
-
-	if (*str != '"')
-		return (0);
-	end = skip_quote(str);
-	if (!end || end != str + ft_strlen(str))
-		return (0);
-	return (1);
-}
-
-int	is_single_quoted(char *str)
-{
-	char	*end;
-
-	if (*str != '\'')
-		return (0);
-	end = skip_quote(str);
-	if (!end || end != str + ft_strlen(str))
-		return (0);
-	return (1);
-}
-
-static char	*remove_outer_quotes(char *str)
-{
-	size_t	len;
-
-	len = ft_strlen(str);
-	if (len < 2)
-		return str;
-	if (is_quote(str[0])&& is_quote(str[len - 1]))
-	{
-		ft_memmove(str, str + 1, len - 2);
-		str[len - 2] = '\0';
-	}
-	return (str);
-}
-
 static void	process_word_token(t_token *token, t_var_list *v)
 {
 	char	*value;
-	char	*expanded;
-
-	if (token->type == WORD || token->type == VAR)
-	{
-		// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
-		// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
-		// ARG=" la hello world"
-		// expanded = echo la hello worldd"eee" or echo la hello world
-		// not double quoted or it doesn't contain a $
-		value = handle_quotes(token->value, v);
-		
-	}
+	// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
+	// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
+	// ARG=" la hello world"
+	// expanded = echo la hello worldd"eee" or echo la hello world
+	// not double quoted or it doesn't contain a $
+	value = handle_quotes(token->value, v);
+	if (value)
+		return ;		
 }
 
 static t_token_list *create_token_node(char *str, t_var_list *v)

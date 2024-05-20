@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 15:05:30 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:10:25 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	process_word_token(t_token *token, t_var_list *v)
 	if (ft_strchr(token->value, EQUAL_SIGN) != NULL)
 	{
 		process_var_assignment(&(token->value), v);
-		return ;
+			return ;
 	}
 	else
 		value = handle_quotes(token->value + 1, v);
@@ -171,8 +171,6 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 		str = skip_whitespaces(str);
 		if (!*str)
 			break ;
-		if (ft_strchr(str, '='))
-			process_var_assigment(&str, v);
 		add_token(&lst, str, v);
 		str += token_len(str);
 	}

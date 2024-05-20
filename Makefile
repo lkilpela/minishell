@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/20 10:42:35 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/05/20 11:26:52 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ READLINE		=	-lreadline
 NAME			=	minishell
 INCLUDES		=	./include
 M_HEADERS		=	$(INCLUDES)/minishell.h \
-					$(INCLUDES)/tokenizer.h
+					$(INCLUDES)/structs.h
 OBJ_DIR			=	./obj
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
@@ -53,8 +53,7 @@ SRCS			=	minishell.c \
 					parsing.c \
 					built_pwd.c \
 					built_echo.c \
-					built_cd.c \
-					history.c 
+					built_cd.c
 					
 ################################################################################
 # RULES
@@ -72,27 +71,34 @@ vpath %.c $(SRC_DIR) $(SRC_DIR)/tokenizer $(SRC_DIR)/parser $(SRC_DIR)/builtins
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJECTS)
-	$(CC_FULL) $(OBJECTS) $(READLINE) $(LIBFT) -o $(NAME)
+	@echo "--------------------------------------------"
+	@$(CC_FULL) $(OBJECTS) $(READLINE) $(LIBFT) -o $(NAME)
+	@echo "[$(NAME)] $(BLUE)Built target $(NAME)$(RESET)"
+	@echo "--------------------------------------------"
 
 $(OBJ_DIR)/%.o: %.c $(M_HEADERS)
-	mkdir -p $(@D)
-	$(CC_FULL) -c $< -o $@
+	@mkdir -p $(@D)
+	@$(CC_FULL) -c $< -o $@
+	@echo "$(GREEN)Compiled: $< $(RESET)"
 
 $(LIBFT): libft_force
-	make -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 
 libft_force:
 	@true
 
 clean:
-	rm -rf $(NAME).dSYM/ obj/
-	make clean -C $(LIBFT_DIR)
+	@rm -rf $(NAME).dSYM/ obj/
+	@make clean -C $(LIBFT_DIR)
+	@echo "[$(NAME)] Object files cleaned."
 
 fclean: clean
-	rm -f $(NAME)
-	make fclean -C $(LIBFT_DIR)
+	@rm -f $(NAME)
+	@make fclean -C $(LIBFT_DIR)
+	@echo "[$(NAME)] Everything deleted."
 
 re: fclean all
+	@echo "[$(NAME)] Everything rebuilt."
 
 ################################################################################
 # NORM
@@ -107,3 +113,8 @@ norm2:
 # PHONY
 ################################################################################
 .PHONY: all bonus re clean fclean libft_force db
+
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
+BLUE = \033[34m

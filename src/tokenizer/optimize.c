@@ -190,14 +190,14 @@ t_token_list *retokenizer(t_token_list **t, t_var_list *v)
 					prev->next = new_token;
 				last_new_token->next = tmp->next;
 
-				//free(tmp->token->value);
+				free(tmp->token);
 				free(tmp);
 				tmp = new_token;
 			}
 			prev = tmp;
 			tmp = tmp->next;
 		}
+		//print_tokens(*t);
 	}
-	print_tokens(*t);
 	return (*t);
 }

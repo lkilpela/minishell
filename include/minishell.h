@@ -47,8 +47,9 @@ t_commands		*parser(t_token_list *tokens);
 
 //builtins
 void			built_echo(t_simple_cmd *cmd);
-void			built_pwd();
+void			built_pwd(void);
 void			built_cd(int argc, char **argv, t_var_list *v);
+void			built_env(void);
 
 // utils
 int				is_word(char c);

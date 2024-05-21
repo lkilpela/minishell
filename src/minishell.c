@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 00:21:37 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/22 00:53:29 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	builtin_tests(t_commands *cmds, t_var_list *v)
 		built_echo(cmds->simples[0]);
 		if (strcmp(cmds->simples[0]->command, "pwd") == 0)
 			built_pwd();
+		if (strcmp(cmds->simples[0]->command, "env") == 0)
+			built_env();
 		if (strcmp(cmds->simples[0]->command, "cd") == 0)
 		{
 			ft_printf("old pwd: %s\n", getcwd(NULL, 0));

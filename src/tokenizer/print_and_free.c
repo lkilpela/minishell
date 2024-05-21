@@ -116,3 +116,22 @@ void print_a_token(t_token_list *lst)
 	printf(BLUE "a_token_value: %-20s a_token_type: %s\n" RESET, lst->token->value, get_type_str(lst->token->type));
 
 }
+
+
+void print_last_token_node(t_token_list *t)
+{
+    if (t == NULL)
+    {
+        printf("The list is empty.\n");
+        return;
+    }
+
+    // Traverse the list to find the last node
+    while (t->next != NULL)
+    {
+        t = t->next;
+    }
+
+    // Now v points to the last node
+    printf(BLUE "token_name: %-20s token_value: %s\n" RESET, t->token->value, get_type_str(t->token->type));
+}

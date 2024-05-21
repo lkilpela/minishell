@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/21 21:05:04 by lkilpela         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <minishell.h>
 
 static int	token_len(char *str)
@@ -92,19 +80,42 @@ static t_token	*create_token(char *str)
 	return (token);
 }
 
-/*static void	process_token(t_token *token, t_var_list *v)
+/*t_token	**split_token(t_token *token)
+{
+	t_token **words;
+	int i;
+
+	i = 0;
+	if (ft_strchr(token->value, ' '))
+		words = ft_split(token->value, ' ');
+	while (words[i])
+	{
+		create_token(words[i]);
+		i++;
+	}
+	return (words);
+}*/
+
+static void	process_word_token(t_token *token, t_var_list *v)
 {
 	char	*value;
 
 	value = handle_quotes(token->value, v);
 	if (value)
 	{
-		free(token->value);
+		//free(token->value);
 		token->value = value;
+		//if (ft_strchr(token->value, ' '))
+			//split_token(token->value);
 	}
-}*/
+	else
+		token->value = ft_strdup("");
+	
+}
 
-static t_token_list *create_token_node(char *str)
+
+
+static t_token_list *create_token_node(char *str, t_var_list *v)
 {
 	t_token_list *node;
 
@@ -117,7 +128,7 @@ static t_token_list *create_token_node(char *str)
 		free(node);
 		return (NULL);		
 	}
-	//process_token(node->token, v);
+	process_word_token(node->token, v);
 	node->next = NULL;
 	return (node);
 }
@@ -139,7 +150,7 @@ static void	add_token_to_list(t_token_list **lst, t_token_list *node)
 }
 
 // create new token and add to a list
-static void	add_token(t_token_list **lst, char *str)
+static void	add_token(t_token_list **lst, char *str, t_var_list *v)
 {
 	t_token_list	*node;
 	char			*value;
@@ -150,66 +161,27 @@ static void	add_token(t_token_list **lst, char *str)
 	extract_token(str, &value, &type);
 	if (!value)
 		return ;
-	node = create_token_node(str);
+	node = create_token_node(str, v);
 	if (!node)
 		return ;
 	add_token_to_list(lst, node);
 }
 
-static void	process_token(t_token_list **t, t_var_list *v)
-{
-	char	*new_value;
-
-	new_value = handle_quotes((*t)->token->value, v);
-	//printf("new_value: %s\n", new_value);
-	if (new_value)
-	{
-		free((*t)->token->value);
-		(*t)->token->value = new_value;
-	}
-}
-
-void split_and_add_tokens(t_token_list **t, char *value)
-{
-	int		i;
-	char	**temp;
-
-	i = 0;
-	temp = ft_split(value, ' ');
-	if (!temp)
-		return;
-	free((*t)->token->value);
-	(*t)->token->value = ft_strdup(temp[i++]);
-	while (temp[i])
-	{
-		t_token_list *new_token = malloc(sizeof(t_token_list));
-        new_token->token->value = ft_strdup(temp[i]);
-        new_token->next = (*t)->next;
-        (*t)->next = new_token;
-        (*t) = new_token;
-        i++;
-	}
-}
-
 // converts a string into a list of tokens
 t_token_list	*tokenizer(char *str, t_var_list *v)
 {
-	t_token_list	*t;
+	t_token_list	*lst;
 
-	t = NULL;
+	lst = NULL;
 	while (*str)
 	{
 		str = skip_whitespaces(str);
 		if (!*str)
 			break ;
-		add_token(&t, str);
-		process_token(&t, v);
-		if (ft_strchr(t->token->value, ' '))
-		{
-			split_and_add_tokens(&t, t->token->value);
-		}
+		add_token(&lst, str, v);
 		str += token_len(str);
-		print_tokens(t);
 	}
-	return (t);
+	print_tokens(lst);
+	return (lst);
 }
+

@@ -80,22 +80,6 @@ static t_token	*create_token(char *str)
 	return (token);
 }
 
-/*t_token	**split_token(t_token *token)
-{
-	t_token **words;
-	int i;
-
-	i = 0;
-	if (ft_strchr(token->value, ' '))
-		words = ft_split(token->value, ' ');
-	while (words[i])
-	{
-		create_token(words[i]);
-		i++;
-	}
-	return (words);
-}*/
-
 static void	process_word_token(t_token *token, t_var_list *v)
 {
 	char	*value;
@@ -105,8 +89,6 @@ static void	process_word_token(t_token *token, t_var_list *v)
 	{
 		//free(token->value);
 		token->value = value;
-		//if (ft_strchr(token->value, ' '))
-			//split_token(token->value);
 	}
 	else
 		token->value = ft_strdup("");
@@ -182,7 +164,6 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 	//print_tokens(lst);
 	return (lst);
 }
-
 
 t_token_list *retokenizer(t_token_list **t, t_var_list *v)
 {

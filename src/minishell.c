@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/20 00:01:18 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/22 00:01:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,20 @@ void minishell_loop(t_var_list *v)
 	while (42)
 	{
 		input = readline(PROMPT);
-		if (!input)
-			break;
+		if (!input || ft_strcmp(input, "exit") == 0)
+			break ;
 		add_history(input);
+		if (ft_strchr(input, EQUAL_SIGN) != NULL)
+		{
+			process_var_assignment(&input, v);
+			free(input);
+			continue ;
+		}
 		t = tokenizer(input, v);
-		//print_var_list(v);
+		retokenizer(&t, v);
 		print_tokens(t);
 		cmds = parser(t);
-		// print_commands(parser(t));
 		builtin_tests(cmds, v);
-		//free_var_list(v);
-		free_token_list(&t);
 		free(input);
 	}
 }
@@ -61,6 +64,7 @@ int main(int argc, char **argv, char **envp)
 
 	init_minishell(argc, argv, envp);
 	v = get_envp(envp);
-	built_cd(0, NULL, v); //set cwd to home
+	read_history("history_file.txt"); // for testing
 	minishell_loop(v);
+	write_history("history_file.txt");  // for testing
 }

@@ -35,6 +35,8 @@
 | 1 | `\"echo$ARG\"eee\"\"` | token_value: echo$ARG"eee", token_type: WORD;|
 **After expanded**
 
+echo test$HOME" I'm ""end $USER ""I'm another e$sda$tsda"nd
+
 ### DOUBLE QUOTES
 
 1. `ARG=" la"`: The value is double quoted but does not contain a dollar sign. 
@@ -60,4 +62,9 @@
 - The value is not quoted.
 - Does contain a dollar sign. $USER will be **expanded** to the value of the USER environment variable.
 
+	// "echo$ARG"eee"" or "echo$ARG" or"echo"eee""
+	// unquoted = echo$ARG"eee" or echo$ARG or echo"eee"
+	// ARG=" la hello world"
+	// expanded = echo la hello worldd"eee" or echo la hello world
+	// not double quoted or it doesn't contain a $
 

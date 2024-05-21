@@ -3,69 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 14:39:25 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/20 15:06:49 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*expand_if_needed(char *str, t_var_list *v)
+static void	handle_empty_var_assignment(char **input, t_var_list *v)
 {
-	char	*expanded;
-
-	expanded = NULL;
-	if (ft_strchr(str, '$'))
-	{
-		expanded = expand_variable(str, v);
-		if (!expanded)
-			return (NULL);
-		return (expanded);
-	}
-	return (str);
-}
-
-void	process_var_assigment(char **input, t_var_list *v)
-{
-	char	*equal_pos;
-	char	*expanded;
-	char	*prefix;
-	char 	*new_input;
-	char	*unquoted;
-	
 	if (*input == NULL || **input == '\0')
 	{
 		add_var(&v, *input);
 		return ;
 	}
+}
+
+void	process_var_assignment(char **input, t_var_list *v)
+{
+	char	*equal_pos;
+	char	*value;
+	char	*prefix;
+	char 	*new_input;
+	
+	handle_empty_var_assignment(input, v);
 	new_input = NULL;
 	equal_pos = ft_strchr(*input, '=');
 	if (equal_pos)
 	{
-		unquoted = remove_outer_quotes(equal_pos + 1);
 		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
-		expanded = expand_if_needed(unquoted, v);
-		if (expanded)
+		value = handle_quotes(equal_pos + 1, v);
+		new_input = ft_strjoin(prefix, value);
+		if (new_input)
 		{
-			new_input = ft_strjoin(prefix, expanded);
+			add_var(&v, new_input);
 			free(prefix);
-			if (new_input)
-			{
-				add_var(&v, new_input);
-				free(new_input);
-			}
+			free(new_input);
 		}
-		else
-		{
-			free(*input); // If the token is not quoted at all, free the original value
-			*input = unquoted;
-		}
-		add_var(&v, new_input);// name: ARG value: lumik
 	}
 	else
 		add_var(&v, *input);
+	print_last_node(v);
 }
 
 char *lookup_var(char *var_name, t_var_list *v)

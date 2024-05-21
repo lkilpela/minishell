@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_echo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:06:24 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/19 14:54:13 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/20 11:10:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	built_echo(t_simple_cmd *cmd)
 	int	i;
 	int	n_flag;
 
-	if (!cmd || strcmp(cmd->command, "echo") != 0)
+	if (!cmd || ft_strcmp(cmd->command, "echo") != 0)
 		return ;
 	i = 0;
 	n_flag = 0;

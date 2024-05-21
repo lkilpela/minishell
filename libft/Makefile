@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aklein <aklein@student.42.fr>              +#+  +:+       +#+         #
+#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/29 16:17:19 by aklein            #+#    #+#              #
-#    Updated: 2024/05/06 00:44:46 by aklein           ###   ########.fr        #
+#    Updated: 2024/05/20 11:28:23 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,18 +113,26 @@ vpath %.c $(LIBFT_DIR) $(FT_PF_DIR) $(GNL_DIR)
 all: $(NAME)
 
 $(NAME): $(OBJECTS) $(FT_PF_OBJ) $(GNL_OBJ)
-		ar -rcs $@ $^
-
+		@echo "--------------------------------------------"
+		@ar -rcs $@ $^
+		@echo "[$(NAME)] $(BLUE)Built static library $(NAME)$(RESET)"
+		@echo "--------------------------------------------"
+		
 $(OBJ_DIR)/%.o: %.c
 		@mkdir -p $(@D)
-		$(CC_FULL) -c $< -o $@
+		@$(CC_FULL) -c $< -o $@
 
 clean:
-		rm -rf $(OBJ_DIR)
+		@rm -rf $(OBJ_DIR)
 
 fclean: clean
-		rm -f $(NAME)
+		@rm -f $(NAME)
 
 re: fclean all
 
 .PHONY: all re clean fclean
+
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
+BLUE = \033[34m

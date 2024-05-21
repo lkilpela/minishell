@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/20 15:25:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/21 22:43:24 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void minishell_loop(t_var_list *v)
 			continue ;
 		}
 		t = tokenizer(input, v);
+		retokenizer(&t, v);
 		cmds = parser(t);
 		builtin_tests(cmds, v);
 		free(input);

@@ -29,5 +29,6 @@
 | 2 | `"echo 'hello'"` | echo<br>hello | WORD<br>WORD |
 | 3 | `"echo "hello""` | echo<br>hello | WORD<br>WORD |
 | 4 | `echo '$USER'` | echo<br>$USER | WORD<br>WORD |
-| 5 | `"$HOME here '$HOME' test"` | /Users/lumiko<br>here o<br>$HOMEo<br>test | WORD<br>WORD<br>WORD<br>WORD |
+| 5 | `"$HOME here '$HOME' test"` | /Users/lumik<br>here <br>$HOME<br>test | WORD<br>WORD<br>WORD<br>WORD |
+| 65 | `"'$HOME' here $HOME test"` | /Users/lumik<br>here <br>$HOME<br>test | WORD<br>WORD<br>WORD<br>WORD |
 

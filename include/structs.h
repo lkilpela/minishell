@@ -6,13 +6,14 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/22 18:25:43 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/22 18:56:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct s_var_list t_var_list;
 /******************************************************************************\
  * MINISHELL
 \******************************************************************************/
@@ -80,11 +81,11 @@ typedef struct s_var
 }				t_var;
 
 // variables
-typedef struct s_var_list
+struct s_var_list
 {
 	t_var				*current_var; 
 	struct s_var_list	*next; 
-}				t_var_list;
+};
 
 /******************************************************************************\
  * PARSER

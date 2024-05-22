@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/22 23:38:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 00:02:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ t_quote_type	identify_quotes(char *str)
 
 char 	*handle_quotes(char *str, t_quote_type quote_type)
 {
-	//t_quote_type	quote_type;
 	char			*expanded;
 
-	//quote_type = identify_quotes(str);
 	if ((quote_type == DOUBLE_QUOTE || quote_type == NO_QUOTE)
 		&& ft_strchr(str, DOLLAR_SIGN))
 		expanded = expand_variable(str, quote_type);

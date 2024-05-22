@@ -47,6 +47,7 @@ char 			*handle_quotes(char *str, t_var_list *v);
 // tokenizer
 t_token_list	*tokenizer(char *str, t_var_list *v);
 t_token_list 	*retokenizer(t_token_list **t, t_var_list *v);
+void			delone_node(t_token_list *lst);
 
 // expander
 char 			*expand_variable(char *str, t_var_list *v);
@@ -92,5 +93,6 @@ void 			print_a_token(t_token_list *lst);
 void			free_arrays(char **arrays);
 void 			print_last_token_node(t_token_list *t);
 char			*get_type_str(int e);
+
 
 #endif              

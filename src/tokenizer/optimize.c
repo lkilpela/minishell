@@ -164,13 +164,40 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 	return (lst);
 }
 
+static t_token_list *del_spaced_token(t_token_list **t)
+{
+	t_token_list	*tmp;
+	t_token_list	*prev;
+
+	tmp = *t;
+	prev = NULL;
+	while (tmp)
+	{
+		if (ft_strchr(tmp->token->value, ' '))
+		{
+			if (prev)
+				prev->next = tmp->next;
+			else
+				*t = tmp->next;
+			delone_node(tmp);
+			if (prev)
+				tmp = prev->next;
+			else
+				tmp = *t;
+		}
+		else
+		{
+			prev = tmp;
+			tmp = tmp->next;
+		}
+	}
+	return (*t);
+}
+
 t_token_list *retokenizer(t_token_list **t, t_var_list *v)
 {
-	t_token_list *prev;
 	t_token_list *new_token;
-	t_token_list *last_new_token;
 
-	prev = NULL;
 	new_token = NULL;
 	if (ft_strchr((*t)->token->value, ' '))
 	{
@@ -181,24 +208,9 @@ t_token_list *retokenizer(t_token_list **t, t_var_list *v)
 			return NULL;
 		printf("After add new_token: \n");
 		print_tokens(new_token);
-
-		// Find the node before the 'echo la' node
-		while (prev->next != (*t))
-			prev = prev->next;
-		
-		// Find the last node in the new_token list
-		last_new_token = new_token; // last_new_token points to the first node
-		while (last_new_token->next)//as long as the next node exits
-			last_new_token = last_new_token->next; //move to next node
-
-		// Replace the 'echo la' node with the new_token list
-        prev->next = new_token;
-        last_new_token->next = (*t)->next;
-
-        // Delete the 'echo la' node
-        free(*t);
-        *t = NULL;
 	}
+	del_spaced_token(t);
 	print_tokens(*t);
 	return (new_token);
 }
+

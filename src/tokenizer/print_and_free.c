@@ -36,7 +36,7 @@ void free_var_list(t_var_list *list)
 		free(tmp);
 	}
 }
-static void	delone_node(t_token_list *lst)
+void	delone_node(t_token_list *lst)
 {
 	if (!lst)
 		return ;

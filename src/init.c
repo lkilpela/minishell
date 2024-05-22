@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/22 02:40:28 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/22 20:17:28 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void init_minishell(int argc, char **argv, char **envp)
 {
 	ms()->argc = argc;
 	ms()->argv = argv;
-	ms()->envp = env_array_dup(envp, env_array_size(envp), -1);
+	ms()->envp = NULL; //location to store our envp for child processes later
 	ms()->paths = NULL;
+	ms()->var_list = get_envp(envp);
 }

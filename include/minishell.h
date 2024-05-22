@@ -28,8 +28,8 @@ void			init_minishell(int argc, char **argv, char **envp);
 
 // local var
 t_var_list 		*get_envp(char **envp);
-void			add_var(t_var_list **lst, char *str);
-char			*lookup_var(char *var_name, t_var_list *v);
+void			add_var(char *str);
+char			*lookup_var(char *var_name);
 
 //env var
 int				env_array_size(char **envp);
@@ -42,15 +42,15 @@ void			env_remove(char *keyval);
 void			env_add(char *keyval);
 
 // quote handler
-char 			*handle_quotes(char *str, t_var_list *v);
+char 			*handle_quotes(char *str);
 
 // tokenizer
-t_token_list	*tokenizer(char *str, t_var_list *v);
-t_token_list 	*retokenizer(t_token_list **t, t_var_list *v);
+t_token_list	*tokenizer(char *str);
+t_token_list 	*retokenizer(t_token_list **t);
 
 // expander
-char 			*expand_variable(char *str, t_var_list *v);
-void			process_var_assignment(char **input, t_var_list *v);
+char 			*expand_variable(char *str);
+void			process_var_assignment(char **input);
 
 // parser
 t_commands		*parser(t_token_list *tokens);
@@ -59,7 +59,7 @@ t_commands		*parser(t_token_list *tokens);
 void			built_echo(t_simple_cmd *cmd);
 void			built_pwd(void);
 void			built_exit(void);
-void			built_cd(int argc, char **argv, t_var_list *v);
+void			built_cd(int argc, char **argv);
 void			built_env(int declare);
 void			built_export(t_simple_cmd *cmd);
 void			built_unset(t_simple_cmd *cmd);
@@ -82,9 +82,9 @@ char			*ft_strndup(char *str, size_t len);
 int				ft_strcmp(char *s1, char *s2);
 
 // FOR TESTING **REMOVE WHEN SUBMIT**
-void 			print_var_list(t_var_list *v);
-void			free_var_list(t_var_list *list);
-void 			print_last_node(t_var_list *v);
+void 			print_var_list(void);
+void			free_var_list(void);
+void 			print_last_node(void);
 void 			print_tokens(t_token_list *lst);
 void			free_token_list(t_token_list **lst);
 void			print_commands(t_commands *cmds);

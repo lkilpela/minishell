@@ -3,26 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 14:05:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:34:44 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+typedef struct s_var_list t_var_list;
 /******************************************************************************\
  * MINISHELL
 \******************************************************************************/
 
 typedef struct s_ms
 {
-	char	**argv;
-	int		argc;
-	char	**envp;
-	char	**paths;	// Array of paths for executable lookup
+	char		**argv;
+	int			argc;
+	char		**envp;
+	char		**paths;	// Array of paths for executable lookup
+	t_var_list	*var_list;
 }				t_ms;
 
 /******************************************************************************\
@@ -71,19 +73,13 @@ typedef struct s_token_list
 	struct s_token_list	*next;	// pointer to next token
 }				t_token_list;
 
-// single env variable
-typedef struct s_var
-{
-	char	*name;	// name of variable
-	char	*value;	// value of variable
-}				t_var;
-
 // variables
-typedef struct s_var_list
+struct s_var_list
 {
-	t_var				*current_var; 
+	char				*key;	// name of variable
+	char				*value;	// value of variable
 	struct s_var_list	*next; 
-}				t_var_list;
+};
 
 /******************************************************************************\
  * PARSER

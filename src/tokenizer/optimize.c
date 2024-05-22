@@ -80,7 +80,7 @@ static t_token	*create_token(char *str)
 	return (token);
 }
 
-static void	process_word_token(t_token *token, t_var_list *v)
+static void	process_token(t_token *token, t_var_list *v)
 {
 	char	*value;
 
@@ -108,7 +108,7 @@ static t_token_list *create_token_node(char *str, t_var_list *v)
 		free(node);
 		return (NULL);		
 	}
-	process_word_token(node->token, v);
+	process_token(node->token, v);
 	node->next = NULL;
 	return (node);
 }

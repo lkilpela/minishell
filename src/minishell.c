@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 12:13:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:49:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,8 @@ t_ms	*ms(void)
 
 int main(int argc, char **argv, char **envp)
 {
-	t_var_list *v;
-
 	init_minishell(argc, argv, envp);
-	v = get_envp(envp);
 	read_history("history_file.txt"); // for testing
-	minishell_loop(v);
+	minishell_loop(ms()->var_list);
 	write_history("history_file.txt");  // for testing
 }

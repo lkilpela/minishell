@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 14:05:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:25:43 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 
 typedef struct s_ms
 {
-	char	**argv;
-	int		argc;
-	char	**envp;
-	char	**paths;	// Array of paths for executable lookup
+	char		**argv;
+	int			argc;
+	char		**envp;
+	char		**paths;	// Array of paths for executable lookup
+	t_var_list	*var_list;
 }				t_ms;
 
 /******************************************************************************\

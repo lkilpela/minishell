@@ -42,14 +42,16 @@ void			env_remove(char *keyval);
 void			env_add(char *keyval);
 
 // quote handler
-char 			*handle_quotes(char *str);
+char 			*handle_quotes(char *str, t_quote_type quote_type);
+t_quote_type	identify_quotes(char *str);
+char			*remove_outer_quotes(char *str);
 
 // tokenizer
 t_token_list	*tokenizer(char *str);
 t_token_list 	*retokenizer(t_token_list **t);
 
 // expander
-char 			*expand_variable(char *str);
+char 			*expand_variable(char *str, t_quote_type quote_type);
 void			process_var_assignment(char **input);
 
 // parser

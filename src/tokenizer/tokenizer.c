@@ -80,7 +80,7 @@ static t_token	*create_token(char *str)
 	return (token);
 }
 
-static void	process_token(t_token *token)
+/*static void	process_token(t_token *token)
 {
 	char	*value;
 
@@ -89,6 +89,24 @@ static void	process_token(t_token *token)
 	{
 		//free(token->value);
 		token->value = value;
+	}
+	else
+		token->value = ft_strdup("");
+	
+}*/
+
+static void	process_token(t_token *token)
+{
+	char	*value;
+	t_quote_type	quote_type;
+
+	value = NULL;
+	quote_type = identify_quotes(token->value);
+	value = handle_quotes(token->value, quote_type);
+	if (value)
+	{
+		//free(token->value);
+		token->value = remove_outer_quotes(value);
 	}
 	else
 		token->value = ft_strdup("");

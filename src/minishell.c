@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 19:56:14 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/22 23:36:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void minishell_loop(void)
 		input = readline(PROMPT);
 		add_history(input);
 		t = tokenizer(input);
-		retokenizer(&t);
+		if (ft_strchr(t->token->value, ' '))
+			retokenizer(&t);
 		cmds = parser(t);
 		if (ft_strchr(cmds->simples[0]->command, EQUAL_SIGN) != NULL) //only allowing var assignment as first WORD aka command
 		{

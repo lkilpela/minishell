@@ -29,4 +29,5 @@
 | 2 | `"echo 'hello'"` | echo<br>hello | WORD<br>WORD |
 | 3 | `"echo "hello""` | echo<br>hello | WORD<br>WORD |
 | 4 | `echo '$USER'` | echo<br>$USER | WORD<br>WORD |
+| 5 | `"$HOME here '$HOME' test"` | ... | ... |
 

@@ -167,13 +167,33 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 
 t_token_list *retokenizer(t_token_list **t, t_var_list *v)
 {
-	t_token_list *tmp;
-	t_token_list *prev;
+	//t_token_list *tmp;
+	//t_token_list *prev;
 	t_token_list *new_token;
-	t_token_list *last_new_token;
+	//t_token_list *last_new_token;
 
-	prev = NULL;
-	if (t && *t)
+	//prev = NULL;
+	new_token = NULL;
+	if (ft_strchr((*t)->token->value, ' '))
+	{
+		printf("Original list: \n");
+		print_tokens((*t));
+		new_token = tokenizer((*t)->token->value, v);
+		if (!new_token)
+			return NULL;
+		printf("After add new_token: \n");
+		print_tokens(new_token);
+		printf("here");
+		while (new_token->next != NULL)
+		{
+			new_token = new_token->next;
+		}
+		printf(CYAN "token_value: %-20s token_type: %s\n" RESET, new_token->token->value, get_type_str(new_token->token->type));
+
+	}
+	return (new_token);
+}
+	/*if (t && *t)
 	{
 		tmp = *t;
 		while (tmp)
@@ -181,6 +201,7 @@ t_token_list *retokenizer(t_token_list **t, t_var_list *v)
 			if (ft_strchr(tmp->token->value, ' '))
 			{
 				new_token = tokenizer(tmp->token->value, v);
+				print_tokens(new_token);
 				last_new_token = new_token; // last_new_token points to the first node
 				while (last_new_token->next)//as long as the next node exits
 					last_new_token = last_new_token->next; //move to next node
@@ -198,6 +219,7 @@ t_token_list *retokenizer(t_token_list **t, t_var_list *v)
 			tmp = tmp->next;
 		}
 		//print_tokens(*t);
+		//printf("new_token: %s\n last_new_token %s\n prev: %s\n temp: %s\n", new_token->token->value, last_new_token->token->value, prev->token->value, tmp->token->value);
 	}
-	return (*t);
-}
+	return (*t);*/
+//}

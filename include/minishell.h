@@ -76,5 +76,6 @@ void			print_commands(t_commands *cmds);
 void 			print_a_token(t_token_list *lst);
 void			free_arrays(char **arrays);
 void 			print_last_token_node(t_token_list *t);
+char			*get_type_str(int e);
 
 #endif              

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 09:18:16 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/21 21:05:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 09:20:13 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ void split_and_add_tokens(t_token_list **t, char *value)
 }
 
 // converts a string into a list of tokens
-t_token_list	*tokenizer(char *str, t_var_list *v)
+/*t_token_list	*tokenizer(char *str, t_var_list *v)
 {
 	t_token_list	*t;
 
@@ -209,7 +209,7 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 			split_and_add_tokens(&t, t->token->value);
 		}
 		str += token_len(str);
-		print_tokens(t);
+		//print_tokens(t);
 	}
 	return (t);
-}
+}*/

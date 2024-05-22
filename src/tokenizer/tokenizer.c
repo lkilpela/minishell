@@ -80,21 +80,6 @@ static t_token	*create_token(char *str)
 	return (token);
 }
 
-/*static void	process_token(t_token *token)
-{
-	char	*value;
-
-	value = handle_quotes(token->value);
-	if (value)
-	{
-		//free(token->value);
-		token->value = value;
-	}
-	else
-		token->value = ft_strdup("");
-	
-}*/
-
 static void	process_token(t_token *token)
 {
 	char	*value;

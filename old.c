@@ -78,23 +78,48 @@ int	is_single_quoted(char *str)
 	return (1);
 }
 
-static char	*remove_outer_quotes(char *str)
+static void	process_token(t_token *token)
 {
-	size_t	len;
+	char	*value;
 
-	len = ft_strlen(str);
-	if (len < 2)
-		return str;
-	if (is_quote(str[0])&& is_quote(str[len - 1]))
+	value = handle_quotes(token->value);
+	if (value)
 	{
-		ft_memmove(str, str + 1, len - 2);
-		str[len - 2] = '\0';
+		//free(token->value);
+		token->value = value;
 	}
-	return (str);
+	else
+		token->value = ft_strdup("");
+	
+}
+char	*expand_variable(char *str, t_quote_type quote_type)
+{
+	char	*start;
+	char	*prefix;
+	char	*end;
+	char 	*expanded_str;
+	char	*temp;
+	char	*var_name;
+	char	*var_value;
+
+	start = ft_strchr(str, '$');
+	if (start == NULL || *(start + 1) == '\0' || *(start + 1) == '\0')
+		return (ft_strdup(str));
+	end = skip_variable(start);
+	if (start + 1 == end)
+		return (ft_strdup(str));
+	prefix = ft_strndup(str, start - str);
+	var_name = ft_strndup(start + 1, end - start - 1);
+	var_value = lookup_var(var_name); //empty string if doesnt exist, othervise the value
+	free(var_name);
+	temp = ft_strjoin(prefix, var_value);
+	expanded_str = ft_strjoin(temp, expand_variable(end, quote_type)); //recursively solve all the rest of the variables in the same WORD
+	free(temp);
+	free(prefix);
+	return (expanded_str);
 }
 
-
-/*static t_quote_type	identify_quotes(char **str)
+static t_quote_type	identify_quotes(char **str)
 {
 	size_t			len;
 	t_quote_type	quote_type;
@@ -128,4 +153,4 @@ static char	*expand_if_needed(char *str)
 		return (expanded);
 	}
 	return (str);
-}*/
+}

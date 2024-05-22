@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 00:00:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 00:12:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,35 +66,50 @@ char *lookup_var(char *var_name)
 
 char	*expand_variable(char *str, t_quote_type quote_type)
 {
-	char	*start;
-	char	*prefix;
-	char	*end;
-	char 	*expanded_str;
-	char	*temp;
-	char	*var_name;
-	char	*var_value;
+    char	*start;
+    char	*prefix;
+    char	*end;
+    char 	*expanded_str;
+    char	*temp;
+    char	*var_name;
+    char	*var_value;
 
-	start = str;
-	while (*start)
-	{
-		quote_type = identify_quotes(start);
-		if (*start == '$' 
-			&& (quote_type == DOUBLE_QUOTE || quote_type == NO_QUOTE))
-		{
-			end = skip_variable(start);
-			if (start + 1 == end)
-				return (ft_strdup(str));
-			prefix = ft_strndup(str, start - str);
-			var_name = ft_strndup(start + 1, end - start - 1);
-			var_value = lookup_var(var_name); //empty string if doesnt exist, othervise the value
-			free(var_name);
-			temp = ft_strjoin(prefix, var_value);
-			expanded_str = ft_strjoin(temp, expand_variable(end, NO_QUOTE)); //recursively solve all the rest of the variables in the same WORD
-			free(temp);
-			free(prefix);
-			return (expanded_str);
-		}
-		start++;
-	}
-	return (ft_strdup(str));
+    start = str;
+    while (*start)
+    {
+        if (*start == S_QUOTE && (quote_type == NO_QUOTE || quote_type == SINGLE_QUOTE))
+        {
+            if (quote_type == SINGLE_QUOTE)
+                quote_type = NO_QUOTE;
+            else
+                quote_type = SINGLE_QUOTE;
+        }
+        else if (*start == D_QUOTE && (quote_type == NO_QUOTE || quote_type == DOUBLE_QUOTE))
+        {
+            if (quote_type == DOUBLE_QUOTE)
+                quote_type = NO_QUOTE;
+            else
+                quote_type = DOUBLE_QUOTE;
+        }
+        if (*start == '$' && (quote_type == DOUBLE_QUOTE || quote_type == NO_QUOTE))
+        {
+            end = skip_variable(start);
+            if (start + 1 == end)
+                return (ft_strdup(str));
+            prefix = ft_strndup(str, start - str);
+            var_name = ft_strndup(start + 1, end - start - 1);
+            var_value = lookup_var(var_name); //empty string if doesnt exist, othervise the value
+            free(var_name);
+            temp = ft_strjoin(prefix, var_value);
+            if (end)
+                expanded_str = ft_strjoin(temp, expand_variable(end, NO_QUOTE)); //recursively solve all the rest of the variables in the same WORD
+            else
+                expanded_str = ft_strdup(temp);
+            free(temp);
+            free(prefix);
+            return (expanded_str);
+        }
+        start++;
+    }
+    return (ft_strdup(str));
 }

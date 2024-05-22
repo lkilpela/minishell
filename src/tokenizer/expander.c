@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/22 09:31:30 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:54:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	*expand_variable(char *str, t_var_list *v)
 	free(var_name);
 	temp = ft_strjoin(prefix, var_value);
 	expanded_str = ft_strjoin(temp, expand_variable(end, v)); //recursively solve all the rest of the variables in the same WORD
+	printf("start: %-20s end: %s\n prefix: %s\n var_name: %-20s var_value: %s\n", start, end, prefix, var_name, var_value);
+	printf("temp: %s\n expanded_tr: %s\n", temp, expanded_str);
 	free(temp);
 	free(prefix);
 	return (expanded_str);

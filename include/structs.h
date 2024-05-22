@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 17:51:43 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/23 18:12:47 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ typedef struct s_token_list
 // variables
 typedef struct s_var_list
 {
-	char				*key;
-	char				*value;
+	char				*key;	// name of variable
+	char				*value;	// value of variable
 	struct s_var_list	*next;
-}				t_var_list;
+	struct s_var_list	*previous;
+};
 
 /******************************************************************************\
  * PARSER

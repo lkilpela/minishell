@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_unset.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:00 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 14:49:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 22:04:15 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ void	built_unset(t_simple_cmd *cmd)
 
 	i = 0;
 	while (i < cmd->num_of_args)
-		env_remove(cmd->args[i++]);
+		var_remove(cmd->args[i++]);
 }

@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 13:32:38 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 18:13:41 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void extract_var(char *str, char **name, char **value)
+static void extract_var(char *str, char **key, char **value)
 {
 	char	*equal_sign;
 
+	*key = NULL;
+	*value = NULL;
 	equal_sign = ft_strchr(str, EQUAL_SIGN);
 	if (!equal_sign)
 		return ;
-	*name = ft_strndup(str, equal_sign - str);
-	if (!*name)
+	*key = ft_strndup(str, equal_sign - str);
+	if (!*key)
 		return ;
 	*value = ft_strdup(equal_sign + 1);
 	if (!*value)
@@ -31,7 +33,7 @@ static void extract_var(char *str, char **name, char **value)
 static t_var_list *create_var_node(char *key, char *value)
 {
 	t_var_list	*node;
-	
+
 	node = ft_calloc(1, sizeof(t_var_list));
 	if (!node)
 		return (NULL);
@@ -40,18 +42,27 @@ static t_var_list *create_var_node(char *key, char *value)
 	return (node);
 }
 
+t_var_list	*var_get_last(void)
+{
+	t_var_list	*last;
+
+	last = ms()->var_list;
+	while (last->next)
+		last = last->next;
+	return (last);
+}
+
 // add new node to the end of list
 static void	add_var_to_list(t_var_list *node)
 {
 	t_var_list	*last;
-	
+
 	if (ms()->var_list == NULL)
 		ms()->var_list = node;
 	else
 	{
-		last = ms()->var_list;
-		while (last->next)
-			last = last->next;
+		last = var_get_last();
+		node->previous = last;
 		last->next = node;
 	}
 }
@@ -59,25 +70,25 @@ static void	add_var_to_list(t_var_list *node)
 void	add_var(char *str)
 {
 	t_var_list	*node;
-	t_var_list	*v;
+	t_var_list	*vars;
 	char		*key;
 	char		*value;
 
 	extract_var(str, &key, &value);
 	if (!key || !value)
 		return ;
-	v = ms()->var_list;
-	while (v) // if the name is existed, update it with new one
+	vars = ms()->var_list;
+	while (vars) // if the name is existed, update it with new one
 	{
-		if(ft_strcmp(v->key, key) == 0)
+		if(ft_strcmp(vars->key, key) == 0)
 		{
-			free(v->key);
-			free(v->value);
-			v->key = key;
-			v->value = value;
+			free(vars->key);
+			free(vars->value);
+			vars->key = key;
+			vars->value = value;
 			return ;
 		}
-		v = v->next;
+		vars = vars->next;
 	}
 	node = create_var_node(key, value);
 	if (!node)
@@ -100,7 +111,7 @@ void	process_var_assignment(char **input)
 	char			*value;
 	char			*prefix;
 	char 			*new_input;
-	
+
 	handle_empty_var_assignment(input);
 	new_input = NULL;
 	equal_pos = ft_strchr(*input, EQUAL_SIGN);
@@ -132,4 +143,27 @@ t_var_list	*get_envp(char **envp)
 		i++;
 	}
 	return (ms()->var_list);
+}
+
+void	var_remove(char *key)
+{
+	t_var_list	*vars;
+
+	vars = ms()->var_list;
+	if (!key)
+		return ;
+	while (vars)
+	{
+		if (ft_strcmp(key, vars->key) == 0)
+		{
+			if (vars->previous)
+				vars->previous->next = vars->next;
+			if (vars->next)
+				vars->next->previous = vars->previous;
+			free(vars);
+			vars = NULL;
+			return ;
+		}
+		vars = vars->next;
+	}
 }

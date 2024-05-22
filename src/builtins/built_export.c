@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 03:07:15 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/22 21:39:33 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void	built_export(t_simple_cmd *cmd)
 	{
 		while (i < cmd->num_of_args)
 		{
-			if (!env_is_env(cmd->args[i]))
-				continue ;
-			env_add(cmd->args[i]);
+			add_var(cmd->args[i]);
 			i++;
 		}
 	}

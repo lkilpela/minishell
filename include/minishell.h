@@ -26,10 +26,11 @@
 t_ms			*ms(void);
 void			init_minishell(int argc, char **argv, char **envp);
 
-// local var
+// vars list
 t_var_list 		*get_envp(char **envp);
 void			add_var(char *str);
 char			*lookup_var(char *var_name);
+void			var_remove(char *keyval);
 
 //env var
 int				env_array_size(char **envp);

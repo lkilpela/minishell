@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 09:35:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 10:55:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void minishell_loop(t_var_list *v)
 		t = tokenizer(input, v);
 		retokenizer(&t, v);
 		//print_tokens(t);
+		//del_spaced_token(&t);
 		cmds = parser(t);
 		if (ft_strchr(cmds->simples[0]->command, EQUAL_SIGN) != NULL) //only allowing var assignment as first WORD aka command
 		{

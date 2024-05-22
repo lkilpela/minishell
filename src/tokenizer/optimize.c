@@ -164,10 +164,96 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 	return (lst);
 }
 
-static t_token_list *del_spaced_token(t_token_list **t)
+// ls$ARG hello | echo < output
+t_token_list *retokenizer(t_token_list **t, t_var_list *v)
+{
+	t_token_list	*new_token;
+	t_token_list	*prev;
+	t_token_list	*last_new_token;
+	t_token_list	*tmp;
+	t_token_list	*next;
+
+	prev = NULL;
+	new_token = NULL;
+	tmp = *t;
+	while (tmp)
+	{
+		if (ft_strchr((tmp)->token->value, ' '))
+		{
+			printf("Original list: \n");
+			print_tokens((*t));
+			new_token = tokenizer(tmp->token->value, v);
+			if (!new_token)
+				return NULL;
+			printf("new_token list: \n");
+			print_tokens(new_token);
+
+			last_new_token = new_token;
+			while (last_new_token->next)
+				last_new_token = last_new_token->next;
+
+			if (prev)
+				prev->next = new_token;
+			else
+				*t = new_token; 
+			last_new_token->next = tmp->next;
+			next = tmp->next;
+			free(tmp);
+			tmp = next;
+		}
+		else
+		{
+			prev = tmp;
+			tmp = tmp->next;
+		}
+	}
+}
+/*		else
+			*t = tmp->next;
+
+
+
+
+		 // Find the node before the 'ls la' node
+        if (tmp != NULL && tmp->next != NULL)
+        {
+            prev = tmp;
+            if (prev->next != tmp && prev->next != NULL)
+            {
+                prev = prev->next;
+            }
+        }
+
+        // Find the last node in the new_token list
+        last_new_token = new_token;
+        while (last_new_token->next != NULL)
+        {
+            last_new_token = last_new_token->next;
+        }
+
+        // Replace the 'ls la' node with the new_token list
+        if (prev != NULL)
+        {
+            prev->next = new_token;
+            last_new_token->next = tmp->next;
+        }
+
+        // Delete the 'ls la' node
+        //free(*t);
+        //*t = NULL;
+
+		}
+	//del_spaced_token(t);
+	printf("Updated list: \n");
+	print_tokens(*t);
+	return (new_token);
+}*/
+
+t_token_list *del_spaced_token(t_token_list **t)
 {
 	t_token_list	*tmp;
 	t_token_list	*prev;
+	t_token_list	*next;
 
 	tmp = *t;
 	prev = NULL;
@@ -179,11 +265,9 @@ static t_token_list *del_spaced_token(t_token_list **t)
 				prev->next = tmp->next;
 			else
 				*t = tmp->next;
+			next = tmp->next;
 			delone_node(tmp);
-			if (prev)
-				tmp = prev->next;
-			else
-				tmp = *t;
+			tmp = next;
 		}
 		else
 		{
@@ -193,24 +277,3 @@ static t_token_list *del_spaced_token(t_token_list **t)
 	}
 	return (*t);
 }
-
-t_token_list *retokenizer(t_token_list **t, t_var_list *v)
-{
-	t_token_list *new_token;
-
-	new_token = NULL;
-	if (ft_strchr((*t)->token->value, ' '))
-	{
-		printf("Original list: \n");
-		print_tokens((*t));
-		new_token = tokenizer((*t)->token->value, v);
-		if (!new_token)
-			return NULL;
-		printf("After add new_token: \n");
-		print_tokens(new_token);
-	}
-	del_spaced_token(t);
-	print_tokens(*t);
-	return (new_token);
-}
-

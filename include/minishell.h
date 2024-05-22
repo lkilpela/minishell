@@ -48,6 +48,7 @@ char 			*handle_quotes(char *str, t_var_list *v);
 t_token_list	*tokenizer(char *str, t_var_list *v);
 t_token_list 	*retokenizer(t_token_list **t, t_var_list *v);
 void			delone_node(t_token_list *lst);
+t_token_list	*del_spaced_token(t_token_list **t);
 
 // expander
 char 			*expand_variable(char *str, t_var_list *v);

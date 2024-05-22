@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 09:20:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 02:40:28 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void init_minishell(int argc, char **argv, char **envp)
 {
 	ms()->argc = argc;
 	ms()->argv = argv;
-	ms()->envp = envp;
+	ms()->envp = env_array_dup(envp, env_array_size(envp), -1);
 	ms()->paths = NULL;
 }

@@ -45,6 +45,8 @@
         "readline.h": "c",
         "history.h": "c",
         "unistd.h": "c",
-        "structs.h": "c"
+        "structs.h": "c",
+        "algorithm": "c",
+        "unordered_map": "c"
     }
 }

@@ -26,10 +26,20 @@
 t_ms			*ms(void);
 void			init_minishell(int argc, char **argv, char **envp);
 
-// environment var
+// local var
 t_var_list 		*get_envp(char **envp);
 void			add_var(t_var_list **lst, char *str);
 char			*lookup_var(char *var_name, t_var_list *v);
+
+//env var
+int				env_array_size(char **envp);
+char			**env_array_dup(char **envp, int size, int cut);
+void			env_free_array(char **envp);
+int				env_key_len(char *env);
+int				env_is_env(char *env);
+int				env_exists(char *keyval);
+void			env_remove(char *keyval);
+void			env_add(char *keyval);
 
 // quote handler
 char 			*handle_quotes(char *str, t_var_list *v);
@@ -48,8 +58,11 @@ t_commands		*parser(t_token_list *tokens);
 //builtins
 void			built_echo(t_simple_cmd *cmd);
 void			built_pwd(void);
+void			built_exit(void);
 void			built_cd(int argc, char **argv, t_var_list *v);
-void			built_env(void);
+void			built_env(int declare);
+void			built_export(t_simple_cmd *cmd);
+void			built_unset(t_simple_cmd *cmd);
 
 // utils
 int				is_word(char c);

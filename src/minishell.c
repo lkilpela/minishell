@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 00:53:29 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/22 04:36:55 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 void	builtin_tests(t_commands *cmds, t_var_list *v)
 {
-		built_echo(cmds->simples[0]);
+		if (strcmp(cmds->simples[0]->command, "exit") == 0)
+			built_exit();
 		if (strcmp(cmds->simples[0]->command, "pwd") == 0)
 			built_pwd();
 		if (strcmp(cmds->simples[0]->command, "env") == 0)
-			built_env();
+			built_env(0);
+		if (strcmp(cmds->simples[0]->command, "echo") == 0)
+			built_echo(cmds->simples[0]);
+		if (strcmp(cmds->simples[0]->command, "export") == 0)
+			built_export(cmds->simples[0]);
+		if (strcmp(cmds->simples[0]->command, "unset") == 0)
+			built_unset(cmds->simples[0]);
 		if (strcmp(cmds->simples[0]->command, "cd") == 0)
 		{
 			ft_printf("old pwd: %s\n", getcwd(NULL, 0));
@@ -36,19 +43,18 @@ void minishell_loop(t_var_list *v)
 	while (42)
 	{
 		input = readline(PROMPT);
-		if (!input || ft_strcmp(input, "exit") == 0)
-			break ;
 		add_history(input);
-		if (ft_strchr(input, EQUAL_SIGN) != NULL)
-		{
-			process_var_assignment(&input, v);
-			free(input);
-			continue ;
-		}
 		t = tokenizer(input, v);
 		retokenizer(&t, v);
 		print_tokens(t);
 		cmds = parser(t);
+		if (ft_strchr(cmds->simples[0]->command, EQUAL_SIGN) != NULL) //only allowing var assignment as first WORD aka command
+		{
+			process_var_assignment(&input, v);
+			free(input);
+			print_var_list(v);
+			continue ;
+		}
 		builtin_tests(cmds, v);
 		free(input);
 	}

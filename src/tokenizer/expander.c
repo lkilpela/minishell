@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 15:06:49 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 03:45:23 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	process_var_assignment(char **input, t_var_list *v)
 	
 	handle_empty_var_assignment(input, v);
 	new_input = NULL;
-	equal_pos = ft_strchr(*input, '=');
+	equal_pos = ft_strchr(*input, EQUAL_SIGN);
 	if (equal_pos)
 	{
 		prefix = ft_strndup(*input, (equal_pos + 1) - *input);

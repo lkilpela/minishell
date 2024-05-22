@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/20 14:17:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 09:53:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void extract_var(char *str, char **name, char **value)
 {
 	char	*equal_sign;
 
-	equal_sign = ft_strchr(str, '=');
+	equal_sign = ft_strchr(str, EQUAL_SIGN);
 	if (!equal_sign)
 		return ;
 	*name = ft_strndup(str, equal_sign - str);

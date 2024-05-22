@@ -164,34 +164,57 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 	return (lst);
 }
 
-// ls$ARG hello | echo < output
-t_token_list *retokenizer(t_token_list **t, t_var_list *v)
+t_token_list	*reprocess_token(t_token_list **tmp,
+								t_token_list **prev, t_var_list *v)
 {
 	t_token_list	*new_token;
-	t_token_list	*prev;
 	t_token_list	*last_new_token;
-	t_token_list	*tmp;
 	t_token_list	*next;
 
+	new_token = tokenizer((*tmp)->token->value, v);
+	if (!new_token)
+		return NULL;
+	printf("new_token list: \n");
+	print_tokens(new_token);
+	last_new_token = new_token;
+	while (last_new_token->next)
+		last_new_token = last_new_token->next;
+	if ((*prev))
+		(*prev)->next = new_token;
+	//else
+		//*t = new_token; 
+	last_new_token->next = (*tmp)->next;
+	next = (*tmp)->next;
+	free(*tmp);
+	*tmp = next;
+	return (new_token);
+}
+
+// ls$ARG hello | echo < output
+t_token_list	*retokenizer(t_token_list **t, t_var_list *v)
+{
+	//t_token_list	*new_token;
+	t_token_list	*prev;
+	//t_token_list	*last_new_token;
+	t_token_list	*tmp;
+	//t_token_list	*next;
+
 	prev = NULL;
-	new_token = NULL;
+	
 	tmp = *t;
 	while (tmp)
 	{
-		if (ft_strchr((tmp)->token->value, ' '))
+		if (ft_strchr(tmp->token->value, ' '))
 		{
 			printf("Original list: \n");
 			print_tokens((*t));
-			new_token = tokenizer(tmp->token->value, v);
-			if (!new_token)
-				return NULL;
-			printf("new_token list: \n");
-			print_tokens(new_token);
-
-			last_new_token = new_token;
-			while (last_new_token->next)
-				last_new_token = last_new_token->next;
-
+			/*new_token = reprocess_token(tmp, v);
+			if (new_token)
+			{
+				last_new_token = new_token;
+				while (last_new_token->next)
+					last_new_token = last_new_token->next;
+			}
 			if (prev)
 				prev->next = new_token;
 			else
@@ -199,7 +222,9 @@ t_token_list *retokenizer(t_token_list **t, t_var_list *v)
 			last_new_token->next = tmp->next;
 			next = tmp->next;
 			free(tmp);
-			tmp = next;
+			tmp = next;*/
+			if (!reprocess_token(&tmp, &prev, v))
+				return (NULL);
 		}
 		else
 		{

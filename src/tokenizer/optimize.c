@@ -207,4 +207,5 @@ t_token_list *retokenizer(t_token_list **t, t_var_list *v)
 			tmp = tmp->next;
 		}
 	}
+	return (*t);
 }

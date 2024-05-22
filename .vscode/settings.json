@@ -47,6 +47,7 @@
         "unistd.h": "c",
         "structs.h": "c",
         "algorithm": "c",
-        "unordered_map": "c"
+        "unordered_map": "c",
+        "typeinfo": "c"
     }
 }

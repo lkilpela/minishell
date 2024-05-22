@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/21 22:00:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:56:28 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ static t_quote_type	identify_quotes(char **str)
 	}
 	return (quote_type);
 }
-static char	*expand_if_needed(char *str, t_var_list *v)
+static char	*expand_if_needed(char *str)
 {
 	char	*expanded;
 
 	expanded = NULL;
 	if (ft_strchr(str, DOLLAR_SIGN))
 	{
-		expanded = expand_variable(str, v);
+		expanded = expand_variable(str);
 		if (!expanded)
 			return (NULL);
 		return (expanded);
@@ -48,14 +48,14 @@ static char	*expand_if_needed(char *str, t_var_list *v)
 	return (str);
 }
 
-char 	*handle_quotes(char *str, t_var_list *v)
+char 	*handle_quotes(char *str)
 {
 	t_quote_type	quote_type;
 	char			*expanded;
 
 	quote_type = identify_quotes(&str);
 	if (quote_type == DOUBLE_QUOTE || quote_type == NO_QUOTE)
-		expanded = expand_if_needed(str, v);
+		expanded = expand_if_needed(str);
 	else
 		expanded = ft_strdup(str);
 	return (expanded);

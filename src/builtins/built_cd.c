@@ -6,13 +6,13 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/20 00:08:25 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/22 19:57:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	built_cd(int argc, char **argv, t_var_list *v)
+void	built_cd(int argc, char **argv)
 {
 	char	*home;
 
@@ -23,7 +23,7 @@ void	built_cd(int argc, char **argv, t_var_list *v)
 	}
 	if (argc == 0)
 	{
-		home = lookup_var("HOME", v);
+		home = lookup_var("HOME");
 		if (*home == 0)
 			return ;
 			//error $HOME unset

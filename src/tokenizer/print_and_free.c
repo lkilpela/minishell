@@ -14,26 +14,21 @@ void	free_arrays(char **arrays)
 	free(arrays);
 }
 
-static void free_var(t_var *var)
+void free_var_list(void)
 {
-	if (var)
-	{
-		free(var->name);
-		free(var->value);
-		free(var);
-	}
-}
+	t_var_list *node;
+	t_var_list *next;
 
-void free_var_list(t_var_list *list)
-{
-	t_var_list *tmp;
-
-	while (list)
+	node = ms()->var_list;
+	while (node)
 	{
-		tmp = list;
-		list = list->next;
-		free_var(tmp->current_var);
-		free(tmp);
+		if (node->key)
+			free(node->key);
+		if (node->value)
+			free(node->value);
+		next = node->next;
+		free(node);
+		node = next;
 	}
 }
 void	delone_node(t_token_list *lst)
@@ -59,17 +54,23 @@ void	free_token_list(t_token_list **lst)
 	*lst = NULL;
 }
 
-void print_var_list(t_var_list *v)
+void print_var_list(void)
 {
+	t_var_list	*v;
+
+	v = ms()->var_list;
 	while (v)
 	{
-		printf(CYAN "var_name: %s \t\t\t var_value: %s\n" RESET, v->current_var->name, v->current_var->value);
+		printf(CYAN "var_name: %s \t\t\t var_value: %s\n" RESET, v->key, v->value);
 		v = v->next;
 	}
 }
 
-void print_last_node(t_var_list *v)
+void print_last_node(void)
 {
+	t_var_list	*v;
+
+	v = ms()->var_list;
     if (v == NULL)
     {
         printf("The list is empty.\n");
@@ -83,7 +84,7 @@ void print_last_node(t_var_list *v)
     }
 
     // Now v points to the last node
-    printf(CYAN "var_name: %s \t\t\t var_value: %s\n" RESET, v->current_var->name, v->current_var->value);
+    printf(CYAN "var_name: %s \t\t\t var_value: %s\n" RESET, v->key, v->value);
 }
 
 char	*get_type_str(int e)

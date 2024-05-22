@@ -80,11 +80,11 @@ static t_token	*create_token(char *str)
 	return (token);
 }
 
-static void	process_token(t_token *token, t_var_list *v)
+static void	process_token(t_token *token)
 {
 	char	*value;
 
-	value = handle_quotes(token->value, v);
+	value = handle_quotes(token->value);
 	if (value)
 	{
 		//free(token->value);
@@ -95,7 +95,7 @@ static void	process_token(t_token *token, t_var_list *v)
 	
 }
 
-static t_token_list *create_token_node(char *str, t_var_list *v)
+static t_token_list *create_token_node(char *str)
 {
 	t_token_list *node;
 
@@ -108,7 +108,7 @@ static t_token_list *create_token_node(char *str, t_var_list *v)
 		free(node);
 		return (NULL);		
 	}
-	process_token(node->token, v);
+	process_token(node->token);
 	node->next = NULL;
 	return (node);
 }
@@ -130,7 +130,7 @@ static void	add_token_to_list(t_token_list **lst, t_token_list *node)
 }
 
 // create new token and add to a list
-static void	add_token(t_token_list **lst, char *str, t_var_list *v)
+static void	add_token(t_token_list **lst, char *str)
 {
 	t_token_list	*node;
 	char			*value;
@@ -141,14 +141,14 @@ static void	add_token(t_token_list **lst, char *str, t_var_list *v)
 	extract_token(str, &value, &type);
 	if (!value)
 		return ;
-	node = create_token_node(str, v);
+	node = create_token_node(str);
 	if (!node)
 		return ;
 	add_token_to_list(lst, node);
 }
 
 // converts a string into a list of tokens
-t_token_list	*tokenizer(char *str, t_var_list *v)
+t_token_list	*tokenizer(char *str)
 {
 	t_token_list	*lst;
 
@@ -158,20 +158,20 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 		str = skip_whitespaces(str);
 		if (!*str)
 			break ;
-		add_token(&lst, str, v);
+		add_token(&lst, str);
 		str += token_len(str);
 	}
 	return (lst);
 }
 
 t_token_list	*reprocess_token(t_token_list **t, t_token_list *tmp,
-								t_token_list **prev, t_var_list *v)
+								t_token_list **prev)
 {
 	t_token_list	*new_token;
 	t_token_list	*last_new_token;
 	t_token_list	*next;
 
-	new_token = tokenizer(tmp->token->value, v);
+	new_token = tokenizer(tmp->token->value);
 	if (!new_token)
 		return (tmp->next);
 	printf("new_token list: \n");
@@ -190,7 +190,7 @@ t_token_list	*reprocess_token(t_token_list **t, t_token_list *tmp,
 }
 
 // ls$ARG hello | echo < output
-t_token_list	*retokenizer(t_token_list **t, t_var_list *v)
+t_token_list	*retokenizer(t_token_list **t)
 {
 	t_token_list	*prev;
 	t_token_list	*tmp;
@@ -203,7 +203,7 @@ t_token_list	*retokenizer(t_token_list **t, t_var_list *v)
 		{
 			printf("Original list: \n");
 			print_tokens(*t);
-			tmp = reprocess_token(t, tmp, &prev, v);
+			tmp = reprocess_token(t, tmp, &prev);
 		}
 		else
 		{

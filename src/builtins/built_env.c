@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 03:44:53 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/22 19:27:57 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,14 @@ void	built_env(int declare)
 	}
 	return ;
 }
+
+// void	built_env(int declare)
+// {
+// 	t_var_list	*envs;
+
+// 	envs = ms()->var_list;
+// 	while (envs)
+// 	{
+// 		if (envs->name && envs->value)
+// 	}
+// }

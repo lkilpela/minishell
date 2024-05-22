@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/22 18:56:19 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/22 19:34:44 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,17 +73,11 @@ typedef struct s_token_list
 	struct s_token_list	*next;	// pointer to next token
 }				t_token_list;
 
-// single env variable
-typedef struct s_var
-{
-	char	*name;	// name of variable
-	char	*value;	// value of variable
-}				t_var;
-
 // variables
 struct s_var_list
 {
-	t_var				*current_var; 
+	char				*key;	// name of variable
+	char				*value;	// value of variable
 	struct s_var_list	*next; 
 };
 

@@ -3,63 +3,66 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/22 09:31:30 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 19:56:38 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	handle_empty_var_assignment(char **input, t_var_list *v)
+static void	handle_empty_var_assignment(char **input)
 {
 	if (*input == NULL || **input == '\0')
 	{
-		add_var(&v, *input);
+		add_var(*input);
 		return ;
 	}
 }
 
-void	process_var_assignment(char **input, t_var_list *v)
+void	process_var_assignment(char **input)
 {
 	char	*equal_pos;
 	char	*value;
 	char	*prefix;
 	char 	*new_input;
 	
-	handle_empty_var_assignment(input, v);
+	handle_empty_var_assignment(input);
 	new_input = NULL;
 	equal_pos = ft_strchr(*input, EQUAL_SIGN);
 	if (equal_pos)
 	{
 		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
-		value = handle_quotes(equal_pos + 1, v);
+		value = handle_quotes(equal_pos + 1);
 		new_input = ft_strjoin(prefix, value);
 		if (new_input)
 		{
-			add_var(&v, new_input);
+			add_var( new_input);
 			free(prefix);
 			free(new_input);
 		}
 	}
 	else
-		add_var(&v, *input);
-	print_last_node(v);
+		add_var(*input);
+	print_last_node();
 }
 
-char *lookup_var(char *var_name, t_var_list *v)
+char *lookup_var(char *var_name)
 {
+	t_var_list	*v;
+
+	v = ms()->var_list;
 	while (v)
 	{
-		if (ft_strcmp(v->current_var->name, var_name) == 0)
-			return (ft_strdup(v->current_var->value));
+		if (ft_strcmp(v->key, var_name) == 0)
+			return (ft_strdup(v->value));
 		v = v->next;
 	}
 	return (ft_strdup(""));
 }
 
-char	*expand_variable(char *str, t_var_list *v)
+char	*expand_variable(char *str)
 {
 	char	*start;
 	char	*prefix;
@@ -77,10 +80,10 @@ char	*expand_variable(char *str, t_var_list *v)
 		return (ft_strdup(str));
 	prefix = ft_strndup(str, start - str);
 	var_name = ft_strndup(start + 1, end - start - 1);
-	var_value = lookup_var(var_name, v); //empty string if doesnt exist, othervise the value
+	var_value = lookup_var(var_name); //empty string if doesnt exist, othervise the value
 	free(var_name);
 	temp = ft_strjoin(prefix, var_value);
-	expanded_str = ft_strjoin(temp, expand_variable(end, v)); //recursively solve all the rest of the variables in the same WORD
+	expanded_str = ft_strjoin(temp, expand_variable(end)); //recursively solve all the rest of the variables in the same WORD
 	free(temp);
 	free(prefix);
 	return (expanded_str);

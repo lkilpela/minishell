@@ -173,7 +173,7 @@ t_token_list	*reprocess_token(t_token_list **t, t_token_list *tmp,
 
 	new_token = tokenizer(tmp->token->value, v);
 	if (!new_token)
-		return NULL;
+		return (tmp->next);
 	printf("new_token list: \n");
 	print_tokens(new_token);
 	last_new_token = new_token;
@@ -204,8 +204,6 @@ t_token_list	*retokenizer(t_token_list **t, t_var_list *v)
 			printf("Original list: \n");
 			print_tokens(*t);
 			tmp = reprocess_token(t, tmp, &prev, v);
-			if (!tmp)
-				return (NULL);
 		}
 		else
 		{

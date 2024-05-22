@@ -164,14 +164,14 @@ t_token_list	*tokenizer(char *str, t_var_list *v)
 	return (lst);
 }
 
-t_token_list	*reprocess_token(t_token_list **tmp,
+t_token_list	*reprocess_token(t_token_list **t, t_token_list *tmp,
 								t_token_list **prev, t_var_list *v)
 {
 	t_token_list	*new_token;
 	t_token_list	*last_new_token;
 	t_token_list	*next;
 
-	new_token = tokenizer((*tmp)->token->value, v);
+	new_token = tokenizer(tmp->token->value, v);
 	if (!new_token)
 		return NULL;
 	printf("new_token list: \n");
@@ -181,23 +181,19 @@ t_token_list	*reprocess_token(t_token_list **tmp,
 		last_new_token = last_new_token->next;
 	if ((*prev))
 		(*prev)->next = new_token;
-	//else
-		//*t = new_token; 
-	last_new_token->next = (*tmp)->next;
-	next = (*tmp)->next;
-	free(*tmp);
-	*tmp = next;
-	return (new_token);
+	else
+		*t = new_token;
+	last_new_token->next = tmp->next;
+	next = tmp->next;
+	free(tmp);
+	return (next);
 }
 
 // ls$ARG hello | echo < output
 t_token_list	*retokenizer(t_token_list **t, t_var_list *v)
 {
-	//t_token_list	*new_token;
 	t_token_list	*prev;
-	//t_token_list	*last_new_token;
 	t_token_list	*tmp;
-	//t_token_list	*next;
 
 	prev = NULL;	
 	tmp = *t;
@@ -206,28 +202,9 @@ t_token_list	*retokenizer(t_token_list **t, t_var_list *v)
 		if (ft_strchr(tmp->token->value, ' '))
 		{
 			printf("Original list: \n");
-			print_tokens((*t));
-			/*
-			new_token = tokenizer(tmp->token->value, v);
-			if (!new_token)
-				return NULL;
-			printf("new_token list: \n");
-			print_tokens(new_token);
-			
-			last_new_token = new_token;
-			while (last_new_token->next)
-				last_new_token = last_new_token->next;
-
-			if (prev)
-				prev->next = new_token;
-			else
-				*t = new_token;
-			
-			last_new_token->next = tmp->next;
-			next = tmp->next;
-			free(tmp);
-			tmp = next;*/
-			if (!reprocess_token(&tmp, &prev, v))
+			print_tokens(*t);
+			tmp = reprocess_token(t, tmp, &prev, v);
+			if (!tmp)
 				return (NULL);
 		}
 		else

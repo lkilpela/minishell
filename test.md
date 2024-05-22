@@ -7,7 +7,7 @@
 | 5 | `ls -l > output.txt` | ls<br>-l<br>\><br>output.txt | WORD<br>WORD<br>OP_GREAT<br>WORD |
 | 6 | `echo "Hello World"` | echo<br>Hello<br>World | WORD<br>WORD<br>WORD |
 | 7 | `echo $HOME` | echo<br>/Users/lumik<br>($HOME get expanded from local var) | WORD<br>VAR |
-| 8 | `ls -l; echo "Hello World"` | token_value: ls, token_type: WORD; token_value: -l;, token_type: WORD; token_value: echo, token_type: WORD; token_value: Hello World, token_type: WORD |
+| 8 | `ls -l; echo "Hello World"` | ls<br>-l;<br>echo<br>Hello<br>World | WORD<br>WORD<br>WORD<br>WORD<br>WORD |
 | 9 | `echo $PATH` | token_value: echo, token_type: WORD; token_value: $PATH, token_type: VAR|
 | 10 | `echo 'Hello World'`	| token_value: echo, token_type: WORD; token_value: 'Hello World', token_type: WORD | 
 | 11 | `username="John Doe"` | token_value: username="John Doe", token_type: WORD |

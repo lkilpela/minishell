@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:06:24 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/20 11:10:38 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/22 14:47:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ void	built_echo(t_simple_cmd *cmd)
 	}
 	while (i < cmd->num_of_args)
 	{
-		ft_printf("%s", cmd->args[i++]);
+		printf("echo output: \n");
+		printf("%s", cmd->args[i++]);
 		if (cmd->num_of_args != i)
-			ft_printf(" ");
+			printf(" ");
 	}
 	if (!n_flag)
-		ft_printf("\n");
+		printf("\n");
 }

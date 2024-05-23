@@ -50,6 +50,7 @@ t_token			*create_token(char *str);
 void			add_token(t_token_list **lst, char *str);
 t_token_list	*tokenizer(char *str);
 t_token_list 	*retokenizer(t_token_list **t);
+void			process_var_assignment(char **input);
 
 // parser
 t_commands		*parser(t_token_list *tokens);

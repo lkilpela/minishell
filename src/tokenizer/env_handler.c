@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 01:58:47 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 04:00:57 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/23 14:12:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,10 @@
 int	env_array_size(char **envp)
 {
 	int	count;
-	
+
 	count = 0;
-    while (envp[count] != NULL) {
-        count++;
-    }
+	while (envp[count] != NULL)
+		count++;
 	return (count);
 }
 
@@ -47,7 +46,7 @@ char	**env_array_dup(char **envp, int size, int cut)
 			free(env_copy);
 			return (NULL);
 		}
-		i++;		
+		i++;
 	}
 	return (env_copy);
 }

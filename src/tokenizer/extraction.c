@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:56:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 22:52:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 23:03:10 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,35 @@
 
 int	token_len(char *str)
 {
-    char	inquote;
-    int	len;
+	char	inquote;
+	int		len;
 
-    len = 0;
-    inquote = 0;
-    while (*str)
-    {
-        if (is_quote(*str))
-        {
-            if (inquote == 0) // If we're not inside a quote
-                inquote = *str; // We're now inside a quote
-            else if (inquote == *str) // If we're inside the same type of quote
-                inquote = 0; // We're now outside the quote
-        }
-        else if (!inquote && (is_operator(*str) 
-				|| is_double_operator(str) || !is_word(*str)))
-        {
-            if (len > 0) // If we've already started a token
-                break; // End the token
-           	if (is_double_operator(str))
-			 	return (2);
-			else
+	len = 0;
+	inquote = 0;
+	while (*str)
+	{
+		if (is_quote(*str))
+		{
+			if (inquote == 0)
+				inquote = *str;
+			else if (inquote == *str)
+				inquote = 0;
+		}
+		else if (!inquote)
+		{
+			if (is_operator(*str) || is_double_operator(str) || !is_word(*str))
+			{
+				if (len > 0)
+					break ;
+				if (is_double_operator(str))
+					return (2);
 				return (1);
-            break;
-        }
-        len++;
-        str++;
-    }
-    return (len);
+			}
+		}
+		len++;
+		str++;
+	}
+	return (len);
 }
 
 static t_token_type	get_token_type(char *str)

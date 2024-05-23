@@ -75,25 +75,9 @@ static t_token	*create_token(char *str)
 		free(value);
 		return (NULL);
 	}
-	token->value = value;
+	token->value = check_quotes_and_expand(value);
 	token->type = type;
 	return (token);
-}
-
-static void	process_token(t_token *token)
-{
-	char	*value;
-
-	value = NULL;
-	value = check_quotes_and_expand(token->value);
-	if (value)
-	{
-		//free(token->value);
-		token->value = value;
-	}
-	else
-		token->value = ft_strdup("");
-	
 }
 
 static t_token_list *create_token_node(char *str)
@@ -109,7 +93,6 @@ static t_token_list *create_token_node(char *str)
 		free(node);
 		return (NULL);		
 	}
-	process_token(node->token);
 	node->next = NULL;
 	return (node);
 }
@@ -130,18 +113,10 @@ static void	add_token_to_list(t_token_list **lst, t_token_list *node)
 	}
 }
 
-// create new token and add to a list
 static void	add_token(t_token_list **lst, char *str)
 {
 	t_token_list	*node;
-	char			*value;
-	t_token_type	type;
 
-	value = NULL;
-	type = -1;
-	extract_token(str, &value, &type);
-	if (!value)
-		return ;
 	node = create_token_node(str);
 	if (!node)
 		return ;

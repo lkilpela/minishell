@@ -318,3 +318,83 @@ char 	*handle_quotes(char *str)
 	}
 	return (str);
 }*/
+
+
+
+
+
+static t_token	*create_token(char *str)
+{
+	t_token 		*token;
+	char			*value;
+	t_token_type	type;
+
+	value = NULL;
+	type = -1;
+	extract_token(str, &value, &type);
+	if (!value)
+		return (NULL);
+	token = malloc(sizeof(t_token));
+	if (!token)
+	{
+		free(value);
+		return (NULL);
+	}
+	token->value = value;
+	token->type = type;
+	return (token);
+}
+
+static void	process_token(t_token *token)
+{
+	char	*value;
+
+	value = NULL;
+	value = check_quotes_and_expand(token->value);
+	if (value)
+	{
+		//free(token->value);
+		token->value = value;
+	}
+	else
+		token->value = ft_strdup("");
+	
+}
+
+static t_token_list *create_token_node(char *str)
+{
+	t_token_list *node;
+
+	node = malloc(sizeof(t_token_list));
+	if (!node)
+		return (NULL);
+	node->token = create_token(str);
+	if (!node->token)
+	{
+		free(node);
+		return (NULL);		
+	}
+	process_token(node->token);
+	node->next = NULL;
+	return (node);
+}
+
+
+
+// create new token and add to a list
+static void	add_token(t_token_list **lst, char *str)
+{
+	t_token_list	*node;
+	char			*value;
+	t_token_type	type;
+
+	value = NULL;
+	type = -1;
+	extract_token(str, &value, &type);
+	if (!value)
+		return ;
+	node = create_token_node(str);
+	if (!node)
+		return ;
+	add_token_to_list(lst, node);
+}

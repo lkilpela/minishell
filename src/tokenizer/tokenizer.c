@@ -89,7 +89,7 @@ static void	process_token(t_token *token)
 	if (value)
 	{
 		//free(token->value);
-		token->value = remove_outer_quotes(value);
+		token->value = value;
 	}
 	else
 		token->value = ft_strdup("");

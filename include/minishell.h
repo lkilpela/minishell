@@ -49,6 +49,7 @@ char			*expand_var(char *s, char **str);
 char			*check_quotes_and_expand(char *str);
 
 // tokenizer
+int				token_len(char *str);
 t_token			*create_token(char *str);
 void			add_token(t_token_list **lst, char *str);
 t_token_list	*tokenizer(char *str);

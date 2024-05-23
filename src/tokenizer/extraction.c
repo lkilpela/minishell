@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_extraction.c                                 :+:      :+:    :+:   */
+/*   extraction.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:56:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 13:59:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:07:52 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	token_len(char *str)
+int	token_len(char *str)
 {
 	int	inquote;
 	int	len;

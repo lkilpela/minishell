@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:47 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 14:06:37 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:08:54 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_token_list	*tokenizer(char *str)
 	return (lst);
 }
 
-t_token_list	*reprocess_token(t_token_list **t, t_token_list *tmp,
+static t_token_list	*reprocess_token(t_token_list **t, t_token_list *tmp,
 								t_token_list **prev)
 {
 	t_token_list	*new_token;
@@ -69,6 +69,8 @@ t_token_list	*retokenizer(t_token_list **t)
 			printf("Original list: \n");
 			print_tokens(*t);
 			tmp = reprocess_token(t, tmp, &prev);
+			if (!tmp)
+				return (NULL);
 		}
 		else
 		{

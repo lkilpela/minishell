@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:56:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 14:23:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:25:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ t_token	*create_token(char *str)
 	char			*value;
 	t_token_type	type;
 
-	value = NULL;
-	type = -1;
 	extract_token(str, &value, &type);
 	if (!value)
 		return (NULL);

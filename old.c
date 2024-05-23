@@ -240,6 +240,33 @@ char 	*handle_quotes(char *str)
 	return (expanded);
 }
 
+/*char	*expand_variable(char *str)
+{
+	char	*start;
+	char	*prefix;
+	char	*end;
+	char 	*expanded_str;
+	char	*temp;
+	char	*var_name;
+	char	*var_value;
+
+	start = ft_strchr(str, '$');
+	if (start == NULL || *(start + 1) == '\0' || *(start + 1) == '\0')
+		return (ft_strdup(str));
+	end = skip_variable(start);
+	if (start + 1 == end)
+		return (ft_strdup(str));
+	prefix = ft_strndup(str, start - str);
+	var_name = ft_strndup(start + 1, end - start - 1);
+	var_value = lookup_var(var_name); //empty string if doesnt exist, othervise the value
+	free(var_name);
+	temp = ft_strjoin(prefix, var_value);
+	expanded_str = ft_strjoin(temp, expand_variable(end)); //recursively solve all the rest of the variables in the same WORD
+	free(temp);
+	free(prefix);
+	return (expanded_str);
+}*/
+
 /*char	*check_quotes_and_expand(char *str)
 {
 	t_quote_type	quote_type;

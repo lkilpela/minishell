@@ -36,3 +36,25 @@
 | 9 | `"hello"$HOME"test""test2"` | hello/Users/lumiktesttest2 | WORD |
 
 test'okayy' "TEST'inner'Test $HOME" | test <what <<okay
+```
+a_token_value: test'okayy'          a_token_type: WORD
+a_token_value: "TEST'inner'Test /Users/lumik" a_token_type: WORD
+a_token_value: |                    a_token_type: OP_PIPE
+a_token_value: test                 a_token_type: WORD
+a_token_value: <                    a_token_type: OP_LESS
+a_token_value: what                 a_token_type: WORD
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: okay                 a_token_type: WORD
+```
+
+test'okayy' "TEST'inner'Test $HOME" "|" "test" <what <<okay
+```
+a_token_value: test'okayy'          a_token_type: WORD
+a_token_value: "TEST'inner'Test /Users/lumik" a_token_type: WORD
+a_token_value: "|"                  a_token_type: WORD
+a_token_value: "test"               a_token_type: WORD
+a_token_value: <                    a_token_type: OP_LESS
+a_token_value: what                 a_token_type: WORD
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: okay                 a_token_type: WORD
+```

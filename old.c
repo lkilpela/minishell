@@ -398,3 +398,29 @@ static void	add_token(t_token_list **lst, char *str)
 		return ;
 	add_token_to_list(lst, node);
 }
+
+
+int	token_len(char *str)
+{
+	int	inquote;
+	int	len;
+
+	len = 0;
+	inquote = 0;
+	if (is_double_operator(str))
+		return (2);
+	if (is_operator(*str))
+		return (1);
+	while (*str)
+	{
+		if (inquote && is_quote(*str))
+			inquote -= *str;
+		else if (is_quote(*str))
+			inquote += *str;
+		else if (!inquote && !is_word(*str))
+			return (len);
+		len++;
+		str++;
+	}
+	return (len);
+}

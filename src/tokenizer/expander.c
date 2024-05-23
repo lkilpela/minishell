@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 09:15:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:15:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,3 +87,4 @@ char	*expand_variable(char *str)
 	free(temp);
 	free(prefix);
 	return (expanded_str);
+}

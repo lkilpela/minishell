@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 13:22:53 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:31:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ static t_quote_type	update_quote_type(t_quote_type quote_type, char c)
 	else if (quote_type == DOUBLE_QUOTE && c == D_QUOTE)
 		return (NO_QUOTE);
 	return (quote_type);
+}
+
+char	*lookup_var(char *var_name)
+{
+	t_var_list	*v;
+
+	v = ms()->var_list;
+	while (v)
+	{
+		if (ft_strcmp(v->key, var_name) == 0)
+			return (ft_strdup(v->value));
+		v = v->next;
+	}
+	return (ft_strdup(""));
 }
 
 char	*expand_var(char *s, char **str)

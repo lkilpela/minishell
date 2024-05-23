@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 12:22:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:32:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,42 @@ void	add_var(char *str)
 	if (!node)
 		return;
 	add_var_to_list(node);
+}
+
+static void	handle_empty_var_assignment(char **input)
+{
+	if (*input == NULL || **input == '\0')
+	{
+		add_var(*input);
+		return ;
+	}
+}
+
+void	process_var_assignment(char **input)
+{
+	char			*equal_pos;
+	char			*value;
+	char			*prefix;
+	char 			*new_input;
+	
+	handle_empty_var_assignment(input);
+	new_input = NULL;
+	equal_pos = ft_strchr(*input, EQUAL_SIGN);
+	if (equal_pos)
+	{
+		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
+		value = check_quotes_and_expand(equal_pos + 1);
+		new_input = ft_strjoin(prefix, value);
+		if (new_input)
+		{
+			add_var(new_input);
+			free(prefix);
+			free(new_input);
+		}
+	}
+	else
+		add_var(*input);
+	print_last_node();
 }
 
 t_var_list	*get_envp(char **envp)

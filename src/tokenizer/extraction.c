@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:56:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 22:08:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 22:09:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	token_len(char *str)
 		len++;
 		str++;
 	}
-	printf("str: %s, len: %d\n", str, len);
 	return (len);
 }
 

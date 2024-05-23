@@ -10,17 +10,17 @@
 # include <libft.h>
 # include <structs.h>
 
-# define GREEN "\e[0;32m"
-# define RESET	"\e[0m"
-# define BLUE "\e[0;34m"
-# define CYAN "\e[0;36m"
+# define GREEN "\001\e[0;32m\002"
+# define RESET	"\001\e[0m\002"
+# define BLUE "\001\e[0;34m\002"
+# define CYAN "\001\e[0;36m\002"
 
 # define PROMPT GREEN "minishell$ " RESET
 # define DOLLAR_SIGN '$'
 # define UNDERSCORE '_'
 # define EQUAL_SIGN '='
 # define S_QUOTE '\''
-# define D_QUOTE '"' 
+# define D_QUOTE '"'
 
 // minishell
 t_ms			*ms(void);
@@ -95,4 +95,4 @@ void 			print_last_token_node(t_token_list *t);
 char			*get_type_str(int e);
 
 
-#endif              
+#endif

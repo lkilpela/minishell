@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/23 19:18:30 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/23 22:21:16 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,38 +34,59 @@ void	builtin_tests(t_commands *cmds)
 	}
 }
 
+void	handle_quotes(char **val)
+{
+	char	quote;
+	
+	quote = **val;
+	ft_memmove(*val, *val + 1, ft_strlen(*val));
+	while (**val)
+	{
+		if (**val == quote)
+		{
+			ft_memmove(*val, *val + 1, ft_strlen(*val));
+			break ;
+		}
+		(*val)++;
+	}
+}
+
+char	*handle_node_quotes(char *val)
+{
+	char	*start;
+	char	*new_val;
+	size_t	len;
+	
+	len = ft_strlen(val);
+	start = val;
+	while (*val)
+	{
+		if (is_quote(*val))
+		{
+			handle_quotes(&val);
+			break ;
+		}
+		val++;
+	}
+	if (ft_strlen(start) != len)
+	{
+		new_val = ft_strdup(start);
+		free(start);
+		if (!new_val)
+			return (NULL);
+		return (new_val);
+	}
+	return (start);
+}
+
 void	clear_quotes(t_token_list *t)
 {
-	int		len;
 	char	*val;
-	int		i;
-	int		quote;
 
 	while (t)
 	{
 		val = t->token->value;
-		len = token_len(t->token->value);
-		i = 0;
-		while (*val)
-		{
-			if (is_quote(*val))
-			{
-				quote = *val;
-				ft_memmove(val, val + 1, ft_strlen(val));
-				len--;
-				while (*val)
-				{
-					if (*val == quote)
-					{
-						ft_memmove(val, val + 1, ft_strlen(val));
-						len--;
-						break ;
-					}
-					val++;
-				}
-			}
-			val++;
-		}
+		t->token->value = handle_node_quotes(val);
 		t = t->next;
 	}
 }
@@ -84,6 +105,7 @@ void	minishell_loop(void)
 		t = tokenizer(input);
 		retokenizer(&t);
 		clear_quotes(t);
+		printf("final token list: \n");
 		print_tokens(t);
 		cmds = parser(t);
 		if (ft_strchr(cmds->simples[0]->command, EQUAL_SIGN) != NULL)

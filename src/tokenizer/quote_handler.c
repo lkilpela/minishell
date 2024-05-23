@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 09:42:27 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:45:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ static t_quote_type	identify_quotes(char *str)
 				quote_type = NO_QUOTE;
 			else
 				quote_type = DOUBLE_QUOTE;
-			str++;
 		}
+		str++;
 	}
+	printf("quote_type: 1(s) 2(d): %d\n", quote_type);
 	return (quote_type);
 }
 

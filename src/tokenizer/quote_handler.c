@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 09:21:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:22:11 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char 	*handle_quotes(char *str)
 	char			*expanded;
 	t_quote_type 	quote_type;
 
-	quote_type = identify_quotes(&str);
+	quote_type = identify_quotes(str);
 	if ((quote_type == DOUBLE_QUOTE || quote_type == NO_QUOTE))
 		expanded = expand_if_needed(str);
 	else

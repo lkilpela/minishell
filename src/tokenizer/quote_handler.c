@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 12:16:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 12:21:55 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_quote_type	update_quote_type(t_quote_type quote_type, char c)
+static t_quote_type	update_quote_type(t_quote_type quote_type, char c)
 {
 	if (quote_type == NO_QUOTE)
 	{
@@ -28,7 +28,7 @@ t_quote_type	update_quote_type(t_quote_type quote_type, char c)
 	return (quote_type);
 }
 
-char	*expand_var(char *s, char **str)
+static char	*expand_var(char *s, char **str)
 {
 	char	*end;
 	char	*name;

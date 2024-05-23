@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/22 20:18:37 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/23 12:22:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void extract_var(char *str, char **name, char **value)
 	*value = ft_strdup(equal_sign + 1);
 	if (!*value)
 		return ;
-	//*value = remove_outer_quotes(*value);
 }
 
 // create a new t_var_list node

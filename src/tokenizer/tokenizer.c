@@ -83,11 +83,9 @@ static t_token	*create_token(char *str)
 static void	process_token(t_token *token)
 {
 	char	*value;
-	t_quote_type	quote_type;
 
 	value = NULL;
-	quote_type = identify_quotes(token->value);
-	value = handle_quotes(token->value, quote_type);
+	value = handle_quotes(token->value);
 	if (value)
 	{
 		//free(token->value);

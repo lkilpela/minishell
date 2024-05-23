@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 12:12:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 12:16:12 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ char	*expand_var(char *s, char **str)
 	char	*end;
 	char	*name;
 	char	*value;
-	char	*prefix;
-	char	*posfix;
 	char	*new_str;
 	char	*final_str;
 
@@ -42,14 +40,10 @@ char	*expand_var(char *s, char **str)
 	name = ft_strndup(s + 1, end - s - 1);
 	value = lookup_var(name);
 	free(name);
-	prefix = ft_strndup(*str, s - *str);
-	posfix = ft_strdup(end);
-	new_str = ft_strjoin(prefix, value);
-	final_str = ft_strjoin(new_str, posfix);
+	new_str = ft_strjoin(ft_strndup(*str, s - *str), value);
+	final_str = ft_strjoin(new_str, ft_strdup(end));
 	s = final_str + ft_strlen(new_str);
 	free(value);
-	free(prefix);
-	free(posfix);
 	free(new_str);
 	*str = final_str;
 	return (s);

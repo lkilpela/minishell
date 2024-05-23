@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 11:52:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:25:21 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	process_var_assignment(char **input)
 	if (equal_pos)
 	{
 		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
-		//value = handle_quotes(equal_pos + 1);
+		value = check_quotes_and_expand(equal_pos + 1);
 		new_input = ft_strjoin(prefix, value);
 		if (new_input)
 		{
@@ -62,7 +62,7 @@ char	*lookup_var(char *var_name)
 	return (ft_strdup(""));
 }
 
-char	*expand_variable(char *str)
+/*char	*expand_variable(char *str)
 {
 	char	*start;
 	char	*prefix;
@@ -87,4 +87,4 @@ char	*expand_variable(char *str)
 	free(temp);
 	free(prefix);
 	return (expanded_str);
-}
+}*/

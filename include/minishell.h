@@ -45,6 +45,7 @@ void			env_add(char *keyval);
 //char 			*handle_quotes(char *str);
 //t_quote_type	identify_quotes(char **str);
 //char			*remove_outer_quotes(char *str);
+char			*expand_var(char *s, char **str);
 char			*check_quotes_and_expand(char *str);
 
 // tokenizer

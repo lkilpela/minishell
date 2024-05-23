@@ -92,65 +92,95 @@ static void	process_token(t_token *token)
 		token->value = ft_strdup("");
 	
 }
+
+t_quote_type	identify_quotes(char *str)
+{
+	t_quote_type	quote_type;
+
+	quote_type = NO_QUOTE;
+
+	while (*str)
+	{
+		if (*str == S_QUOTE)
+		{
+			if (quote_type == SINGLE_QUOTE)
+				quote_type = NO_QUOTE;
+			else
+				quote_type = SINGLE_QUOTE;
+		}
+		else if (*str == D_QUOTE)
+		{
+			if (quote_type == DOUBLE_QUOTE)
+				quote_type = NO_QUOTE;
+			else
+				quote_type = DOUBLE_QUOTE;
+		}
+		str++;
+	}
+	return (quote_type);
+}
+
+char	*remove_outer_quotes(char *str)
+{
+	size_t	len;
+
+	len = ft_strlen(str);
+	if (len < 2)
+		return str;
+	if (is_quote(str[0])&& is_quote(str[len - 1]))
+	{
+		ft_memmove(str, str + 1, len - 2);
+		str[len - 2] = '\0';
+	}
+	return (str);
+}
+
 char	*expand_variable(char *str, t_quote_type quote_type)
 {
 	char	*start;
 	char	*prefix;
 	char	*end;
-	char 	*expanded_str;
+	char	*expanded_str;
 	char	*temp;
 	char	*var_name;
 	char	*var_value;
 
-	start = ft_strchr(str, '$');
-	if (start == NULL || *(start + 1) == '\0' || *(start + 1) == '\0')
-		return (ft_strdup(str));
-	end = skip_variable(start);
-	if (start + 1 == end)
-		return (ft_strdup(str));
-	prefix = ft_strndup(str, start - str);
-	var_name = ft_strndup(start + 1, end - start - 1);
-	var_value = lookup_var(var_name); //empty string if doesnt exist, othervise the value
-	free(var_name);
-	temp = ft_strjoin(prefix, var_value);
-	expanded_str = ft_strjoin(temp, expand_variable(end, quote_type)); //recursively solve all the rest of the variables in the same WORD
-	free(temp);
-	free(prefix);
-	return (expanded_str);
-}
-
-static t_quote_type	identify_quotes(char **str)
-{
-	size_t			len;
-	t_quote_type	quote_type;
-
-	quote_type = NO_QUOTE;
-	len = ft_strlen(*str);
-	if ((*str)[0] == S_QUOTE && (*str)[len - 1] == S_QUOTE)
+	start = str;
+	while (*start)
 	{
-		(*str)[len - 1] = '\0';
-		(*str)++;
-		quote_type = SINGLE_QUOTE;
+		if (*start == S_QUOTE && (quote_type == NO_QUOTE || quote_type == SINGLE_QUOTE))
+		{
+			if (quote_type == SINGLE_QUOTE)
+				quote_type = NO_QUOTE;
+			else
+				quote_type = SINGLE_QUOTE;
+		}
+		else if (*start == D_QUOTE && (quote_type == NO_QUOTE || quote_type == DOUBLE_QUOTE))
+		{
+			if (quote_type == DOUBLE_QUOTE)
+				quote_type = NO_QUOTE;
+			else
+				quote_type = DOUBLE_QUOTE;
+		}
+		if (*start == '$' && (quote_type == DOUBLE_QUOTE || quote_type == NO_QUOTE))
+		{
+			end = skip_variable(start);
+			if (start + 1 == end)
+				return (ft_strdup(str));
+			prefix = ft_strndup(str, start - str);
+			var_name = ft_strndup(start + 1, end - start - 1);
+			var_value = lookup_var(var_name); //empty string if doesnt exist, othervise the value
+			free(var_name);
+			temp = ft_strjoin(prefix, var_value);
+			if (end)
+				expanded_str = ft_strjoin(temp, expand_variable(end, NO_QUOTE)); //recursively solve all the rest of the variables in the same WORD
+			else
+				expanded_str = ft_strdup(temp);
+			free(temp);
+			free(prefix);
+			return (expanded_str);
+		}
+		start++;
 	}
-	else if ((*str)[0] == D_QUOTE && (*str)[len - 1] == D_QUOTE)
-	{
-		(*str)[len - 1] = '\0';
-		(*str)++;
-		quote_type = DOUBLE_QUOTE;
-	}
-	return (quote_type);
-}
-static char	*expand_if_needed(char *str)
-{
-	char	*expanded;
-
-	expanded = NULL;
-	if (ft_strchr(str, DOLLAR_SIGN))
-	{
-		expanded = expand_variable(str);
-		if (!expanded)
-			return (NULL);
-		return (expanded);
-	}
-	return (str);
+	return (ft_strdup(str));
 }

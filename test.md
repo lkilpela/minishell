@@ -35,3 +35,4 @@
 | 8 | `"hello"'$HOME'` | hello$HOME | WORD |
 | 9 | `"hello"$HOME"test""test2"` | hello/Users/lumiktesttest2 | WORD |
 
+test'okayy' "TEST'inner'Test $HOME" | test <what <<okay

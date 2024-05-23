@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:56:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 22:09:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 22:12:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	token_len(char *str)
 		else if (!inquote && !is_word(*str))
 			return (len);
 		else if (inquote && (*str == '|' || *str == '<' || *str == '>'))
-            return (len);
+			return (len);
 		len++;
 		str++;
 	}

@@ -42,9 +42,10 @@ void			env_remove(char *keyval);
 void			env_add(char *keyval);
 
 // quote handler
-char 			*handle_quotes(char *str);
+//char 			*handle_quotes(char *str);
 //t_quote_type	identify_quotes(char **str);
-char			*remove_outer_quotes(char *str);
+//char			*remove_outer_quotes(char *str);
+char			*check_quotes_and_expand(char *str);
 
 // tokenizer
 t_token_list	*tokenizer(char *str);

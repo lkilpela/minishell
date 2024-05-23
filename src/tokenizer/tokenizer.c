@@ -85,7 +85,7 @@ static void	process_token(t_token *token)
 	char	*value;
 
 	value = NULL;
-	value = handle_quotes(token->value);
+	value = check_quotes_and_expand(token->value);
 	if (value)
 	{
 		//free(token->value);
@@ -212,6 +212,7 @@ t_token_list	*retokenizer(t_token_list **t)
 			tmp = tmp->next;
 		}
 	}
+
 	printf("Updated list: \n");
 	print_tokens(*t);
 	return (*t);

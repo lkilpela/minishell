@@ -209,3 +209,33 @@ char	*expand_variable(char *str, t_quote_type quote_type)
 	}
 	return (ft_strdup(str));
 }
+
+
+static char	*expand_if_needed(char *str)
+{
+	char	*expanded;
+
+	expanded = NULL;
+	if (ft_strchr(str, DOLLAR_SIGN))
+	{
+		expanded = expand_variable(str);
+		if (!expanded)
+			return (NULL);
+		return (expanded);
+	}
+	return (str);
+}
+
+char 	*handle_quotes(char *str)
+{
+	char			*expanded;
+	t_quote_type 	quote_type;
+
+	quote_type = identify_quotes(str);
+	printf("quote_type: 1(s) 2(d): %d\n", quote_type);
+	if ((quote_type == DOUBLE_QUOTE || quote_type == NO_QUOTE))
+		expanded = expand_if_needed(str);
+	else
+		expanded = ft_strdup(str);
+	return (expanded);
+}

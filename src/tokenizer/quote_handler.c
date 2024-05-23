@@ -6,65 +6,60 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 09:45:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:50:25 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static t_quote_type	identify_quotes(char *str)
+char	*check_quotes_and_expand(char *str)
 {
 	t_quote_type	quote_type;
+	char			*s;
 
 	quote_type = NO_QUOTE;
-
-	while (*str)
+	s = str;
+	// '$some'"echo "$HOME"" -> final_str: '$some'"echo "User/lumik" $USER"
+	while (*s)
 	{
-		if (*str == S_QUOTE && quote_type != DOUBLE_QUOTE)
+		if (quote_type == NO_QUOTE)
 		{
-			if (quote_type == SINGLE_QUOTE)
-				quote_type = NO_QUOTE;
-			else
+			if (*s == S_QUOTE)
 				quote_type = SINGLE_QUOTE;
-		}
-		else if (*str == D_QUOTE && quote_type != SINGLE_QUOTE)
-		{
-			if (quote_type == DOUBLE_QUOTE)
-				quote_type = NO_QUOTE;
-			else
+			else if (*s == D_QUOTE)
 				quote_type = DOUBLE_QUOTE;
 		}
-		str++;
-	}
-	printf("quote_type: 1(s) 2(d): %d\n", quote_type);
-	return (quote_type);
-}
+		else if (quote_type == SINGLE_QUOTE)
+		{
+			if (*s == S_QUOTE)
+				quote_type = NO_QUOTE;
+		}
+		else if (quote_type == DOUBLE_QUOTE)
+		{
+			if (*s == D_QUOTE)
+				quote_type = NO_QUOTE;
+		}
+		if (quote_type != SINGLE_QUOTE && *s == '$')
+		{
+			char *end = skip_variable(s);
+			char *name = ft_strndup(s + 1, end - s - 1);
+			char *value = lookup_var(name);
+			free(name);
 
-static char	*expand_if_needed(char *str)
-{
-	char	*expanded;
+			char *prefix = ft_strndup(str, s - str);
+			char *posfix = ft_strdup(end);
+			char *new_str = ft_strjoin(prefix, value);
+			char *final_str = ft_strjoin(new_str, posfix);
 
-	expanded = NULL;
-	if (ft_strchr(str, DOLLAR_SIGN))
-	{
-		expanded = expand_variable(str);
-		if (!expanded)
-			return (NULL);
-		return (expanded);
+			s = final_str + ft_strlen(new_str);
+			
+			free(value);
+			free(prefix);
+			free(posfix);
+			free(new_str);
+			str = final_str;		
+		}	
+		s++;
 	}
 	return (str);
-}
-
-char 	*handle_quotes(char *str)
-{
-	char			*expanded;
-	t_quote_type 	quote_type;
-
-	quote_type = identify_quotes(str);
-	printf("quote_type: 1(s) 2(d): %d\n", quote_type);
-	if ((quote_type == DOUBLE_QUOTE || quote_type == NO_QUOTE))
-		expanded = expand_if_needed(str);
-	else
-		expanded = ft_strdup(str);
-	return (expanded);
 }

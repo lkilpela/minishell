@@ -31,7 +31,7 @@
 | 4 | `echo '$USER'` | echo<br>$USER | WORD<br>WORD |
 | 5 | `"$HOME here '$HOME' test"` | /Users/lumik<br>here <br>$HOME<br>test | WORD<br>WORD<br>WORD<br>WORD |
 | 6 | `"'$HOME' here $HOME test"` | '/Users/lumik' here /Users/lumik test | WORD |
-| 7 | `"echo "test '$HOME' whatever"` | echo<br>test '/Users/lumik' whatever | WORD<br>WORD |
+| 7 | `echo "test '$HOME' whatever"` | echo<br>test '/Users/lumik' whatever | WORD<br>WORD |
 | 8 | `"hello"'$HOME'` | hello$HOME | WORD |
 | 9 | `"hello"$HOME"test""test2"` | hello/Users/lumiktesttest2 | WORD |
 

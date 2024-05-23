@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 14:22:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 09:22:11 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 09:42:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@ static t_quote_type	identify_quotes(char *str)
 
 	while (*str)
 	{
-		if (*str == S_QUOTE)
+		if (*str == S_QUOTE && quote_type != DOUBLE_QUOTE)
 		{
 			if (quote_type == SINGLE_QUOTE)
 				quote_type = NO_QUOTE;
 			else
 				quote_type = SINGLE_QUOTE;
 		}
-		else if (*str == D_QUOTE)
+		else if (*str == D_QUOTE && quote_type != SINGLE_QUOTE)
 		{
 			if (quote_type == DOUBLE_QUOTE)
 				quote_type = NO_QUOTE;
 			else
 				quote_type = DOUBLE_QUOTE;
+			str++;
 		}
-		str++;
 	}
 	return (quote_type);
 }
@@ -60,6 +60,7 @@ char 	*handle_quotes(char *str)
 	t_quote_type 	quote_type;
 
 	quote_type = identify_quotes(str);
+	printf("quote_type: 1(s) 2(d): %d\n", quote_type);
 	if ((quote_type == DOUBLE_QUOTE || quote_type == NO_QUOTE))
 		expanded = expand_if_needed(str);
 	else

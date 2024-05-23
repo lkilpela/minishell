@@ -93,6 +93,36 @@ static void	process_token(t_token *token)
 	
 }
 
+// switches between NO_QUOTE, SINGLE_QUOTE, and DOUBLE_QUOTE 
+// every time it encounters a quote character
+static t_quote_type	identify_quotes(char *str)
+{
+	t_quote_type	quote_type;
+
+	quote_type = NO_QUOTE;
+
+	while (*str)
+	{
+		if (*str == S_QUOTE)
+		{
+			if (quote_type == SINGLE_QUOTE)
+				quote_type = NO_QUOTE;
+			else
+				quote_type = SINGLE_QUOTE;
+		}
+		else if (*str == D_QUOTE)
+		{
+			if (quote_type == DOUBLE_QUOTE)
+				quote_type = NO_QUOTE;
+			else
+				quote_type = DOUBLE_QUOTE;
+		}
+		str++;
+	}
+	return (quote_type);
+}
+
+// toggle quotes and determine the content inside quotes
 static t_quote_type	identify_quotes(char **str)
 {
 	size_t			len;

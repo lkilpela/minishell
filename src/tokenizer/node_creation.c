@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:33 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 14:06:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:24:21 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_token_list	*create_token_node(char *str)
 {
 	t_token_list	*node;
 
-	node = malloc(sizeof(t_token_list));
+	node = ft_calloc(1, sizeof(t_token_list));
 	if (!node)
 		return (NULL);
 	node->token = create_token(str);

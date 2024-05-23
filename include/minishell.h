@@ -41,23 +41,15 @@ int				env_exists(char *keyval);
 void			env_remove(char *keyval);
 void			env_add(char *keyval);
 
-// quote handler
-//char 			*handle_quotes(char *str);
-//t_quote_type	identify_quotes(char **str);
-//char			*remove_outer_quotes(char *str);
-char			*expand_var(char *s, char **str);
+// expander
 char			*check_quotes_and_expand(char *str);
 
-// tokenizer
+// tokenizer & var_assignment handler
 int				token_len(char *str);
 t_token			*create_token(char *str);
 void			add_token(t_token_list **lst, char *str);
 t_token_list	*tokenizer(char *str);
 t_token_list 	*retokenizer(t_token_list **t);
-
-// expander
-char 			*expand_variable(char *str);
-void			process_var_assignment(char **input);
 
 // parser
 t_commands		*parser(t_token_list *tokens);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:46:24 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/19 14:34:45 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/23 13:39:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,4 @@ char	*skip_quote(char *str)
 	if (end == NULL)
 		return (NULL);
 	return (end + 1);
-}
-
-int	is_var_name(char c)
-{
-	return (!is_whitespace(c) && !is_operator(c)
-		&& !is_quote(c) && c != ':') && c != '$';
-}
-
-char	*skip_variable(char *str)
-{
-	if (*str == '$')
-	{
-		str++; // skip dollar sign
-		if (*str == '?')
-		{
-			str++; // special case for '$?'
-			return (str); //return the end after the special case
-		}
-		while (*str && is_var_name(*str)) //specific checker for variable delimiters which are different from WORD ones
-			str++;
-	}
-	return (str);
 }

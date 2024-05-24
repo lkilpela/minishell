@@ -35,7 +35,6 @@ void			clear_lal();
 void			*free_one_lal(void *ptr);
 
 // error
-void			print_err_msg(char *from);
 void			ft_error(t_err type, char *msg, int check_errno);
 t_list			*allocs(void);
 void			print_error(int err);

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 04:12:54 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/24 23:53:12 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void	built_exit(void)
     ft_printf("                                           \\▓▓    ▓▓         \n");
     ft_printf("                                            \\▓▓▓▓▓▓          \n");
 	//clear_all function etc
-	exit(0);
+	clear_lal();
+    exit(EXIT_SUCCESS);
 }

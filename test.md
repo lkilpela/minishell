@@ -67,3 +67,95 @@ a_token_value: test                 a_token_type: WORD
 a_token_value: /Users/lumik"ANDME is lumik '/Users/lumik'again" a_token_type: WORD
 a_token_value: 'someting $HOME not expanded' a_token_type: WORD
 ```
+
+# HEREDOC
+
+1. Single line
+```c
+minishell$ <<END
+Calling tokenizer: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: END                  a_token_type: WORD
+final token list: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: END                  a_token_type: WORD
+After quote_clear: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: END                  a_token_type: WORD
+heredoc> This is a test.
+heredoc> END
+This is a test.
+```
+
+2. Multiple lines of input
+
+```c
+minishell$ <<STOP
+Calling tokenizer: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: STOP                 a_token_type: WORD
+final token list: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: STOP                 a_token_type: WORD
+After quote_clear: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: STOP                 a_token_type: WORD
+heredoc> Line 1.
+heredoc> Line 2.
+heredoc> Line 3.
+heredoc> STOP
+Line 1.
+Line 2.
+Line 3.
+```
+
+3. Variable expansion
+
+```c
+minishell$ <<END
+Calling tokenizer: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: END                  a_token_type: WORD
+final token list: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: END                  a_token_type: WORD
+After quote_clear: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: END                  a_token_type: WORD
+heredoc> test
+heredoc> $USER
+heredoc> END
+test
+lumik
+```
+## NOT WORKING 
+```c
+minishell$ <<END
+Calling tokenizer: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: END                  a_token_type: WORD
+final token list: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: END                  a_token_type: WORD
+After quote_clear: 
+a_token_value: <<                   a_token_type: OP_DLESS
+a_token_value: END                  a_token_type: WORD
+heredoc> Hello, $USER.
+heredoc> END
+Hello,
+```
+
+4. No delimeter
+
+## NOT WORKING
+```c
+minishell$ <<
+Calling tokenizer: 
+a_token_value: <<                   a_token_type: OP_DLESS
+final token list: 
+a_token_value: <<                   a_token_type: OP_DLESS
+After quote_clear: 
+a_token_value: <<                   a_token_type: OP_DLESS
+heredoc> This is a test.
+zsh: segmentation fault  ./minishell
+```

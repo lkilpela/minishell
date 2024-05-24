@@ -25,7 +25,7 @@ void	*free_one_lal(void *ptr)
 		}
 		lalloc = lalloc->next;
 	}
-	ft_printf("free_one_lal, pointer wasn't in the list");
+	ft_printf("free_one_lal, pointer wasn't in the list or was NULL");
 	return (NULL);
 }
 

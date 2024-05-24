@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   var.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 22:34:33 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/24 11:38:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void extract_var(char *str, char **key, char **value)
+static void	extract_var(char *str, char **key, char **value)
 {
 	char	*equal_sign;
 
@@ -30,7 +30,7 @@ static void extract_var(char *str, char **key, char **value)
 }
 
 // create a new t_var_list node
-static t_var_list *create_var_node(char *key, char *value)
+static t_var_list	*create_var_node(char *key, char *value)
 {
 	t_var_list	*node;
 
@@ -42,7 +42,7 @@ static t_var_list *create_var_node(char *key, char *value)
 	return (node);
 }
 
-t_var_list	*var_get_last(void)
+static t_var_list	*var_get_last(void)
 {
 	t_var_list	*last;
 
@@ -78,9 +78,9 @@ void	add_var(char *str)
 	if (!key || !value)
 		return ;
 	vars = ms()->var_list;
-	while (vars) // if the name is existed, update it with new one
+	while (vars)
 	{
-		if(ft_strcmp(vars->key, key) == 0)
+		if (ft_strcmp(vars->key, key) == 0)
 		{
 			free(vars->key);
 			free(vars->value);
@@ -92,78 +92,6 @@ void	add_var(char *str)
 	}
 	node = create_var_node(key, value);
 	if (!node)
-		return;
+		return ;
 	add_var_to_list(node);
-}
-
-static void	handle_empty_var_assignment(char **input)
-{
-	if (*input == NULL || **input == '\0')
-	{
-		add_var(*input);
-		return ;
-	}
-}
-
-void	process_var_assignment(char **input)
-{
-	char			*equal_pos;
-	char			*value;
-	char			*prefix;
-	char 			*new_input;
-
-	handle_empty_var_assignment(input);
-	new_input = NULL;
-	equal_pos = ft_strchr(*input, EQUAL_SIGN);
-	if (equal_pos)
-	{
-		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
-		value = check_quotes_and_expand(equal_pos + 1);
-		new_input = ft_strjoin(prefix, value);
-		if (new_input)
-		{
-			add_var(new_input);
-			free(prefix);
-			free(new_input);
-		}
-	}
-	else
-		add_var(*input);
-	print_last_node();
-}
-
-t_var_list	*get_envp(char **envp)
-{
-	int			i;
-
-	i = 0;
-	while (envp[i])
-	{
-		add_var(envp[i]);
-		i++;
-	}
-	return (ms()->var_list);
-}
-
-void	var_remove(char *key)
-{
-	t_var_list	*vars;
-
-	vars = ms()->var_list;
-	if (!key)
-		return ;
-	while (vars)
-	{
-		if (ft_strcmp(key, vars->key) == 0)
-		{
-			if (vars->previous)
-				vars->previous->next = vars->next;
-			if (vars->next)
-				vars->next->previous = vars->previous;
-			free(vars);
-			vars = NULL;
-			return ;
-		}
-		vars = vars->next;
-	}
 }

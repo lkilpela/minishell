@@ -31,6 +31,7 @@ t_var_list 		*get_envp(char **envp);
 void			add_var(char *str);
 char			*lookup_var(char *var_name);
 void			var_remove(char *keyval);
+void			process_var_assignment(char **input);
 
 //env var
 int				env_array_size(char **envp);
@@ -45,13 +46,12 @@ void			env_add(char *keyval);
 // expander
 char			*check_quotes_and_expand(char *str);
 
-// tokenizer & var_assignment handler
+// tokenizer
 int				token_len(char *str);
 t_token			*create_token(char *str);
 void			add_token(t_token_list **lst, char *str);
 t_token_list	*tokenizer(char *str);
 t_token_list 	*retokenizer(t_token_list **t);
-void			process_var_assignment(char **input);
 
 // parser
 t_commands		*parser(t_token_list *tokens);
@@ -78,7 +78,6 @@ char			*skip_quote(char *str);
 char			*skip_variable(char *str);
 
 // utils2
-int				get_token_len(char *str);
 char			*ft_strndup(char *str, size_t len);
 int				ft_strcmp(char *s1, char *s2);
 

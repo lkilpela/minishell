@@ -17,7 +17,7 @@
 | 12 | `count=10` | count=10 | WORD |
 |    | `echo $count` | echo<br>10 | WORD<br>WORD |
 | 13 | `PATH=$HOME/bin:$PATH` | ? | ? |
-| 14 | `echo$USEReee` | echolumikeee | WORD |
+| 14 | `echo$USEReee` | echo<br>emptystring | WORD |
 | 15 | `ARG=$USER` | ARG=lumik | WORD |
 |    | `echo $USER` | echo<br>lumik | WORD<br>WORD |
 

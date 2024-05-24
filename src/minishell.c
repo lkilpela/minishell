@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/24 00:01:02 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/24 11:09:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,9 @@ void	minishell_loop(void)
 	{
 		input = readline(PROMPT);
 		add_history(input);
+		printf(GREEN "Calling tokenizer: \n" RESET);
 		t = tokenizer(input);
+		print_tokens(t);
 		retokenizer(&t);
 		printf("final token list: \n");
 		print_tokens(t);

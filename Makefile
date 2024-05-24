@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
+#    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/24 12:35:15 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/05/24 15:06:16 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,10 @@ SRCS			=	minishell.c \
 					redirection.c \
 					simple_cmd.c \
 					print_and_free.c \
-					
+					errors.c \
+					lalloc.c \
+					safe_alloc.c \
+
 ################################################################################
 # RULES
 ################################################################################
@@ -76,7 +79,9 @@ SRCS			=	minishell.c \
 #it will look throuhg all these directories to find the file
 #this way we dont have to specify folders in front of each file
 #just have to make sure each file in the $(SRCS) is a unique name
-vpath %.c $(SRC_DIR) $(SRC_DIR)/tokenizer $(SRC_DIR)/env_var $(SRC_DIR)/parser $(SRC_DIR)/builtins
+vpath %.c $(SRC_DIR) $(SRC_DIR)/tokenizer \
+			$(SRC_DIR)/env_var $(SRC_DIR)/parser $(SRC_DIR)/builtins \
+			$(SRC_DIR)/error
 
 all: $(NAME)
 

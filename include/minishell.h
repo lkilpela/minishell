@@ -6,9 +6,12 @@
 # include <stdio.h> //readline
 # include <stdlib.h> //malloc, free
 # include <unistd.h> //write, access, getcwd, chdir
+# include <string.h> //strerror
+# include <errno.h> //errno
 
 # include <libft.h>
 # include <structs.h>
+# include <errors.h>
 
 # define GREEN "\001\e[0;32m\002"
 # define RESET	"\001\e[0m\002"
@@ -25,6 +28,16 @@
 // minishell
 t_ms			*ms(void);
 void			init_minishell(int argc, char **argv, char **envp);
+
+// lalloc
+void			add_to_lal(void *ptr);
+void			clear_lal();
+void			*free_one_lal(void *ptr);
+
+// error
+void			ft_error(char *msg, int check_errno);
+t_list			*allocs(void);
+void			error_print(int err);
 
 // vars list
 t_var_list 		*get_envp(char **envp);
@@ -82,7 +95,7 @@ char			*skip_quote(char *str);
 char			*skip_variable(char *str);
 
 // utils2
-char			*ft_strndup(char *str, size_t len);
+char			*ft_strndup(const char *str, size_t len);
 int				ft_strcmp(char *s1, char *s2);
 
 // FOR TESTING **REMOVE WHEN SUBMIT**

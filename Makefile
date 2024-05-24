@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/23 14:05:10 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/05/24 11:53:27 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ SRCS			=	minishell.c \
 					node_creation.c \
 					tokenization.c \
 					print_and_free.c \
-					expander.c \
+					var_expander.c \
 					parsing.c \
 					built_pwd.c \
 					built_echo.c \

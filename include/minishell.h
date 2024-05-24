@@ -45,6 +45,7 @@ void			env_add(char *keyval);
 
 // expander
 char			*check_quotes_and_expand(char *str);
+char			*expand_with_condition(char *str, int last_was_dless);
 
 // tokenizer
 int				token_len(char *str);

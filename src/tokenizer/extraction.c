@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:56:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 23:03:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 23:36:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,11 @@ static void	extract_token(char *str, char **value, t_token_type *type)
 
 t_token	*create_token(char *str)
 {
+	static int				last_was_dless = 0;
 	t_token			*token;
 	char			*value;
 	t_token_type	type;
+	
 
 	extract_token(str, &value, &type);
 	if (!value)
@@ -93,7 +95,11 @@ t_token	*create_token(char *str)
 		free(value);
 		return (NULL);
 	}
-	token->value = check_quotes_and_expand(value);
 	token->type = type;
+	if (token->type == OP_DLESS)
+		last_was_dless = 1;
+	else
+		last_was_dless = 0;
+	token->value = expand_with_condition(value, last_was_dless);
 	return (token);
 }

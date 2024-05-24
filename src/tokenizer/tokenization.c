@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:47 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 14:08:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 07:46:49 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ static t_token_list	*reprocess_token(t_token_list **t, t_token_list *tmp,
 	new_token = tokenizer(tmp->token->value);
 	if (!new_token)
 		return (tmp->next);
-	printf("new_token list: \n");
-	print_tokens(new_token);
 	last_new_token = new_token;
 	while (last_new_token->next)
 		last_new_token = last_new_token->next;
@@ -66,8 +64,6 @@ t_token_list	*retokenizer(t_token_list **t)
 	{
 		if (ft_strchr(tmp->token->value, ' '))
 		{
-			printf("Original list: \n");
-			print_tokens(*t);
 			tmp = reprocess_token(t, tmp, &prev);
 			if (!tmp)
 				return (NULL);
@@ -78,7 +74,5 @@ t_token_list	*retokenizer(t_token_list **t)
 			tmp = tmp->next;
 		}
 	}
-	printf("Updated list: \n");
-	print_tokens(*t);
 	return (*t);
 }

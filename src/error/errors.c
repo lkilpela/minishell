@@ -12,5 +12,8 @@ void	ft_error(t_err type, char *msg, int check_errno)
 	if (msg)
 		printf("%s\n", msg);
 	if (type == FATAL)
+	{
+		clear_lal();
 		exit(EXIT_FAILURE);
+	}
 }

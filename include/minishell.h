@@ -35,9 +35,16 @@ void			clear_lal();
 void			*free_one_lal(void *ptr);
 
 // error
+void			print_err_msg(char *from);
 void			ft_error(t_err type, char *msg, int check_errno);
 t_list			*allocs(void);
 void			print_error(int err);
+
+// safe
+char			*ft_safe_strjoin(const char *s1, const char *s2);
+char			*ft_safe_strndup(const char *s1, size_t len);
+char			*ft_safe_strdup(const char *s1);
+void			*ft_safe_calloc(size_t count, size_t size);
 
 // vars list
 t_var_list 		*get_envp(char **envp);

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:06:24 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/24 13:08:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/24 23:23:15 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	built_echo(t_simple_cmd *cmd)
 	int	i;
 	int	n_flag;
 
-	if (!cmd || ft_strcmp(cmd->command, "echo") != 0)
-		return ;
 	i = 0;
 	n_flag = 0;
 	if (i < cmd->num_of_args && check_flag(cmd->args[i]))
@@ -38,7 +36,6 @@ void	built_echo(t_simple_cmd *cmd)
 		n_flag = 1;
 		i++;
 	}
-	printf("echo output: \n");
 	while (i < cmd->num_of_args)
 	{
 		printf("%s", cmd->args[i++]);

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 23:33:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 23:37:55 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	*check_quotes_and_expand(char *str)
 
 	quote_type = NO_QUOTE;
 	s = str;
-	printf("s: %s\n", s);
 	while (*s)
 	{
 		quote_type = update_quote_type(quote_type, *s);

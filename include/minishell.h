@@ -54,7 +54,10 @@ t_token_list	*tokenizer(char *str);
 t_token_list 	*retokenizer(t_token_list **t);
 
 // parser
+
+t_simple_cmd	*simple_cmd(t_token_list **tokens);
 t_commands		*parser(t_token_list *tokens);
+t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens);
 
 //builtins
 void			built_echo(t_simple_cmd *cmd);

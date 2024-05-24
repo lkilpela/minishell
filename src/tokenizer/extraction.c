@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extraction.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:56:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 20:43:27 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/24 23:52:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static void	extract_token(char *str, char **value, t_token_type *type)
 
 t_token	*create_token(char *str)
 {
+	static int		last_was_dless = 0;
 	t_token			*token;
 	char			*value;
 	t_token_type	type;
@@ -91,7 +92,11 @@ t_token	*create_token(char *str)
 		free(value);
 		return (NULL);
 	}
-	token->value = check_quotes_and_expand(value);
+	token->value = expand_with_condition(value, last_was_dless);
 	token->type = type;
+	if (token->type == OP_DLESS)
+		last_was_dless = 1;
+	else
+		last_was_dless = 0;
 	return (token);
 }

@@ -121,3 +121,17 @@ Hello, lumik.
 minishell$ <<
 minishell: syntax error near unexpected token `newline'
 ```
+
+5. delim is VAR
+
+```c
+minishell$ <<$TEST
+>hello
+>$TEST
+```
+
+```c
+minishell$ <<$USER
+>hello
+>$USER
+```

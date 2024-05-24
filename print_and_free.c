@@ -136,3 +136,42 @@ void print_last_token_node(t_token_list *t)
     // Now v points to the last node
     printf(BLUE "token_name: %-20s token_value: %s\n" RESET, t->token->value, get_type_str(t->token->type));
 }
+
+void print_simple_cmd(t_simple_cmd *cmd) {
+	if (cmd == NULL) {
+		ft_printf("NULL command\n");
+		return;
+	}
+	if (cmd->heredoc)
+		ft_printf("Heredoc: %s\n", cmd->heredoc);
+	ft_printf("Input redirection: %s\n", cmd->in_file.file);
+	if (cmd->out_file.append)
+		ft_printf("(APPEND) ");
+	ft_printf("Output redirection: %s\n", cmd->out_file.file);
+	ft_printf("Command: %s\n", cmd->command);
+	ft_printf("Args (%d): ", cmd->num_of_args);
+	int	i = 0;
+	while (i < cmd->num_of_args)
+	{
+		ft_printf("<%s> ", cmd->args[i]);
+		i++;
+	}
+	ft_printf("\n");
+}
+
+void	print_commands(t_commands *cmds)
+{
+	int	i = 0;
+
+	if (cmds == NULL)
+	{
+		ft_printf("NULL commands structure\n");
+		return;
+	}
+	while (i < cmds->num_of_cmds)
+	{
+		ft_printf("\e[0;32mCommand %d:\e[0m\n", i + 1);
+		print_simple_cmd(cmds->simples[i]);
+		i++;
+	}
+}

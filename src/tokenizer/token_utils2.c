@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:26:42 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 13:39:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 15:17:43 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-char	*ft_strndup(char *str, size_t len)
+char	*ft_strndup(const char *str, size_t len)
 {
 	size_t	i;
 	char	*dup;

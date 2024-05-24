@@ -52,6 +52,7 @@
         "__hash_table": "c",
         "variant": "c",
         "compare": "c",
-        "errno.h": "c"
+        "errno.h": "c",
+        "string.h": "c"
     }
 }

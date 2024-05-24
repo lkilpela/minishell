@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/24 11:09:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 01:26:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,7 @@ void	builtin_tests(t_commands *cmds)
 	if (ft_strcmp(cmds->simples[0]->command, "unset") == 0)
 		built_unset(cmds->simples[0]);
 	if (ft_strcmp(cmds->simples[0]->command, "cd") == 0)
-	{
-		ft_printf("old pwd: %s\n", getcwd(NULL, 0));
-		built_cd(cmds->simples[0]->num_of_args, cmds->simples[0]->args);
-		ft_printf("new pwd: %s\n", getcwd(NULL, 0));
-	}
+		built_cd(cmds->simples[0]);
 }
 
 void	handle_quotes(char **val)

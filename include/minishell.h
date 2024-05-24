@@ -37,7 +37,7 @@ void			*free_one_lal(void *ptr);
 // error
 void			ft_error(t_err type, char *msg, int check_errno);
 t_list			*allocs(void);
-void			print_error(int err);
+void			print_errno(char *from, char *bad_arg, int from_ms);
 
 // safe
 char			*ft_safe_strjoin(const char *s1, const char *s2);
@@ -83,7 +83,7 @@ t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens);
 void			built_echo(t_simple_cmd *cmd);
 void			built_pwd(void);
 void			built_exit(void);
-void			built_cd(int argc, char **argv);
+void			built_cd(t_simple_cmd *cmd);
 void			built_env(int declare);
 void			built_export(t_simple_cmd *cmd);
 void			built_unset(t_simple_cmd *cmd);

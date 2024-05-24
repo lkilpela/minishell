@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 12:05:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:23:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	*heredoc(t_token_list *tokens)
+static char	*heredoc(t_token_list *tokens)
 {
 	char	*line;
 	char	*heredoc;
@@ -41,41 +41,60 @@ char	*heredoc(t_token_list *tokens)
 		line = get_next_line(0);
 	}
 	free(line);
-	return (heredoc); //no delim warning (bash: warning: here-document at line 1 delimited by end-of-file (wanted `<delimiter-value>'))
+	return (heredoc); //no delim warning (bash: warning: here-document at line 1
+					// delimited by end-of-file (wanted `<delimiter-value>'))
+}
+
+t_token_list	*handle_heredoc(t_simple_cmd *simple, t_token_list *tokens)
+{
+	tokens = tokens->next;
+	simple->heredoc = heredoc(tokens);
+	return (tokens);
+}
+
+t_token_list	*handle_input_redir(t_simple_cmd *simple, t_token_list *tokens)
+{
+	if (simple->heredoc)
+	{
+		free(simple->heredoc);
+		simple->heredoc = NULL;
+	}
+	tokens = tokens->next;
+	if (tokens->token->type == WORD)
+	{
+		simple->in_file.file = tokens->token->value;
+		return (tokens->next);
+	}
+	return (tokens);
+}
+
+t_token_list	*handle_output_redir(t_simple_cmd *simple, t_token_list *tokens)
+{
+	simple->out_file.append = 0;
+	if (tokens->token->type == OP_DGREAT)
+		simple->out_file.append = 1;
+	tokens = tokens->next;
+	if (tokens->token->type == WORD)
+	{
+		simple->out_file.file = tokens->token->value;
+		return (tokens->next);
+	}
+	return (tokens);
 }
 
 t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens)
 {
 	if (tokens->token->type == OP_DLESS)
 	{
-		tokens = tokens->next;
-		simple->heredoc = heredoc(tokens);
+		tokens = handle_heredoc(simple, tokens);
 	}
 	if (tokens->token->type == OP_LESS)
 	{
-		if (simple->heredoc)
-		{
-			free(simple->heredoc);
-			simple->heredoc = NULL;
-		}
-		tokens = tokens->next;
-		if (tokens->token->type == WORD)
-		{
-			simple->in_file.file = tokens->token->value;
-			return (tokens->next);
-		}
+		tokens = handle_input_redir(simple, tokens);
 	}
 	if (tokens->token->type == OP_GREAT || tokens->token->type == OP_DGREAT)
 	{
-		simple->out_file.append = 0;
-		if (tokens->token->type == OP_DGREAT)
-			simple->out_file.append = 1;
-		tokens = tokens->next;
-		if (tokens->token->type == WORD)
-		{
-			simple->out_file.file = tokens->token->value;
-			return (tokens->next);
-		}
+		tokens = handle_output_redir(simple, tokens);
 	}
 	return (tokens);
 }

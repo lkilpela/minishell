@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/24 11:53:27 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/05/24 12:35:15 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,17 +42,13 @@ OBJ_DIR			=	./obj
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
 SRCS			=	minishell.c \
-					token_utils.c \
-					token_utils2.c \
-					token_utils3.c \
-					var.c \
 					init.c \
 					extraction.c \
 					node_creation.c \
 					tokenization.c \
-					print_and_free.c \
-					var_expander.c \
-					parsing.c \
+					token_utils.c \
+					token_utils2.c \
+					token_utils3.c \
 					built_pwd.c \
 					built_echo.c \
 					built_cd.c \
@@ -60,7 +56,14 @@ SRCS			=	minishell.c \
 					built_export.c \
 					built_unset.c \
 					built_exit.c \
-					env_handler.c
+					env_handler.c \
+					var_expander.c \
+					var_handler.c \
+					var_list.c \
+					parsing.c \
+					redirection.c \
+					simple_cmd.c \
+					print_and_free.c \
 					
 ################################################################################
 # RULES
@@ -73,7 +76,7 @@ SRCS			=	minishell.c \
 #it will look throuhg all these directories to find the file
 #this way we dont have to specify folders in front of each file
 #just have to make sure each file in the $(SRCS) is a unique name
-vpath %.c $(SRC_DIR) $(SRC_DIR)/tokenizer $(SRC_DIR)/parser $(SRC_DIR)/builtins
+vpath %.c $(SRC_DIR) $(SRC_DIR)/tokenizer $(SRC_DIR)/env_var $(SRC_DIR)/parser $(SRC_DIR)/builtins
 
 all: $(NAME)
 

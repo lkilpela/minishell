@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/24 12:12:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:16:40 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	var_to_word(t_token_list *tokens)
 t_commands	*parser(t_token_list *tokens)
 {
 	t_commands	*cmds;
-	int	i;
+	int			i;
 
 	cmds = ft_calloc(1, sizeof(t_commands));
 	cmds->num_of_cmds = count_cmd(tokens);

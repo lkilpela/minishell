@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 20:42:58 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/24 20:45:07 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ typedef enum e_quote_type
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE
 }			t_quote_type;
+
+typedef enum e_err
+{
+	FATAL,
+	WARNING
+}			t_err;
 
 // single token struct
 typedef struct s_token

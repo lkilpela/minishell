@@ -35,9 +35,9 @@ void			clear_lal();
 void			*free_one_lal(void *ptr);
 
 // error
-void			ft_error(char *msg, int check_errno);
+void			ft_error(t_err type, char *msg, int check_errno);
 t_list			*allocs(void);
-void			error_print(int err);
+void			print_error(int err);
 
 // vars list
 t_var_list 		*get_envp(char **envp);

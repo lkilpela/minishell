@@ -1,13 +1,16 @@
 #include <minishell.h>
 
-void	error_print(int err)
+void	print_error(int err)
 {
 	printf("%s\n", strerror(err));
 }
 
-void	ft_error(char *msg, int check_errno)
+void	ft_error(t_err type, char *msg, int check_errno)
 {
 	if (check_errno)
-		error_print(errno);
-	printf("%s\n", msg);
+		print_error(errno);
+	if (msg)
+		printf("%s\n", msg);
+	if (type == FATAL)
+		exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 12:23:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 13:22:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*heredoc(t_token_list *tokens)
 		if (ft_strncmp(line, delim, ft_strlen(delim)) == 0)
 		{
 			free(line);
-			return (heredoc);
+			return (check_quotes_and_expand(heredoc));
 		}
 		here_temp = ft_strdup(heredoc);
 		free(heredoc);
@@ -41,7 +41,7 @@ static char	*heredoc(t_token_list *tokens)
 		line = get_next_line(0);
 	}
 	free(line);
-	return (heredoc); //no delim warning (bash: warning: here-document at line 1
+	return (check_quotes_and_expand(heredoc)); //no delim warning (bash: warning: here-document at line 1
 					// delimited by end-of-file (wanted `<delimiter-value>'))
 }
 
@@ -49,6 +49,7 @@ t_token_list	*handle_heredoc(t_simple_cmd *simple, t_token_list *tokens)
 {
 	tokens = tokens->next;
 	simple->heredoc = heredoc(tokens);
+	printf("%s", simple->heredoc);
 	return (tokens);
 }
 

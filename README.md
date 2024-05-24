@@ -1,4 +1,4 @@
-## In Collaboration with Allar Klein
+## Author: Allar K. & Lumi K.
 <h1 align="center">
 	<img src="https://github.com/lkilpela/42-project-badges/blob/main/badges/minishelle.png" />
     <b><i>A Mini Recreation of Bash</i></b><br>

@@ -128,34 +128,18 @@ heredoc> END
 test
 lumik
 ```
-## NOT WORKING 
+
 ```c
 minishell$ <<END
-Calling tokenizer: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
-final token list: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
-After quote_clear: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
 heredoc> Hello, $USER.
 heredoc> END
-Hello,
+Hello, lumik
 ```
 
-4. No delimeter
+4. No delimeter : ERROR
 
-## NOT WORKING
 ```c
 minishell$ <<
-Calling tokenizer: 
-a_token_value: <<                   a_token_type: OP_DLESS
-final token list: 
-a_token_value: <<                   a_token_type: OP_DLESS
-After quote_clear: 
-a_token_value: <<                   a_token_type: OP_DLESS
-heredoc> This is a test.
-zsh: segmentation fault  ./minishell
+minishell: syntax error near unexpected token `newline'
+
 ```

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
+/*   var_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 22:34:02 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/24 11:50:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ char	*expand_var(char *s, char **str)
 	return (s);
 }
 
-	// '$some'"echo "$HOME"" -> final_str: '$some'"echo "User/lumik" $USER"
 char	*check_quotes_and_expand(char *str)
 {
 	t_quote_type	quote_type;

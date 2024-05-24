@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 15:48:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 22:31:29 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,19 @@ t_token_list	*handle_output_redir(t_simple_cmd *simple, t_token_list *tokens)
 	return (tokens);
 }
 
-t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens)
+t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *t)
 {
-	if (tokens->token->type == OP_DLESS)
+	if (t->token->type == OP_DLESS)
 	{
-		tokens = handle_heredoc(simple, tokens);
+		t = handle_heredoc(simple, t);
 	}
-	if (tokens->token->type == OP_LESS)
+	if (t->token->type == OP_LESS)
 	{
-		tokens = handle_input_redir(simple, tokens);
+		t = handle_input_redir(simple, t);
 	}
-	if (tokens->token->type == OP_GREAT || tokens->token->type == OP_DGREAT)
+	if (t->token->type == OP_GREAT || t->token->type == OP_DGREAT)
 	{
-		tokens = handle_output_redir(simple, tokens);
+		t = handle_output_redir(simple, t);
 	}
-	return (tokens);
+	return (t);
 }

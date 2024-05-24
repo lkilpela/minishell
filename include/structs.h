@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 20:45:07 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/25 01:09:30 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_ms
 	int			argc;
 	char		**envp;
 	char		**paths;	// Array of paths for executable lookup
+	char		*executable;
 	t_var_list	*var_list;
 }				t_ms;
 

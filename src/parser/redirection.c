@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 14:59:16 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 15:06:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*heredoc(t_token_list *t)
 	char	*tmp;
 	char	*expanded = ft_calloc(1, 1);
 
-	ft_putstr_fd("heredoc> ", 1);
+	ft_putstr_fd("> ", 1);
 	line = get_next_line(0);
 	if (!line)
 		return (NULL);
@@ -38,7 +38,7 @@ static char	*heredoc(t_token_list *t)
 			expanded = ft_strjoin(expanded, tmp);
 			free(old_expand);
 		}
-		ft_putstr_fd("heredoc> ", 1);
+		ft_putstr_fd("> ", 1);
 		free(line);
 		line = get_next_line(0);
 	}

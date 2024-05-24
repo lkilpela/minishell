@@ -73,33 +73,20 @@ a_token_value: 'someting $HOME not expanded' a_token_type: WORD
 1. Single line
 ```c
 minishell$ <<END
-Calling tokenizer: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
-final token list: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
-After quote_clear: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
-heredoc> This is a test.
-heredoc> END
+> This is a test.
+> END
 This is a test.
 ```
 
 2. Multiple lines of input
 
 ```c
-minishell$ <<STOP
-Calling tokenizer: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: STOP                 a_token_type: WORD
-final token list: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: STOP                 a_token_type: WORD
-After quote_clear: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: STOP                 a_token_type: WORD
+minishell$ bash-3.2$ cat <<EMD
+> hello
+> $USER
+> EMD
+hello
+lumik
 heredoc> Line 1.
 heredoc> Line 2.
 heredoc> Line 3.
@@ -113,49 +100,24 @@ Line 3.
 
 ```c
 minishell$ <<END
-Calling tokenizer: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
-final token list: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
-After quote_clear: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
-heredoc> test
-heredoc> $USER
-heredoc> END
+> test
+> $USER
+> END
 test
 lumik
 ```
-## NOT WORKING 
+
 ```c
 minishell$ <<END
-Calling tokenizer: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
-final token list: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
-After quote_clear: 
-a_token_value: <<                   a_token_type: OP_DLESS
-a_token_value: END                  a_token_type: WORD
-heredoc> Hello, $USER.
-heredoc> END
-Hello,
+> Hello, $USER.
+> END
+Hello, lumik.
 ```
 
 4. No delimeter
 
-## NOT WORKING
+## ERROR
 ```c
 minishell$ <<
-Calling tokenizer: 
-a_token_value: <<                   a_token_type: OP_DLESS
-final token list: 
-a_token_value: <<                   a_token_type: OP_DLESS
-After quote_clear: 
-a_token_value: <<                   a_token_type: OP_DLESS
-heredoc> This is a test.
-zsh: segmentation fault  ./minishell
+minishell: syntax error near unexpected token `newline'
 ```

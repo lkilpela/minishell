@@ -48,6 +48,9 @@
         "structs.h": "c",
         "algorithm": "c",
         "unordered_map": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "__hash_table": "c",
+        "variant": "c",
+        "compare": "c"
     }
 }

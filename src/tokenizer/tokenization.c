@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:47 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 14:08:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 11:14:57 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ static t_token_list	*reprocess_token(t_token_list **t, t_token_list *tmp,
 	t_token_list	*next;
 
 	new_token = tokenizer(tmp->token->value);
+	print_tokens(new_token);
 	if (!new_token)
 		return (tmp->next);
-	printf("new_token list: \n");
-	print_tokens(new_token);
 	last_new_token = new_token;
 	while (last_new_token->next)
 		last_new_token = last_new_token->next;
@@ -54,7 +53,41 @@ static t_token_list	*reprocess_token(t_token_list **t, t_token_list *tmp,
 	return (next);
 }
 
-// ls$ARG hello | echo < output
+static int has_closed_quote(char *value)
+{
+	int	inquote;
+	int has_closed_quote;
+
+	inquote = 0;
+	has_closed_quote = 0;
+	while (*value)
+	{
+		if (is_quote(*value))
+		{
+			if (inquote == 0)
+				inquote = 1;
+			else
+			{
+				inquote = 0;
+				has_closed_quote = 1;
+			}
+		}
+		value++;
+	}
+	return (has_closed_quote);
+}
+
+static int has_one_word(char *value)
+{
+	while (*value)
+	{
+		if (*value == ' ')
+			return (0);
+		value++;
+	}
+	return (1);
+}
+
 t_token_list	*retokenizer(t_token_list **t)
 {
 	t_token_list	*prev;
@@ -64,10 +97,10 @@ t_token_list	*retokenizer(t_token_list **t)
 	tmp = *t;
 	while (tmp)
 	{
-		if (ft_strchr(tmp->token->value, ' '))
+		if (!has_closed_quote(tmp->token->value)
+			&& !has_one_word(tmp->token->value))
 		{
-			printf("Original list: \n");
-			print_tokens(*t);
+			printf(GREEN "Calling REtokenizer: \n" RESET);
 			tmp = reprocess_token(t, tmp, &prev);
 			if (!tmp)
 				return (NULL);
@@ -78,7 +111,5 @@ t_token_list	*retokenizer(t_token_list **t)
 			tmp = tmp->next;
 		}
 	}
-	printf("Updated list: \n");
-	print_tokens(*t);
 	return (*t);
 }

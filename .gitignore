@@ -1,0 +1,6 @@
+obj/
+minishell
+archive/
+*.a
+a.out
+history_file.txt

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extraction.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:56:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 23:03:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:43:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ static t_token_type	get_token_type(char *str)
 		return (OP_GREAT);
 	else if (*str == '|')
 		return (OP_PIPE);
-	else if (*str == '$')
-		return (VAR);
 	else if (is_word(*str))
 		return (WORD);
 	else

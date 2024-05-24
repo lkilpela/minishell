@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/24 12:16:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:43:23 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,6 @@ static int	count_cmd(t_token_list *tokens)
 	return (count);
 }
 
-void	var_to_word(t_token_list *tokens)
-{
-	while (tokens && tokens->token)
-	{
-		if (tokens->token->type == VAR)
-			tokens->token->type = WORD;
-		tokens = tokens->next;
-	}
-}
-
 t_commands	*parser(t_token_list *tokens)
 {
 	t_commands	*cmds;
@@ -47,7 +37,6 @@ t_commands	*parser(t_token_list *tokens)
 	i = 0;
 	while (tokens)
 	{
-		var_to_word(tokens); //maybe temp if we actually need the VAR type
 		cmds->simples[i++] = simple_cmd(&tokens);
 		if (tokens)
 			tokens = tokens->next;

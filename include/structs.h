@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 22:46:07 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/24 20:42:58 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef enum e_token_type
 	OP_GREAT,	// redirect output to a file (>), overwriting file if exists
 	OP_DLESS,	// denote heredoc (<<)
 	OP_DGREAT,	// redirect output to a file (>>), appending to file if exists
-	VAR,		// $HOME is treated as a single VAR token´
 	UNKNOWN
 }			t_token_type;
 

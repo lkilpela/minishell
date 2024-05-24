@@ -51,6 +51,7 @@
         "typeinfo": "c",
         "__hash_table": "c",
         "variant": "c",
-        "compare": "c"
+        "compare": "c",
+        "errno.h": "c"
     }
 }

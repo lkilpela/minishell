@@ -5,8 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/libft/include",
-                "~/minishell/include",
-                "~/minishell/libft/include"
+                "/users/aklein/minishell/include",
+                "/users/aklein/minishell/libft/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
@@ -18,7 +18,8 @@
         {
             "name": "mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/libft/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",

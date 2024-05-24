@@ -58,3 +58,10 @@ a_token_value: what                 a_token_type: WORD
 a_token_value: <<                   a_token_type: OP_DLESS
 a_token_value: okay                 a_token_type: WORD
 ```
+
+test $HOME"ANDME is $USER '$HOME'again" 'someting $HOME not expanded'
+```
+a_token_value: test                 a_token_type: WORD
+a_token_value: /Users/lumik"ANDME is lumik '/Users/lumik'again" a_token_type: WORD
+a_token_value: 'someting $HOME not expanded' a_token_type: WORD
+```

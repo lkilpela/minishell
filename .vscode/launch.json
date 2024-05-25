@@ -29,13 +29,15 @@
 				"ignoreFailures": true
 			  },
 			  {
-				"description": "Disable breaking on SIGINT",
-				"text": "handle SIGINT nostop noprint pass"
+				"description": "Pass SIGINT to the program",
+				"text": "handle SIGINT nostop pass noprint",
+				"ignoreFailures": true
 			},
 			{
-				"description": "Disable breaking on SIGQUIT",
-				"text": "handle SIGQUIT nostop noprint pass"
-			},
+				"description": "Pass SIGQUIT to the program",
+				"text": "handle SIGQUIT nostop pass moprint",
+				"ignoreFailures": true
+			}
 			]
 		},
 	]

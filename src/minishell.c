@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/25 17:02:54 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/25 23:29:12 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,15 @@ void	minishell_loop(void)
 			ft_free((void **)&input);
 			continue ;
 		}
-		printf(GREEN "Calling tokenizer: \n" RESET);
 		t = tokenizer(input);
-		print_tokens(t);
 		retokenizer(&t);
-		printf("final token list: \n");
-		print_tokens(t);
 		clear_quotes(t);
 		if (!near_token_errors(t)) 
 		{
 			ft_free((void **)&input);
 			continue ;
 		}
-		printf("After quote_clear: \n");
+		printf("final token_list: \n");
 		print_tokens(t);
 		cmds = parser(t);
 		if (ft_strchr(cmds->simples[0]->command, EQUAL_SIGN) != NULL)

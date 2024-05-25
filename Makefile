@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/24 15:06:16 by aklein           ###   ########.fr        #
+#    Updated: 2024/05/26 00:39:33 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ SRCS			=	minishell.c \
 					errors.c \
 					lalloc.c \
 					safe_alloc.c \
+					signals.c \
 
 ################################################################################
 # RULES
@@ -81,7 +82,7 @@ SRCS			=	minishell.c \
 #just have to make sure each file in the $(SRCS) is a unique name
 vpath %.c $(SRC_DIR) $(SRC_DIR)/tokenizer \
 			$(SRC_DIR)/env_var $(SRC_DIR)/parser $(SRC_DIR)/builtins \
-			$(SRC_DIR)/error
+			$(SRC_DIR)/error $(SRC_DIR)/signals
 
 all: $(NAME)
 

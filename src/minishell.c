@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/26 00:02:23 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/26 01:42:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ void	minishell_loop(void)
 	while (42)
 	{
 		input = readline(PROMPT);
-		if (input == NULL)
+		if (input == NULL) // ctrl + D
 			built_exit();
 		add_history(input);
-		if (!quote_match_check(input))
+		if (!quote_match_check(input)) // ensure quotes are balanced
 		{
 			ft_error(WARNING, ERR_QUOTES, 1);
 			ft_free((void **)&input);
@@ -111,7 +111,7 @@ void	minishell_loop(void)
 		printf("final token list: \n");
 		print_tokens(t);
 		clear_quotes(t);
-		if (!near_token_errors(t)) 
+		if (!near_token_errors(t)) // check for errors in token list
 		{
 			ft_free((void **)&input);
 			continue ;
@@ -119,7 +119,7 @@ void	minishell_loop(void)
 		printf("After quote_clear: \n");
 		print_tokens(t);
 		cmds = parser(t);
-		if (ft_strchr(cmds->simples[0]->command, EQUAL_SIGN) != NULL)
+		if (ft_strchr(cmds->simples[0]->command, EQUAL_SIGN) != NULL) // local var assignment
 		{
 			process_var_assignment(&input);
 			ft_free((void **)&input);

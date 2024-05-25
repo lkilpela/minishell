@@ -30,6 +30,10 @@
 t_ms			*ms(void);
 void			init_minishell(int argc, char **argv, char **envp);
 
+// signals
+void			init_signals();
+void			sigint_handler(int sig);
+
 // lalloc
 int				same_ptr(void *ptr, void *ptr2);
 void			add_to_lal(void *ptr);

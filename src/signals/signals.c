@@ -1,21 +1,18 @@
 #include <minishell.h>
 
-void	sigint_handler(int signum, siginfo_t *info, void *context)
+void	sigint_handler(int sig)
 {
-	(void)signum;
-	(void)info;
-	(void)context;
-	write(1, "\n", 1);
-	write(1, PROMPT, ft_strlen(PROMPT));
+    if (sig == SIGINT)
+	{
+		ft_putchar_fd('\n', 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 void	init_signals()
 {
-	struct sigaction	act;
-
-	ft_bzero(&act, sizeof(act));
-	act.sa_flags = SA_SIGINFO;
-	act.sa_sigaction = &sigint_handler;
-	sigaction(SIGINT, &act, NULL);
+	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);
 }

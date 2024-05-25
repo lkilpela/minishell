@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:08:08 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/04/03 08:08:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 03:08:54 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <minishell.h>
 
 //Find the environment path for Unix commands (e.g grep, ls, cat, etc.)
 static char	**get_envpaths(t_pipex *p)
@@ -32,22 +33,22 @@ static char	*find_executable(t_pipex *p, char *cmd)
 	char	*command;
 	int		i;
 
-	command = ft_strjoin("/", cmd);
+	command = ft_safe_strjoin("/", cmd);
 	if (!command)
 		return (NULL);
 	i = 0;
 	while (p->paths[i])
 	{
-		path = ft_strjoin(p->paths[i], command);
-		if (!path || access(path, F_OK | X_OK) == 0)
+		path = ft_safe_strjoin(p->paths[i], command);
+		if (access(path, F_OK | X_OK) == 0)
 		{
-			free(command);
+			ft_free((void **)&command);
 			return (path);
 		}
-		free(path);
+		ft_free((void **)&path);
 		i++;
 	}
-	free(command);
+	ft_free((void **)&command);
 	return (NULL);
 }
 
@@ -58,7 +59,7 @@ char	*find_command(t_pipex *p, char *cmd)
 	if (!cmd)
 		return (NULL);
 	else if (ft_strchr(cmd, '/'))
-		return (ft_strdup(cmd));
+		return (ft_safe_strdup(cmd));
 	if (!p->paths)
 		p->paths = get_envpaths(p);
 	if (!p->paths)

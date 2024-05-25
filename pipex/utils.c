@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:37:58 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/04/12 20:52:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <minishell.h>
 
 void	free_paths(char **paths)
 {
@@ -19,10 +20,10 @@ void	free_paths(char **paths)
 	i = 0;
 	while (paths[i])
 	{
-		free(paths[i]);
+		ft_free((void **)&paths[i]);
 		i++;
 	}
-	free(paths);
+	ft_free((void **)&paths);
 }
 
 void	cleanup(t_pipex *p)
@@ -37,7 +38,7 @@ void	cleanup(t_pipex *p)
 		if (p->cmds[i].args)
 			free_paths(p->cmds[i].args);
 		if (p->cmds[i].path)
-			free(p->cmds[i].path);
+			ft_free((void **)&p->cmds[i].path);
 		i++;
 	}
 }
@@ -48,15 +49,14 @@ char	**resize_array(char **old_array, int old_count, int new_count)
 	int		i;
 
 	i = 0;
-	new_array = malloc(sizeof(char *) * (new_count + 1));
-	if (new_array == NULL)
-		return (NULL);
+	new_array = ft_safe_calloc(new_count + 1, sizeof(char *));
 	while (i < old_count)
 	{
 		new_array[i] = old_array[i];
 		i++;
 	}
-	free(old_array);
+	ft_free((void **)&old_array);
+	old_array = NULL;
 	return (new_array);
 }
 

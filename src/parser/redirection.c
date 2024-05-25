@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 23:32:25 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*heredoc(t_token_list *t)
 	char	*line;
 	char	*delim;
 	char	*tmp;
-	char	*expanded = ft_calloc(1, 1);
+	char	*expanded = ft_safe_calloc(1, 1);
 
 	ft_putstr_fd("> ", 1);
 	line = get_next_line(0);
@@ -29,20 +29,20 @@ static char	*heredoc(t_token_list *t)
 		tmp = check_quotes_and_expand(line);
 		if (ft_strncmp(line, delim, ft_strlen(delim)) == 0)
 		{
-			free(line);
+			ft_free((void **)&line);
 			return (expanded);
 		}
 		else
 		{
 			char *old_expand = expanded;
-			expanded = ft_strjoin(expanded, tmp);
-			free(old_expand);
+			expanded = ft_safe_strjoin(expanded, tmp);
+			ft_free((void **)&old_expand);
 		}
 		ft_putstr_fd("> ", 1);
-		free(line);
+		ft_free((void **)&line);
 		line = get_next_line(0);
 	}
-	free(expanded);
+	ft_free((void **)&expanded);
 	return (NULL);
 }
 
@@ -63,7 +63,7 @@ t_token_list	*handle_input_redir(t_simple_cmd *simple, t_token_list *tokens)
 {
 	if (simple->heredoc)
 	{
-		free(simple->heredoc);
+		ft_free((void **)&simple->heredoc);
 		simple->heredoc = NULL;
 	}
 	tokens = tokens->next;

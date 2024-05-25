@@ -3,10 +3,7 @@
 static void	free_content(void *content)
 {
 	if (content != NULL)
-	{
-		free(content);
-		content = NULL;
-	}
+		ft_free((void **)&content);
 }
 
 void	*free_one_lal(void *ptr)

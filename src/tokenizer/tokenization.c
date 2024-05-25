@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:47 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 11:14:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_token_list	*reprocess_token(t_token_list **t, t_token_list *tmp,
 		*t = new_token;
 	last_new_token->next = tmp->next;
 	next = tmp->next;
-	free(tmp);
+	ft_free((void **)&tmp);
 	return (next);
 }
 

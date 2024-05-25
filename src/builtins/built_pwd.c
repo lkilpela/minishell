@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:17:23 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/20 00:01:04 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ void	built_pwd(void)
 
 	pwd = getcwd(NULL, 0);
 	ft_printf("%s\n", pwd);
-	free(pwd);
+	ft_free((void **)&pwd);
 }

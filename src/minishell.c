@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/25 02:06:46 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ char	*handle_node_quotes(char *val)
 	}
 	if (ft_strlen(start) != len)
 	{
-		new_val = ft_strdup(start);
-		free(start);
-		if (!new_val)
-			return (NULL);
+		new_val = ft_safe_strdup(start);
+		ft_free((void **)&start);
 		return (new_val);
 	}
 	return (start);
@@ -111,12 +109,12 @@ void	minishell_loop(void)
 		if (ft_strchr(cmds->simples[0]->command, EQUAL_SIGN) != NULL)
 		{
 			process_var_assignment(&input);
-			free(input);
+			ft_free((void **)&input);
 			print_var_list();
 			continue ;
 		}
 		builtin_tests(cmds);
-		free(input);
+		ft_free((void **)&input);
 	}
 }
 

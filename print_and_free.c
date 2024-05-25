@@ -1,42 +1,12 @@
 
 #include <minishell.h>
 
-void	free_arrays(char **arrays)
-{
-	int	i;
-
-	i = 0;
-	while (arrays[i])
-	{
-		free(arrays[i]);
-		i++;
-	}
-	free(arrays);
-}
-
-void free_var_list(void)
-{
-	t_var_list *node;
-	t_var_list *next;
-
-	node = ms()->var_list;
-	while (node)
-	{
-		if (node->key)
-			free(node->key);
-		if (node->value)
-			free(node->value);
-		next = node->next;
-		free(node);
-		node = next;
-	}
-}
 void	delone_node(t_token_list *lst)
 {
 	if (!lst)
 		return ;
-	free(lst->token->value);
-	free(lst);
+	ft_free((void **)&lst->token->value);
+	ft_free((void **)&lst);
 }
 
 void	free_token_list(t_token_list **lst)
@@ -105,7 +75,7 @@ char	*get_type_str(int e)
 
 void print_a_token(t_token_list *lst)
 {
-	printf(BLUE "a_token_value: %-20s a_token_type: %s\n" RESET, lst->token->value, get_type_str(lst->token->type));
+	printf("%sa_token_value: %-20s a_token_type: %s\n%s", BLUE, lst->token->value, get_type_str(lst->token->type), RESET);
 
 }
 
@@ -134,7 +104,7 @@ void print_last_token_node(t_token_list *t)
     }
 
     // Now v points to the last node
-    printf(BLUE "token_name: %-20s token_value: %s\n" RESET, t->token->value, get_type_str(t->token->type));
+    printf("%stoken_name: %-20s token_value: %s\n%s", BLUE, t->token->value, get_type_str(t->token->type), RESET);
 }
 
 void print_simple_cmd(t_simple_cmd *cmd) {

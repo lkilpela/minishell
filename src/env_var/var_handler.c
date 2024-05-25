@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:33:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 11:40:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ void	process_var_assignment(char **input)
 	equal_pos = ft_strchr(*input, EQUAL_SIGN);
 	if (equal_pos)
 	{
-		prefix = ft_strndup(*input, (equal_pos + 1) - *input);
+		prefix = ft_safe_strndup(*input, (equal_pos + 1) - *input);
 		value = check_quotes_and_expand(equal_pos + 1);
-		new_input = ft_strjoin(prefix, value);
+		new_input = ft_safe_strjoin(prefix, value);
 		if (new_input)
 		{
 			add_var(new_input);
-			free(prefix);
-			free(new_input);
+			ft_free((void **)&prefix);
+			ft_free((void **)&new_input);
 		}
 	}
 	else
@@ -76,7 +76,7 @@ void	var_remove(char *key)
 				vars->previous->next = vars->next;
 			if (vars->next)
 				vars->next->previous = vars->previous;
-			free(vars);
+			ft_free((void **)&vars);
 			vars = NULL;
 			return ;
 		}

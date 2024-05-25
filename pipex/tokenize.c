@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 13:30:19 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/04/04 14:56:21 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <minishell.h>
 
 static void	toggle_quotes(t_tokenize *t, char c)
 {
@@ -23,10 +24,8 @@ static int	add_word(t_tokenize *t, char *start, char *end)
 	char	**new_args;
 
 	new_args = resize_array(t->args, t->count, t->count + 1);
-	if (!new_args)
-		return (-1);
 	t->args = new_args;
-	t->args[t->count++] = ft_substr(start, 0, end - start);
+	t->args[t->count++] = ft_safe_substr(start, 0, end - start);
 	return (0);
 }
 
@@ -61,7 +60,7 @@ static char	*trim_cmd(char *cmd)
 	trimmed_cmd = ft_strtrim(cmd, " ");
 	if (trimmed_cmd && trimmed_cmd[0] == '\0')
 	{
-		free(trimmed_cmd);
+		ft_free((void **)&trimmed_cmd);
 		return (NULL);
 	}
 	return (trimmed_cmd);
@@ -83,10 +82,8 @@ char	**split_command(t_tokenize *t, char *cmd)
 	}
 	split_on_space(t, cmd);
 	new_args = resize_array(t->args, t->count, t->count + 1);
-	if (!new_args)
-		return (NULL);
 	t->args = new_args;
 	t->args[t->count] = NULL;
-	free(trimmed_cmd);
+	ft_free((void **)&trimmed_cmd);
 	return (t->args);
 }

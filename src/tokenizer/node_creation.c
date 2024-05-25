@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node_creation.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:33 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/23 14:24:21 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:15:03 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,8 @@ static t_token_list	*create_token_node(char *str)
 {
 	t_token_list	*node;
 
-	node = ft_calloc(1, sizeof(t_token_list));
-	if (!node)
-		return (NULL);
+	node = ft_safe_calloc(1, sizeof(t_token_list));
 	node->token = create_token(str);
-	if (!node->token)
-	{
-		free(node);
-		return (NULL);
-	}
 	node->next = NULL;
 	return (node);
 }

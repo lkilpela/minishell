@@ -44,6 +44,8 @@ char			*ft_safe_strjoin(const char *s1, const char *s2);
 char			*ft_safe_strndup(const char *s1, size_t len);
 char			*ft_safe_strdup(const char *s1);
 void			*ft_safe_calloc(size_t count, size_t size);
+char			*ft_safe_substr(const char *s, unsigned int start, size_t len);
+void			ft_free(void **ptr);
 
 // vars list
 t_var_list 		*get_envp(char **envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 01:58:47 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/23 14:12:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 03:09:30 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,14 @@ char	**env_array_dup(char **envp, int size, int cut)
 
 	if (size < 0)
 		return (NULL);
-	env_copy = ft_calloc((size + 1), sizeof(char *));
-	if (!env_copy)
-		return (NULL);
+	env_copy = ft_safe_calloc((size + 1), sizeof(char *));
 	i = 0;
 	while (i < size && i < env_array_size(envp))
 	{
 		if (cut == -1 || i < cut)
-			env_copy[i] = ft_strdup(envp[i]);
+			env_copy[i] = ft_safe_strdup(envp[i]);
 		else
-			env_copy[i] = ft_strdup(envp[i + 1]);
-		if (!env_copy[i])
-		{
-			while (i--)
-				free(env_copy[i]);
-			free(env_copy);
-			return (NULL);
-		}
+			env_copy[i] = ft_safe_strdup(envp[i + 1]);
 		i++;
 	}
 	return (env_copy);
@@ -57,8 +48,8 @@ void	env_free_array(char **envp)
 
 	i = 0;
 	while (envp[i])
-		free(envp[i++]);
-	free(envp);
+		ft_free((void **)&envp[i++]);
+	ft_free((void **)&envp);
 }
 
 int	env_key_len(char *env)
@@ -97,10 +88,10 @@ int	env_exists(char *keyval)
 	while (envp[i])
 	{
 		len = env_key_len(envp[i]);
-		key = ft_substr(keyval, 0, len);
+		key = ft_safe_substr(keyval, 0, len);
 		if (ft_strnstr(envp[i], key, len))
 		{
-			free(key);
+			ft_free((void **)&key);
 			return (i);
 		}
 		i++;
@@ -134,15 +125,15 @@ void	env_add(char *keyval)
 	if (i != -1)
 	{
 		ft_printf("changed '%s' ", ms()->envp[i]);
-		free(ms()->envp[i]);
-		ms()->envp[i] = ft_strdup(keyval);
+		ft_free((void **)&ms()->envp[i]);
+		ms()->envp[i] = ft_safe_strdup(keyval);
 		ft_printf("to '%s'\n", ms()->envp[i]);
 	}
 	else
 	{
 		size = env_array_size(ms()->envp);
 		new_envp = env_array_dup(ms()->envp, size + 1, -1);
-		new_envp[size] = ft_strdup(keyval);
+		new_envp[size] = ft_safe_strdup(keyval);
 		env_free_array(ms()->envp);
 		ms()->envp = new_envp;
 		ft_printf("added '%s' to envs\n", ms()->envp[size]);

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/25 01:24:54 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	built_cd(t_simple_cmd *cmd)
 			return ;
 		}
 		if (chdir(home) == 0)
-			free(home);
+			ft_free((void **)&home);
 	}
 	if (cmd->num_of_args == 1)
 		if (chdir(cmd->args[0]) != 0)

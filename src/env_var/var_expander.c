@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 23:43:45 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ char	*lookup_var(char *var_name)
 	while (v)
 	{
 		if (ft_strcmp(v->key, var_name) == 0)
-			return (ft_strdup(v->value));
+			return (ft_safe_strdup(v->value));
 		v = v->next;
 	}
-	return (ft_strdup(""));
+	return (ft_safe_strdup(""));
 }
 
 char	*expand_var(char *s, char **str)
@@ -51,14 +51,14 @@ char	*expand_var(char *s, char **str)
 	char	*final_str;
 
 	end = skip_variable(s);
-	name = ft_strndup(s + 1, end - s - 1);
+	name = ft_safe_strndup(s + 1, end - s - 1);
 	value = lookup_var(name);
-	free(name);
-	new_str = ft_strjoin(ft_strndup(*str, s - *str), value);
-	final_str = ft_strjoin(new_str, ft_strdup(end));
+	ft_free((void **)&name);
+	new_str = ft_safe_strjoin(ft_safe_strndup(*str, s - *str), value);
+	final_str = ft_safe_strjoin(new_str, ft_safe_strdup(end));
 	s = final_str + ft_strlen(new_str);
-	free(value);
-	free(new_str);
+	ft_free((void **)&value);
+	ft_free((void **)&new_str);
 	*str = final_str;
 	return (s);
 }
@@ -94,7 +94,7 @@ char	*expand_with_condition(char *str, int last_was_dless)
 		if (quote_type != SINGLE_QUOTE && *s == '$')
 		{
 			if (last_was_dless == 1)
-				return (ft_strdup(s));
+				return (ft_safe_strdup(s));
 			else
 				s = expand_var(s, &str);
 		}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_handler.c                                    :+:      :+:    :+:   */
+/*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:03:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 12:13:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 02:15:03 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	parse_args(t_simple_cmd **simp, t_token_list **tokens)
 {
 	(*simp)->num_of_args = count_args(*tokens);
 	if ((*simp)->num_of_args > 0)
-		(*simp)->args = ft_calloc((*simp)->num_of_args, sizeof(char *));
+		(*simp)->args = ft_safe_calloc((*simp)->num_of_args, sizeof(char *));
 }
 
 t_simple_cmd	*simple_cmd(t_token_list **tokens)
@@ -54,7 +54,7 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 	t_simple_cmd	*simple_cmd;
 	int				i;
 
-	simple_cmd = ft_calloc(1, sizeof(t_simple_cmd));
+	simple_cmd = ft_safe_calloc(1, sizeof(t_simple_cmd));
 	while ((*tokens) && (*tokens)->token->type != OP_PIPE)
 	{
 		if ((*tokens)->token->type >= OP_LESS && (*tokens)->token->type <= OP_DGREAT)

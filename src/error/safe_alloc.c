@@ -27,7 +27,7 @@ char	*ft_safe_strdup(const char *s1)
 	str = ft_strdup(s1);
 	if (!str)
 		ft_error(FATAL, NULL, 0);
-	add_to_lal((void *)dup);
+	add_to_lal((void *)str);
 	return (str);
 }
 

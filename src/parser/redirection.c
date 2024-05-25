@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/25 21:52:45 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,6 @@ static char	*heredoc(t_token_list *t)
 t_token_list	*handle_heredoc(t_simple_cmd *simple, t_token_list *t)
 {
 	t = t->next;
-	if (!t)
-	{
-		printf("minishell: syntax error near unexpected token `newline'\n");
-		exit(EXIT_FAILURE);
-	}
 	simple->heredoc = heredoc(t);
 	printf("%s", simple->heredoc);
 	return (t);

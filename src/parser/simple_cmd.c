@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:03:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 06:36:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 06:44:11 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,29 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 	t_simple_cmd	*simple_cmd;
 	int				i;
 
+	i = 0;
 	simple_cmd = ft_safe_calloc(1, sizeof(t_simple_cmd));
 	while ((*tokens) && (*tokens)->token->type != OP_PIPE)
 	{
 		if ((*tokens)->token->type >= OP_LESS && (*tokens)->token->type <= OP_DGREAT)
 		{
 			(*tokens) = get_redir(simple_cmd, *tokens);
+			print_tokens(*tokens);
 			continue ;
 		}
 		if (simple_cmd->command == NULL && (*tokens)->token->type == WORD)
 		{
 			parse_command(&simple_cmd, tokens);
 			parse_args(&simple_cmd, tokens);
-			i = 0;
 			continue ;
 		}
 		if (simple_cmd->command != NULL && (*tokens)->token->type == WORD)
-			simple_cmd->args[i++] = (*tokens)->token->value;
+		{
+			if (simple_cmd->args != NULL)
+				simple_cmd->args[i++] = (*tokens)->token->value;
+		}
 		(*tokens) = (*tokens)->next;
 	}
+	print_simple_cmd(simple_cmd);
 	return (simple_cmd);
 }

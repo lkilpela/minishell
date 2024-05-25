@@ -135,3 +135,7 @@ minishell$ <<$USER
 >hello
 >$USER
 ```
+
+## PARSER
+
+cat <<END | grep "hello" | wc -l > output

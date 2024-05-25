@@ -37,6 +37,8 @@ void			free_one_lal(void *ptr);
 
 // error
 int				quote_match_check(char *input);
+int				post_pipe_check(t_token_list *tokens);
+int				near_token_errors(t_token_list *tokens);
 void			ft_error(t_err type, char *msg, int from_ms);
 t_list			**allocs(void);
 void			print_errno(char *from, char *bad_arg, int from_ms);

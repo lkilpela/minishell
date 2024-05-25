@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/25 15:20:05 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/25 17:02:54 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,11 @@ void	minishell_loop(void)
 		printf("final token list: \n");
 		print_tokens(t);
 		clear_quotes(t);
+		if (!near_token_errors(t)) 
+		{
+			ft_free((void **)&input);
+			continue ;
+		}
 		printf("After quote_clear: \n");
 		print_tokens(t);
 		cmds = parser(t);

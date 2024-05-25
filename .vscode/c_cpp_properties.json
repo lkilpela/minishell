@@ -5,8 +5,6 @@
             "includePath": [
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/libft/include",
-                "/users/aklein/minishell/include",
-                "/users/aklein/minishell/libft/include"
             ],
             "defines": [ "_POSIX_C_SOURCE 200809L"],
             "compilerPath": "/usr/bin/gcc",

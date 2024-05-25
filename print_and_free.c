@@ -36,6 +36,18 @@ void print_var_list(void)
 	}
 }
 
+void	print_lalloc()
+{
+	t_list	*lalloc;
+
+	lalloc = *allocs();
+	while (lalloc)
+	{
+		ft_printf("%p\n", lalloc->content);
+		lalloc = lalloc->next;
+	}
+}
+
 void print_last_node(void)
 {
 	t_var_list	*v;

@@ -30,13 +30,14 @@ t_ms			*ms(void);
 void			init_minishell(int argc, char **argv, char **envp);
 
 // lalloc
+int				same_ptr(void *ptr, void *ptr2);
 void			add_to_lal(void *ptr);
 void			clear_lal();
-void			*free_one_lal(void *ptr);
+void			free_one_lal(void *ptr);
 
 // error
 void			ft_error(t_err type, char *msg, int from_ms);
-t_list			*allocs(void);
+t_list			**allocs(void);
 void			print_errno(char *from, char *bad_arg, int from_ms);
 
 // safe
@@ -108,6 +109,7 @@ int				ft_strcmp(char *s1, char *s2);
 
 // FOR TESTING **REMOVE WHEN SUBMIT**
 void 			print_var_list(void);
+void			print_lalloc();
 void			free_var_list(void);
 void 			print_last_node(void);
 void 			print_tokens(t_token_list *lst);

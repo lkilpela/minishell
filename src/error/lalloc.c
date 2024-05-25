@@ -41,7 +41,10 @@ void	free_one_lal(void *ptr)
 
 void	clear_lal()
 {
-	ft_lstclear(allocs(), free_content);
+	t_list	**lalloc;
+
+	lalloc = allocs();
+	ft_lstclear(lalloc, free_content);
 }
 
 void	add_to_lal(void *ptr)

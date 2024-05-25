@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/25 17:02:54 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/26 00:02:23 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	minishell_loop(void)
 	while (42)
 	{
 		input = readline(PROMPT);
+		if (input == NULL)
+			built_exit();
 		add_history(input);
 		if (!quote_match_check(input))
 		{

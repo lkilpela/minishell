@@ -8,6 +8,7 @@
 # include <unistd.h> //write, access, getcwd, chdir
 # include <string.h> //strerror
 # include <errno.h> //errno
+# include <signal.h> //signal, sigaction
 
 # include <libft.h>
 # include <structs.h>

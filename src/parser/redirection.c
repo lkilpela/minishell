@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/25 22:20:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/25 23:39:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_token_list	*handle_heredoc(t_simple_cmd *simple, t_token_list *t)
 {
 	t = t->next;
 	simple->heredoc = heredoc(t);
-	printf("%s", simple->heredoc);
 	return (t);
 }
 

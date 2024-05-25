@@ -7,7 +7,7 @@ static void	free_content(void *content)
 }
 
 void	ft_lst_remove_if(t_list **lst, void *data_ref,
-							int (*cmp)(), void (*del)(void *))
+							int (*cmp)(void *, void *), void (*del)(void *))
 {
 	t_list	*cur;
 	

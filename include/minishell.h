@@ -36,6 +36,7 @@ void			clear_lal();
 void			free_one_lal(void *ptr);
 
 // error
+int				quote_match_check(char *input);
 void			ft_error(t_err type, char *msg, int from_ms);
 t_list			**allocs(void);
 void			print_errno(char *from, char *bad_arg, int from_ms);

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/25 15:20:05 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,12 @@ void	minishell_loop(void)
 	{
 		input = readline(PROMPT);
 		add_history(input);
+		if (!quote_match_check(input))
+		{
+			ft_error(WARNING, ERR_QUOTES, 1);
+			ft_free((void **)&input);
+			continue ;
+		}
 		printf(GREEN "Calling tokenizer: \n" RESET);
 		t = tokenizer(input);
 		print_tokens(t);

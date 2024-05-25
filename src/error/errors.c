@@ -31,3 +31,19 @@ void	print_errno(char *from, char *bad_arg, int from_ms)
 	}
 	perror(bad_arg);
 }
+
+int	quote_match_check(char *input)
+{
+	char	quote_type;
+
+	quote_type = 0;
+	while (*input)
+	{
+		if (!quote_type && is_quote(*input))
+			quote_type = *input;
+		else if (*input == quote_type)
+			quote_type = 0;
+		input++;
+	}
+	return (quote_type == 0);
+}

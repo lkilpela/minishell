@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/26 01:42:20 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/26 19:09:36 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	builtin_tests(t_commands *cmds)
 {
 	if (ft_strcmp(cmds->simples[0]->command, "exit") == 0)
-		built_exit();
+		built_exit(cmds->simples[0]);
 	if (ft_strcmp(cmds->simples[0]->command, "pwd") == 0)
 		built_pwd();
 	if (ft_strcmp(cmds->simples[0]->command, "env") == 0)
@@ -96,7 +96,7 @@ void	minishell_loop(void)
 	{
 		input = readline(PROMPT);
 		if (input == NULL) // ctrl + D
-			built_exit();
+			built_exit(NULL);
 		add_history(input);
 		if (!quote_match_check(input)) // ensure quotes are balanced
 		{

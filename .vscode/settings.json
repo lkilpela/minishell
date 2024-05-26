@@ -53,6 +53,8 @@
         "variant": "c",
         "compare": "c",
         "errno.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "signal.h": "c",
+        "features.h": "c"
     }
 }

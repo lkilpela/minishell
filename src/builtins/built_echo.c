@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:06:24 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/26 19:00:36 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/27 00:07:21 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ void	built_echo(t_simple_cmd *cmd)
 	}
 	if (!n_flag)
 		printf("\n");
+	ms()->exit = 0;
 }

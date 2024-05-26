@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/26 22:55:47 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/27 00:16:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	built_exit(t_simple_cmd *cmd)
 	if (cmd->num_of_args > 1)
 	{
 		print_error("bash: exit", NULL, "too many arguments", 0);
+		ms()->exit = 1;
 		return ;
 	}
 	if (!non_numeric_exit(cmd->args[0]))

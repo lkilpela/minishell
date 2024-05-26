@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:00 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 22:04:15 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/27 00:17:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,5 @@ void	built_unset(t_simple_cmd *cmd)
 	i = 0;
 	while (i < cmd->num_of_args)
 		var_remove(cmd->args[i++]);
+	ms()->exit = 0;
 }

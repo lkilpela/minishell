@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:10 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/24 11:54:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 00:08:53 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@ void	built_env(int declare)
 		}
 		envs = envs->next;
 	}
+	ms()->exit = 0;
 }

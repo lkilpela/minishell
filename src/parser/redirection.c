@@ -6,43 +6,52 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/25 23:39:27 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/26 13:56:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static char	*heredoc(t_token_list *t)
+static void	append_heredoc(char **heredoc, char *tmp)
+{
+	char *old_heredoc;
+
+	old_heredoc = *heredoc;
+	*heredoc = ft_safe_strjoin(*heredoc, tmp);
+	ft_free((void **)&old_heredoc);
+}
+
+static char	*read_and_expand_line(char *delim)
 {
 	char	*line;
-	char	*delim;
-	char	*tmp;
-	char	*expanded = ft_safe_calloc(1, 1);
+	char	*expanded_line;
 
 	ft_putstr_fd("> ", 1);
 	line = get_next_line(0);
 	if (!line)
 		return (NULL);
+	expanded_line = check_quotes_and_expand(line);
+	if (ft_strncmp(line, delim, ft_strlen(delim)) == 0)
+		return (NULL);
+	ft_free((void **)&line);
+	return (expanded_line);
+}
+
+static char	*heredoc(t_token_list *t)
+{
+	char 	*line;
+	char 	*heredoc;
+	char	*delim;
+
+	heredoc = ft_safe_calloc(1, 1);
 	delim = t->token->value;
+	line = read_and_expand_line(delim);
 	while (line)
-	{	
-		tmp = check_quotes_and_expand(line);
-		if (ft_strncmp(line, delim, ft_strlen(delim)) == 0)
-		{
-			ft_free((void **)&line);
-			return (expanded);
-		}
-		else
-		{
-			char *old_expand = expanded;
-			expanded = ft_safe_strjoin(expanded, tmp);
-			ft_free((void **)&old_expand);
-		}
-		ft_putstr_fd("> ", 1);
-		ft_free((void **)&line);
-		line = get_next_line(0);
+	{   
+		append_heredoc(&heredoc, line);
+		line = read_and_expand_line(delim);
 	}
-	ft_free((void **)&expanded);
+	ft_free((void **)&heredoc);
 	return (NULL);
 }
 

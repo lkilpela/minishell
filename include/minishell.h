@@ -58,6 +58,7 @@ void			ft_free(void **ptr);
 
 // vars list
 t_var_list 		*get_envp(char **envp);
+void			extract_var(char *str, char **key, char **value);
 void			add_var(char *str);
 char			*lookup_var(char *var_name);
 void			var_remove(char *keyval);

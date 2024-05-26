@@ -6,13 +6,13 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/26 21:58:58 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/26 22:07:31 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	extract_var(char *str, char **key, char **value)
+void	extract_var(char *str, char **key, char **value)
 {
 	char	*equal_sign;
 

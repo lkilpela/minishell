@@ -5,6 +5,7 @@
 # define ERR_QUOTES "syntax error, quotes not matched"
 # define ERR_PIPES "syntax error, pipe all alone in the end"
 # define ERR_NEAR_TOKEN "syntax error near unexpected token `"
+# define ERR_KEY_VALID "not a valid identifier"
 # define NL	"newline"
 
 #endif

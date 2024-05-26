@@ -6,11 +6,27 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/22 21:39:33 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/26 23:11:59 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	check_key(char *arg)
+{
+	char	*key;
+	char	*value;
+
+	extract_var(arg, &key, &value);
+	if (!ft_isalpha(*key) && *key != '_')
+		return (0);
+	while (*++key)
+	{
+		if (!ft_isalnum(*key) && *key != '_')
+			return (0);
+	}
+	return (1);
+}
 
 void	built_export(t_simple_cmd *cmd)
 {
@@ -26,6 +42,12 @@ void	built_export(t_simple_cmd *cmd)
 	{
 		while (i < cmd->num_of_args)
 		{
+			if (!check_key(cmd->args[i]))
+			{
+				print_error("bash: export: ", cmd->args[i], ERR_KEY_VALID, 0);
+				i++;
+				continue ;
+			}
 			add_var(cmd->args[i]);
 			i++;
 		}

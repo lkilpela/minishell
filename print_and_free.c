@@ -125,7 +125,7 @@ void print_simple_cmd(t_simple_cmd *cmd) {
 		return;
 	}
 	if (cmd->heredoc)
-		ft_printf("Heredoc: %s\n", cmd->heredoc);
+		ft_printf("Heredoc: %s", cmd->heredoc);
 	ft_printf("Input redirection: %s\n", cmd->in_file.file);
 	if (cmd->out_file.append)
 		ft_printf("(APPEND) ");

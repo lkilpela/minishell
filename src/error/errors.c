@@ -17,19 +17,27 @@ void	ft_error(t_err type, char *msg, int from_ms)
 	}
 }
 
-void	print_errno(char *from, char *bad_arg, int from_ms)
+void	print_error(char *from, char *bad_arg, char *custom, int is_errno)
 {
-	if (from_ms)
-	{
-		ft_putstr_fd(ms()->executable, 2);
-		ft_putstr_fd(": ", 2);
-	}
 	if (from)
 	{
 		ft_putstr_fd(from, 2);
 		ft_putstr_fd(": ", 2);
 	}
-	perror(bad_arg);
+	if (is_errno)
+		if (bad_arg)
+			perror(bad_arg);
+		else
+			perror(NULL);
+	else
+	{
+		if (bad_arg)
+		{
+			ft_putstr_fd(bad_arg, 2);
+			ft_putstr_fd(": ", 2);
+		}
+		ft_putendl_fd(custom, 2);
+	}
 }
 
 int	quote_match_check(char *input)

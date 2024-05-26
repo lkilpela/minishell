@@ -46,7 +46,7 @@ int				post_pipe_check(t_token_list *tokens);
 int				near_token_errors(t_token_list *tokens);
 void			ft_error(t_err type, char *msg, int from_ms);
 t_list			**allocs(void);
-void			print_errno(char *from, char *bad_arg, int from_ms);
+void			print_error(char *from, char *bad_arg, char *custom, int is_errno);
 
 // safe
 char			*ft_safe_strjoin(const char *s1, const char *s2);
@@ -93,7 +93,7 @@ t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens);
 //builtins
 void			built_echo(t_simple_cmd *cmd);
 void			built_pwd(void);
-void			built_exit(void);
+void			built_exit(t_simple_cmd *cmd);
 void			built_cd(t_simple_cmd *cmd);
 void			built_env(int declare);
 void			built_export(t_simple_cmd *cmd);

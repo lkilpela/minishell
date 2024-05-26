@@ -6,27 +6,11 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/26 21:40:48 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/26 21:50:33 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void    exit_banner(void)
-{
-	ft_printf("                   __   __     __                            \n");
-	ft_printf("                  |  \\ |  \\   |  \\                           \n");
-	ft_printf("  ______  __    __ \\▓▓_| ▓▓_   \\▓▓_______   ______           \n");
-	ft_printf(" /      \\|  \\  /  \\  \\   ▓▓ \\ |  \\       \\ /      \\          \n");
-	ft_printf("|  ▓▓▓▓▓▓\\\\▓▓\\/  ▓▓ ▓▓\\▓▓▓▓▓▓ | ▓▓ ▓▓▓▓▓▓▓\\  ▓▓▓▓▓▓\\         \n");
-	ft_printf("| ▓▓    ▓▓ >▓▓  ▓▓| ▓▓ | ▓▓ __| ▓▓ ▓▓  | ▓▓ ▓▓  | ▓▓         \n");
-	ft_printf("| ▓▓▓▓▓▓▓▓/  ▓▓▓▓\\| ▓▓ | ▓▓|  \\ ▓▓ ▓▓  | ▓▓ ▓▓__| ▓▓__ __ __ \n");
-	ft_printf(" \\▓▓     \\  ▓▓ \\▓▓\\ ▓▓  \\▓▓  ▓▓ ▓▓ ▓▓  | ▓▓\\▓▓    ▓▓  \\  \\  \\ \n");
-	ft_printf("  \\▓▓▓▓▓▓▓\\▓▓   \\▓▓\\▓▓   \\▓▓▓▓ \\▓▓\\▓▓   \\▓▓_\\▓▓▓▓▓▓▓\\▓▓\\▓▓\\▓▓\n");
-	ft_printf("                                          |  \\__| ▓▓         \n");
-	ft_printf("                                           \\▓▓    ▓▓         \n");
-	ft_printf("                                            \\▓▓▓▓▓▓          \n");
-}
 
 int str_is_number(char *str)
 {
@@ -81,7 +65,12 @@ void	built_exit(t_simple_cmd *cmd)
 {
 	uint8_t	exit_code;
 
-	exit_banner();
+	ft_putendl_fd("exit", 1);
+	if (!cmd || cmd->num_of_args == 0)
+	{
+		clear_lal();
+		exit(ms()->exit);
+	}
 	if (cmd->num_of_args > 1)
 	{
 		print_error("bash: exit", NULL, "too many arguments", 0);

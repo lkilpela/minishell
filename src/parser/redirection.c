@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/26 14:13:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:25:30 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void join_and_free(char **heredoc, char *tmp)
+static void append_heredoc(char **heredoc, char *tmp)
 {
 	char *old_heredoc;
 
@@ -43,7 +43,7 @@ static char	*heredoc(t_token_list *t)
 			return (heredoc);
 		}
 		else
-			join_and_free(&heredoc, tmp);
+			append_heredoc(&heredoc, tmp);
 		ft_putstr_fd("> ", 1);
 		ft_free((void **)&line);
 		line = get_next_line(0);

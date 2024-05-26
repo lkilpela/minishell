@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/26 00:39:33 by aklein           ###   ########.fr        #
+#    Updated: 2024/05/26 23:49:26 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,3 +134,36 @@ GREEN = \033[0;32m
 RED = \033[0;31m
 RESET = \033[0m
 BLUE = \033[34m
+
+################################################################################
+# VALGRIND
+################################################################################
+
+CC_VG = $(CC) $(CC_STRICT) $(HEADERS)
+
+VG = valgrind
+
+VG_FLAGS = --leak-check=full \
+	--show-leak-kinds=all \
+	--trace-children=yes \
+	--suppressions=readline.supp
+
+VG_LOG_FLAGS = $(VG_FLAGS) \
+	--log-file=$(VG_LOG) \
+	--track-origins=yes \
+	--verbose \
+	--gen-suppressions=all
+
+VG_LOG = valgrind_leaks.log
+
+vg: vg_build
+	$(VG) $(VG_FLAGS) ./$(NAME) $(VG_ARGS)
+
+vglog: vg_build
+	$(VG) $(VG_LOG_FLAGS) ./$(NAME) $(VG_ARGS)
+
+vg_build: $(OBJECTS)
+	$(CC_FULL) $(OBJECTS) $(READLINE) $(LIBFT) -o $(NAME)
+
+vglog_clean: fclean
+	rm -f $(VG_LOG)

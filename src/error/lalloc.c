@@ -3,7 +3,10 @@
 static void	free_content(void *content)
 {
 	if (content != NULL)
-		ft_free((void **)&content);
+	{
+		free(content);
+		content = NULL;
+	}
 }
 
 void	ft_lst_remove_if(t_list **lst, void *data_ref,

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/26 21:58:58 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	add_var(char *str)
 	char		*value;
 
 	extract_var(str, &key, &value);
-	if (!key || !value)
+	if (!key || !*key || !value)
 		return ;
 	vars = ms()->var_list;
 	while (vars)

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 19:01:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 19:01:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	validate_command(t_commands *c)
 		outfile = c->simples[i]->out_file.file;
 		if (access(infile, F_OK) == 0 )
 			print_error("minishell: infile: ", ERR_FILE, NULL, 1);
-		else if (ft_strlen(outfile) == 0)
+		else if (access(outfile, F_OK) == 0)
 			print_error("minishell: outfile: ", ERR_FILE, NULL, 1);
 	}
 }

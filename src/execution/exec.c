@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 14:40:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:55:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	execute_simple_command(t_execution *e, int i)
 int	execute_commands(t_execution *e)
 {
 	int		i; // track index of command
-	pid_t	pid;
 
 	i = 0;
 	e->pids = ft_safe_calloc(e->cmds->num_of_cmds, sizeof(pid_t));
@@ -88,6 +87,7 @@ int	execute_commands(t_execution *e)
 		}
 		i++;		
 	}
+	return (0);
 }
 
 void	close_all_fds(t_execution *e, int i)
@@ -102,4 +102,25 @@ void	close_all_fds(t_execution *e, int i)
 		close(e->pipefds[i][READ]);
 	if (e->pipefds[i][WRITE] != -1)
 		close(e->pipefds[i][WRITE]);
+}
+
+int	check_status(t_execution *e)
+{
+	if (WIFSIGNALED(e->wstatus) != 0)
+		return (handle_signal(e));
+	else
+		return (WEXITSTATUS(e->wstatus));
+}
+
+int	wait(t_execution *e)
+{
+	int	i;
+
+	while (i < e->cmds->num_of_cmds)
+	{
+		  e->pid = waitpid(e->pids[i], &e->wstatus, 0);
+		  if (e->pid == -1)
+		  	ft_error(FATAL, ERR_WAITPID, 1);
+		i++;
+	}
 }

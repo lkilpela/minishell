@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 12:41:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:53:33 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,10 @@ typedef struct s_commands
 typedef struct s_execution
 {
 	pid_t		*pids;
+	pid_t		pid;
 	int			**pipefds;
+	int			exec_status;
+	int			wstatus;
 	t_commands	*cmds;
 }				t_execution;
 

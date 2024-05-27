@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 06:45:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 09:28:53 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_ms
 	char		*executable;
 	uint8_t		exit;
 	t_var_list	*var_list;
-	t_execution	*execution;
 }				t_ms;
 
 /******************************************************************************\

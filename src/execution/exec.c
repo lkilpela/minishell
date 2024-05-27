@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 14:24:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:25:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	execute_commands(t_execution *e)
 	e->pids = ft_safe_calloc(e->cmds->num_of_cmds, sizeof(pid_t));
 	while (i < e->cmds->num_of_cmds)
 	{
-		pid = fork();
+		e->pids[i] = fork();
 		if (pid == -1)
 			ft_error(FATAL, ERR_FORK, 1);
 		if (pid == 0)

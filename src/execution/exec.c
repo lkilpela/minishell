@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 14:25:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:26:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,13 @@ int	execute_commands(t_execution *e)
 	while (i < e->cmds->num_of_cmds)
 	{
 		e->pids[i] = fork();
-		if (pid == -1)
+		if (e->pids[i] == -1)
 			ft_error(FATAL, ERR_FORK, 1);
-		if (pid == 0)
+		if (e->pids[i] == 0)
 		{
 			setup_duplication(e, i);
 			execute_command(e, i);
 		}
-			
 		i++;		
 	}
 }

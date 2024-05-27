@@ -12,5 +12,9 @@
 # define ERR_FORK "fork failed"
 # define ERR_EXECVE "execve failed"
 # define ERR_WAITPID "waitpid failed"
+# define ERR_FILE "no such file or directory"
+# define ERR_CMD "command not found"
+# define ERR_DIR "is a directory"
+# define ERR_PERM "permission denied"
 
 #endif

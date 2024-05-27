@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 08:53:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 08:54:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	**get_path_var()
+char	**get_path_dirs()
 {
 	t_var_list	*var;
 

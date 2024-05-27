@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 14:55:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:13:50 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,16 @@ int	execute_commands(t_execution *e)
 	{
 		e->pids[i] = fork();
 		if (e->pids[i] == -1)
+		{
 			ft_error(FATAL, ERR_FORK, 1);
+			ms()->exit = 1;
+		}
 		if (e->pids[i] == 0)
 		{
 			setup_duplication(e, i);
 			execute_command(e, i);
 			close_all_fds(e, i);
-			exit(0);
+			ms()->exit = 0;
 		}
 		i++;		
 	}
@@ -104,23 +107,17 @@ void	close_all_fds(t_execution *e, int i)
 		close(e->pipefds[i][WRITE]);
 }
 
-int	check_status(t_execution *e)
-{
-	if (WIFSIGNALED(e->wstatus) != 0)
-		return (handle_signal(e));
-	else
-		return (WEXITSTATUS(e->wstatus));
-}
-
 int	wait(t_execution *e)
 {
 	int	i;
 
 	while (i < e->cmds->num_of_cmds)
 	{
-		  e->pid = waitpid(e->pids[i], &e->wstatus, 0);
-		  if (e->pid == -1)
-		  	ft_error(FATAL, ERR_WAITPID, 1);
+		e->pid = waitpid(e->pids[i], &e->wstatus, 0);
+		if (e->pid == -1)
+			ft_error(FATAL, ERR_WAITPID, 1);
+		if (WIFEXITED(e->exec_status))
+			ms()->exit = WEXITSTATUS(e->exec_status);
 		i++;
 	}
 }

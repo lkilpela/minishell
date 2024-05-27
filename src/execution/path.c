@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 08:54:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 08:55:02 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ char	*find_local_command(t_simple_cmd *a_cmd)
 	if (!a_cmd->command)
 		return (NULL);
 	if (!ms()->paths)
-		ms()->paths = get_path_var();
+		ms()->paths = get_path_dirs();
 	return (find_executable(a_cmd));
 }

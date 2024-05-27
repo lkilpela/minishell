@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 12:49:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:42:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,28 @@ void	setup_pipes(t_execution *e)
 	}
 }
 
-
-
-/*void execute_cmds(t_commands *cmd, t_execution	*exec)
+int	execution(t_execution *e)
 {
-	exec = ft_safe_calloc(1, sizeof(t_execution));
-	exec->pids = ft_safe_calloc(cmd->num_of_cmds, sizeof(pid_t));
-	exec->pipefds = ft_safe_calloc(cmd->num_of_cmds - 1, sizeof(int[2]));
-	
-	
-}*/
+	int		i; // track index of command
+	pid_t	pid;
+
+	i = 0;
+	e->pids = ft_safe_calloc(e->cmds->num_of_cmds, sizeof(pid_t));
+	while (i < e->cmds->num_of_cmds)
+	{
+		pid = fork();
+		if (pid == -1)
+			ft_error(FATAL, ERR_PID, 1);
+		if (pid == 0)
+		{
+			if (i > 0)
+				dup2(e->pipefds[i - 1][READ], STDIN_FILENO);
+			if (i < e->cmds->num_of_cmds - 1)
+				dup2(e->pipefds[i][WRITE], STDOUT_FILENO);
+			
+			execve(e->cmds->simples[i]->executable, e->cmds->simples[i]->args, ms()->envp);
+		}
+			
+		i++;		
+	}
+}

@@ -7,5 +7,6 @@
 # define ERR_NEAR_TOKEN "syntax error near unexpected token `"
 # define ERR_KEY_VALID "not a valid identifier"
 # define NL	"newline"
+# define ERR_PIPE "Failed to create pipe"
 
 #endif

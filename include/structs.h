@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/26 21:44:45 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/27 06:45:24 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_ms
 	char		*executable;
 	uint8_t		exit;
 	t_var_list	*var_list;
+	t_execution	*execution;
 }				t_ms;
 
 /******************************************************************************\
@@ -107,5 +108,17 @@ typedef struct s_commands
 	t_simple_cmd	**simples;
 	int				num_of_cmds;
 }				t_commands;
+
+/******************************************************************************\
+ * EXECUTION
+\******************************************************************************/
+
+typedef struct s_execution
+{
+	pid_t		*pids;
+	int			*pipefds;
+	t_commands	*cmds;
+}				t_execution;
+
 
 #endif

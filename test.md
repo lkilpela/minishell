@@ -139,3 +139,5 @@ minishell$ <<$USER
 ## PARSER
 
 cat <<END | grep "hello" | wc -l > output
+
+cat <END | grep "hello" | wc -l > output

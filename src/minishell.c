@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/27 06:46:12 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:15:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	minishell_loop(void)
 	char			*input;
 	t_token_list	*t;
 	t_commands		*cmds;
+	int i = 0;
 
 	while (42)
 	{
@@ -112,8 +113,8 @@ void	minishell_loop(void)
 			ft_free((void **)&input);
 			continue ;
 		}
-		printf("final token_list: \n");
-		print_tokens(t);
+		//printf("final token_list: \n");
+		//rint_tokens(t);
 		cmds = parser(t);
 		if (ft_strchr(cmds->simples[0]->command, EQUAL_SIGN) != NULL) // local var assignment
 		{
@@ -123,6 +124,12 @@ void	minishell_loop(void)
 			continue ;
 		}
 		builtin_tests(cmds);
+		while (i < cmds->num_of_cmds)
+		{
+			find_executable(cmds->simples[i]);
+			i++;
+		}
+		
 		ft_free((void **)&input);
 	}
 }

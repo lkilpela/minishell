@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:03:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 06:46:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:20:47 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 		if ((*tokens)->token->type >= OP_LESS && (*tokens)->token->type <= OP_DGREAT)
 		{
 			(*tokens) = get_redir(simple_cmd, *tokens);
-			print_tokens(*tokens);
 			continue ;
 		}
 		if (simple_cmd->command == NULL && (*tokens)->token->type == WORD)
@@ -77,6 +76,5 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 		}
 		(*tokens) = (*tokens)->next;
 	}
-	print_simple_cmd(simple_cmd);
 	return (simple_cmd);
 }

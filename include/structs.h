@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 09:28:53 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 10:35:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_simple_cmd
 	t_redir	out_file;
 	char	*heredoc;
 	char	**args;
+	char	*executable;
 }			t_simple_cmd;
 
 typedef struct s_commands

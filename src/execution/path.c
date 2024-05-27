@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 09:04:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:20:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,41 @@ char	**get_path_dirs(void)
 	return (NULL);
 }
 
+void	init_path_dirs(void)
+{
+	if (!ms()->paths)
+		ms()->paths = get_path_dirs();
+	for (int i = 0; ms()->paths[i]; i++)
+			printf("dir_paths: %s\n", ms()->paths[i]);
+}
+
 char	*find_executable(t_simple_cmd *a_cmd)
 {
-	char	*command;
+	char	*command = NULL;
+	char	*tmp = NULL;
 	int		i;
-	char	*executable;
-	char	**dir_paths;
+	//char	**dir_paths = NULL;
 
 	i = 0;
-	dir_paths = ms()->paths;
 	if (!ft_strchr(a_cmd->command, '/'))
 		command = ft_safe_strjoin("/", a_cmd->command);
 	else
 		return (ft_safe_strdup(a_cmd->command));
-	while (dir_paths[i])
+	printf("command: %s\n", command);
+	while (ms()->paths[i])
 	{
-		executable = ft_safe_strjoin(dir_paths[i], command);
-		if (executable && access(executable, F_OK | X_OK) == 0)
+		tmp = ft_safe_strjoin(ms()->paths[i], command);
+		printf("tmp: %s\n", tmp);
+		if (tmp && access(tmp, F_OK | X_OK) == 0)
 		{
-			ft_free((void **)&command);
-			return (executable);
+			//ft_free((void **)&command);
+			a_cmd->executable = tmp;
+			return (a_cmd->executable);
 		}
+		//ft_free((void **)&tmp);
 		i++;
 	}
-	ft_free((void **)&command);
+	//ft_free((void **)&command);
+	printf("executable: %s\n", a_cmd->executable);
 	return (NULL);
-}
-
-char	*find_local_command(t_simple_cmd *a_cmd)
-{
-	if (!a_cmd->command)
-		return (NULL);
-	if (!ms()->paths)
-		ms()->paths = get_path_dirs();
-	return (find_executable(a_cmd));
 }

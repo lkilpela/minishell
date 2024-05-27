@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 15:17:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:21:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	execute_simple_command(t_execution *e, int i)
 	if (execve(e->cmds->simples[i]->executable,
 			e->cmds->simples[i]->args, ms()->envp) == -1)
 	{
-		ft_error(FATAL,ERR_EXECVE, 1);
+		ft_error(FATAL, ERR_EXECVE, 1);
 		return (-1);
 	}
 	return (0);
@@ -69,7 +69,7 @@ int	execute_simple_command(t_execution *e, int i)
 
 int	execute_commands(t_execution *e)
 {
-	int		i; // track index of command
+	int	i;
 
 	i = 0;
 	e->pids = ft_safe_calloc(e->cmds->num_of_cmds, sizeof(pid_t));
@@ -85,7 +85,7 @@ int	execute_commands(t_execution *e)
 			close_all_fds(e, i);
 			ms()->exit = 0;
 		}
-		i++;		
+		i++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 13:42:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:09:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,31 @@ void	setup_pipes(t_execution *e)
 	}
 }
 
+// i: index of command
+int	setup_duplication(t_execution *e, int i)
+{
+	int	num_of_pipes;
+
+	num_of_pipes = e->cmds->num_of_cmds - 1;
+	if (i > 0)
+	{
+		if (dup2(e->pipefds[i - 1][READ], STDIN_FILENO) == -1)
+		{
+			close(e->pipefds[i - 1][WRITE]);
+			ft_error(FATAL, ERR_DUP2, 1);
+		}
+	}
+	if (i < num_of_pipes)
+	{
+		if (dup2(e->pipefds[i][WRITE], STDOUT_FILENO) == -1)
+		{
+			close(e->pipefds[i][READ]);
+			ft_error(FATAL, ERR_DUP2, 1);
+		}
+	}
+	return (0);
+}
+
 int	execution(t_execution *e)
 {
 	int		i; // track index of command
@@ -45,10 +70,6 @@ int	execution(t_execution *e)
 			ft_error(FATAL, ERR_FORK, 1);
 		if (pid == 0)
 		{
-			if (i > 0)
-				dup2(e->pipefds[i - 1][READ], STDIN_FILENO);
-			if (i < e->cmds->num_of_cmds - 1)
-				dup2(e->pipefds[i][WRITE], STDOUT_FILENO);
 			
 			execve(e->cmds->simples[i]->executable, e->cmds->simples[i]->args, ms()->envp);
 		}

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   waipid.c                                           :+:      :+:    :+:   */
+/*   waitpid.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:22:07 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 15:22:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:24:00 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	waitpid(t_execution *e, int i)
+int	wait(t_execution *e, int i)
 {
 	while (i < e->cmds->num_of_cmds)
 	{

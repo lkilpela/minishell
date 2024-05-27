@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 08:55:02 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 08:59:37 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ char *find_executable(t_simple_cmd *a_cmd)
 	char	*command;
 	int		i;
 	char	*executable;
-	char	*dir_path;
+	char	**dir_paths;
 
 	i = 0;
-	dir_path = ms()->paths[i];
-	if (!ft_strchr(a_cmd, '/'))
-		command = ft_safe_strjoin("/", a_cmd);
+	dir_paths = ms()->paths;
+	if (!ft_strchr(a_cmd->command, '/'))
+		command = ft_safe_strjoin("/", a_cmd->command);
 	else
-		return (ft_safe_strdup(a_cmd));
-	while (ms()->paths[i])
+		return (ft_safe_strdup(a_cmd->command));
+	while (dir_paths[i])
 	{
-		executable = ft_safe_strjoin(ms()->paths[i], a_cmd);
+		executable = ft_safe_strjoin(dir_paths[i], command);
 		if (access(executable, F_OK | X_OK) == 0)
 			return (executable);
 		i++;

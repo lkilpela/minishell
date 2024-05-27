@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 09:03:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 09:04:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-char	**get_path_dirs()
+char	**get_path_dirs(void)
 {
 	t_var_list	*var;
 
@@ -26,7 +26,7 @@ char	**get_path_dirs()
 	return (NULL);
 }
 
-char *find_executable(t_simple_cmd *a_cmd)
+char	*find_executable(t_simple_cmd *a_cmd)
 {
 	char	*command;
 	int		i;

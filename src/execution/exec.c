@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 15:16:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:17:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,8 @@ void	close_all_fds(t_execution *e, int i)
 		close(e->pipefds[i][WRITE]);
 }
 
-int	wait(t_execution *e)
+int	waitpid(t_execution *e, int i)
 {
-	int	i;
-
 	while (i < e->cmds->num_of_cmds)
 	{
 		e->pid = waitpid(e->pids[i], &e->status, 0);

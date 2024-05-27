@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 08:53:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 08:53:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**get_path_var()
 	{
 		if (ft_strcmp(var->key, "PATH") == 0)
 			return (ft_split(var->value, ':'));
-			var = var->next;
+		var = var->next;
 	}
 	return (NULL);
 }

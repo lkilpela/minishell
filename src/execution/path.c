@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 11:20:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 11:25:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*find_executable(t_simple_cmd *a_cmd)
 	{
 		tmp = ft_safe_strjoin(ms()->paths[i], command);
 		printf("tmp: %s\n", tmp);
-		if (tmp && access(tmp, F_OK | X_OK) == 0)
+		if (tmp && access(tmp, F_OK | X_OK) != -1)
 		{
 			//ft_free((void **)&command);
 			a_cmd->executable = tmp;

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 14:09:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:18:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,17 @@ int	setup_duplication(t_execution *e, int i)
 	return (0);
 }
 
+int	execute_command(t_execution *e, int i)
+{
+	if (execve(e->cmds->simples[i]->executable,
+			e->cmds->simples[i]->args, ms()->envp) == -1)
+	{
+		ft_error(FATAL,ERR_EXECVE, 1);
+		return (-1);
+	}
+	return (0);
+}
+
 int	execution(t_execution *e)
 {
 	int		i; // track index of command
@@ -70,8 +81,8 @@ int	execution(t_execution *e)
 			ft_error(FATAL, ERR_FORK, 1);
 		if (pid == 0)
 		{
+			setup_duplication(e, i);
 			
-			execve(e->cmds->simples[i]->executable, e->cmds->simples[i]->args, ms()->envp);
 		}
 			
 		i++;		

@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/27 09:26:06 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/05/27 10:19:41 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 CC				=	cc
 CC_STRICT		=	-Wall -Wextra -Werror
 DB_FLAGS		=	-g #-fsanitize=leak
-HEADERS			=	-I $(LIBFT_INCLUDES) -I $(INCLUDES)
+HEADERS			=	-I $(LIBFT_INCLUDES) -I $(INCLUDES) -I/opt/homebrew/opt/readline/include
 CC_FULL			=	$(CC) $(CC_STRICT) $(DB_FLAGS) $(HEADERS)
 
 ################################################################################
@@ -29,7 +29,7 @@ LIBFT_INCLUDES	=	./libft/include
 ################################################################################
 # READLINE
 ################################################################################
-READLINE		=	-lreadline
+READLINE		=	-L/opt/homebrew/opt/readline/lib -lreadline
 
 ################################################################################
 # MANDATORY
@@ -37,7 +37,8 @@ READLINE		=	-lreadline
 NAME			=	minishell
 INCLUDES		=	./include
 M_HEADERS		=	$(INCLUDES)/minishell.h \
-					$(INCLUDES)/structs.h
+					$(INCLUDES)/structs.h \
+					$(INCLUDES)/errors.h
 OBJ_DIR			=	./obj
 OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
@@ -70,7 +71,7 @@ SRCS			=	minishell.c \
 					signals.c \
 					child.c \
 					exec.c \
-					path.c \
+					path.c 
 
 ################################################################################
 # RULES
@@ -91,7 +92,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJECTS)
 	@echo "--------------------------------------------"
-	@$(CC_FULL) $(OBJECTS) $(READLINE) $(LIBFT) -o $(NAME)
+	@$(CC_FULL) $(OBJECTS) $(LIBFT) $(READLINE) -o $(NAME)
 	@echo "[$(NAME)] $(BLUE)Built target $(NAME)$(RESET)"
 	@echo "--------------------------------------------"
 

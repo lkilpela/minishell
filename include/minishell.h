@@ -1,9 +1,9 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <stdio.h> //readline
 # include <readline/readline.h> //readline
 # include <readline/history.h> //readline
-# include <stdio.h> //readline
 # include <stdlib.h> //malloc, free
 # include <unistd.h> //write, access, getcwd, chdir
 # include <string.h> //strerror

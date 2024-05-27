@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:35:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 09:09:43 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 09:48:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	duplicate_fds(t_execution *e)
+void	duplicate_fds(t_execution *e)
 {
 	int	i;
 	t_simple_cmd *cmd;

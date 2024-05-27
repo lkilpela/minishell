@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 15:13:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:15:02 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,11 @@ int	wait(t_execution *e)
 
 	while (i < e->cmds->num_of_cmds)
 	{
-		e->pid = waitpid(e->pids[i], &e->wstatus, 0);
+		e->pid = waitpid(e->pids[i], &e->status, 0);
 		if (e->pid == -1)
 			ft_error(FATAL, ERR_WAITPID, 1);
-		if (WIFEXITED(e->exec_status))
-			ms()->exit = WEXITSTATUS(e->exec_status);
+		if (WIFEXITED(e->status))
+			ms()->exit = WEXITSTATUS(e->status);
 		i++;
 	}
 }

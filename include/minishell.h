@@ -95,7 +95,7 @@ t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens);
 void			init_path_dirs(void);
 char			*find_executable(t_simple_cmd *a_cmd);
 int				execute_commands(t_execution *e);
-int				wait(t_execution *e, int i);
+int				parent(t_execution *e, int i);
 void			close_all_fds(t_execution *e, int i);
 
 //builtins

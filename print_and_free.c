@@ -157,3 +157,20 @@ void	print_commands(t_commands *cmds)
 		i++;
 	}
 }
+
+
+void print_executable(t_commands *cmds)
+{
+	int i = 0;
+	if (cmds == NULL)
+	{
+		ft_printf("NULL commands structure\n");
+		return;
+	}
+	while (i < cmds->num_of_cmds)
+	{
+		ft_printf("\e[0;32mexecutable_cmd %d:\e[0m\n", i + 1);
+		printf("%s\n", find_executable(cmds->simples[i]));
+		i++;
+	}
+}

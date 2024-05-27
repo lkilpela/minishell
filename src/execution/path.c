@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 12:16:32 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:17:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,4 @@ char	*find_executable(t_simple_cmd *a_cmd)
 	}
 	ft_free((void **)&command);
 	return (NULL);
-}
-
-void print_executable(t_commands *cmds)
-{
-	int i = 0;
-	if (cmds == NULL)
-	{
-		ft_printf("NULL commands structure\n");
-		return;
-	}
-	while (i < cmds->num_of_cmds)
-	{
-		ft_printf("\e[0;32mexecutable_cmd %d:\e[0m\n", i + 1);
-		printf("%s\n", find_executable(cmds->simples[i]));
-		i++;
-	}
 }

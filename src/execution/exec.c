@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 14:26:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:40:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,23 @@ int	execute_commands(t_execution *e)
 		{
 			setup_duplication(e, i);
 			execute_command(e, i);
+			close_all_fds(e, i);
+			exit(0);
 		}
 		i++;		
 	}
+}
+
+void	close_all_fds(t_execution *e, int i)
+{
+	if (!e)
+		return ;
+	if (e->cmds->simples[i]->in_file.fd != -1)
+		close(e->cmds->simples[i]->in_file.fd);
+	if (e->cmds->simples[i]->out_file.fd != -1)
+		close(e->cmds->simples[i]->out_file.fd);
+	if (e->pipefds[i][READ] != -1)
+		close(e->pipefds[i][READ]);
+	if (e->pipefds[i][WRITE] != -1)
+		close(e->pipefds[i][WRITE]);
 }

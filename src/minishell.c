@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/27 11:21:53 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:12:54 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	minishell_loop(void)
 	char			*input;
 	t_token_list	*t;
 	t_commands		*cmds;
-	int i = 0;
 
 	while (42)
 	{
@@ -123,14 +122,9 @@ void	minishell_loop(void)
 			print_var_list();
 			continue ;
 		}
-		builtin_tests(cmds);
 		init_path_dirs();
-		while (i < cmds->num_of_cmds)
-		{
-			find_executable(cmds->simples[i]);
-			i++;
-		}
-		
+		print_executable(cmds);
+		builtin_tests(cmds);
 		ft_free((void **)&input);
 	}
 }

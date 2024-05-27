@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 11:25:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 12:16:32 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	init_path_dirs(void)
 {
 	if (!ms()->paths)
 		ms()->paths = get_path_dirs();
-	for (int i = 0; ms()->paths[i]; i++)
-			printf("dir_paths: %s\n", ms()->paths[i]);
 }
 
 char	*find_executable(t_simple_cmd *a_cmd)
@@ -46,21 +44,33 @@ char	*find_executable(t_simple_cmd *a_cmd)
 		command = ft_safe_strjoin("/", a_cmd->command);
 	else
 		return (ft_safe_strdup(a_cmd->command));
-	printf("command: %s\n", command);
 	while (ms()->paths[i])
 	{
 		tmp = ft_safe_strjoin(ms()->paths[i], command);
-		printf("tmp: %s\n", tmp);
 		if (tmp && access(tmp, F_OK | X_OK) != -1)
 		{
-			//ft_free((void **)&command);
 			a_cmd->executable = tmp;
 			return (a_cmd->executable);
 		}
-		//ft_free((void **)&tmp);
+		ft_free((void **)&tmp);
 		i++;
 	}
-	//ft_free((void **)&command);
-	printf("executable: %s\n", a_cmd->executable);
+	ft_free((void **)&command);
 	return (NULL);
+}
+
+void print_executable(t_commands *cmds)
+{
+	int i = 0;
+	if (cmds == NULL)
+	{
+		ft_printf("NULL commands structure\n");
+		return;
+	}
+	while (i < cmds->num_of_cmds)
+	{
+		ft_printf("\e[0;32mexecutable_cmd %d:\e[0m\n", i + 1);
+		printf("%s\n", find_executable(cmds->simples[i]));
+		i++;
+	}
 }

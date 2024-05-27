@@ -134,6 +134,6 @@ void 			print_last_token_node(t_token_list *t);
 char			*get_type_str(int e);
 void			print_commands(t_commands *cmds);
 void			print_simple_cmd(t_simple_cmd *cmd);
-
+void			print_executable(t_commands *cmds);
 
 #endif

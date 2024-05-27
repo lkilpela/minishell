@@ -6,11 +6,14 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 07:01:43 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 08:16:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+#define WRITE 1 // Pipe write_end
+#define READ 0 // Pipe read_end
 
 void	setup_pipes(t_execution *e)
 {
@@ -38,17 +41,22 @@ int	setup_commands(t_execution *e)
 		if (dup2(cmd->in_file.fd, STDIN_FILENO) == -1)
 		{
 			close(cmd->in_file.fd);
-			ft_error(FATAL, )
+			ft_error(FATAL, ERR_DUP2, 1);
+		}
+		if (dup2(e->pipefds[i], STDOUT_FILENO) == -1)
+		{
+			
 		}
 	}
 }
 
-void execute_cmds(t_commands *cmd)
-{
-	t_execution	*exec;
 
+
+void execute_cmds(t_commands *cmd, t_execution	*exec)
+{
 	exec = ft_safe_calloc(1, sizeof(t_execution));
 	exec->pids = ft_safe_calloc(cmd->num_of_cmds, sizeof(pid_t));
 	exec->pipefds = ft_safe_calloc(cmd->num_of_cmds - 1, sizeof(int[2]));
+	
 	
 }

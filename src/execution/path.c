@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 08:49:52 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 08:53:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,16 @@
 
 char	**get_path_var()
 {
-	if (ft_strcmp(ms()->var_list->key, "PATH") == 0)
-		return (ft_split(ms()->var_list->value, ':'));
-	else
-		return (NULL);
+	t_var_list	*var;
+
+	var = ms()->var_list;
+	while (var)
+	{
+		if (ft_strcmp(var->key, "PATH") == 0)
+			return (ft_split(var->value, ':'));
+			var = var->next;
+	}
+	return (NULL);
 }
 
 char *find_executable(t_simple_cmd *a_cmd)

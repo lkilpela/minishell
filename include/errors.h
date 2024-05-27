@@ -7,6 +7,10 @@
 # define ERR_NEAR_TOKEN "syntax error near unexpected token `"
 # define ERR_KEY_VALID "not a valid identifier"
 # define NL	"newline"
-# define ERR_PIPE "Failed to create pipe"
+# define ERR_PIPE "pipe failed"
+# define ERR_DUP2 "dup2 failed"
+# define ERR_FORK "fork failed"
+# define ERR_EXECVE "execve failed"
+# define ERR_WAITPID "waitpid failed"
 
 #endif

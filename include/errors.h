@@ -6,5 +6,6 @@
 # define ERR_PIPES "syntax error, pipe all alone in the end"
 # define ERR_NEAR_TOKEN "syntax error near unexpected token `"
 # define NL	"newline"
+# define ERR_PIPE "Failed to create pipe"
 
 #endif

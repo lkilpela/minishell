@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/25 16:02:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/26 14:48:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_ms
 	char		**paths;	// Array of paths for executable lookup
 	char		*executable;
 	t_var_list	*var_list;
+	t_execution	*execution;
 }				t_ms;
 
 /******************************************************************************\
@@ -106,5 +107,17 @@ typedef struct s_commands
 	t_simple_cmd	**simples;
 	int				num_of_cmds;
 }				t_commands;
+
+/******************************************************************************\
+ * EXECUTION
+\******************************************************************************/
+
+typedef struct s_execution
+{
+	pid_t		*pids;
+	int			*pipefds;
+	t_commands	*cmds;
+}				t_execution;
+
 
 #endif

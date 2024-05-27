@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 15:22:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 15:27:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define WRITE 1 // Pipe write_end
 #define READ 0 // Pipe read_end
 
-void	setup_pipes(t_execution *e)
+static void	setup_pipes(t_execution *e)
 {
 	int	i;
 	int	num_of_pipes;
@@ -32,7 +32,7 @@ void	setup_pipes(t_execution *e)
 }
 
 // i: index of command
-int	setup_duplication(t_execution *e, int i)
+static int	setup_duplication(t_execution *e, int i)
 {
 	int	num_of_pipes;
 
@@ -56,7 +56,7 @@ int	setup_duplication(t_execution *e, int i)
 	return (0);
 }
 
-int	execute_simple_command(t_execution *e, int i)
+static int	execute_simple_command(t_execution *e, int i)
 {
 	if (execve(e->cmds->simples[i]->executable,
 			e->cmds->simples[i]->args, ms()->envp) == -1)
@@ -65,6 +65,20 @@ int	execute_simple_command(t_execution *e, int i)
 		return (-1);
 	}
 	return (0);
+}
+
+void	close_all_fds(t_execution *e, int i)
+{
+	if (!e)
+		return ;
+	if (e->cmds->simples[i]->in_file.fd != -1)
+		close(e->cmds->simples[i]->in_file.fd);
+	if (e->cmds->simples[i]->out_file.fd != -1)
+		close(e->cmds->simples[i]->out_file.fd);
+	if (e->pipefds[i][READ] != -1)
+		close(e->pipefds[i][READ]);
+	if (e->pipefds[i][WRITE] != -1)
+		close(e->pipefds[i][WRITE]);
 }
 
 int	execute_commands(t_execution *e)
@@ -88,18 +102,4 @@ int	execute_commands(t_execution *e)
 		i++;
 	}
 	return (0);
-}
-
-void	close_all_fds(t_execution *e, int i)
-{
-	if (!e)
-		return ;
-	if (e->cmds->simples[i]->in_file.fd != -1)
-		close(e->cmds->simples[i]->in_file.fd);
-	if (e->cmds->simples[i]->out_file.fd != -1)
-		close(e->cmds->simples[i]->out_file.fd);
-	if (e->pipefds[i][READ] != -1)
-		close(e->pipefds[i][READ]);
-	if (e->pipefds[i][WRITE] != -1)
-		close(e->pipefds[i][WRITE]);
 }

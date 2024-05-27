@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 13:42:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:42:40 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	execution(t_execution *e)
 	{
 		pid = fork();
 		if (pid == -1)
-			ft_error(FATAL, ERR_PID, 1);
+			ft_error(FATAL, ERR_FORK, 1);
 		if (pid == 0)
 		{
 			if (i > 0)

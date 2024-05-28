@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 15:27:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:56:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #define WRITE 1 // Pipe write_end
 #define READ 0 // Pipe read_end
 
-static void	setup_pipes(t_execution *e)
+void	setup_pipes(t_execution *e)
 {
 	int	i;
 	int	num_of_pipes;
@@ -27,6 +27,7 @@ static void	setup_pipes(t_execution *e)
 	{
 		e->pipefds[i] = ft_calloc(2, sizeof(int));
 		pipe(e->pipefds[i]);
+		printf("Pipe %d: read end = %d, write end = %d\n", i, e->pipefds[i][0], e->pipefds[i][1]);
 		i++;
 	}
 }
@@ -58,8 +59,12 @@ static int	setup_duplication(t_execution *e, int i)
 
 static int	execute_simple_command(t_execution *e, int i)
 {
-	if (execve(e->cmds->simples[i]->executable,
-			e->cmds->simples[i]->args, ms()->envp) == -1)
+	char	*executable;
+	char	**args;
+
+	executable = e->cmds->simples[i]->executable;
+	args = e->cmds->simples[i]->args;
+	if (execve(executable, args, ms()->envp) == -1)
 	{
 		ft_error(FATAL, ERR_EXECVE, 1);
 		return (-1);
@@ -95,7 +100,7 @@ int	execute_commands(t_execution *e)
 		if (e->pids[i] == 0)
 		{
 			setup_duplication(e, i);
-			execute_command(e, i);
+			execute_simple_command(e, i);
 			close_all_fds(e, i);
 			ms()->exit = 0;
 		}

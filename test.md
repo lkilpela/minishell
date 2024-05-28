@@ -141,3 +141,7 @@ minishell$ <<$USER
 cat <<END | grep "hello" | wc -l > output
 
 cat <END | grep "hello" | wc -l > output
+
+## PIPE
+
+echo "Hello, World!" | cat

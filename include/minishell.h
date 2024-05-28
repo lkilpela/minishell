@@ -92,6 +92,7 @@ t_commands		*parser(t_token_list *tokens);
 t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens);
 
 // execution
+void			setup_pipes(t_execution *e);
 void			init_path_dirs(void);
 char			*find_executable(t_simple_cmd *a_cmd);
 int				execute_commands(t_execution *e);

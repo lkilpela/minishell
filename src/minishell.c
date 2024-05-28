@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/29 23:26:55 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/29 23:27:28 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,26 @@ void	handle_quotes(char **val)
 
 char	*handle_node_quotes(char *val)
 {
-	char	*start;
+	char	*current;
 	char	*new_val;
 	size_t	len;
 	
 	len = ft_strlen(val);
-	start = val;
-	while (*val)
+	current = val;
+	while (*current)
 	{
-		if (is_quote(*val))
-		{
-			handle_quotes(&val);
-			break ;
-		}
-		val++;
+		if (is_quote(*current))
+			handle_quotes(&current);
+		else
+			current++;
 	}
-	if (ft_strlen(start) != len)
+	if (ft_strlen(val) != len)
 	{
-		new_val = ft_safe_strdup(start);
-		ft_free((void **)&start);
+		new_val = ft_safe_strdup(val);
+		ft_free((void **)&val);
 		return (new_val);
 	}
-	return (start);
+	return (val);
 }
 
 void	clear_quotes(t_token_list *t)
@@ -85,6 +83,16 @@ void	clear_quotes(t_token_list *t)
 	}
 }
 
+void	rl_history(char *input)
+{
+	static char	*last = NULL;
+
+	if (!last || ft_strcmp(last, input) != 0)
+		add_history(input);
+	ft_free((void **)&last);
+	last = ft_safe_strdup(input);
+}
+
 // line 51:  only allowing var assignment as first WORD aka command
 void	minishell_loop(void)
 {
@@ -97,7 +105,7 @@ void	minishell_loop(void)
 		input = readline(PROMPT);
 		if (input == NULL) // ctrl + D
 			built_exit(NULL);
-		add_history(input);
+		rl_history(input);
 		if (!quote_match_check(input)) // ensure quotes are balanced
 		{
 			ft_error(WARNING, ERR_QUOTES, 1);
@@ -119,13 +127,6 @@ void	minishell_loop(void)
 		printf("After quote_clear: \n");
 		print_tokens(t);
 		cmds = parser(t);
-		if (ft_strchr(cmds->simples[0]->command, EQUAL_SIGN) != NULL) // local var assignment
-		{
-			process_var_assignment(&input);
-			ft_free((void **)&input);
-			print_var_list();
-			continue ;
-		}
 		init_path_dirs();
 		//print_executable(cmds);
 		//setup_pipes(cmds);
@@ -146,5 +147,6 @@ t_ms	*ms(void)
 int	main(int argc, char **argv, char **envp)
 {
 	init_minishell(argc, argv, envp);
+	read_history(NULL);
 	minishell_loop();
 }

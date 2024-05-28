@@ -63,3 +63,14 @@ char	*ft_safe_substr(const char *s, unsigned int start, size_t len)
 	add_to_lal((void *)str);
 	return (str);
 }
+
+char	*ft_safe_itoa(int n)
+{
+	char	*str;
+
+	str = ft_itoa(n);
+	if (!str)
+		ft_error(FATAL, NULL, 0);
+	add_to_lal((void *)str);
+	return (str);
+}

@@ -55,6 +55,7 @@ char			*ft_safe_strndup(const char *s1, size_t len);
 char			*ft_safe_strdup(const char *s1);
 void			*ft_safe_calloc(size_t count, size_t size);
 char			*ft_safe_substr(const char *s, unsigned int start, size_t len);
+char			*ft_safe_itoa(int n);
 void			ft_free(void **ptr);
 
 // vars list

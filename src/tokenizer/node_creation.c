@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:33 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 18:22:18 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/28 19:53:36 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,46 +38,6 @@ void	list_to_list(t_token_list **lst, t_token_list *add, t_token_list *index)
 	ft_free((void **)&index);
 }
 
-int	var_at_start(char *var, char *start)
-{
-	if (start == var)
-		return (1);
-	if (*start == '"' && start + 1 == var)
-		return (1);
-	return (0);
-}
-
-int	var_at_end(char *var)
-{
-	char	*skip_var;
-
-	skip_var = skip_variable(var);
-	if (*skip_var == 0)
-		return (1);
-	if (*skip_var == '"' && *(skip_var + 1) == 0)
-		return (1);
-	return (0);
-}
-
-int	contains_space(char *var)
-{
-	char	quote;
-
-	quote = 0;
-	while (*var)
-	{
-		if (!quote && is_whitespace(*var))
-			return (1);
-		if (!quote && is_quote(*var))
-			quote = *var;
-		else if (quote && *var == quote)
-			quote = 0;
-		var++;
-	}
-	return (0);
-}
-//string *start where *var is the location of the first var
-//return new string after *var is expanded
 char	*get_variable(char *var)
 {
 	char	*key;
@@ -90,43 +50,38 @@ char	*get_variable(char *var)
 	ft_free((void **)&key);
 	return (value);	
 }
-char	*exp_next_var(char *var, char *start)
+char	*exp_next_var(char *var, char **start)
 {
 	char	*new;
-	char	*tmp;
+	char	*beginning;
 	char	*final;
 	char	*value;
+	int		ret_index;
 
-	tmp = ft_safe_strndup(start, var - start);
+	beginning = ft_safe_strndup(*start, var - *start);
 	value = get_variable(var);
-	new = ft_safe_strjoin(tmp, value);
-	ft_free((void **)&tmp);
+	new = ft_safe_strjoin(beginning, value);
+	ret_index = ft_strlen(new);
+	ft_free((void **)&beginning);
 	ft_free((void **)&value);
 	final = ft_safe_strjoin(new, skip_variable(var));
 	ft_free((void **)&new);
-	return (final);
+	*start = final;
+	return (*start + ret_index);
 }
 
 t_token_list	*exp_word(char *str_start)
 {
 	t_quote_type	quote;
 	char			*str;
-	char			*tmp;
 
 	str = str_start;
 	quote = NO_QUOTE;	
 	while (*str)
 	{
-		if (is_quote(*str))
-			quote = update_quote_type(quote, *str++);
+		quote = update_quote_type(quote, *str);
 		if (quote != SINGLE_QUOTE && *str == '$')
-		{
-			tmp = exp_next_var(str, str_start);
-			ft_free((void **)&str);
-			str = tmp;
-			str_start = tmp;
-			quote = NO_QUOTE;
-		}
+			str = exp_next_var(str, &str_start);
 		else
 			str++;
 	}

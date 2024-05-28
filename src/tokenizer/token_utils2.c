@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:26:42 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 17:51:05 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/28 19:52:00 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,15 @@ static int	is_var_name(char c)
 	return (ft_isalnum(c) || c == '_');
 }
 
-// line58: skip dollar sign
-// line61-62: skip ? and return the end after the special case
-// line64: specific checker for var delimiters which are different from WORD
 char	*skip_variable(char *str)
 {
 	if (*str == '$')
 	{
 		str++;
-		if (*str == '?')
-		{
-			str++;
-			return (str);
-		}
+		if (ft_isdigit(*str) || *str == '?')
+			return (str + 1);
+		if (!ft_isalnum(*str) && *str != '_')
+			return (str - 1);
 		while (*str && is_var_name(*str))
 			str++;
 	}

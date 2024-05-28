@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 02:18:56 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/28 19:26:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*lookup_var(char *var_name)
 	t_var_list	*v;
 
 	v = ms()->var_list;
+	if (*var_name == '?')
+		return (ft_safe_itoa(ms()->exit));
 	while (v)
 	{
 		if (ft_strcmp(v->key, var_name) == 0)

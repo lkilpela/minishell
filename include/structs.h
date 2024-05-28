@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 09:49:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:26:42 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,10 @@ typedef struct s_token
 // a token node in linked list
 typedef struct s_token_list
 {
-	t_token				*token;
+	char			*value;
+	t_token_type	type;
 	struct s_token_list	*next;
+	struct s_token_list	*prev;
 }				t_token_list;
 
 // variables

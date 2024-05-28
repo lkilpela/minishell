@@ -60,7 +60,7 @@ int	post_pipe_check(t_token_list *tokens)
 {
 	while (tokens)
 	{
-		if (tokens->token->type == OP_PIPE)
+		if (tokens->type == OP_PIPE)
 		{
 			if (tokens->next == NULL)
 			{
@@ -82,7 +82,7 @@ char	*get_near_error(t_token_list *near)
 	if (!near)
 		token_val = NL;
 	else
-		token_val = near->token->value;
+		token_val = near->value;
 	start = ft_safe_strjoin(ERR_NEAR_TOKEN, token_val);
 	final = ft_safe_strjoin(start, "\'");
 	ft_free((void **)&start);
@@ -93,14 +93,14 @@ int	check_op_syntax(t_token_list *token)
 {
 	t_token_type	current;
 
-	current = token->token->type;
+	current = token->type;
 	if (!token->next)
 		return (0);
 	if (current == OP_PIPE)
-		if (token->next->token->type == OP_PIPE)
+		if (token->next->type == OP_PIPE)
 			return (0);
 	if (current >= OP_LESS && current <= OP_DGREAT)
-		if (token->next->token->type != WORD)
+		if (token->next->type != WORD)
 			return (0);
 	return (1);
 }
@@ -113,7 +113,7 @@ int	near_token_errors(t_token_list *tokens)
 	while (tokens)
 	{
 		near = tokens->next;
-		if (tokens->token->type != WORD)
+		if (tokens->type != WORD)
 			if (!check_op_syntax(tokens))
 			{
 				err_msg = get_near_error(near);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/26 14:25:30 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 22:47:22 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*heredoc(t_token_list *t)
 	line = get_next_line(0);
 	if (!line)
 		return (NULL);
-	delim = t->token->value;
+	delim = t->value;
 	while (line)
 	{	
 		tmp = check_quotes_and_expand(line);
@@ -67,9 +67,9 @@ t_token_list	*handle_input_redir(t_simple_cmd *simple, t_token_list *tokens)
 		simple->heredoc = NULL;
 	}
 	tokens = tokens->next;
-	if (tokens->token->type == WORD)
+	if (tokens->type == WORD)
 	{
-		simple->in_file.file = tokens->token->value;
+		simple->in_file.file = tokens->value;
 		return (tokens->next);
 	}
 	return (tokens);
@@ -78,12 +78,12 @@ t_token_list	*handle_input_redir(t_simple_cmd *simple, t_token_list *tokens)
 t_token_list	*handle_output_redir(t_simple_cmd *simple, t_token_list *tokens)
 {
 	simple->out_file.append = 0;
-	if (tokens->token->type == OP_DGREAT)
+	if (tokens->type == OP_DGREAT)
 		simple->out_file.append = 1;
 	tokens = tokens->next;
-	if (tokens->token->type == WORD)
+	if (tokens->type == WORD)
 	{
-		simple->out_file.file = tokens->token->value;
+		simple->out_file.file = tokens->value;
 		return (tokens->next);
 	}
 	return (tokens);
@@ -91,15 +91,15 @@ t_token_list	*handle_output_redir(t_simple_cmd *simple, t_token_list *tokens)
 
 t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *t)
 {
-	if (t->token->type == OP_DLESS)
+	if (t->type == OP_DLESS)
 	{
 		t = handle_heredoc(simple, t);
 	}
-	if (t->token->type == OP_LESS)
+	if (t->type == OP_LESS)
 	{
 		t = handle_input_redir(simple, t);
 	}
-	if (t->token->type == OP_GREAT || t->token->type == OP_DGREAT)
+	if (t->type == OP_GREAT || t->type == OP_DGREAT)
 	{
 		t = handle_output_redir(simple, t);
 	}

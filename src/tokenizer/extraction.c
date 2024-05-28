@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 13:56:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/25 02:33:50 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/28 02:34:09 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,29 +67,11 @@ static t_token_type	get_token_type(char *str)
 		return (UNKNOWN);
 }
 
-static void	extract_token(char *str, char **value, t_token_type *type)
+void	extract_token(char *str, char **value, t_token_type *type)
 {
 	int	len;
 
 	len = token_len(str);
 	*value = ft_safe_strndup(str, len);
 	*type = get_token_type(str);
-}
-
-t_token	*create_token(char *str)
-{
-	static int		last_was_dless = 0;
-	t_token			*token;
-	char			*value;
-	t_token_type	type;
-
-	extract_token(str, &value, &type);
-	token = ft_safe_calloc(1, sizeof(t_token));
-	token->value = expand_with_condition(value, last_was_dless);
-	token->type = type;
-	if (token->type == OP_DLESS)
-		last_was_dless = 1;
-	else
-		last_was_dless = 0;
-	return (token);
 }

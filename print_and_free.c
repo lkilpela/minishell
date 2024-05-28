@@ -5,7 +5,7 @@ void	delone_node(t_token_list *lst)
 {
 	if (!lst)
 		return ;
-	ft_free((void **)&lst->token->value);
+	ft_free((void **)&lst->value);
 	ft_free((void **)&lst);
 }
 
@@ -87,7 +87,7 @@ char	*get_type_str(int e)
 
 void print_a_token(t_token_list *lst)
 {
-	printf("%sa_token_value: %-20s a_token_type: %s\n%s", BLUE, lst->token->value, get_type_str(lst->token->type), RESET);
+	printf("%sa_token_value: %-20s a_token_type: %s\n%s", BLUE, lst->value, get_type_str(lst->type), RESET);
 
 }
 
@@ -116,7 +116,7 @@ void print_last_token_node(t_token_list *t)
     }
 
     // Now v points to the last node
-    printf("%stoken_name: %-20s token_value: %s\n%s", BLUE, t->token->value, get_type_str(t->token->type), RESET);
+    printf("%stoken_name: %-20s token_value: %s\n%s", BLUE, t->value, get_type_str(t->type), RESET);
 }
 
 void print_simple_cmd(t_simple_cmd *cmd) {

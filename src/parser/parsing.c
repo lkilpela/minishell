@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/29 15:31:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:27:01 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	count_cmd(t_token_list *tokens)
 	count = 1;
 	while (tokens)
 	{
-		if (tokens->token->type == OP_PIPE)
+		if (tokens->type == OP_PIPE)
 			count++;
 		tokens = tokens->next;
 	}

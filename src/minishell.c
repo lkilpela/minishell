@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/29 22:46:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:26:55 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	clear_quotes(t_token_list *t)
 
 	while (t)
 	{
-		val = t->token->value;
-		t->token->value = handle_node_quotes(val);
+		val = t->value;
+		t->value = handle_node_quotes(val);
 		t = t->next;
 	}
 }
@@ -104,16 +104,20 @@ void	minishell_loop(void)
 			ft_free((void **)&input);
 			continue ;
 		}
-		t = tokenizer(input);
-		retokenizer(&t);
-		clear_quotes(t);
+		printf(GREEN "Calling tokenizer: \n" RESET);
+		t = new_tokenizer(input);
+		print_tokens(t);
+		printf(GREEN "expander: \n" RESET);
+		exp_and_insert(&t);
+		print_tokens(t);
 		if (!near_token_errors(t)) // check for errors in token list
 		{
 			ft_free((void **)&input);
 			continue ;
 		}
-		//printf("final token_list: \n");
-		//rint_tokens(t);
+		clear_quotes(t);
+		printf("After quote_clear: \n");
+		print_tokens(t);
 		cmds = parser(t);
 		if (ft_strchr(cmds->simples[0]->command, EQUAL_SIGN) != NULL) // local var assignment
 		{

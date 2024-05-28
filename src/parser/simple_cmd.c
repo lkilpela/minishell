@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:03:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/27 11:20:47 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 22:47:43 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static int	count_args(t_token_list *tokens)
 	int	count;
 
 	count = 0;
-	while (tokens && tokens->token->type != OP_PIPE)
+	while (tokens && tokens->type != OP_PIPE)
 	{
-		if (tokens->token->type >= OP_LESS && tokens->token->type <= OP_DGREAT)
+		if (tokens->type >= OP_LESS && tokens->type <= OP_DGREAT)
 		{
 			tokens = tokens->next;
-			if (tokens->token->type == WORD)
+			if (tokens->type == WORD)
 				tokens = tokens->next;
 			continue ;
 		}
-		if (tokens->token->type == WORD)
+		if (tokens->type == WORD)
 			count++;
 		tokens = tokens->next;
 	}
@@ -35,9 +35,9 @@ static int	count_args(t_token_list *tokens)
 
 static void	parse_command(t_simple_cmd **simp, t_token_list **tokens)
 {
-	if ((*tokens)->token->type == WORD)
+	if ((*tokens)->type == WORD)
 	{
-		(*simp)->command = (*tokens)->token->value;
+		(*simp)->command = (*tokens)->value;
 		(*tokens) = (*tokens)->next;
 	}
 }
@@ -56,24 +56,21 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 
 	i = 0;
 	simple_cmd = ft_safe_calloc(1, sizeof(t_simple_cmd));
-	while ((*tokens) && (*tokens)->token->type != OP_PIPE)
+	while ((*tokens) && (*tokens)->type != OP_PIPE)
 	{
-		if ((*tokens)->token->type >= OP_LESS && (*tokens)->token->type <= OP_DGREAT)
+		if ((*tokens)->type >= OP_LESS && (*tokens)->type <= OP_DGREAT)
 		{
 			(*tokens) = get_redir(simple_cmd, *tokens);
 			continue ;
 		}
-		if (simple_cmd->command == NULL && (*tokens)->token->type == WORD)
+		if (simple_cmd->command == NULL && (*tokens)->type == WORD)
 		{
 			parse_command(&simple_cmd, tokens);
 			parse_args(&simple_cmd, tokens);
 			continue ;
 		}
-		if (simple_cmd->command != NULL && (*tokens)->token->type == WORD)
-		{
-			if (simple_cmd->args != NULL)
-				simple_cmd->args[i++] = (*tokens)->token->value;
-		}
+		if (simple_cmd->command != NULL && (*tokens)->type == WORD)
+			simple_cmd->args[i++] = (*tokens)->value;
 		(*tokens) = (*tokens)->next;
 	}
 	return (simple_cmd);

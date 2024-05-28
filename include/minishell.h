@@ -80,14 +80,16 @@ char			*check_quotes_and_expand(char *str);
 char			*expand_with_condition(char *str, int last_was_dless);
 
 // tokenizer
+t_token_list	*new_tokenizer(char *str);
+void			exp_and_insert(t_token_list **lst);
 int				token_len(char *str);
-t_token			*create_token(char *str);
+void			extract_token(char *str, char **value, t_token_type *type);
+t_token_list	*create_token(t_token_type type, char *value);
 void			add_token(t_token_list **lst, char *str);
-t_token_list	*tokenizer(char *str);
-t_token_list 	*retokenizer(t_token_list **t);
+void			extract_token(char *str, char **value, t_token_type *type);
+t_quote_type	update_quote_type(t_quote_type quote_type, char c);
 
 // parser
-
 t_simple_cmd	*simple_cmd(t_token_list **tokens);
 t_commands		*parser(t_token_list *tokens);
 t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens);

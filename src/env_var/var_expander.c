@@ -6,13 +6,13 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/25 03:06:50 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/28 02:18:56 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static t_quote_type	update_quote_type(t_quote_type quote_type, char c)
+t_quote_type	update_quote_type(t_quote_type quote_type, char c)
 {
 	if (quote_type == NO_QUOTE)
 	{

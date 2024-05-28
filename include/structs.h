@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 21:24:28 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:41:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct s_simple_cmd
 	char	*heredoc;
 	char	**args;
 	char	*executable;
-	int		status;
+	//int		status;
 }			t_simple_cmd;
 
 typedef struct s_commands
@@ -111,6 +111,7 @@ typedef struct s_commands
 	pid_t			*pids;
 	pid_t			pid;
 	int				**pipefds;
+	int				status;
 }				t_commands;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 21:23:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:53:21 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	setup_pipes(t_commands *c)
 }
 
 // i: index of command
-static int	setup_duplication(t_commands *c, int i)
+int	setup_duplication(t_commands *c, int i)
 {
 	int	num_of_pipes;
 
@@ -54,10 +54,11 @@ static int	setup_duplication(t_commands *c, int i)
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
 	}
+	printf("Command %s: read end = %d, write end = %d\n", c->simples[i]->command, c->pipefds[i][READ], c->pipefds[i][WRITE]);
 	return (0);
 }
 
-static int	execute_simple_command(t_simple_cmd *s, int i)
+static int	execute_simple_command(t_simple_cmd *s)
 {
 	if (execve(s->executable, s->args, ms()->envp) == -1)
 	{
@@ -95,7 +96,7 @@ int	execute_commands(t_commands *c)
 		if (c->pids[i] == 0)
 		{
 			setup_duplication(c, i);
-			execute_simple_command(c->simples[i], i);
+			execute_simple_command(c->simples[i]);
 			close_all_fds(c, i);
 		}
 		i++;

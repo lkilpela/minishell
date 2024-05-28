@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/28 21:24:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:51:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ void	minishell_loop(void)
 		init_path_dirs();
 		print_executable(cmds);
 		setup_pipes(cmds);
+		execute_commands(cmds);
 		builtin_tests(cmds);
 		ft_free((void **)&input);
 	}

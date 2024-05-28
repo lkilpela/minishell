@@ -92,12 +92,13 @@ t_commands		*parser(t_token_list *tokens);
 t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens);
 
 // execution
-void			setup_pipes(t_execution *e);
+void			setup_pipes(t_commands *c);
 void			init_path_dirs(void);
 char			*find_executable(t_simple_cmd *a_cmd);
-int				execute_commands(t_execution *e);
-int				parent(t_execution *e, int i);
-void			close_all_fds(t_execution *e, int i);
+int				execute_commands(t_commands *c);
+int				parent(t_commands *c, int i);
+void			close_all_fds(t_commands *c, int i);
+int				setup_duplication(t_commands *c, int i);
 
 //builtins
 void			built_echo(t_simple_cmd *cmd);

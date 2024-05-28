@@ -145,3 +145,5 @@ cat <END | grep "hello" | wc -l > output
 ## PIPE
 
 echo "Hello, World!" | cat
+
+ls -l | grep ".txt" | wc -l

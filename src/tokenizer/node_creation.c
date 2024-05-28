@@ -6,27 +6,24 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:33 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 15:33:34 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/28 18:22:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	set_up_tail(t_token_list **add, t_token_list *index)
+void	set_up_tail(t_token_list *add, t_token_list *index)
 {
-	t_token_list	*_add;
-
-	_add = *add;
-	while (_add->next)
-		_add = _add->next;
-	_add->next = index->next;
+	while (add->next)
+		add = add->next;
+	add->next = index->next;
 	if (index->next)
-		index->next->prev = _add;
+		index->next->prev = add;
 }
 
 void	list_to_list(t_token_list **lst, t_token_list *add, t_token_list *index)
 {
-	set_up_tail(&add, index);
+	set_up_tail(add, index);
 	if (index->prev)
 	{
 		index->prev->next = add;
@@ -125,8 +122,10 @@ t_token_list	*exp_word(char *str_start)
 		if (quote != SINGLE_QUOTE && *str == '$')
 		{
 			tmp = exp_next_var(str, str_start);
+			ft_free((void **)&str);
+			str = tmp;
 			str_start = tmp;
-			str = skip_variable(str);
+			quote = NO_QUOTE;
 		}
 		else
 			str++;

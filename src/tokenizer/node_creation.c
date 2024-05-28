@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:33 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 03:54:29 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/28 15:33:34 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*get_variable(char *var)
 	ft_free((void **)&key);
 	return (value);	
 }
-char	*exp_word(char *var, char *start)
+char	*exp_next_var(char *var, char *start)
 {
 	char	*new;
 	char	*tmp;
@@ -110,7 +110,7 @@ char	*exp_word(char *var, char *start)
 	return (final);
 }
 
-t_token_list	*var_to_tok(char *str_start)
+t_token_list	*exp_word(char *str_start)
 {
 	t_quote_type	quote;
 	char			*str;
@@ -124,7 +124,7 @@ t_token_list	*var_to_tok(char *str_start)
 			quote = update_quote_type(quote, *str++);
 		if (quote != SINGLE_QUOTE && *str == '$')
 		{
-			tmp = exp_word(str, str_start);
+			tmp = exp_next_var(str, str_start);
 			str_start = tmp;
 			str = skip_variable(str);
 		}
@@ -144,7 +144,7 @@ void	exp_and_insert(t_token_list **lst)
 	{
 		if (current->type == WORD && strchr(current->value, '$'))
 		{
-			new = var_to_tok(current->value);
+			new = exp_word(current->value);
 			list_to_list(lst, new, current);
 		}
 		current = current->next;

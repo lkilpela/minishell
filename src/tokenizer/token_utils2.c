@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:26:42 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/24 15:17:43 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:51:05 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ char	*ft_strndup(const char *str, size_t len)
 
 static int	is_var_name(char c)
 {
-	return (!is_whitespace(c) && !is_operator(c)
-		&& !is_quote(c) && c != ':' && c != '$');
+	return (ft_isalnum(c) || c == '_');
 }
 
 // line58: skip dollar sign

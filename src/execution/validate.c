@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 10:18:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:06:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,26 @@ void	validate_command(t_commands *c)
 	}
 }
 
-void	validate_permission(t_simple_cmd *s)
+void	validate_permission(t_commands *c)
 {
-	s->in_file.fd = open(s->in_file.file, O_RDONLY);
-	if (s->in_file.fd == -1)
-		ft_error(WARNING, ERR_PERM, 1);
-	s->out_file.fd = open(s->out_file.file,
-			O_CREAT | O_WRONLY | O_TRUNC, PERMISSION);
-	if (s->out_file.fd == -1)
-		ft_error(WARNING, ERR_PERM, 1);
-	
+	int	i;
+
+	i = 0;
+	while (i < c->num_of_cmds)
+	{
+		if (c->simples[i]->in_file.file != NULL)
+		{
+			c->simples[i]->in_file.fd = open(c->simples[i]->in_file.file, O_RDONLY);
+			if (c->simples[i]->in_file.fd == -1)
+				ft_error(WARNING, ERR_PERM, 1);
+		}
+		if (c->simples[i]->out_file.file != NULL)
+		{
+			c->simples[i]->out_file.fd = open(c->simples[i]->out_file.file,
+					O_CREAT | O_WRONLY | O_TRUNC, PERMISSION);
+			if (c->simples[i]->out_file.fd == -1)
+				ft_error(WARNING, ERR_PERM, 1);
+		}
+		i++;
+	}
 }

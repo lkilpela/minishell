@@ -96,7 +96,7 @@ void			setup_pipes(t_commands *c);
 void			init_path_dirs(void);
 char			*find_executable(t_simple_cmd *a_cmd);
 int				execute_commands(t_commands *c);
-int				parent(t_commands *c, int i);
+int				parent(t_commands *c);
 void			close_all_fds(t_commands *c, int i);
 void			setup_duplication(t_commands *c, int i);
 void			validate_permission(t_commands *c);

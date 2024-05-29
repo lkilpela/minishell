@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:22:07 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 14:32:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:19:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	parent(t_commands *c, int i)
+/*int	parent(t_commands *c, int i)
 {
 	while (i < c->num_of_cmds)
 	{
@@ -24,4 +24,4 @@ int	parent(t_commands *c, int i)
 		i++;
 	}
 	return (0);
-}
+}*/

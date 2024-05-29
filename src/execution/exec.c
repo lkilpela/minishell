@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 10:08:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:16:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,15 @@ void	setup_pipes(t_commands *c)
 	}
 }
 
-// i: index of command
-int	setup_duplication(t_commands *c, int i)
+void	setup_input_dup(t_commands *c, int i)
 {
-	int	num_of_pipes;
+	t_simple_cmd s;
+	int in_filefd;
+	int out_filefd;
 
-	num_of_pipes = c->num_of_cmds - 1;
+	in_filefd = s.in_file.fd;
+	out_filefd = s.out_file.fd;
+	
 	if (i > 0)
 	{
 		if (dup2(ms()->pipefds[i - 1][READ], STDIN_FILENO) == -1)
@@ -46,14 +49,47 @@ int	setup_duplication(t_commands *c, int i)
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
 	}
+}
+
+// i: index of command
+int	setup_dup(t_commands *c, int i)
+{
+	int	num_of_pipes;
+
+	num_of_pipes = c->num_of_cmds - 1;
+	if (i > 0)
+	{
+		if (dup2(ms()->pipefds[i - 1][READ], STDIN_FILENO) == -1)
+		{
+			close(ms()->pipefds[i - 1][READ]);
+			ft_error(FATAL, ERR_DUP2, 1);
+		}
+	}
+	else if (c->simples[i]->in_file.file) // if there is an input file for the first command
+	{
+		if (dup2(c->simples[i]->in_file.fd, STDIN_FILENO) == -1)
+		{
+			close(c->simples[i]->in_file.fd);
+			ft_error(FATAL, ERR_DUP2, 1);
+		}
+	}
+
+	
 	if (i < num_of_pipes)
 	{
 		if (dup2(ms()->pipefds[i][WRITE], STDOUT_FILENO) == -1)
 		{
-			close(ms()->pipefds[i][READ]);
+			close(ms()->pipefds[i][WRITE]);
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
-		printf("Command <%d> %s: read end = %d, write end = %d\n", i, c->simples[i]->command, ms()->pipefds[i][READ], ms()->pipefds[i][WRITE]);
+	}
+	else if (c->simples[i]->out_file.file) // if there is an output file for the last command
+	{
+		if (dup2(c->simples[i]->out_file.fd, STDOUT_FILENO) == -1)
+		{
+			close(c->simples[i]->out_file.fd);
+			ft_error(FATAL, ERR_DUP2, 1);
+		}
 	}
 	return (0);
 }

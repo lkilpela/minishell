@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:22:07 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 12:57:13 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 14:32:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	parent(t_commands *c, int i)
 {
-	close_all_fds(c, i);
 	while (i < c->num_of_cmds)
 	{
 		ms()->pid = waitpid(ms()->pids[i], &ms()->status, 0);

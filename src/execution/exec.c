@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 14:07:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 14:34:54 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,22 +127,30 @@ void	close_all_fds(t_commands *c, int i)
 int	execute_commands(t_commands *c)
 {
 	int	i;
+	int	has_pipe;
 
 	i = 0;
+	has_pipe = c->num_of_cmds > 1;
+	if (has_pipe)
+		setup_pipes(c);
 	ms()->pids = ft_safe_calloc(c->num_of_cmds, sizeof(pid_t));
 	while (i < c->num_of_cmds)
 	{
 		ms()->pids[i] = fork();
 		if (ms()->pids[i] == -1)
 			ft_error(FATAL, ERR_FORK, 1);
-		if (ms()->pids[i] == 0)
+		else if (ms()->pids[i] == 0)
 		{
-			setup_duplication(c, i);
+			if (has_pipe)
+				setup_duplication(c, i);
 			execute_simple_command(c->simples[i]);
-			close_all_fds(c, i);
+			if (has_pipe)
+				close_all_fds(c, i);
 			exit(0);
 		}
-		parent(c, i);
+		else
+			parent(c, i);
+		i++;
 	}
 	return (0);
 }

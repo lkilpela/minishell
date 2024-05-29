@@ -15,12 +15,17 @@
 # include <structs.h>
 # include <errors.h>
 
-# define GREEN "\001\e[0;32m\002"
-# define RESET	"\001\e[0m\002"
-# define BLUE "\001\e[0;34m\002"
-# define CYAN "\001\e[0;36m\002"
+// # define GREEN "\001\e[0;32m\002"
+// # define RESET	"\001\e[0m\002"
+// # define BLUE "\001\e[0;34m\002"
+// # define CYAN "\001\e[0;36m\002"
 
-# define PROMPT GREEN "minishell$ " RESET
+# define GREEN ""
+# define RESET ""
+# define BLUE ""
+# define CYAN ""
+
+# define PROMPT "minishell$ "
 # define DOLLAR_SIGN '$'
 # define UNDERSCORE '_'
 # define EQUAL_SIGN '='
@@ -64,7 +69,6 @@ void			extract_var(char *str, char **key, char **value);
 void			add_var(char *str);
 char			*lookup_var(char *var_name);
 void			var_remove(char *keyval);
-void			process_var_assignment(char **input);
 
 //env var
 int				env_array_size(char **envp);
@@ -76,9 +80,12 @@ int				env_exists(char *keyval);
 void			env_remove(char *keyval);
 void			env_add(char *keyval);
 
-// expander
-char			*check_quotes_and_expand(char *str);
-char			*expand_with_condition(char *str, int last_was_dless);
+// expand
+
+char			*exp_next_var(char *var, char **start);
+char			*exp_word(char *str_start);
+char			*heredoc_exp(char *str_start);
+void			list_to_list(t_token_list **lst, t_token_list *add, t_token_list *index);
 
 // tokenizer
 t_token_list	*new_tokenizer(char *str);
@@ -86,14 +93,13 @@ void			exp_and_insert(t_token_list **lst);
 int				token_len(char *str);
 void			extract_token(char *str, char **value, t_token_type *type);
 t_token_list	*create_token(t_token_type type, char *value);
-void			add_token(t_token_list **lst, char *str);
-void			extract_token(char *str, char **value, t_token_type *type);
 t_quote_type	update_quote_type(t_quote_type quote_type, char c);
 
 // parser
 t_simple_cmd	*simple_cmd(t_token_list **tokens);
 t_commands		*parser(t_token_list *tokens);
 t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens);
+char			*handle_node_quotes(char *val);
 
 // execution
 void			setup_pipes(t_commands *c);
@@ -134,13 +140,11 @@ int				ft_strcmp(char *s1, char *s2);
 // FOR TESTING **REMOVE WHEN SUBMIT**
 void 			print_var_list(void);
 void			print_lalloc();
-void			free_var_list(void);
 void 			print_last_node(void);
 void 			print_tokens(t_token_list *lst);
 void			free_token_list(t_token_list **lst);
 void			print_commands(t_commands *cmds);
 void 			print_a_token(t_token_list *lst);
-void			free_arrays(char **arrays);
 void 			print_last_token_node(t_token_list *t);
 char			*get_type_str(int e);
 void			print_commands(t_commands *cmds);

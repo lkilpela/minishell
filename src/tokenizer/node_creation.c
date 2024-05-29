@@ -6,14 +6,17 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:33 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 19:53:36 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/29 02:48:56 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	set_up_tail(t_token_list *add, t_token_list *index)
+void	set_up_tail(t_token_list **_add, t_token_list *index)
 {
+	t_token_list	*add;
+
+	add = *_add;
 	while (add->next)
 		add = add->next;
 	add->next = index->next;
@@ -23,17 +26,17 @@ void	set_up_tail(t_token_list *add, t_token_list *index)
 
 void	list_to_list(t_token_list **lst, t_token_list *add, t_token_list *index)
 {
-	set_up_tail(add, index);
+	set_up_tail(&add, index);
 	if (index->prev)
 	{
-		index->prev->next = add;
 		add->prev = index->prev;
+		(*lst)->prev->next = add;
 	}
 	else
 	{
-		*lst = add;
 		add->prev = NULL;
 	}
+	*lst = add;
 	ft_free((void **)&index->value);
 	ft_free((void **)&index);
 }
@@ -70,7 +73,22 @@ char	*exp_next_var(char *var, char **start)
 	return (*start + ret_index);
 }
 
-t_token_list	*exp_word(char *str_start)
+char	*heredoc_exp(char *str_start)
+{
+	char	*str;
+
+	str = str_start;
+	while (*str)
+	{
+		if(*str == '$')
+			str = exp_next_var(str, &str_start);
+		else
+			str++;
+	}
+	return (str_start);
+}
+
+char	*exp_word(char *str_start)
 {
 	t_quote_type	quote;
 	char			*str;
@@ -85,7 +103,8 @@ t_token_list	*exp_word(char *str_start)
 		else
 			str++;
 	}
-	return (new_tokenizer(str_start));
+	str_start = handle_node_quotes(str_start);
+	return (str_start);
 }
 
 void	exp_and_insert(t_token_list **lst)
@@ -96,9 +115,9 @@ void	exp_and_insert(t_token_list **lst)
 	current = *lst;
 	while (current)
 	{
-		if (current->type == WORD && strchr(current->value, '$'))
+		if (current->type == WORD && current->expand)
 		{
-			new = exp_word(current->value);
+			new = new_tokenizer(exp_word(current->value));
 			list_to_list(lst, new, current);
 		}
 		current = current->next;

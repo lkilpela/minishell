@@ -6,6 +6,7 @@
 # define ERR_PIPES "syntax error, pipe all alone in the end"
 # define ERR_NEAR_TOKEN "syntax error near unexpected token `"
 # define ERR_KEY_VALID "not a valid identifier"
+# define ERR_AMBIGUOUS "ambiguous redirect"
 # define NL	"newline"
 # define ERR_PIPE "pipe failed"
 # define ERR_DUP2 "dup2 failed"

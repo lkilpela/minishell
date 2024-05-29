@@ -6,16 +6,32 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:03:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 22:47:43 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/29 22:55:26 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static int	count_args(t_token_list *tokens)
+void	expand_current_el(t_token_list **tokens)
+{
+	char			*str;
+	char			*new;
+	t_token_list	*new_tokens;
+	t_token_list	*index;
+	
+	index = *tokens;
+	str = (*tokens)->value;
+	new = exp_word(str);
+	new_tokens = new_tokenizer(new);
+	list_to_list(tokens, new_tokens, index);
+}
+
+static int	count_args(t_token_list **_tokens)
 {
 	int	count;
+	t_token_list	*tokens;
 
+	tokens = *_tokens;
 	count = 0;
 	while (tokens && tokens->type != OP_PIPE)
 	{
@@ -26,6 +42,7 @@ static int	count_args(t_token_list *tokens)
 				tokens = tokens->next;
 			continue ;
 		}
+		expand_current_el(&tokens);
 		if (tokens->type == WORD)
 			count++;
 		tokens = tokens->next;
@@ -37,6 +54,7 @@ static void	parse_command(t_simple_cmd **simp, t_token_list **tokens)
 {
 	if ((*tokens)->type == WORD)
 	{
+		expand_current_el(tokens);
 		(*simp)->command = (*tokens)->value;
 		(*tokens) = (*tokens)->next;
 	}
@@ -44,7 +62,7 @@ static void	parse_command(t_simple_cmd **simp, t_token_list **tokens)
 
 static void	parse_args(t_simple_cmd **simp, t_token_list **tokens)
 {
-	(*simp)->num_of_args = count_args(*tokens);
+	(*simp)->num_of_args = count_args(tokens);
 	if ((*simp)->num_of_args > 0)
 		(*simp)->args = ft_safe_calloc((*simp)->num_of_args, sizeof(char *));
 }
@@ -75,3 +93,4 @@ t_simple_cmd	*simple_cmd(t_token_list **tokens)
 	}
 	return (simple_cmd);
 }
+

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 23:26:42 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/29 23:28:01 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_token_list
 {
 	char			*value;
 	t_token_type	type;
+	int				expand;
 	struct s_token_list	*next;
 	struct s_token_list	*prev;
 }				t_token_list;
@@ -105,8 +106,10 @@ typedef struct s_simple_cmd
 	t_redir	in_file;
 	t_redir	out_file;
 	char	*heredoc;
-	char	**args; // an array of additional arguments
-	char	*exec_path;
+	int		heredoc_expand;
+	char	*heredoc_delim;
+	char	**args;
+	char	*executable;
 }			t_simple_cmd;
 
 typedef struct s_commands

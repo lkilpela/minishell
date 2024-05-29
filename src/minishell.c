@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/29 23:27:28 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/29 23:28:32 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,23 +115,20 @@ void	minishell_loop(void)
 		printf(GREEN "Calling tokenizer: \n" RESET);
 		t = new_tokenizer(input);
 		print_tokens(t);
-		printf(GREEN "expander: \n" RESET);
-		exp_and_insert(&t);
-		print_tokens(t);
 		if (!near_token_errors(t)) // check for errors in token list
 		{
 			ft_free((void **)&input);
 			continue ;
 		}
-		clear_quotes(t);
-		printf("After quote_clear: \n");
-		print_tokens(t);
 		cmds = parser(t);
 		init_path_dirs();
 		//print_executable(cmds);
 		//setup_pipes(cmds);
 		validate_arguments(cmds);
 		execute_commands(cmds);
+		print_executable(cmds);
+		printf(GREEN "expanded and parsed: \n" RESET);
+		print_commands(cmds);
 		builtin_tests(cmds);
 		ft_free((void **)&input);
 	}

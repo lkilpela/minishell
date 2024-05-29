@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 11:16:27 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:25:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	setup_dup(t_commands *c, int i)
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
 	}
-	else if (c->simples[i]->in_file.file) // if there is an input file for the first command
+	else if (c->simples[i]->in_file.file || c->simples[i]->heredoc) // if there is an input file for the first command
 	{
 		if (dup2(c->simples[i]->in_file.fd, STDIN_FILENO) == -1)
 		{

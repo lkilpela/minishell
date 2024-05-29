@@ -85,7 +85,7 @@ void			env_add(char *keyval);
 char			*exp_next_var(char *var, char **start);
 char			*exp_word(char *str_start);
 char			*heredoc_exp(char *str_start);
-void			list_to_list(t_token_list **lst, t_token_list *add, t_token_list *index);
+void			list_to_list(t_token_list **lst, t_token_list *add, t_token_list **index);
 
 // tokenizer
 t_token_list	*new_tokenizer(char *str);

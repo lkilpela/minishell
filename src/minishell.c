@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/29 23:28:32 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/29 23:28:44 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*handle_node_quotes(char *val)
 	return (val);
 }
 
-void	clear_quotes(t_token_list *t)
+void	clear_token_quotes(t_token_list *t)
 {
 	char	*val;
 
@@ -91,6 +91,7 @@ void	rl_history(char *input)
 		add_history(input);
 	ft_free((void **)&last);
 	last = ft_safe_strdup(input);
+	write_history(NULL); //temp
 }
 
 // line 51:  only allowing var assignment as first WORD aka command
@@ -129,7 +130,8 @@ void	minishell_loop(void)
 		print_executable(cmds);
 		printf(GREEN "expanded and parsed: \n" RESET);
 		print_commands(cmds);
-		builtin_tests(cmds);
+		if (cmds)
+			builtin_tests(cmds);
 		ft_free((void **)&input);
 	}
 }

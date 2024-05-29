@@ -48,7 +48,6 @@ void	clear_lal()
 
 	lalloc = allocs();
 	ft_lstclear(lalloc, free_content);
-	write_history(NULL); //temp
 }
 
 void	add_to_lal(void *ptr)

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 09:35:47 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 09:49:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_ms
 	pid_t		pid;
 	int			**pipefds;
 	int			status;
+	char		*executable;
 }				t_ms;
 
 /******************************************************************************\
@@ -102,8 +103,8 @@ typedef struct s_simple_cmd
 	t_redir	in_file;
 	t_redir	out_file;
 	char	*heredoc;
-	char	**args;
-	char	*executable;
+	char	**args; // an array of additional arguments
+	char	*exec_path;
 }			t_simple_cmd;
 
 typedef struct s_commands

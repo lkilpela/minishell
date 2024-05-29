@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 22:44:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 09:35:47 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ typedef struct s_ms
 	int			argc;
 	char		**envp;
 	char		**paths;	// Array of paths for executable lookup
-	char		*executable;
 	uint8_t		exit;
 	t_var_list	*var_list;
+	pid_t		*pids;
+	pid_t		pid;
+	int			**pipefds;
+	int			status;
 }				t_ms;
 
 /******************************************************************************\
@@ -107,10 +110,6 @@ typedef struct s_commands
 {
 	t_simple_cmd	**simples;
 	int				num_of_cmds;
-	pid_t			*pids;
-	pid_t			pid;
-	int				**pipefds;
-	int				status;
 }				t_commands;
 
 #endif

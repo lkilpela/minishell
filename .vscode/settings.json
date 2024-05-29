@@ -58,6 +58,7 @@
         "features.h": "c",
         "numbers": "c",
         "fstream": "c",
-        "*.tcc": "c"
+        "*.tcc": "c",
+        "errors.h": "c"
     }
 }

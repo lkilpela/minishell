@@ -9,6 +9,7 @@
 # include <string.h> //strerror
 # include <errno.h> //errno
 # include <signal.h> //signal, sigaction
+# include <sys/wait.h> //waitpid
 
 # include <libft.h>
 # include <structs.h>

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 23:28:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/29 23:33:38 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef struct s_simple_cmd
 	int		heredoc_expand;
 	char	*heredoc_delim;
 	char	**args;
-	char	*executable;
+	char	*exec_path;
 }			t_simple_cmd;
 
 typedef struct s_commands

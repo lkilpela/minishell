@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 12:04:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:58:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ static int	execute_simple_command(t_simple_cmd *s)
 		i++;
 	}
 	argv[total_args] = NULL;
+	s->exec_path = find_executable(s);
 	if (execve(s->exec_path, argv, ms()->envp) == -1)
 	{
 		ft_error(FATAL, ERR_EXECVE, 1);
@@ -141,8 +142,7 @@ int	execute_commands(t_commands *c)
 			close_all_fds(c, i);
 			exit(0);
 		}
-		i++;
+		parent(c, i);
 	}
-	parent(c, 0);
 	return (0);
 }

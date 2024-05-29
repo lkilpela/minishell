@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/29 23:27:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/29 23:42:57 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ t_commands	*parser(t_token_list *tokens)
 		if (tokens)
 			tokens = tokens->next;
 	}
-	//print_commands(cmds);
 	return (cmds);
 }

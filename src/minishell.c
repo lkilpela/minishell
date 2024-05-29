@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/29 23:28:44 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/29 23:38:23 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,10 @@ void	minishell_loop(void)
 		init_path_dirs();
 		//print_executable(cmds);
 		//setup_pipes(cmds);
-		validate_arguments(cmds);
-		execute_commands(cmds);
-		print_executable(cmds);
-		printf(GREEN "expanded and parsed: \n" RESET);
 		print_commands(cmds);
-		if (cmds)
-			builtin_tests(cmds);
+		validate_arguments(cmds);
+		print_executable(cmds);
+		execute_commands(cmds);
 		ft_free((void **)&input);
 	}
 }

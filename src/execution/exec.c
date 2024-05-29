@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 10:01:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 10:08:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,10 @@ int	execute_commands(t_commands *c)
 			setup_duplication(c, i);
 			execute_simple_command(c->simples[i]);
 			close_all_fds(c, i);
+			exit(0);
 		}
 		i++;
 	}
+	parent(c, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 23:03:13 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:06:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,6 @@ void	setup_input_dup(int i)
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
 	}
-	/*else if (c->simples[i]->in_file.file || c->simples[i]->heredoc) // if there is an input file for the first command
-	{
-		if (dup2(c->simples[i]->in_file.fd, STDIN_FILENO) == -1)
-		{
-			close(c->simples[i]->in_file.fd);
-			ft_error(FATAL, ERR_DUP2, 1);
-		}
-	}*/
 }
 
 // i: index of command
@@ -91,14 +83,6 @@ void	setup_output_dup(t_commands *c, int i)
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
 	}
-	/*else if (c->simples[i]->out_file.file) // if there is an output file for the last command
-	{
-		if (dup2(c->simples[i]->out_file.fd, STDOUT_FILENO) == -1)
-		{
-			close(c->simples[i]->out_file.fd);
-			ft_error(FATAL, ERR_DUP2, 1);
-		}
-	}*/
 }
 
 void	setup_duplication(t_commands *c, int i)

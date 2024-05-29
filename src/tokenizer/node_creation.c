@@ -6,39 +6,45 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:33 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 02:48:56 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/29 21:59:25 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	set_up_tail(t_token_list **_add, t_token_list *index)
+void	set_up_tail(t_token_list *add, t_token_list *index)
 {
-	t_token_list	*add;
-
-	add = *_add;
-	while (add->next)
-		add = add->next;
-	add->next = index->next;
-	if (index->next)
-		index->next->prev = add;
+    while (add->next)
+        add = add->next;
+    add->next = index->next;
+    if (index->next)
+        index->next->prev = add;
 }
 
-void	list_to_list(t_token_list **lst, t_token_list *add, t_token_list *index)
+void	list_to_list(t_token_list **lst, t_token_list *add, t_token_list **index)
 {
-	set_up_tail(&add, index);
-	if (index->prev)
+	if (!add)
 	{
-		add->prev = index->prev;
-		(*lst)->prev->next = add;
+		if ((*index)->prev)
+            (*index)->prev->next = (*index)->next;
+        if ((*index)->next)
+            (*index)->next->prev = (*index)->prev;
+        if (*lst == *index)
+            *lst = (*index)->next;
+		*index = (*index)->next;
 	}
 	else
 	{
-		add->prev = NULL;
+		set_up_tail(add, *index);
+		if (*lst == *index)
+			*lst = add;
+		if ((*index)->prev)
+		{
+			(*index)->prev->next = add;
+			add->prev = (*index)->prev;
+		}
+		*index = add;
 	}
-	*lst = add;
-	ft_free((void **)&index->value);
-	ft_free((void **)&index);
 }
 
 char	*get_variable(char *var)
@@ -103,7 +109,6 @@ char	*exp_word(char *str_start)
 		else
 			str++;
 	}
-	str_start = handle_node_quotes(str_start);
 	return (str_start);
 }
 
@@ -118,7 +123,7 @@ void	exp_and_insert(t_token_list **lst)
 		if (current->type == WORD && current->expand)
 		{
 			new = new_tokenizer(exp_word(current->value));
-			list_to_list(lst, new, current);
+			list_to_list(lst, new, &current);
 		}
 		current = current->next;
 	}

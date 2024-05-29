@@ -174,3 +174,12 @@ void print_executable(t_commands *cmds)
 		i++;
 	}
 }
+/*void print_args(t_simple_cmd *s)
+{
+	int i = 0;
+	while (s->args[i] != NULL)
+	{
+		printf("Argument %d: %s\n", i, s->args[i]);
+		i++;
+	}
+}*/

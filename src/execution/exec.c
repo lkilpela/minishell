@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 21:53:21 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/28 22:43:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	setup_pipes(t_commands *c)
 	{
 		c->pipefds[i] = ft_calloc(2, sizeof(int));
 		pipe(c->pipefds[i]);
-		printf("Pipe %d: read end = %d, write end = %d\n", i, c->pipefds[i][0], c->pipefds[i][1]);
+		//printf("Pipe %d: read end = %d, write end = %d\n", i, c->pipefds[i][0], c->pipefds[i][1]);
 		i++;
 	}
 }
@@ -53,8 +53,8 @@ int	setup_duplication(t_commands *c, int i)
 			close(c->pipefds[i][READ]);
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
+		printf("Command <%d> %s: read end = %d, write end = %d\n", i, c->simples[i]->command, c->pipefds[i][READ], c->pipefds[i][WRITE]);
 	}
-	printf("Command %s: read end = %d, write end = %d\n", c->simples[i]->command, c->pipefds[i][READ], c->pipefds[i][WRITE]);
 	return (0);
 }
 

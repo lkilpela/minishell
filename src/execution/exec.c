@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 11:25:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 11:41:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,6 @@ void	setup_pipes(t_commands *c)
 
 void	setup_input_dup(t_commands *c, int i)
 {
-	t_simple_cmd s;
-	int in_filefd;
-	int out_filefd;
-
-	in_filefd = s.in_file.fd;
-	out_filefd = s.out_file.fd;
-	
-	if (i > 0)
-	{
-		if (dup2(ms()->pipefds[i - 1][READ], STDIN_FILENO) == -1)
-		{
-			close(ms()->pipefds[i - 1][WRITE]);
-			ft_error(FATAL, ERR_DUP2, 1);
-		}
-	}
-}
-
-// i: index of command
-int	setup_dup(t_commands *c, int i)
-{
-	int	num_of_pipes;
-
-	num_of_pipes = c->num_of_cmds - 1;
 	if (i > 0)
 	{
 		if (dup2(ms()->pipefds[i - 1][READ], STDIN_FILENO) == -1)
@@ -73,7 +50,14 @@ int	setup_dup(t_commands *c, int i)
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
 	}
+}
 
+// i: index of command
+void	setup_output_dup(t_commands *c, int i)
+{
+	int	num_of_pipes;
+
+	num_of_pipes = c->num_of_cmds - 1;
 	
 	if (i < num_of_pipes)
 	{
@@ -91,7 +75,6 @@ int	setup_dup(t_commands *c, int i)
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
 	}
-	return (0);
 }
 
 static int	execute_simple_command(t_simple_cmd *s)

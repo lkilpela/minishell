@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 15:47:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 21:17:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ static void	validate_command(t_commands *c)
 	{
 		infile = c->simples[i]->in_file.file;
 		outfile = c->simples[i]->out_file.file;
-		if (access(infile, F_OK) == 0 )
-			print_error("minishell: ", c->simples[i]->command, ERR_CMD, 1);
+		if (access(infile, F_OK | X_OK) == 0 )
+			print_error("minishell", infile, ERR_FILE, 0);
+			//print_error("minishell", c->simples[i]->command, ERR_CMD, 0);
 		else if (access(outfile, F_OK) == 0)
 			print_error("minishell: outfile: ", ERR_FILE, NULL, 1);
 	}

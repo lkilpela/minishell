@@ -100,6 +100,7 @@ int				parent(t_commands *c);
 void			close_all_fds(t_commands *c, int i);
 void			setup_duplication(t_commands *c, int i);
 void			validate_arguments(t_commands *c);
+void 			validate_redir(t_redir *infile, t_redir *outfile);
 
 //builtins
 void			built_echo(t_simple_cmd *cmd);

@@ -56,6 +56,8 @@
         "string.h": "c",
         "signal.h": "c",
         "features.h": "c",
-        "numbers": "c"
+        "numbers": "c",
+        "fstream": "c",
+        "*.tcc": "c"
     }
 }

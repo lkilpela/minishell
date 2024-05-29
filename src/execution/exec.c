@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 15:22:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 23:03:13 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,31 @@ void	setup_pipes(t_commands *c)
 	}
 }
 
-void	setup_input_dup(t_commands *c, int i)
+void	handle_infile(t_redir *infile)
+{
+	if (infile->file) // if there is an input file for the first command
+	{
+		if (dup2(infile->fd, STDIN_FILENO) == -1)
+		{
+			close(infile->fd);
+			ft_error(FATAL, ERR_DUP2, 1);
+		}
+	}
+}
+
+void	handle_outfile(t_redir *outfile)
+{
+	if (outfile->file) // if there is an input file for the first command
+	{
+		if (dup2(outfile->fd, STDOUT_FILENO) == -1)
+		{
+			close(outfile->fd);
+			ft_error(FATAL, ERR_DUP2, 1);
+		}
+	}
+}
+
+void	setup_input_dup(int i)
 {
 	if (i > 0)
 	{
@@ -42,14 +66,14 @@ void	setup_input_dup(t_commands *c, int i)
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
 	}
-	else if (c->simples[i]->in_file.file || c->simples[i]->heredoc) // if there is an input file for the first command
+	/*else if (c->simples[i]->in_file.file || c->simples[i]->heredoc) // if there is an input file for the first command
 	{
 		if (dup2(c->simples[i]->in_file.fd, STDIN_FILENO) == -1)
 		{
 			close(c->simples[i]->in_file.fd);
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
-	}
+	}*/
 }
 
 // i: index of command
@@ -67,19 +91,19 @@ void	setup_output_dup(t_commands *c, int i)
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
 	}
-	else if (c->simples[i]->out_file.file) // if there is an output file for the last command
+	/*else if (c->simples[i]->out_file.file) // if there is an output file for the last command
 	{
 		if (dup2(c->simples[i]->out_file.fd, STDOUT_FILENO) == -1)
 		{
 			close(c->simples[i]->out_file.fd);
 			ft_error(FATAL, ERR_DUP2, 1);
 		}
-	}
+	}*/
 }
 
 void	setup_duplication(t_commands *c, int i)
 {
-	setup_input_dup(c, i);
+	setup_input_dup(i);
 	setup_output_dup(c, i);
 }
 
@@ -153,6 +177,8 @@ int	execute_commands(t_commands *c)
 	ms()->pids = ft_safe_calloc(c->num_of_cmds, sizeof(pid_t));
 	while (i < c->num_of_cmds)
 	{
+		handle_infile(&c->simples[i]->in_file);
+		handle_outfile(&c->simples[i]->out_file);
 		ms()->pids[i] = fork();
 		if (ms()->pids[i] == -1)
 			ft_error(FATAL, ERR_FORK, 1);

@@ -147,3 +147,5 @@ cat <END | grep "hello" | wc -l > output
 echo "Hello, World!" | cat
 
 ls -l | grep ".txt" | wc -l
+
+< infile grep hello | wc -l < output

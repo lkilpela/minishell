@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 21:17:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 22:47:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,38 @@
 
 # define PERMISSION 0644
 
-static void	validate_command(t_commands *c)
+void validate_redir(t_redir *infile, t_redir *outfile)
+{
+	/*if (access(infile->file, F_OK) == -1)
+		print_error("minishell", infile->file, ERR_FILE, 0);
+	else if (access(outfile->file, F_OK) == -1)
+		print_error("minishell", outfile->file, ERR_FILE, 0);*/
+	if (infile->file)
+	{
+		infile->fd = open(infile->file, O_RDONLY);
+		if (infile->fd == -1)
+		{
+			print_error("minishell", infile->file, strerror(errno), 1);
+			exit(EXIT_FAILURE);
+		}
+	}
+	if (outfile->file)
+	{
+		outfile->fd = open(outfile->file,
+				O_CREAT | O_WRONLY | O_TRUNC, PERMISSION);
+		if (outfile->fd == -1)
+		{
+			print_error("minishell", outfile->file, strerror(errno), 1);
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
+void	validate_arguments(t_commands *c)
+{
+	validate_redir(&c->simples[0]->in_file, &c->simples[0]->out_file);
+}
+/*static void	validate_command(t_commands *c)
 {
 	int i;
 	char *infile;
@@ -31,9 +62,9 @@ static void	validate_command(t_commands *c)
 		else if (access(outfile, F_OK) == 0)
 			print_error("minishell: outfile: ", ERR_FILE, NULL, 1);
 	}
-}
+}*/
 
-static void	validate_permission(t_commands *c)
+/*static void	validate_permission(t_commands *c)
 {
 	int	i;
 
@@ -56,10 +87,5 @@ static void	validate_permission(t_commands *c)
 		}
 		i++;
 	}
-}
+}*/
 
-void	validate_arguments(t_commands *c)
-{
-	validate_permission(c);
-	validate_command(c);
-}

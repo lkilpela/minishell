@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/26 14:29:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:31:29 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ t_commands	*parser(t_token_list *tokens)
 		if (tokens)
 			tokens = tokens->next;
 	}
-	print_commands(cmds);
+	//print_commands(cmds);
 	return (cmds);
 }

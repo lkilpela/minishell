@@ -99,7 +99,7 @@ int				execute_commands(t_commands *c);
 int				parent(t_commands *c);
 void			close_all_fds(t_commands *c, int i);
 void			setup_duplication(t_commands *c, int i);
-void			validate_permission(t_commands *c);
+void			validate_arguments(t_commands *c);
 
 //builtins
 void			built_echo(t_simple_cmd *cmd);

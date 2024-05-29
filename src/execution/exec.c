@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 12:58:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/29 14:07:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	setup_pipes(t_commands *c)
 	while (i < num_of_pipes)
 	{
 		ms()->pipefds[i] = ft_calloc(2, sizeof(int));
-		pipe(ms()->pipefds[i]);
-		//printf("Pipe %d: read end = %d, write end = %d\n", i, c->pipefds[i][0], c->pipefds[i][1]);
+		if (pipe(ms()->pipefds[i]) == -1)
+			ft_error(FATAL, ERR_PIPE, 1);		
 		i++;
 	}
 }
@@ -120,7 +120,7 @@ void	close_all_fds(t_commands *c, int i)
 		close(c->simples[i]->out_file.fd);
 	if (ms()->pipefds[i][READ] != -1)
 		close(ms()->pipefds[i][READ]);
-	if (ms()->pipefds[i][WRITE] != -1)
+	if (i != 0 && ms()->pipefds[i][WRITE] != -1)
 		close(ms()->pipefds[i][WRITE]);
 }
 

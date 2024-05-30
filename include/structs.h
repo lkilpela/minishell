@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 23:33:38 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:42:56 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ typedef struct s_simple_cmd
 	char	*exec_path;
 }			t_simple_cmd;
 
-typedef struct s_commands
+typedef struct s_cmds
 {
-	t_simple_cmd	**simples;
+	t_list			*simp_cmds;
 	int				num_of_cmds;
-}				t_commands;
+}				t_cmds;
 
 #endif

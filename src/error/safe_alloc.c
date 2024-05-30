@@ -74,3 +74,14 @@ char	*ft_safe_itoa(int n)
 	add_to_lal((void *)str);
 	return (str);
 }
+
+void	*ft_safe_lstnew(void *content)
+{
+	t_list	*node;
+
+	node = ft_lstnew(content);
+	if (!node)
+		ft_error(FATAL, NULL, 0);
+	add_to_lal((void *)node);
+	return (node);
+}

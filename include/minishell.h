@@ -60,6 +60,7 @@ char			*ft_safe_strndup(const char *s1, size_t len);
 char			*ft_safe_strdup(const char *s1);
 void			*ft_safe_calloc(size_t count, size_t size);
 char			*ft_safe_substr(const char *s, unsigned int start, size_t len);
+void			*ft_safe_lstnew(void *content);
 char			*ft_safe_itoa(int n);
 void			ft_free(void **ptr);
 
@@ -97,19 +98,19 @@ t_quote_type	update_quote_type(t_quote_type quote_type, char c);
 
 // parser
 t_simple_cmd	*simple_cmd(t_token_list **tokens);
-t_commands		*parser(t_token_list *tokens);
+t_cmds		*parser(t_token_list *tokens);
 t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens);
 char			*handle_node_quotes(char *val);
 
 // execution
-void			setup_pipes(t_commands *c);
+void			setup_pipes(t_cmds *c);
 void			init_path_dirs(void);
 char			*find_executable(t_simple_cmd *a_cmd);
-int				execute_commands(t_commands *c);
-int				parent(t_commands *c);
-void			close_all_fds(t_commands *c, int i);
-void			setup_duplication(t_commands *c, int i);
-void			validate_arguments(t_commands *c);
+int				execute_commands(t_cmds *c);
+int				parent(t_cmds *c);
+void			close_all_fds(t_cmds *c, int i);
+void			setup_duplication(t_cmds *c, int i);
+void			validate_arguments(t_cmds *c);
 void 			validate_redir(t_redir *infile, t_redir *outfile);
 
 //builtins
@@ -143,12 +144,12 @@ void			print_lalloc();
 void 			print_last_node(void);
 void 			print_tokens(t_token_list *lst);
 void			free_token_list(t_token_list **lst);
-void			print_commands(t_commands *cmds);
+void			print_cmds(t_cmds *cmds);
 void 			print_a_token(t_token_list *lst);
 void 			print_last_token_node(t_token_list *t);
 char			*get_type_str(int e);
-void			print_commands(t_commands *cmds);
+void			print_cmds(t_cmds *cmds);
 void			print_simple_cmd(t_simple_cmd *cmd);
-void			print_executable(t_commands *cmds);
+void			print_executable(t_cmds *cmds);
 
 #endif

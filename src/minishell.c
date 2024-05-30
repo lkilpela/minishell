@@ -3,31 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/29 23:38:23 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:49:25 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	builtin_tests(t_commands *cmds)
+void	builtin_tests(t_cmds *_cmds)
 {
-	if (ft_strcmp(cmds->simples[0]->command, "exit") == 0)
-		built_exit(cmds->simples[0]);
-	if (ft_strcmp(cmds->simples[0]->command, "pwd") == 0)
+	t_simple_cmd	*frist_cmd;
+	
+	frist_cmd = (t_simple_cmd *)_cmds->simp_cmds->content;
+	if (ft_strcmp(frist_cmd->command, "exit") == 0)
+		built_exit(frist_cmd);
+	if (ft_strcmp(frist_cmd->command, "pwd") == 0)
 		built_pwd();
-	if (ft_strcmp(cmds->simples[0]->command, "env") == 0)
+	if (ft_strcmp(frist_cmd->command, "env") == 0)
 		built_env(0);
-	if (ft_strcmp(cmds->simples[0]->command, "echo") == 0)
-		built_echo(cmds->simples[0]);
-	if (ft_strcmp(cmds->simples[0]->command, "export") == 0)
-		built_export(cmds->simples[0]);
-	if (ft_strcmp(cmds->simples[0]->command, "unset") == 0)
-		built_unset(cmds->simples[0]);
-	if (ft_strcmp(cmds->simples[0]->command, "cd") == 0)
-		built_cd(cmds->simples[0]);
+	if (ft_strcmp(frist_cmd->command, "echo") == 0)
+		built_echo(frist_cmd);
+	if (ft_strcmp(frist_cmd->command, "export") == 0)
+		built_export(frist_cmd);
+	if (ft_strcmp(frist_cmd->command, "unset") == 0)
+		built_unset(frist_cmd);
+	if (ft_strcmp(frist_cmd->command, "cd") == 0)
+		built_cd(frist_cmd);
 }
 
 void	handle_quotes(char **val)
@@ -99,7 +102,7 @@ void	minishell_loop(void)
 {
 	char			*input;
 	t_token_list	*t;
-	t_commands		*cmds;
+	t_cmds		*cmds;
 
 	while (42)
 	{
@@ -125,7 +128,7 @@ void	minishell_loop(void)
 		init_path_dirs();
 		//print_executable(cmds);
 		//setup_pipes(cmds);
-		print_commands(cmds);
+		print_cmds(cmds);
 		validate_arguments(cmds);
 		print_executable(cmds);
 		execute_commands(cmds);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/29 23:42:57 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:50:43 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,17 @@ static int	count_cmd(t_token_list *tokens)
 	return (count);
 }
 
-t_commands	*parser(t_token_list *tokens)
+t_cmds *parser(t_token_list *tokens)
 {
-	t_commands	*cmds;
-	int			i;
-
-	cmds = ft_safe_calloc(1, sizeof(t_commands));
+	t_cmds			*cmds;
+	t_simple_cmd	*new_cmd;
+	
+	cmds = ft_safe_calloc(1, sizeof(t_cmds));
 	cmds->num_of_cmds = count_cmd(tokens);
-	cmds->simples = ft_safe_calloc(cmds->num_of_cmds, sizeof(t_simple_cmd *));
-	i = 0;
 	while (tokens)
 	{
-		cmds->simples[i++] = simple_cmd(&tokens);
+		new_cmd = simple_cmd(&tokens);
+		ft_lstadd_back((void *)cmds->simp_cmds, ft_safe_lstnew(new_cmd));
 		if (tokens)
 			tokens = tokens->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/30 15:50:43 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/30 16:18:27 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_cmds *parser(t_token_list *tokens)
 	while (tokens)
 	{
 		new_cmd = simple_cmd(&tokens);
-		ft_lstadd_back((void *)cmds->simp_cmds, ft_safe_lstnew(new_cmd));
+		ft_lstadd_back(&cmds->simp_cmds, ft_safe_lstnew(new_cmd));
 		if (tokens)
 			tokens = tokens->next;
 	}

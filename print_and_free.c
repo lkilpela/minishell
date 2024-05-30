@@ -144,18 +144,20 @@ void print_simple_cmd(t_simple_cmd *cmd) {
 void	print_cmds(t_cmds *cmds)
 {
 	int	i;
+	t_list	*cmd_list;
 
+	cmd_list = cmds->simp_cmds;
 	i = 0;
 	if (cmds == NULL)
 	{
 		ft_printf("NULL commands structure\n");
 		return;
 	}
-	while (cmds->simp_cmds)
+	while (cmd_list)
 	{
 		ft_printf("\e[0;32mCommand %d:\e[0m\n", i++ + 1);
-		print_simple_cmd((t_simple_cmd *)cmds->simp_cmds->content);
-		cmds->simp_cmds = cmds->simp_cmds->next;
+		print_simple_cmd((t_simple_cmd *)cmd_list->content);
+		cmd_list = cmd_list->next;
 	}
 }
 
@@ -163,6 +165,9 @@ void	print_cmds(t_cmds *cmds)
 void print_executable(t_cmds *cmds)
 {
 	int	i;
+	t_list	*cmd_list;
+
+	cmd_list = cmds->simp_cmds;
 
 	i = 0;
 	if (cmds == NULL)
@@ -170,11 +175,11 @@ void print_executable(t_cmds *cmds)
 		ft_printf("NULL commands structure\n");
 		return;
 	}
-	while (cmds->simp_cmds)
+	while (cmd_list)
 	{
 		ft_printf("\e[0;32mexecutable_cmd %d:\e[0m\n", i++ + 1);
-		printf("%s\n", find_executable((t_simple_cmd *)cmds->simp_cmds->content));
-		cmds->simp_cmds = cmds->simp_cmds->next;
+		ft_printf("%s\n", find_executable((t_simple_cmd *)cmd_list->content));
+		cmd_list = cmd_list->next;
 	}
 }
 /*void print_args(t_simple_cmd *s)

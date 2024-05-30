@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/30 16:04:05 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/30 16:57:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ int	execute_commands(t_cmds *c)
 			exit(0);
 		}
 		i++;
+		commands = commands->next;
 	}
 	parent(c);
 	return (0);

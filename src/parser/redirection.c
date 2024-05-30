@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/30 18:26:13 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/31 01:04:17 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_token_list	*handle_heredoc(t_cmd *simple, t_token_list *tokens)
 	simple->heredoc_delim = ft_safe_strjoin(tokens->value, "\n");
 	simple->heredoc = heredoc(simple);
 	printf("%s", simple->heredoc); //temp
-	return (tokens);
+	return (tokens->next);
 }
 
 int	is_ambiguous(char *val, t_token_list *tokens)
@@ -141,13 +141,13 @@ t_token_list	*handle_output_redir(t_cmd *simple, t_token_list *tokens)
 	return (tokens);
 }
 
-t_token_list	*get_redir(t_cmd *simple, t_token_list *t)
+t_token_list	*get_redir(t_cmd *cmd, t_token_list *t)
 {
 	if (t->type == OP_DLESS)
-		t = handle_heredoc(simple, t);
+		t = handle_heredoc(cmd, t);
 	else if (t->type == OP_LESS)
-		t = handle_input_redir(simple, t);
+		t = handle_input_redir(cmd, t);
 	else if (t->type == OP_GREAT || t->type == OP_DGREAT)
-		t = handle_output_redir(simple, t);
+		t = handle_output_redir(cmd, t);
 	return (t);
 }

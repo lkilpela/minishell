@@ -99,7 +99,7 @@ t_quote_type	update_quote_type(t_quote_type quote_type, char c);
 // parser
 t_cmd			*simple_cmd(t_token_list **tokens);
 t_list			*parser(t_token_list *tokens);
-t_token_list	*get_redir(t_cmd *simple, t_token_list *tokens);
+t_token_list	*get_redir(t_cmd *cmd, t_token_list *tokens);
 char			*handle_node_quotes(char *val);
 
 // execution

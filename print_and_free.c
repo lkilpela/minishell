@@ -119,7 +119,8 @@ void print_last_token_node(t_token_list *t)
     printf("%stoken_name: %-20s token_value: %s\n%s", BLUE, t->value, get_type_str(t->type), RESET);
 }
 
-void print_simple_cmd(t_simple_cmd *cmd) {
+void print_simple_cmd(t_cmd *cmd)
+{
 	if (cmd == NULL) {
 		ft_printf("NULL command\n");
 		return;
@@ -141,33 +142,27 @@ void print_simple_cmd(t_simple_cmd *cmd) {
 	ft_printf("\n");
 }
 
-void	print_cmds(t_cmds *cmds)
+void	print_cmds(t_list *cmds)
 {
 	int	i;
-	t_list	*cmd_list;
-
-	cmd_list = cmds->simp_cmds;
 	i = 0;
 	if (cmds == NULL)
 	{
 		ft_printf("NULL commands structure\n");
 		return;
 	}
-	while (cmd_list)
+	while (cmds)
 	{
 		ft_printf("\e[0;32mCommand %d:\e[0m\n", i++ + 1);
-		print_simple_cmd((t_simple_cmd *)cmd_list->content);
-		cmd_list = cmd_list->next;
+		print_simple_cmd((t_cmd *)cmds->content);
+		cmds = cmds->next;
 	}
 }
 
 
-void print_executable(t_cmds *cmds)
+void print_executable(t_list *cmds)
 {
 	int	i;
-	t_list	*cmd_list;
-
-	cmd_list = cmds->simp_cmds;
 
 	i = 0;
 	if (cmds == NULL)
@@ -175,14 +170,14 @@ void print_executable(t_cmds *cmds)
 		ft_printf("NULL commands structure\n");
 		return;
 	}
-	while (cmd_list)
+	while (cmds)
 	{
 		ft_printf("\e[0;32mexecutable_cmd %d:\e[0m\n", i++ + 1);
-		ft_printf("%s\n", find_executable((t_simple_cmd *)cmd_list->content));
-		cmd_list = cmd_list->next;
+		ft_printf("%s\n", find_executable((t_cmd *)cmds->content));
+		cmds = cmds->next;
 	}
 }
-/*void print_args(t_simple_cmd *s)
+/*void print_args(t_list *s)
 {
 	int i = 0;
 	while (s->args[i] != NULL)

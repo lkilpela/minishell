@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/27 00:16:50 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/30 17:48:35 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	non_numeric_exit(char *arg)
 	return (pos_limit(arg));
 }
 
-void	built_exit(t_simple_cmd *cmd)
+void	built_exit(t_cmd *cmd)
 {
 	uint8_t	exit_code;
 
@@ -73,13 +73,13 @@ void	built_exit(t_simple_cmd *cmd)
 	}
 	if (cmd->num_of_args > 1)
 	{
-		print_error("bash: exit", NULL, "too many arguments", 0);
+		print_error("minishell: exit", NULL, "too many arguments", 0);
 		ms()->exit = 1;
 		return ;
 	}
 	if (!non_numeric_exit(cmd->args[0]))
 	{
-		print_error("bash: exit", cmd->args[0], "numeric argument required", 0);
+		print_error("minishell: exit", cmd->args[0], "numeric argument required", 0);
 		exit_code = 2;
 	}
 	else

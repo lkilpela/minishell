@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/30 15:42:56 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/30 17:33:32 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_ms
 	int			**pipefds;
 	int			status;
 	char		*executable;
+	int			cmds_num;
 }				t_ms;
 
 /******************************************************************************\
@@ -99,7 +100,7 @@ struct s_var_list
 /******************************************************************************\
  * PARSER
 \******************************************************************************/
-typedef struct s_simple_cmd
+typedef struct s_cmd
 {
 	char	*command;
 	int		num_of_args;
@@ -110,12 +111,6 @@ typedef struct s_simple_cmd
 	char	*heredoc_delim;
 	char	**args;
 	char	*exec_path;
-}			t_simple_cmd;
-
-typedef struct s_cmds
-{
-	t_list			*simp_cmds;
-	int				num_of_cmds;
-}				t_cmds;
+}			t_cmd;
 
 #endif

@@ -6,17 +6,17 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/30 15:49:25 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/30 18:22:13 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	builtin_tests(t_cmds *_cmds)
+void	builtin_tests(t_list *cmds)
 {
-	t_simple_cmd	*frist_cmd;
+	t_cmd	*frist_cmd;
 	
-	frist_cmd = (t_simple_cmd *)_cmds->simp_cmds->content;
+	frist_cmd = (t_cmd *)cmds->content;
 	if (ft_strcmp(frist_cmd->command, "exit") == 0)
 		built_exit(frist_cmd);
 	if (ft_strcmp(frist_cmd->command, "pwd") == 0)
@@ -102,7 +102,7 @@ void	minishell_loop(void)
 {
 	char			*input;
 	t_token_list	*t;
-	t_cmds		*cmds;
+	t_list			*cmds;
 
 	while (42)
 	{
@@ -129,9 +129,9 @@ void	minishell_loop(void)
 		//print_executable(cmds);
 		//setup_pipes(cmds);
 		print_cmds(cmds);
-		validate_arguments(cmds);
+		// validate_arguments(cmds);
 		print_executable(cmds);
-		execute_commands(cmds);
+		// execute_commands(cmds);
 		ft_free((void **)&input);
 	}
 }

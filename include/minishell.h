@@ -97,30 +97,30 @@ t_token_list	*create_token(t_token_type type, char *value);
 t_quote_type	update_quote_type(t_quote_type quote_type, char c);
 
 // parser
-t_simple_cmd	*simple_cmd(t_token_list **tokens);
-t_cmds		*parser(t_token_list *tokens);
-t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *tokens);
+t_cmd			*simple_cmd(t_token_list **tokens);
+t_list			*parser(t_token_list *tokens);
+t_token_list	*get_redir(t_cmd *simple, t_token_list *tokens);
 char			*handle_node_quotes(char *val);
 
 // execution
-void			setup_pipes(t_cmds *c);
+void			setup_pipes(void);
 void			init_path_dirs(void);
-char			*find_executable(t_simple_cmd *a_cmd);
-int				execute_commands(t_cmds *c);
-int				parent(t_cmds *c);
-void			close_all_fds(t_cmds *c, int i);
-void			setup_duplication(t_cmds *c, int i);
-void			validate_arguments(t_cmds *c);
+char			*find_executable(t_cmd *a_cmd);
+int				execute_commands(t_list *c);
+int				parent(void);
+void			close_all_fds(t_list *cmd, int i);
+void			setup_duplication(int i);
+void			validate_arguments(t_list *cmd);
 void 			validate_redir(t_redir *infile, t_redir *outfile);
 
 //builtins
-void			built_echo(t_simple_cmd *cmd);
+void			built_echo(t_cmd *cmds);
 void			built_pwd(void);
-void			built_exit(t_simple_cmd *cmd);
-void			built_cd(t_simple_cmd *cmd);
+void			built_exit(t_cmd *cmds);
+void			built_cd(t_cmd *cmds);
 void			built_env(int declare);
-void			built_export(t_simple_cmd *cmd);
-void			built_unset(t_simple_cmd *cmd);
+void			built_export(t_cmd *cmds);
+void			built_unset(t_cmd *cmds);
 
 // utils
 int				is_word(char c);
@@ -144,12 +144,10 @@ void			print_lalloc();
 void 			print_last_node(void);
 void 			print_tokens(t_token_list *lst);
 void			free_token_list(t_token_list **lst);
-void			print_cmds(t_cmds *cmds);
 void 			print_a_token(t_token_list *lst);
 void 			print_last_token_node(t_token_list *t);
 char			*get_type_str(int e);
-void			print_cmds(t_cmds *cmds);
-void			print_simple_cmd(t_simple_cmd *cmd);
-void			print_executable(t_cmds *cmds);
+void			print_cmds(t_list *cmd);
+void			print_executable(t_list *cmds);
 
 #endif

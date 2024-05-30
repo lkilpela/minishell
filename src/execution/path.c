@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 10:03:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:59:11 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_path_dirs(void)
 		ms()->paths = get_path_dirs();
 }
 
-char	*find_executable(t_simple_cmd *a_cmd)
+char	*find_executable(t_cmd *a_cmd)
 {
 	char	*command;
 	char	*tmp;

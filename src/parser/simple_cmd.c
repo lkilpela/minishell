@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:03:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 22:56:20 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/30 17:56:05 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	count_args(t_token_list **tokens)
 	return (count);
 }
 
-static void	parse_command(t_simple_cmd **simp, t_token_list **tokens)
+static void	parse_command(t_cmd **simp, t_token_list **tokens)
 {
 	if ((*tokens)->type == WORD)
 	{
@@ -67,20 +67,20 @@ static void	parse_command(t_simple_cmd **simp, t_token_list **tokens)
 	}
 }
 
-static void	parse_args(t_simple_cmd *simp, t_token_list **tokens)
+static void	parse_args(t_cmd *simp, t_token_list **tokens)
 {
 	simp->num_of_args = count_args(tokens);
 	if (simp->num_of_args > 0)
 		simp->args = ft_safe_calloc(simp->num_of_args + 1, sizeof(char *));
 }
 
-t_simple_cmd	*simple_cmd(t_token_list **tokens)
+t_cmd	*simple_cmd(t_token_list **tokens)
 {
-	t_simple_cmd	*simple_cmd;
+	t_cmd	*simple_cmd;
 	int				i;
 
 	i = 0;
-	simple_cmd = ft_safe_calloc(1, sizeof(t_simple_cmd));
+	simple_cmd = ft_safe_calloc(1, sizeof(t_cmd));
 	while ((*tokens) && (*tokens)->type != OP_PIPE)
 	{
 		if ((*tokens)->type >= OP_LESS && (*tokens)->type <= OP_DGREAT)

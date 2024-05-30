@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/29 22:55:10 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/30 18:26:13 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 //returning empty string on error, maybe need NULL idk
-static char	*heredoc(t_simple_cmd *cmd)
+static char	*heredoc(t_cmd *cmd)
 {
 	char	*line;
 	char	*tmp;
@@ -72,7 +72,7 @@ int	contains_space(char *var)
 	return (0);
 }
 
-t_token_list	*handle_heredoc(t_simple_cmd *simple, t_token_list *tokens)
+t_token_list	*handle_heredoc(t_cmd *simple, t_token_list *tokens)
 {
 	tokens = tokens->next;
 	tokens->expand = 0;
@@ -96,7 +96,7 @@ int	is_ambiguous(char *val, t_token_list *tokens)
 	return (0);
 }
 
-t_token_list	*handle_input_redir(t_simple_cmd *simple, t_token_list *tokens)
+t_token_list	*handle_input_redir(t_cmd *simple, t_token_list *tokens)
 {
 	char	*val;
 
@@ -118,7 +118,7 @@ t_token_list	*handle_input_redir(t_simple_cmd *simple, t_token_list *tokens)
 	return (tokens);
 }
 
-t_token_list	*handle_output_redir(t_simple_cmd *simple, t_token_list *tokens)
+t_token_list	*handle_output_redir(t_cmd *simple, t_token_list *tokens)
 {
 	char	*val;
 
@@ -141,19 +141,13 @@ t_token_list	*handle_output_redir(t_simple_cmd *simple, t_token_list *tokens)
 	return (tokens);
 }
 
-t_token_list	*get_redir(t_simple_cmd *simple, t_token_list *t)
+t_token_list	*get_redir(t_cmd *simple, t_token_list *t)
 {
 	if (t->type == OP_DLESS)
-	{
 		t = handle_heredoc(simple, t);
-	}
-	if (t->type == OP_LESS)
-	{
+	else if (t->type == OP_LESS)
 		t = handle_input_redir(simple, t);
-	}
-	if (t->type == OP_GREAT || t->type == OP_DGREAT)
-	{
+	else if (t->type == OP_GREAT || t->type == OP_DGREAT)
 		t = handle_output_redir(simple, t);
-	}
 	return (t);
 }

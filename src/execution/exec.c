@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/30 16:57:26 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/30 18:12:58 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 #define WRITE 1 // Pipe write_end
 #define READ 0 // Pipe read_end
 
-void	setup_pipes(t_cmds *c)
+void	setup_pipes(void)
 {
 	int	i;
 	int	num_of_pipes;
 
 	i = 0;
-	num_of_pipes = c->num_of_cmds - 1;
+	num_of_pipes = ms()->cmds_num - 1;
 	ms()->pipefds = ft_safe_calloc(num_of_pipes, sizeof(int *));
 	while (i < num_of_pipes)
 	{
@@ -69,11 +69,11 @@ void	setup_input_dup(int i)
 }
 
 // i: index of command
-void	setup_output_dup(t_cmds *c, int i)
+void	setup_output_dup(int i)
 {
 	int	num_of_pipes;
 
-	num_of_pipes = c->num_of_cmds - 1;
+	num_of_pipes = ms()->cmds_num - 1;
 	
 	if (i < num_of_pipes)
 	{
@@ -85,30 +85,30 @@ void	setup_output_dup(t_cmds *c, int i)
 	}
 }
 
-void	setup_duplication(t_cmds *c, int i)
+void	setup_duplication(int i)
 {
 	setup_input_dup(i);
-	setup_output_dup(c, i);
+	setup_output_dup(i);
 }
 
-static int	execute_simple_command(t_simple_cmd *s)
+static int	execute_simple_command(t_cmd *cmd)
 {
 	int		total_args;
 	char	**argv;
 	int		i;
 
 	i = 0;
-	total_args = s->num_of_args + 1; // include command itself
+	total_args = cmd->num_of_args + 1; // include command itself
 	argv = ft_safe_calloc(total_args + 1, sizeof (char *));
-	argv[0] = s->command;
-	while (i < s->num_of_args)
+	argv[0] = cmd->command;
+	while (i < cmd->num_of_args)
 	{
-		argv[i + 1] = s->args[i];
+		argv[i + 1] = cmd->args[i];
 		i++;
 	}
 	argv[total_args] = NULL;
-	s->exec_path = find_executable(s);
-	if (execve(s->exec_path, argv, ms()->envp) == -1)
+	cmd->exec_path = find_executable(cmd);
+	if (execve(cmd->exec_path, argv, ms()->envp) == -1)
 	{
 		ft_error(FATAL, ERR_EXECVE, 1);
 		free(argv);
@@ -118,7 +118,7 @@ static int	execute_simple_command(t_simple_cmd *s)
 	return (0);
 }
 
-void	close_all_fds(t_cmds *c, int i)
+void	close_all_fds(t_list *c, int i)
 {
 	(void)c;
 	(void)i;
@@ -135,12 +135,12 @@ void	close_all_fds(t_cmds *c, int i)
 	return ;
 }
 
-int	parent(t_cmds *c)
+int	parent(void)
 {
 	int	i;
 
 	i = 0;
-	while (i < c->num_of_cmds)
+	while (i < ms()->cmds_num)
 	{
 		ms()->pid = waitpid(ms()->pids[i], &ms()->status, 0);
 		if (ms()->pid == -1)
@@ -152,39 +152,37 @@ int	parent(t_cmds *c)
 	return (0);
 }
 
-int	execute_commands(t_cmds *c)
+int	execute_commands(t_list *cmds)
 {
-	int	i;
-	int	has_pipe;
-	t_simple_cmd	*simp;
-	t_list			*commands;
+	int		i;
+	int		has_pipe;
+	t_cmd	*cmd;
 	
-	commands = c->simp_cmds;
 	i = 0;
-	has_pipe = c->num_of_cmds > 1;
+	has_pipe = ms()->cmds_num > 1;
 	if (has_pipe)
-		setup_pipes(c);
-	ms()->pids = ft_safe_calloc(c->num_of_cmds, sizeof(pid_t));
-	while (commands)
+		setup_pipes();
+	ms()->pids = ft_safe_calloc(ms()->cmds_num, sizeof(pid_t));
+	while (cmds)
 	{
-		simp = (t_simple_cmd *)c->simp_cmds->content;
-		handle_infile(&simp->in_file);
-		handle_outfile(&simp->out_file);
+		cmd = (t_cmd *)cmds->content;
+		handle_infile(&cmd->in_file);
+		handle_outfile(&cmd->out_file);
 		ms()->pids[i] = fork();
 		if (ms()->pids[i] == -1)
 			ft_error(FATAL, ERR_FORK, 1);
 		else if (ms()->pids[i] == 0)
 		{
 			if (has_pipe)
-				setup_duplication(c, i);
-			execute_simple_command(simp);
+				setup_duplication(i);
+			execute_simple_command(cmd);
 			if (has_pipe)
-				close_all_fds(c, i);
+				close_all_fds(cmds, i); //commented out that function
 			exit(0);
 		}
 		i++;
-		commands = commands->next;
+		cmds = cmds->next;
 	}
-	parent(c);
+	parent();
 	return (0);
 }

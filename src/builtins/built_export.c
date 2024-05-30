@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/27 00:12:26 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/30 17:48:50 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,30 @@ int	check_key(char *arg)
 	return (1);
 }
 
-void	built_export(t_simple_cmd *cmd)
+int	check_args(int	args)
 {
-	int	i;
+	if (args == 0)
+	{
+		built_env(1);
+		return (0);
+	}
+	else
+		return (1);
+}
+
+void	built_export(t_cmd *cmd)
+{
+	int		i;
 
 	i = 0;
 	ms()->exit = 0;
-	if (cmd->num_of_args == 0)
-	{
-		built_env(1);
-		return ;
-	}
-	if (cmd->num_of_args >= 1)
+	if (check_args(cmd->num_of_args))
 	{
 		while (i < cmd->num_of_args)
 		{
 			if (!check_key(cmd->args[i]))
 			{
-				print_error("bash: export: ", cmd->args[i], ERR_KEY_VALID, 0);
+				print_error("minishell: export: ", cmd->args[i], ERR_KEY_VALID, 0);
 				i++;
 				ms()->exit = 1;
 				continue ;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/27 00:05:45 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/30 17:48:01 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	built_cd(t_simple_cmd *cmd)
+void	built_cd(t_cmd *cmd)
 {
 	char	*home;
 
@@ -37,7 +37,7 @@ void	built_cd(t_simple_cmd *cmd)
 	if (cmd->num_of_args == 1)
 		if (chdir(cmd->args[0]) != 0)
 		{
-			print_error("bash: cd", cmd->args[0], NULL, 1);
+			print_error("minishell: cd", cmd->args[0], NULL, 1);
 			ms()->exit = 1;
 			return ;
 		}

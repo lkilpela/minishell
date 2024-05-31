@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/31 01:04:17 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/31 17:55:59 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,19 @@ int	contains_space(char *var)
 	return (0);
 }
 
-t_token_list	*handle_heredoc(t_cmd *simple, t_token_list *tokens)
+t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens)
 {
+	cmd->in_file.type = INFILE;
+	if (cmd->in_file.file)
+		ft_free((void **)&cmd->in_file.file);
 	tokens = tokens->next;
 	tokens->expand = 0;
 	if (!has_quotes(tokens->value))
-		simple->heredoc_expand = 1;
+		cmd->heredoc_expand = 1;
 	tokens->value = handle_node_quotes(tokens->value);
-	simple->heredoc_delim = ft_safe_strjoin(tokens->value, "\n");
-	simple->heredoc = heredoc(simple);
-	printf("%s", simple->heredoc); //temp
+	cmd->heredoc_delim = ft_safe_strjoin(tokens->value, "\n");
+	cmd->heredoc = heredoc(cmd);
+	printf("%s", cmd->heredoc); //temp
 	return (tokens->next);
 }
 
@@ -96,45 +99,47 @@ int	is_ambiguous(char *val, t_token_list *tokens)
 	return (0);
 }
 
-t_token_list	*handle_input_redir(t_cmd *simple, t_token_list *tokens)
+t_token_list	*handle_input_redir(t_cmd *cmd, t_token_list *tokens)
 {
 	char	*val;
 
-	if (simple->heredoc)
-		ft_free((void **)&simple->heredoc);
+	cmd->in_file.type = INFILE;
+	if (cmd->heredoc)
+		ft_free((void **)&cmd->heredoc);
 	tokens = tokens->next;
 	if (tokens->type == WORD)
 	{
 		val = exp_word(tokens->value);
 		if (is_ambiguous(val, tokens))
-			simple->in_file.file = NULL;
+			cmd->in_file.file = NULL;
 		else
 		{
 			tokens->value = val;
-			simple->in_file.file = tokens->value;
+			cmd->in_file.file = tokens->value;
 		}
 		return (tokens->next);
 	}
 	return (tokens);
 }
 
-t_token_list	*handle_output_redir(t_cmd *simple, t_token_list *tokens)
+t_token_list	*handle_output_redir(t_cmd *cmd, t_token_list *tokens)
 {
 	char	*val;
 
-	simple->out_file.append = 0;
+	cmd->out_file.type = OUTFILE;
+	cmd->out_file.append = 0;
 	if (tokens->type == OP_DGREAT)
-		simple->out_file.append = 1;
+		cmd->out_file.append = 1;
 	tokens = tokens->next;
 	if (tokens->type == WORD)
 	{
 		val = exp_word(tokens->value);
 		if (is_ambiguous(val, tokens))
-			simple->out_file.file = NULL;
+			cmd->out_file.file = NULL;
 		else
 		{
 			tokens->value = val;
-			simple->out_file.file = tokens->value;
+			cmd->out_file.file = tokens->value;
 		}
 		return (tokens->next);
 	}

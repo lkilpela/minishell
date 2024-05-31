@@ -3,52 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/31 01:31:55 by aklein           ###   ########.fr       */
+/*   Updated: 2024/05/31 17:05:08 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 # define PERMISSION 0644
+# define O_INFILE O_RDONLY
+# define O_OUTFILE O_CREAT | O_WRONLY | O_TRUNC
+# define O_APPENDFILE O_CREAT | O_WRONLY | O_TRUNC //fix for append
 
-void validate_redir(t_redir *infile, t_redir *outfile)
+
+int	validate_redir(t_redir *file)
 {
-	if (infile->file)
+	int oflags;
+	if (file->type == INFILE)
+		oflags = O_INFILE;	
+	if (file->type == OUTFILE)
+		oflags = O_OUTFILE;
+	if (file->append)
+		oflags = O_APPENDFILE;
+	if (file->file)
 	{
-		infile->fd = open(infile->file, O_RDONLY);
-		if (infile->fd == -1)
+		if (file->fd != -1)
+			close (file->fd);
+		file->fd = open(file->file, oflags, PERMISSION);
+		if (file->fd == -1)
 		{
-			print_error("minishell", infile->file, NULL, 1);
-			exit(EXIT_FAILURE);
+			print_error("minishell", file->file, NULL, 1);
+			return (0);
 		}
 	}
 	else
-		infile->fd = -1;
-	if (outfile->file)
-	{
-		outfile->fd = open(outfile->file,
-				O_CREAT | O_WRONLY | O_TRUNC, PERMISSION);
-		if (outfile->fd == -1)
-		{
-			print_error("minishell", outfile->file, NULL, 1);
-			exit(EXIT_FAILURE);
-		}
-	}
-	else
-		outfile->fd = -1;
-}
-
-void	validate_arguments(t_list *cmds)
-{
-	t_cmd			*first_cmd;
-	t_redir			in;
-	t_redir			out;
-	
-	first_cmd = (t_cmd *)cmds->content;
-	in = first_cmd->in_file;
-	out = first_cmd->out_file;
-	validate_redir(&in, &out);
+		file->fd = -1;
+	return (1);
 }

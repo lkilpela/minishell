@@ -69,8 +69,8 @@ static void	parse_command(t_cmd *cmd, t_token_list **tokens)
 
 static void	parse_args(t_cmd *cmd, t_token_list **tokens)
 {
-	cmd->num_of_args = count_args(tokens);
-	cmd->args = ft_safe_calloc(cmd->num_of_args + 2, sizeof(char *));
+	cmd->num_of_args = count_args(tokens) + 1;
+	cmd->args = ft_safe_calloc(cmd->num_of_args + 1, sizeof(char *));
 	if (cmd->command)
 		cmd->args[0] = cmd->command;
 }

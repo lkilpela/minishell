@@ -105,15 +105,12 @@ t_token_list	*get_redir(t_cmd *cmd, t_token_list *tokens);
 char			*handle_node_quotes(char *val);
 
 // execution
-void			setup_pipes(void);
 void			init_path_dirs(void);
 char			*find_executable(t_cmd *a_cmd);
-int				execute_commands(t_list *c);
-int				parent(void);
-void			close_all_fds(t_list *cmd, int i);
-void			setup_duplication(int i);
-void			validate_arguments(t_list *cmd);
-void 			validate_redir(t_redir *infile, t_redir *outfile);
+void				execute_commands(t_list *c);
+void			parent(t_list *cmds, int *pipe_in);
+void			child(t_list *cmds, int *pipe_in);
+int 			validate_redir(t_redir *file);
 
 //builtins
 void			built_echo(t_cmd *cmds);

@@ -38,11 +38,11 @@
 				"text": "handle SIGQUIT nostop pass moprint",
 				"ignoreFailures": true
 			},
-			{
-				"description": "Follow child processes",
-				"text": "-gdb-set follow-fork-mode child",
-				"ignoreFailures": true
-			}
+			// {
+			// 	"description": "Follow child processes",
+			// 	"text": "-gdb-set follow-fork-mode child",
+			// 	"ignoreFailures": true
+			// }
 			]
 		},
 	]

@@ -75,13 +75,20 @@ static void	parse_args(t_cmd *cmd, t_token_list **tokens)
 		cmd->args[0] = cmd->command;
 }
 
+void	init_redir(t_cmd *cmd)
+{
+	cmd->in_file.fd = -1;
+	cmd->out_file.fd = -1;
+}
+
 t_cmd	*simple_cmd(t_token_list **tokens)
 {
 	t_cmd	*cmd;
-	int				i;
+	int		i;
 
 	i = 0;
 	cmd = ft_safe_calloc(1, sizeof(t_cmd));
+	init_redir(cmd);
 	while ((*tokens) && (*tokens)->type != OP_PIPE)
 	{
 		if ((*tokens)->type >= OP_LESS && (*tokens)->type <= OP_DGREAT)

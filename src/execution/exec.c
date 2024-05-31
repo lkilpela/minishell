@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/31 18:51:54 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/01 02:19:09 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,22 @@ void	dupes(t_cmd *cmd)
 
 	in = STDIN_FILENO;
 	out = STDOUT_FILENO;
-	if (cmd->heredoc)
-		write(STDIN_FILENO, cmd->heredoc, ft_strlen(cmd->heredoc));
 	if (cmd->in_file.fd != -1)
 		in = cmd->in_file.fd;
 	if (cmd->out_file.fd != -1)
 		out = cmd->out_file.fd;
-	dup2(in, STDIN_FILENO);
 	if (in != STDIN_FILENO)
+	{
+		if (dup2(in, STDIN_FILENO) == -1)
+			perror("dup2 in");
 		close(in);
-	dup2(out, STDOUT_FILENO);
+	}
 	if (out != STDOUT_FILENO)
+	{
+		if (dup2(out, STDOUT_FILENO) == -1)
+			perror("dup2 out");
 		close(out);
+	}
 }
 
 void	exec_command(t_cmd *cmd)
@@ -41,9 +45,11 @@ void	exec_command(t_cmd *cmd)
 		print_error(cmd->command, NULL, ERR_CMD, 0);
 		exit(EXIT_FAILURE);
 	}
-	execve(cmd->exec_path, cmd->args, ms()->envp);
-	print_error(cmd->command, NULL, NULL, 1);
-	exit(EXIT_FAILURE); //ft_exit or smth
+	if (execve(cmd->exec_path, cmd->args, ms()->envp) != 0)
+	{
+		print_error(cmd->command, NULL, NULL, 1);
+		exit(EXIT_FAILURE); //ft_exit or smth
+	}
 }
 
 void	child(t_list *cmds, int *pipe_in)
@@ -51,7 +57,13 @@ void	child(t_list *cmds, int *pipe_in)
 	t_cmd	*cmd;
 	
 	cmd = (t_cmd *)cmds->content;
-	if (*pipe_in != -1) //not first
+	if (cmd->heredoc)
+	{
+		write(ms()->pipefd[P_WRITE], cmd->heredoc, ft_strlen(cmd->heredoc));
+		close(ms()->pipefd[P_WRITE]);
+		*pipe_in = ms()->pipefd[P_READ];
+	}
+	if (*pipe_in != -1) //not first or coming from heredoc
 	{
 		dup2(*pipe_in, STDIN_FILENO);
 		close(*pipe_in);
@@ -129,7 +141,7 @@ void	execute_commands(t_list *cmds)
 		if (ms()->pids[i] == -1)
 			ft_error(FATAL, NULL, 1);
 		if (ms()->pids[i] == 0)
-				child(cmds, &pipe_in);
+			child(cmds, &pipe_in);
 		if (ms()->pids[i++] > 0)
 			parent(cmds, &pipe_in);
 		cmds = cmds->next;

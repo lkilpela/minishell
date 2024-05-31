@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/31 17:55:59 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/01 02:31:12 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens)
 	cmd->in_file.type = INFILE;
 	if (cmd->in_file.file)
 		ft_free((void **)&cmd->in_file.file);
+	if (cmd->heredoc)
+		ft_free((void **)&cmd->heredoc);
 	tokens = tokens->next;
 	tokens->expand = 0;
 	if (!has_quotes(tokens->value))
@@ -84,7 +86,6 @@ t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens)
 	tokens->value = handle_node_quotes(tokens->value);
 	cmd->heredoc_delim = ft_safe_strjoin(tokens->value, "\n");
 	cmd->heredoc = heredoc(cmd);
-	printf("%s", cmd->heredoc); //temp
 	return (tokens->next);
 }
 

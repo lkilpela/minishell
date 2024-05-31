@@ -93,7 +93,7 @@ t_cmd	*simple_cmd(t_token_list **tokens)
 		{
 			parse_command(cmd, tokens);
 			parse_args(cmd, tokens);
-			i = 0;
+			i = 1;
 			continue ;
 		}
 		if (cmd->command != NULL && (*tokens)->type == WORD)

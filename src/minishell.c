@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/30 18:22:13 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/31 02:49:53 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,12 +126,12 @@ void	minishell_loop(void)
 		}
 		cmds = parser(t);
 		init_path_dirs();
-		//print_executable(cmds);
+		print_executable(cmds);
 		//setup_pipes(cmds);
 		print_cmds(cmds);
 		// validate_arguments(cmds);
 		print_executable(cmds);
-		// execute_commands(cmds);
+		execute_commands(cmds);
 		ft_free((void **)&input);
 	}
 }

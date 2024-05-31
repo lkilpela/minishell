@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/30 17:33:32 by codespace        ###   ########.fr       */
+/*   Updated: 2024/05/31 01:18:25 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_ms
 	t_var_list	*var_list;
 	pid_t		*pids;
 	pid_t		pid;
-	int			**pipefds;
+	int			pipefd[2];
 	int			status;
 	char		*executable;
 	int			cmds_num;

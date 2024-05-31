@@ -31,6 +31,8 @@
 # define EQUAL_SIGN '='
 # define S_QUOTE '\''
 # define D_QUOTE '"'
+# define P_WRITE 1
+# define P_READ 0
 
 // minishell
 t_ms			*ms(void);

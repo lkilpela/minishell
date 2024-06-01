@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/01 22:56:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/01 23:11:11 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,16 @@ void	exec_command(t_cmd *cmd)
 void	child(t_list *cmds, int *pipe_in)
 {
 	t_cmd	*cmd;
+	int		heredoc_pipefd[2];
 	
 	cmd = (t_cmd *)cmds->content;
 	if (cmd->heredoc)
 	{
-		write(ms()->pipefd[P_WRITE], cmd->heredoc, ft_strlen(cmd->heredoc));
-		close(ms()->pipefd[P_WRITE]);
-		if (ms()->pid > 0)
-			dup2(ms()->pipefd[P_READ], STDIN_FILENO);
-		*pipe_in = ms()->pipefd[P_READ];
+		pipe(heredoc_pipefd);
+		write(heredoc_pipefd[P_WRITE], cmd->heredoc, ft_strlen(cmd->heredoc));
+		dup2(heredoc_pipefd[P_READ], STDIN_FILENO);
+		close(heredoc_pipefd[P_WRITE]);
+		*pipe_in = heredoc_pipefd[P_READ];
 	}
 	if (*pipe_in != -1) //not first or coming from heredoc
 	{

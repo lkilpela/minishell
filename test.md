@@ -149,3 +149,25 @@ echo "Hello, World!" | cat
 ls -l | grep ".txt" | wc -l
 
 < infile grep hello | wc -l < output
+
+cat <<EOF | wc -l
+Hello, World!
+EOF
+Expected output: 1
+
+cat <<EOF | wc -l
+Hello,
+World!
+EOF
+Expected output: 2
+
+cat <<EOF | grep "World" | wc -l
+Hello,
+World!
+EOF
+Expected output: 1
+
+cat <<EOF | wc -l > output.txt
+Hello, World!
+EOF
+Expected output: No output on the terminal, but the file output.txt should contain 1.

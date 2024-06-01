@@ -6,22 +6,12 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/01 13:28:36 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/01 22:56:50 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	dup_herdoc(t_cmd *cmd)
-{
-	char	*tmpfile;
-	int		heredoc_fd;
-	
-	tmpfile = "/tmp/heredoc_tmp";
-	heredoc_fd = open(tmpfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (heredoc_fd == -1)
-		ft_error(FATAL, ERR_OPEN, 1);
-}
 
 void	dupes(t_cmd *cmd)
 {
@@ -72,6 +62,8 @@ void	child(t_list *cmds, int *pipe_in)
 	{
 		write(ms()->pipefd[P_WRITE], cmd->heredoc, ft_strlen(cmd->heredoc));
 		close(ms()->pipefd[P_WRITE]);
+		if (ms()->pid > 0)
+			dup2(ms()->pipefd[P_READ], STDIN_FILENO);
 		*pipe_in = ms()->pipefd[P_READ];
 	}
 	if (*pipe_in != -1) //not first or coming from heredoc

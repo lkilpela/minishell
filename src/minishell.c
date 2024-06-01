@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/01 02:29:38 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/01 13:22:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,9 +116,9 @@ void	minishell_loop(void)
 			ft_free((void **)&input);
 			continue ;
 		}
-		printf(GREEN "Calling tokenizer: \n" RESET);
+		//printf(GREEN "Calling tokenizer: \n" RESET);
 		t = new_tokenizer(input);
-		print_tokens(t);
+		//print_tokens(t);
 		if (!near_token_errors(t)) // check for errors in token list
 		{
 			ft_free((void **)&input);
@@ -126,10 +126,8 @@ void	minishell_loop(void)
 		}
 		cmds = parser(t);
 		init_path_dirs();
-		print_executable(cmds);
-		//setup_pipes(cmds);
-		print_cmds(cmds);
-		print_executable(cmds);
+		//print_cmds(cmds);
+		//print_executable(cmds);
 		execute_commands(cmds);
 		ft_free((void **)&input);
 	}

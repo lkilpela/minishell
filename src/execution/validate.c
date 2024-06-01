@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/01 02:30:17 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/01 02:44:38 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int	validate_redir(t_redir *file)
 	if (file->file)
 	{
 		if (file->fd != -1)
+		{
+			printf("validate_redir: Closed file '%s' with file descriptor %d\n", file->file, file->fd);
 			close (file->fd);
+		}
 		file->fd = open(file->file, oflags, PERMISSION);
 		if (file->fd == -1)
 		{
@@ -39,7 +42,7 @@ int	validate_redir(t_redir *file)
 		}
 		printf("validate_redir: Opened file '%s' with file descriptor %d\n", file->file, file->fd);
 		if (file->fd == STDIN_FILENO || file->fd == STDOUT_FILENO || file->fd == STDERR_FILENO)
-			printf("Conflict: file descriptor %d overlaps with standard I/O\n", file->fd);
+			printf("validate_redir: Conflict: file descriptor %d overlaps with standard I/O\n", file->fd);
 	}
 	else
 		file->fd = -1;

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/01 02:31:12 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/02 22:15:15 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	is_ambiguous(char *val, t_token_list *tokens)
 {
 	if (contains_space(val))
 	{
-		print_error("minishell: ", tokens->value, ERR_AMBIGUOUS, 0);
+		print_error(ERR_MS, tokens->value, ERR_AMBIGUOUS, 0);
 		ms()->exit = 1;
 		return (1);
 	}

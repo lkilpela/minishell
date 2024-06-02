@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/31 16:07:02 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/02 19:53:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,25 @@
  * MINISHELL
 \******************************************************************************/
 typedef struct s_var_list t_var_list;
+typedef struct s_token_list t_token_list;
 
 typedef struct s_ms
 {
-	char		**argv;
-	int			argc;
-	char		**envp;
-	char		**paths;	// Array of paths for executable lookup
-	uint8_t		exit;
-	t_var_list	*var_list;
-	pid_t		*pids;
-	pid_t		pid;
-	int			pipefd[2];
-	int			status;
-	char		*executable;
-	int			cmds_num;
-}				t_ms;
+	char			**argv;
+	int				argc;
+	char			**envp;
+	char			**paths;	// Array of paths for executable lookup
+	uint8_t			exit;
+	t_var_list		*var_list;
+	t_token_list	*tokens;
+	t_list			*commands;
+	pid_t			*pids;
+	pid_t			pid;
+	int				pipefd[2];
+	int				status;
+	char			*executable;
+	int				cmds_num;
+}					t_ms;
 
 /******************************************************************************\
  * FILES
@@ -77,15 +80,9 @@ typedef enum e_quote_type
 typedef enum e_err
 {
 	FATAL,
-	WARNING
+	WARNING,
+	RELINE
 }			t_err;
-
-// single token struct
-typedef struct s_token
-{
-	char			*value;
-	t_token_type	type;
-}				t_token;
 
 // a token node in linked list
 typedef struct s_token_list

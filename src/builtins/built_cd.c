@@ -3,42 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/30 17:48:01 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/02 19:54:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+void	error_ret(char *msg)
+{
+	print_error(ERR_MS, "cd", msg, 0);
+	ms()->exit = EXIT_FAILURE;
+}
+
 void	built_cd(t_cmd *cmd)
 {
 	char	*home;
 
-	if (cmd->num_of_args > 1)
-	{
-		ft_error(WARNING, "cd: too many arguments", 1);
-		ms()->exit = 1;
-		return ;
-	}
-	if (cmd->num_of_args == 0)
+	if (cmd->num_of_args > 2)
+		return (error_ret(ERR_CD_ARGS));
+	if (cmd->num_of_args == 1)
 	{
 		home = lookup_var("HOME");
 		if (*home == 0)
-		{
-			ft_error(WARNING, "cd: HOME not set", 1);
-			ms()->exit = 1;
-			return ;
-		}
+			return (error_ret(ERR_CD_HOME));
 		if (chdir(home) == 0)
 			ft_free((void **)&home);
 	}
-	if (cmd->num_of_args == 1)
+	if (cmd->num_of_args == 2)
+	{
 		if (chdir(cmd->args[0]) != 0)
 		{
 			print_error("minishell: cd", cmd->args[0], NULL, 1);
-			ms()->exit = 1;
+			ms()->exit = EXIT_FAILURE;
 			return ;
 		}
+	}
+		ms()->exit = EXIT_SUCCESS;
 }

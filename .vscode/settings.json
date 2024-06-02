@@ -59,6 +59,7 @@
         "numbers": "c",
         "fstream": "c",
         "*.tcc": "c",
-        "errors.h": "c"
+        "errors.h": "c",
+        "error_t.h": "c"
     }
 }

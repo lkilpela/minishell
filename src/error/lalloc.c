@@ -57,7 +57,7 @@ void	add_to_lal(void *ptr)
 
 	new_node = ft_lstnew(ptr);
 	if (!new_node)
-		ft_error(FATAL, NULL, 0);
+		ft_error(E_CODE_ERRNO + errno);
 	lalloc = allocs();
 	ft_lstadd_front(lalloc, new_node);
 }

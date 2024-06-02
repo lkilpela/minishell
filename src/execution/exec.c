@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/01 23:11:11 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/02 22:48:01 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,13 @@ void	dupes(t_cmd *cmd)
 		out = cmd->out_file.fd;
 	if (in != STDIN_FILENO)
 	{
-		if (dup2(in, STDIN_FILENO) == -1)
-			perror("dup2 in");
-		close(in);
+		safe_dup2(in, STDIN_FILENO);
+		safe_close(in);
 	}
 	if (out != STDOUT_FILENO)
 	{
-		if (dup2(out, STDOUT_FILENO) == -1)
-			perror("dup2 out");
-		close(out);
+		safe_dup2(out, STDOUT_FILENO);
+		safe_close(out);
 	}
 }
 
@@ -61,22 +59,22 @@ void	child(t_list *cmds, int *pipe_in)
 	cmd = (t_cmd *)cmds->content;
 	if (cmd->heredoc)
 	{
-		pipe(heredoc_pipefd);
+		safe_pipe(heredoc_pipefd);
 		write(heredoc_pipefd[P_WRITE], cmd->heredoc, ft_strlen(cmd->heredoc));
-		dup2(heredoc_pipefd[P_READ], STDIN_FILENO);
-		close(heredoc_pipefd[P_WRITE]);
+		safe_dup2(heredoc_pipefd[P_READ], STDIN_FILENO);
+		safe_close(heredoc_pipefd[P_WRITE]);
 		*pipe_in = heredoc_pipefd[P_READ];
 	}
 	if (*pipe_in != -1) //not first or coming from heredoc
 	{
-		dup2(*pipe_in, STDIN_FILENO);
-		close(*pipe_in);
+		safe_dup2(*pipe_in, STDIN_FILENO);
+		safe_close(*pipe_in);
 	}
 	if (cmds->next != NULL) //not last
 	{
-		close(ms()->pipefd[P_READ]);
-		dup2(ms()->pipefd[P_WRITE], STDOUT_FILENO);
-		close(ms()->pipefd[P_WRITE]);
+		safe_close(ms()->pipefd[P_READ]);
+		safe_dup2(ms()->pipefd[P_WRITE], STDOUT_FILENO);
+		safe_close(ms()->pipefd[P_WRITE]);
 	}
 	dupes(cmd);
 	exec_command(cmd);
@@ -88,22 +86,22 @@ void	parent(t_list *cmds, int *pipe_in)
 	
 	cmd = (t_cmd *)cmds->content;
 	if (*pipe_in != -1)
-		close(*pipe_in);
+		safe_close(*pipe_in);
 	if (cmds->next != NULL)
 	{
-		close(ms()->pipefd[P_WRITE]);
+		safe_close(ms()->pipefd[P_WRITE]);
 		*pipe_in = ms()->pipefd[P_READ];
 	}
 	if (cmd->in_file.fd != -1)
-		close(cmd->in_file.fd);
+		safe_close(cmd->in_file.fd);
 	if (cmd->out_file.fd != -1)
-		close(cmd->out_file.fd);
+		safe_close(cmd->out_file.fd);
 }
 
 int	get_status(int status)
 {
 	if (WIFSIGNALED(status) != 0)
-		return (128 + WTERMSIG(status));
+		return (E_CODE_SIG + WTERMSIG(status));
 	return (WEXITSTATUS(status));
 }
 
@@ -133,17 +131,15 @@ void	execute_commands(t_list *cmds)
 	while (cmds)
 	{
 		cmd = (t_cmd *)cmds->content;
+		if (cmds->next != NULL)
+			safe_pipe(ms()->pipefd);
 		if (!validate_redir(&cmd->in_file) || !validate_redir(&cmd->out_file))
 		{
 			cmds=cmds->next;
+			ms()->cmds_num--;
 			continue;
 		}
-		if (cmds->next != NULL)
-			if (pipe(ms()->pipefd) == -1)
-				ft_error(FATAL, NULL, 1);	
-		ms()->pids[i] = fork();
-		if (ms()->pids[i] == -1)
-			ft_error(FATAL, NULL, 1);
+		ms()->pids[i] = safe_fork();
 		if (ms()->pids[i] == 0)
 			child(cmds, &pipe_in);
 		if (ms()->pids[i++] > 0)

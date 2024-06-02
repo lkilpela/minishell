@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/01 13:22:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/02 21:13:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,26 @@
 
 void	builtin_tests(t_list *cmds)
 {
-	t_cmd	*frist_cmd;
+	t_cmd	*first_cmd;
 	
-	frist_cmd = (t_cmd *)cmds->content;
-	if (ft_strcmp(frist_cmd->command, "exit") == 0)
-		built_exit(frist_cmd);
-	if (ft_strcmp(frist_cmd->command, "pwd") == 0)
-		built_pwd();
-	if (ft_strcmp(frist_cmd->command, "env") == 0)
-		built_env(0);
-	if (ft_strcmp(frist_cmd->command, "echo") == 0)
-		built_echo(frist_cmd);
-	if (ft_strcmp(frist_cmd->command, "export") == 0)
-		built_export(frist_cmd);
-	if (ft_strcmp(frist_cmd->command, "unset") == 0)
-		built_unset(frist_cmd);
-	if (ft_strcmp(frist_cmd->command, "cd") == 0)
-		built_cd(frist_cmd);
+	first_cmd = (t_cmd *)cmds->content;
+	if (first_cmd->command)
+	{
+		if (ft_strcmp(first_cmd->command, "exit") == 0)
+			built_exit(first_cmd);
+		if (ft_strcmp(first_cmd->command, "pwd") == 0)
+			built_pwd();
+		if (ft_strcmp(first_cmd->command, "env") == 0)
+			built_env(0);
+		if (ft_strcmp(first_cmd->command, "echo") == 0)
+			built_echo(first_cmd);
+		if (ft_strcmp(first_cmd->command, "export") == 0)
+			built_export(first_cmd);
+		if (ft_strcmp(first_cmd->command, "unset") == 0)
+			built_unset(first_cmd);
+		if (ft_strcmp(first_cmd->command, "cd") == 0)
+			built_cd(first_cmd);
+	}
 }
 
 void	handle_quotes(char **val)
@@ -101,34 +104,32 @@ void	rl_history(char *input)
 void	minishell_loop(void)
 {
 	char			*input;
-	t_token_list	*t;
-	t_list			*cmds;
+	int				all_good;
 
+	all_good = 1;
 	while (42)
 	{
 		input = readline(PROMPT);
 		if (input == NULL) // ctrl + D
 			built_exit(NULL);
 		rl_history(input);
-		if (!quote_match_check(input)) // ensure quotes are balanced
-		{
-			ft_error(WARNING, ERR_QUOTES, 1);
-			ft_free((void **)&input);
-			continue ;
-		}
+		if (all_good && !quote_match_check(input)) // ensure quotes are balanced
+			all_good = ms_exit(RELINE, E_CODE_SYN);
 		//printf(GREEN "Calling tokenizer: \n" RESET);
-		t = new_tokenizer(input);
-		//print_tokens(t);
-		if (!near_token_errors(t)) // check for errors in token list
+		if (all_good)
+			ms()->tokens = new_tokenizer(input);
+		//print_tokens(ms()->tokens);
+		if (all_good && !near_token_errors(ms()->tokens)) // check for errors in token list
+			all_good = ms_exit(RELINE, E_CODE_SYN);
+		if (all_good)
 		{
-			ft_free((void **)&input);
-			continue ;
+			ms()->commands = parser(ms()->tokens);
+			builtin_tests(ms()->commands); //temp
+			init_path_dirs();
+			print_cmds(ms()->commands);
+			print_executable(ms()->commands);
+			execute_commands(ms()->commands);
 		}
-		cmds = parser(t);
-		init_path_dirs();
-		//print_cmds(cmds);
-		//print_executable(cmds);
-		execute_commands(cmds);
 		ft_free((void **)&input);
 	}
 }

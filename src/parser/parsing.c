@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/30 17:50:33 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/02 22:14:30 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_list *parser(t_token_list *tokens)
 	t_cmd	*new_cmd;
 	t_list	*cmd_list;
 
+	cmd_list = NULL;
 	while (tokens)
 	{
 		new_cmd = simple_cmd(&tokens);

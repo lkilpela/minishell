@@ -1,20 +1,66 @@
 #include <minishell.h>
 
-void	ft_error(t_err type, char *msg, int from_ms)
+void	ft_error(int exit_code)
 {
-	if (from_ms)
+	perror(ERR_MS);
+	ms_exit(FATAL, exit_code);
+}
+
+void	clear_tokens(void)
+{
+	t_token_list *tokens;
+
+	tokens = ms()->tokens;
+	while (tokens)
 	{
-		ft_putstr_fd(ms()->executable, 2);
-		ft_putstr_fd(": ", 2);
+		ft_free((void**)&tokens->value);
+		ft_free((void **)&tokens);
+		tokens = tokens->next;
 	}
-	if (msg)
-		ft_putendl_fd(msg, 2);
+	ms()->tokens = NULL;
+}
+
+void	clear_cmds(void)
+{
+	t_list	*cmds;
+	t_cmd	*cmd;
+	int		i;
+
+	cmds = ms()->commands;
+	while (cmds)
+	{
+		cmd = (t_cmd *)cmds->content;
+		ft_free((void **)&cmd->command);
+		ft_free((void **)&cmd->heredoc);
+		ft_free((void **)&cmd->heredoc_delim);
+		ft_free((void **)&cmd->exec_path);
+		i = 0;
+		while (cmd->args[i])
+			ft_free((void **)&cmd->args[i++]);
+		ft_free((void **)*cmd->args);
+		cmds = cmds->next;
+	}
+	ms()->commands = NULL;
+}
+
+int	ms_exit(t_err type, int error_code)
+{
+	if (error_code != -1)
+		ms()->exit = error_code;
+	if (type == RELINE)
+	{
+		//close FDs
+		clear_cmds();
+		clear_tokens();
+		return (0);
+	}
 	if (type == FATAL)
 	{
+		//close FDs
 		clear_lal();
-		perror(NULL);
-		exit(EXIT_FAILURE);
+		exit(ms()->exit);
 	}
+	return (1);
 }
 
 void	print_error(char *from, char *bad_arg, char *custom, int is_errno)
@@ -53,27 +99,24 @@ int	quote_match_check(char *input)
 			quote_type = 0;
 		input++;
 	}
-	return (quote_type == 0);
+	if (quote_type == 0)
+		return (1);
+	print_error(ERR_MS, NULL, ERR_QUOTES, 0);
+	return (0);
 }
 
-int	post_pipe_check(t_token_list *tokens)
+int	pipe_start_end(t_token_list *tokens)
 {
+	if (tokens->type == OP_PIPE)
+		return (0);
 	while (tokens)
-	{
-		if (tokens->type == OP_PIPE)
-		{
-			if (tokens->next == NULL)
-			{
-				ft_error(WARNING, ERR_PIPES, 1);
-				return (0);
-			}
-		}
 		tokens = tokens->next;
-	}
+	if (tokens->type == OP_PIPE)
+		return (0);
 	return (1);
 }
 
-char	*get_near_error(t_token_list *near)
+void	print_near_error(t_token_list *near)
 {
 	char	*token_val;
 	char	*start;
@@ -86,7 +129,8 @@ char	*get_near_error(t_token_list *near)
 	start = ft_safe_strjoin(ERR_NEAR_TOKEN, token_val);
 	final = ft_safe_strjoin(start, "\'");
 	ft_free((void **)&start);
-	return (final);
+	print_error(ERR_MS, NULL, final, 0);
+	ft_free((void **)&final);
 }
 
 int	check_op_syntax(t_token_list *token)
@@ -108,17 +152,19 @@ int	check_op_syntax(t_token_list *token)
 int	near_token_errors(t_token_list *tokens)
 {
 	t_token_list	*near;
-	char			*err_msg;
 
+	if (tokens->type == OP_PIPE)
+	{
+		print_near_error(tokens);
+		return (0);
+	}
 	while (tokens)
 	{
 		near = tokens->next;
 		if (tokens->type != WORD)
 			if (!check_op_syntax(tokens))
 			{
-				err_msg = get_near_error(near);
-				ft_error(WARNING, err_msg, 1);
-				ft_free((void **)&err_msg);
+				print_near_error(near);
 				return (0);
 			}
 		tokens = tokens->next;

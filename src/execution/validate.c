@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/01 02:44:38 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/02 19:41:16 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	validate_redir(t_redir *file)
 		if (file->fd != -1)
 		{
 			printf("validate_redir: Closed file '%s' with file descriptor %d\n", file->file, file->fd);
-			close (file->fd);
+			safe_close(file->fd);
 		}
 		file->fd = open(file->file, oflags, PERMISSION);
 		if (file->fd == -1)
 		{
-			print_error("minishell", file->file, NULL, 1);
+			print_error(ERR_MS, file->file, NULL, 1);
 			return (0);
 		}
 		printf("validate_redir: Opened file '%s' with file descriptor %d\n", file->file, file->fd);

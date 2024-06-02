@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
+/*   Updated: 2024/06/02 22:50:29 by aklein           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -49,10 +61,11 @@ void			clear_lal();
 void			free_one_lal(void *ptr);
 
 // error
+int				ms_exit(t_err type, int error_code);
 int				quote_match_check(char *input);
-int				post_pipe_check(t_token_list *tokens);
+int				pipe_start_end(t_token_list *tokens);
 int				near_token_errors(t_token_list *tokens);
-void			ft_error(t_err type, char *msg, int from_ms);
+void			ft_error(int exit_code);
 t_list			**allocs(void);
 void			print_error(char *from, char *bad_arg, char *custom, int is_errno);
 
@@ -65,6 +78,11 @@ char			*ft_safe_substr(const char *s, unsigned int start, size_t len);
 void			*ft_safe_lstnew(void *content);
 char			*ft_safe_itoa(int n);
 void			ft_free(void **ptr);
+
+void			safe_dup2(int fd, int fd2);
+void			safe_close(int fd);
+void			safe_pipe(int *pipedes);
+int				safe_fork(void);
 
 // vars list
 t_var_list 		*get_envp(char **envp);
@@ -107,7 +125,7 @@ char			*handle_node_quotes(char *val);
 // execution
 void			init_path_dirs(void);
 char			*find_executable(t_cmd *a_cmd);
-void				execute_commands(t_list *c);
+void			execute_commands(t_list *c);
 void			parent(t_list *cmds, int *pipe_in);
 void			child(t_list *cmds, int *pipe_in);
 int 			validate_redir(t_redir *file);

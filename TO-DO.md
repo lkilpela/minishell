@@ -7,7 +7,7 @@ When ```chmod 000 infile```<br>
 ```>infile cat | cat | <Makefile cat | grep CC``` <br>
 does the last part correctly ```<Makefile cat | grep CC```,<br>
 but hangs cause of inaccessible file ```>infile``` <br>
-can unhang if you open second terminal and do `pkill cat`
+can unhang if you open second terminal and do `pkill cat`<br>
 just single command `<infile cat` works and prints permission denied
 - [ ] make does not work, not sure why
 - [ ] temp

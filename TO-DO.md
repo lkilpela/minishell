@@ -10,9 +10,12 @@ but hangs cause of inaccessible file ```>infile``` <br>
 can unhang if you open second terminal and do `pkill cat`<br>
 just single command `<infile cat` works and prints permission denied
 - [ ] make does not work, not sure why
-- [ ] temp
+- [ ] builtins properly into exec
+- [ ] updated variables to be sent to the execve
 
 
 ## builtins
 - [ ] exit isnt exiting.
 - [ ] exit, cd, export, unset need to be not forked, to handle everythign properly
+- [ ] export without args needs to print sorted list of vars
+- [ ] 

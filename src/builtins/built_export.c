@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/30 17:48:50 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/02 23:27:32 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_key(char *arg)
 
 int	check_args(int	args)
 {
-	if (args == 0)
+	if (args == 1)
 	{
 		built_env(1);
 		return (0);
@@ -43,7 +43,7 @@ void	built_export(t_cmd *cmd)
 {
 	int		i;
 
-	i = 0;
+	i = 1;
 	ms()->exit = 0;
 	if (check_args(cmd->num_of_args))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/30 17:48:35 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/02 23:31:31 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,20 @@ void	built_exit(t_cmd *cmd)
 	uint8_t	exit_code;
 
 	ft_putendl_fd("exit", 1);
-	if (!cmd || cmd->num_of_args == 0)
-	{
-		clear_lal();
-		exit(ms()->exit);
-	}
-	if (cmd->num_of_args > 1)
+	if (cmd->num_of_args == 1)
+		ms_exit(FATAL, ms()->exit);
+	if (cmd->num_of_args > 2)
 	{
 		print_error("minishell: exit", NULL, "too many arguments", 0);
 		ms()->exit = 1;
 		return ;
 	}
-	if (!non_numeric_exit(cmd->args[0]))
+	if (!non_numeric_exit(cmd->args[1]))
 	{
-		print_error("minishell: exit", cmd->args[0], "numeric argument required", 0);
+		print_error("minishell: exit", cmd->args[1], "numeric argument required", 0);
 		exit_code = 2;
 	}
 	else
-		exit_code = (uint8_t)ft_atoi(cmd->args[0]);
-	clear_lal();
-	exit(exit_code);
+		exit_code = (uint8_t)ft_atoi(cmd->args[1]);
+	ms_exit(FATAL, exit_code);
 }

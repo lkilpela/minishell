@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/02 19:54:19 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/02 23:33:44 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	built_cd(t_cmd *cmd)
 	}
 	if (cmd->num_of_args == 2)
 	{
-		if (chdir(cmd->args[0]) != 0)
+		if (chdir(cmd->args[1]) != 0)
 		{
-			print_error("minishell: cd", cmd->args[0], NULL, 1);
+			print_error("minishell: cd", cmd->args[1], NULL, 1);
 			ms()->exit = EXIT_FAILURE;
 			return ;
 		}
 	}
-		ms()->exit = EXIT_SUCCESS;
+	ms()->exit = EXIT_SUCCESS;
 }

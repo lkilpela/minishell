@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_echo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:06:24 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/30 17:48:16 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/02 23:06:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	built_echo(t_cmd *cmd)
 	int	i;
 	int	n_flag;
 	
-	i = 0;
+	i = 1;
 	n_flag = 0;
 	while (i < cmd->num_of_args && check_flag(cmd->args[i]))
 	{

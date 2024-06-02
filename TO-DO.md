@@ -18,4 +18,4 @@ just single command `<infile cat` works and prints permission denied
 - [ ] exit isnt exiting.
 - [ ] exit, cd, export, unset need to be not forked, to handle everythign properly
 - [ ] export without args needs to print sorted list of vars
-- [ ] 
+- [ ] .

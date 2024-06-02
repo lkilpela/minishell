@@ -37,7 +37,7 @@ void	clear_cmds(void)
 		i = 0;
 		while (cmd->args[i])
 			ft_free((void **)&cmd->args[i++]);
-		ft_free((void **)*cmd->args);
+		ft_free((void **)&cmd->args);
 		cmds = cmds->next;
 	}
 	ms()->commands = NULL;

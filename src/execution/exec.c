@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/02 22:48:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/02 22:52:53 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,14 +131,14 @@ void	execute_commands(t_list *cmds)
 	while (cmds)
 	{
 		cmd = (t_cmd *)cmds->content;
-		if (cmds->next != NULL)
-			safe_pipe(ms()->pipefd);
 		if (!validate_redir(&cmd->in_file) || !validate_redir(&cmd->out_file))
 		{
 			cmds=cmds->next;
 			ms()->cmds_num--;
 			continue;
 		}
+		if (cmds->next != NULL)
+			safe_pipe(ms()->pipefd);
 		ms()->pids[i] = safe_fork();
 		if (ms()->pids[i] == 0)
 			child(cmds, &pipe_in);

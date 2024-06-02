@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/02 21:13:20 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/02 22:57:38 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,9 @@ void	minishell_loop(void)
 	char			*input;
 	int				all_good;
 
-	all_good = 1;
 	while (42)
 	{
+		all_good = 1;
 		input = readline(PROMPT);
 		if (input == NULL) // ctrl + D
 			built_exit(NULL);

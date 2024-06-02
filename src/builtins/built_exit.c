@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/02 23:31:31 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/03 00:33:24 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	built_exit(t_cmd *cmd)
 	uint8_t	exit_code;
 
 	ft_putendl_fd("exit", 1);
-	if (cmd->num_of_args == 1)
+	if (!cmd || cmd->num_of_args == 1)
 		ms_exit(FATAL, ms()->exit);
 	if (cmd->num_of_args > 2)
 	{

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/02 23:47:45 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/03 00:50:31 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ void	dupes(t_cmd *cmd)
 
 void	exec_command(t_cmd *cmd)
 {
-	if (builtin_cmd(cmd))
-		return ;
+	// if (builtin_cmd(cmd))
+	// 	return ;
 	cmd->exec_path = find_executable(cmd);
 	if (cmd->exec_path == NULL)
 	{
 		print_error(cmd->command, NULL, ERR_CMD, 0);
-		exit(EXIT_FAILURE);
+		ms_exit(FATAL, E_CODE_CMD);
 	}
 	if (execve(cmd->exec_path, cmd->args, ms()->envp) != 0)
 	{
 		print_error(cmd->command, NULL, NULL, 1);
-		exit(EXIT_FAILURE); //ft_exit or smth
+		ms_exit(FATAL, E_CODE_CMD);
 	}
 }
 

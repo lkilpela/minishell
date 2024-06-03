@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 15:22:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:44:45 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,10 @@ static int	is_directory(t_cmd *cmd)
 	return (0);
 }
 
-int	validate_command(t_cmd *cmd)
+void	validate_command(t_cmd *cmd)
 {
 	cmd->exec_path = find_executable(cmd);
-	if (validate_redir(&cmd->in_file) == -1 
-		|| validate_redir(&cmd->out_file) == -1)
+	if (!validate_redir(&cmd->in_file) || !validate_redir(&cmd->out_file))
 		ms_exit(FATAL, 2);
 	else if (is_directory(cmd))
 	{
@@ -86,5 +85,4 @@ int	validate_command(t_cmd *cmd)
 		print_error(ERR_MS, cmd->command, ERR_CMD, 0);
 		ms_exit(FATAL, E_CODE_CMD);
 	}
-	return (0);
 }

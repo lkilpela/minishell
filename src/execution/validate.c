@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 15:19:52 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:21:55 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	validate_redir(t_redir *file)
 	}
 	else
 		file->fd = -1;
-	return (-1);
+	return (1);
 }
 
 static int	is_directory(t_cmd *cmd)

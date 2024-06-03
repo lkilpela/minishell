@@ -227,3 +227,21 @@ Expected output:
 Hello,
 World!
 ```
+
+## VALIDATION
+
+### Command not found:
+
+< in xxx | wc > out 
+```
+minishell: xxx: command not found
+```
+< in wc | xxx > out
+```
+minishell: xxx: command not found
+```
+< in xxx | /xxx/xxx > out
+```
+bash: xxx: command not found
+bash: /xxx/xxx: No such file or directory
+```

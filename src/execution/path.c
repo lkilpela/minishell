@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 10:26:41 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:12:52 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*find_executable(t_cmd *cmd)
 	while (ms()->paths[i])
 	{
 		tmp = ft_safe_strjoin(ms()->paths[i], command);
-		if (!tmp || validate_command(tmp) == 0)
+		if (!tmp || access(tmp, F_OK | X_OK) == 0)
 		{
 			cmd->exec_path = tmp;
 			return (cmd->exec_path);

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 13:29:07 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:19:52 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,45 @@ int	validate_redir(t_redir *file)
 	}
 	else
 		file->fd = -1;
-	return (1);
+	return (-1);
+}
+
+static int	is_directory(t_cmd *cmd)
+{
+	int	fd;
+
+	fd = open(cmd->command, O_DIRECTORY);
+	if (fd != -1)
+	{
+		safe_close(fd);
+		return (1);
+	}
+	return (0);
+}
+
+int	validate_command(t_cmd *cmd)
+{
+	cmd->exec_path = find_executable(cmd);
+	if (validate_redir(&cmd->in_file) == -1 
+		|| validate_redir(&cmd->out_file) == -1)
+		ms_exit(FATAL, 2);
+	else if (is_directory(cmd))
+	{
+		print_error(ERR_MS, cmd->command, ERR_DIR, 0);
+		ms_exit(FATAL, 21);
+	}		
+	else if (cmd->exec_path != NULL)
+	{
+		if (access(cmd->exec_path, X_OK) != 0)
+		{
+			print_error(ERR_MS, cmd->command, ERR_PERM, 0);
+			ms_exit(FATAL, E_CODE_EXEC);
+		}
+	}
+	else
+	{
+		print_error(ERR_MS, cmd->command, ERR_CMD, 0);
+		ms_exit(FATAL, E_CODE_CMD);
+	}
+	return (0);
 }

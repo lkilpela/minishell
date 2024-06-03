@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 19:59:25 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/03 20:04:37 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int	validate_redir(t_redir *file)
 		oflags = O_APPENDFILE;
 	if (file->file)
 	{
-		if (file->fd != -1)
-			safe_close(file->fd);
+		safe_close(file->fd);
 		file->fd = open(file->file, oflags, PERMISSION);
 		if (file->fd == -1)
 		{

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:18 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/02 22:50:19 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/03 20:14:47 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@
 # define ERR_DIR "is a directory"
 # define ERR_PERM "permission denied"
 
-# define E_CODE_EXEC 126
-# define E_CODE_CMD 127
+# define E_CODE_CMD_NEXEC 126
+# define E_CODE_CMD_NFOUND 127
 # define E_CODE_SIG 128
 # define E_CODE_SYN 2
+# define E_CODE_FILE 1
 # define E_CODE_ERRNO 160
 #endif

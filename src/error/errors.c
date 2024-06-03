@@ -153,6 +153,8 @@ int	near_token_errors(t_token_list *tokens)
 {
 	t_token_list	*near;
 
+	if (!tokens)
+		return (0);
 	if (tokens->type == OP_PIPE)
 	{
 		print_near_error(tokens);

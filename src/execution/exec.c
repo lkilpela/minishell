@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 20:00:52 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/03 20:12:16 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,15 @@ void	exec_command(t_cmd *cmd)
 {
 	if (builtin_cmd(cmd))
 		return ;
-	//cmd->exec_path = find_executable(cmd);
 	if (cmd->exec_path == NULL)
 	{
 		print_error(cmd->command, NULL, ERR_CMD, 0);
-		ms_exit(FATAL, E_CODE_CMD);
+		ms_exit(FATAL, E_CODE_CMD_NFOUND);
 	}
 	if (execve(cmd->exec_path, cmd->args, ms()->envp) != 0)
 	{
 		print_error(cmd->command, NULL, NULL, 1);
-		ms_exit(FATAL, E_CODE_CMD);
+		ms_exit(FATAL, E_CODE_ERRNO + errno);
 	}
 }
 

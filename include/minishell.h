@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/03 13:52:37 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:12:53 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void			child(t_list *cmds, int *pipe_in);
 int 			validate_redir(t_redir *file);
 int				builtin_cmd(t_cmd *cmd);
 int				validate_command(t_cmd *cmd);
-char			*find_command(t_cmd *cmd);
+char			*find_executable(t_cmd *cmd);
 
 //builtins
 void			built_echo(t_cmd *cmds);

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 14:05:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:12:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_path_dirs(void)
 		ms()->paths = get_path_dirs();
 }
 
-char	*find_command(t_cmd *cmd)
+char	*find_executable(t_cmd *cmd)
 {
 	char	*command;
 	char	*tmp;
@@ -62,7 +62,7 @@ char	*find_command(t_cmd *cmd)
 
 int	validate_command(t_cmd *cmd)
 {
-	if (find_command(cmd) == NULL)
+	if (find_executable(cmd) == NULL)
 	{
 		if (access(cmd->exec_path, F_OK) != 0)
 		{

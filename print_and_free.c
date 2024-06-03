@@ -173,7 +173,7 @@ void print_executable(t_list *cmds)
 	while (cmds)
 	{
 		ft_printf("\e[0;32mexecutable_cmd %d:\e[0m\n", i++ + 1);
-		ft_printf("%s\n", find_command((t_cmd *)cmds->content));
+		ft_printf("%s\n", find_executable((t_cmd *)cmds->content));
 		cmds = cmds->next;
 	}
 }

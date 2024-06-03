@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 14:12:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:23:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,19 @@ char	*find_executable(t_cmd *cmd)
 
 int	validate_command(t_cmd *cmd)
 {
-	if (find_executable(cmd) == NULL)
+	cmd->exec_path = find_executable(cmd);
+	if (cmd->exec_path != NULL)
 	{
-		if (access(cmd->exec_path, F_OK) != 0)
-		{
-			print_error(ERR_MS, cmd->command, ERR_CMD, 0);
-			ms_exit(FATAL, E_CODE_CMD);
-		}
-		else if (access(cmd->exec_path, X_OK) != 0)
+		if (access(cmd->exec_path, X_OK) != 0)
 		{
 			print_error(ERR_MS, cmd->command, ERR_PERM, 0);
 			ms_exit(FATAL, E_CODE_EXEC);
 		}
+	}
+	else
+	{
+		print_error(ERR_MS, cmd->command, ERR_CMD, 0);
+		ms_exit(FATAL, E_CODE_CMD);
 	}
 	return (0);
 }

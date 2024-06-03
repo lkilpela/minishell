@@ -171,3 +171,59 @@ cat <<EOF | wc -l > output.txt
 Hello, World!
 EOF
 Expected output: No output on the terminal, but the file output.txt should contain 1.
+
+## APPEND
+
+1. Basic:
+```
+echo "hello" > output
+echo "world" >> output
+cat output.txt
+```
+Expected output:
+```
+hello
+world
+```
+
+2. Multiple lines:
+```
+echo "hello" > output
+echo "world" >> output
+echo "!" >> output
+cat output
+```
+Expected output:
+```
+hello
+world
+!
+```
+
+3. Append with pipe:
+```
+echo "hello" | cat > output
+echo "world" | cat >> output
+cat output
+```
+Expected output:
+```
+hello
+world
+```
+
+4. Append with heredoc:
+```
+cat <<EOF > output
+Hello,
+EOF
+cat <<EOF >> output
+World!
+EOF
+cat output
+```
+Expected output:
+```
+Hello,
+World!
+```

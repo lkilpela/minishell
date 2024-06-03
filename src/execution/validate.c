@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 12:12:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:29:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,4 @@ int	validate_redir(t_redir *file)
 	else
 		file->fd = -1;
 	return (1);
-}
-
-int	validate_command(t_cmd *cmd)
-{
-	if (!cmd)
-		return (NULL);
-	char *path = find_executable(cmd);
-	if (path && access(path, X_OK) != 0)
-	{
-		if (access(path, F_OK) != 0)
-			print_error("minishell", NULL, NULL, 0);
-		else
-			print_error("minishell", NULL, NULL, 0);
-		return (ms()->exit = -1);
-	}
-	return (0);
 }

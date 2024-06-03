@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/03 09:52:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:52:37 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,13 +124,13 @@ char			*handle_node_quotes(char *val);
 
 // execution
 void			init_path_dirs(void);
-char			*find_executable(t_cmd *a_cmd);
 void			execute_commands(t_list *c);
 void			parent(t_list *cmds, int *pipe_in);
 void			child(t_list *cmds, int *pipe_in);
 int 			validate_redir(t_redir *file);
 int				builtin_cmd(t_cmd *cmd);
-int				validate_command(const char *path);
+int				validate_command(t_cmd *cmd);
+char			*find_command(t_cmd *cmd);
 
 //builtins
 void			built_echo(t_cmd *cmds);

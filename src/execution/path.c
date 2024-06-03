@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 12:12:52 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 13:52:29 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	init_path_dirs(void)
 		ms()->paths = get_path_dirs();
 }
 
-char	*find_executable(t_cmd *cmd)
+char	*find_command(t_cmd *cmd)
 {
 	char	*command;
 	char	*tmp;
 	int		i;
 
-	command = NULL;
+	//command = NULL;
 	tmp = NULL;
 	i = 0;
 	if (!ft_strchr(cmd->command, '/'))
@@ -48,7 +48,7 @@ char	*find_executable(t_cmd *cmd)
 	while (ms()->paths[i])
 	{
 		tmp = ft_safe_strjoin(ms()->paths[i], command);
-		if (!tmp || access(tmp, F_OK | X_OK) == 0)
+		if (access(tmp, F_OK) == 0)
 		{
 			cmd->exec_path = tmp;
 			return (cmd->exec_path);
@@ -58,4 +58,19 @@ char	*find_executable(t_cmd *cmd)
 	}
 	ft_free((void **)&command);
 	return (NULL);
+}
+
+int	validate_command(t_cmd *cmd)
+{
+	if (find_command(cmd) == NULL)
+	{
+		printf("validate_command: %s\n", cmd->command);
+		if (access(cmd->exec_path, F_OK) != 0)
+			print_error("minishell", cmd->command, ERR_CMD, 0);
+		else
+			print_error("minishell", cmd->command, ERR_PERM, 0);
+		ms()->exit = -1;
+		exit(-1);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 19:46:17 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/03 20:00:52 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	child(t_list *cmds, int *pipe_in)
 		safe_pipe(heredoc_pipefd);
 		write(heredoc_pipefd[P_WRITE], cmd->heredoc, ft_strlen(cmd->heredoc));
 		safe_close(heredoc_pipefd[P_WRITE]);
+		safe_close(*pipe_in);		
 		*pipe_in = heredoc_pipefd[P_READ];
 	}
 	if (*pipe_in != -1) //not first or coming from heredoc

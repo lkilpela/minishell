@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 13:52:29 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:05:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*find_command(t_cmd *cmd)
 	char	*tmp;
 	int		i;
 
-	//command = NULL;
+	command = NULL;
 	tmp = NULL;
 	i = 0;
 	if (!ft_strchr(cmd->command, '/'))
@@ -64,13 +64,16 @@ int	validate_command(t_cmd *cmd)
 {
 	if (find_command(cmd) == NULL)
 	{
-		printf("validate_command: %s\n", cmd->command);
 		if (access(cmd->exec_path, F_OK) != 0)
-			print_error("minishell", cmd->command, ERR_CMD, 0);
-		else
-			print_error("minishell", cmd->command, ERR_PERM, 0);
-		ms()->exit = -1;
-		exit(-1);
+		{
+			print_error(ERR_MS, cmd->command, ERR_CMD, 0);
+			ms_exit(FATAL, E_CODE_CMD);
+		}
+		else if (access(cmd->exec_path, X_OK) != 0)
+		{
+			print_error(ERR_MS, cmd->command, ERR_PERM, 0);
+			ms_exit(FATAL, E_CODE_EXEC);
+		}
 	}
 	return (0);
 }

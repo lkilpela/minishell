@@ -3,7 +3,7 @@
 ## validate
 - [x] validate command is a directory, error msg: bash is showing cmd not executable for this, which makes sense, so error code `E_CODE_CND_NEXEC = 126`~~`Is directory - errcode: 21` (I chose it randomly because bash does not have specific code for this case)~~
 - [x] validate command is not existed, error msg: `command not found - errcode: E_CODE_CMD_NFOUND = 127`
-- [x] validate command is not executable, error msg: `permission denied - errcode: E_CODE_CND_NEXEC = 126`
+- [x] validate command is not executable, error msg: `permission denied - errcode: E_CODE_CMD_NEXEC = 126`
 - [x] validate infile/outfile is not existed, error msg: (my bash is showing 1?)`No such file or directory - errcode: E_CODE_FILE = 1`~~`No such file or directory - errcode: 2` as bash~~
 
 ## exec

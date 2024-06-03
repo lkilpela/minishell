@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/30 17:59:11 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/03 10:26:41 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_path_dirs(void)
 		ms()->paths = get_path_dirs();
 }
 
-char	*find_executable(t_cmd *a_cmd)
+char	*find_executable(t_cmd *cmd)
 {
 	char	*command;
 	char	*tmp;
@@ -41,17 +41,17 @@ char	*find_executable(t_cmd *a_cmd)
 	command = NULL;
 	tmp = NULL;
 	i = 0;
-	if (!ft_strchr(a_cmd->command, '/'))
-		command = ft_safe_strjoin("/", a_cmd->command);
+	if (!ft_strchr(cmd->command, '/'))
+		command = ft_safe_strjoin("/", cmd->command);
 	else
-		return (ft_safe_strdup(a_cmd->command));
+		return (ft_safe_strdup(cmd->command));
 	while (ms()->paths[i])
 	{
 		tmp = ft_safe_strjoin(ms()->paths[i], command);
-		if (tmp && access(tmp, F_OK | X_OK) != -1)
+		if (!tmp || validate_command(tmp) == 0)
 		{
-			a_cmd->exec_path = tmp;
-			return (a_cmd->exec_path);
+			cmd->exec_path = tmp;
+			return (cmd->exec_path);
 		}
 		ft_free((void **)&tmp);
 		i++;

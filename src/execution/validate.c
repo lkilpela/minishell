@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/02 19:41:16 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/03 10:06:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,19 @@ int	validate_redir(t_redir *file)
 	else
 		file->fd = -1;
 	return (1);
+}
+
+
+int	validate_command(const char *path)
+{
+	if (path && access(path, X_OK) != 0)
+	{
+		if (access(path, F_OK) != 0)
+			print_error("minishell", NULL, NULL, 0);
+		else
+			print_error("minishell", NULL, NULL, 0);
+		//ms()->exit = -1;
+		return (ms()->exit = -1);
+	}
+	return (0);
 }

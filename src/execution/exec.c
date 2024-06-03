@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 14:46:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:46:17 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	child(t_list *cmds, int *pipe_in)
 	int		heredoc_pipefd[2];
 	
 	cmd = (t_cmd *)cmds->content;
+	validate_command(cmd);
 	if (cmd->heredoc)
 	{
 		safe_pipe(heredoc_pipefd);
 		write(heredoc_pipefd[P_WRITE], cmd->heredoc, ft_strlen(cmd->heredoc));
-		safe_dup2(heredoc_pipefd[P_READ], STDIN_FILENO);
 		safe_close(heredoc_pipefd[P_WRITE]);
 		*pipe_in = heredoc_pipefd[P_READ];
 	}
@@ -87,17 +87,15 @@ void	parent(t_list *cmds, int *pipe_in)
 	t_cmd	*cmd;
 	
 	cmd = (t_cmd *)cmds->content;
-	if (*pipe_in != -1)
-		safe_close(*pipe_in);
+	safe_close(*pipe_in);
 	if (cmds->next != NULL)
 	{
 		safe_close(ms()->pipefd[P_WRITE]);
-		*pipe_in = ms()->pipefd[P_READ];
+		*pipe_in = dup(ms()->pipefd[P_READ]);
+		safe_close(ms()->pipefd[P_READ]);
 	}
-	if (cmd->in_file.fd != -1)
-		safe_close(cmd->in_file.fd);
-	if (cmd->out_file.fd != -1)
-		safe_close(cmd->out_file.fd);
+	safe_close(cmd->in_file.fd);
+	safe_close(cmd->out_file.fd);
 }
 
 int	get_status(int status)
@@ -123,7 +121,6 @@ void	wait_for_children(void)
 
 void	execute_commands(t_list *cmds)
 {
-	t_cmd	*cmd;
 	int		pipe_in;
 	int		i;
 
@@ -132,13 +129,6 @@ void	execute_commands(t_list *cmds)
 	ms()->pids = ft_safe_calloc(ms()->cmds_num, sizeof(pid_t));
 	while (cmds)
 	{
-		cmd = (t_cmd *)cmds->content;
-		if (!validate_redir(&cmd->in_file) || !validate_redir(&cmd->out_file))
-		{
-			cmds=cmds->next;
-			ms()->cmds_num--;
-			continue;
-		}
 		if (cmds->next != NULL)
 			safe_pipe(ms()->pipefd);
 		ms()->pids[i] = safe_fork();

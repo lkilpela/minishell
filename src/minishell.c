@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/03 14:52:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 19:31:57 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,13 +145,8 @@ void	minishell_loop(void)
 			ms()->commands = parser(ms()->tokens);
 			init_path_dirs();
 			print_cmds(ms()->commands);
-			print_executable(ms()->commands);
+			// print_executable(ms()->commands);
 			// builtin_cmd(ms()->commands); //temp
-			while (ms()->commands)
-			{
-				validate_command(ms()->commands->content);
-				ms()->commands = ms()->commands->next;
-			}	
 			execute_commands(ms()->commands);
 		}
 		ft_free((void **)&input);

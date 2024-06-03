@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 14:29:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:46:50 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,6 @@ void	execute_commands(t_list *cmds)
 	while (cmds)
 	{
 		cmd = (t_cmd *)cmds->content;
-		validate_command(cmd);
 		if (!validate_redir(&cmd->in_file) || !validate_redir(&cmd->out_file))
 		{
 			cmds=cmds->next;

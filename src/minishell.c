@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/03 14:33:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:46:46 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void	minishell_loop(void)
 			print_cmds(ms()->commands);
 			print_executable(ms()->commands);
 			// builtin_cmd(ms()->commands); //temp
-			while(ms()->commands)
+			while (ms()->commands)
 			{
 				validate_command(ms()->commands->content);
 				ms()->commands = ms()->commands->next;

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 05:02:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 05:09:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	exec_command(t_cmd *cmd)
 
 //line 71: not first or coming from heredoc
 //line 76: not last
-static void	child(t_list *cmds, int *pipe_in)
+void	child(t_list *cmds, int *pipe_in)
 {
 	t_cmd	*cmd;
 	int		heredoc_pipefd[2];

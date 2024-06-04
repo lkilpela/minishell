@@ -3,110 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/03 20:18:21 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/04 05:15:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	builtin_cmd(t_cmd *cmd)
-{
-	if (cmd->command)
-	{
-		if (ft_strcmp(cmd->command, "exit") == 0)
-		{
-			built_exit(cmd);
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "pwd") == 0)
-		{
-			built_pwd();
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "env") == 0)
-		{
-			built_env(0);
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "echo") == 0)
-		{
-			built_echo(cmd);
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "export") == 0)
-		{
-			built_export(cmd);
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "unset") == 0)
-		{
-			built_unset(cmd);
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "cd") == 0)
-		{
-			built_cd(cmd);
-			return (1);
-		}
-	}
-	return (0);
-}
-
-void	handle_quotes(char **val)
-{
-	char	quote;
-	
-	quote = **val;
-	ft_memmove(*val, *val + 1, ft_strlen(*val));
-	while (**val)
-	{
-		if (**val == quote)
-		{
-			ft_memmove(*val, *val + 1, ft_strlen(*val));
-			break ;
-		}
-		(*val)++;
-	}
-}
-
-char	*handle_node_quotes(char *val)
-{
-	char	*current;
-	char	*new_val;
-	size_t	len;
-	
-	len = ft_strlen(val);
-	current = val;
-	while (*current)
-	{
-		if (is_quote(*current))
-			handle_quotes(&current);
-		else
-			current++;
-	}
-	if (ft_strlen(val) != len)
-	{
-		new_val = ft_safe_strdup(val);
-		ft_free((void **)&val);
-		return (new_val);
-	}
-	return (val);
-}
-
-void	clear_token_quotes(t_token_list *t)
-{
-	char	*val;
-
-	while (t)
-	{
-		val = t->value;
-		t->value = handle_node_quotes(val);
-		t = t->next;
-	}
-}
 
 void	rl_history(char *input)
 {
@@ -119,7 +23,6 @@ void	rl_history(char *input)
 	write_history(NULL); //temp
 }
 
-// line 51:  only allowing var assignment as first WORD aka command
 void	minishell_loop(void)
 {
 	char			*input;
@@ -151,13 +54,6 @@ void	minishell_loop(void)
 		}
 		ft_free((void **)&input);
 	}
-}
-
-t_ms	*ms(void)
-{
-	static t_ms	ms;
-
-	return (&ms);
 }
 
 int	main(int argc, char **argv, char **envp)

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 04:15:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 05:10:33 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ void init_minishell(int argc, char **argv, char **envp)
 	ms()->executable = ft_strrchr(argv[0], '/') + 1;
 	get_envp(envp);
 	
+}
+
+t_ms	*ms(void)
+{
+	static t_ms	ms;
+
+	return (&ms);
 }
 
 void	init_redir(t_cmd *cmd)

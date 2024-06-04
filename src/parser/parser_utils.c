@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_utils.c                                      :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:06:04 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 04:13:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 05:18:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,57 @@ int	is_ambiguous(char *val, t_token_list *tokens)
 		return (1);
 	}
 	return (0);
+}
+
+static void	handle_quotes(char **val)
+{
+	char	quote;
+	
+	quote = **val;
+	ft_memmove(*val, *val + 1, ft_strlen(*val));
+	while (**val)
+	{
+		if (**val == quote)
+		{
+			ft_memmove(*val, *val + 1, ft_strlen(*val));
+			break ;
+		}
+		(*val)++;
+	}
+}
+
+char	*handle_node_quotes(char *val)
+{
+	char	*current;
+	char	*new_val;
+	size_t	len;
+	
+	len = ft_strlen(val);
+	current = val;
+	while (*current)
+	{
+		if (is_quote(*current))
+			handle_quotes(&current);
+		else
+			current++;
+	}
+	if (ft_strlen(val) != len)
+	{
+		new_val = ft_safe_strdup(val);
+		ft_free((void **)&val);
+		return (new_val);
+	}
+	return (val);
+}
+
+static void	clear_token_quotes(t_token_list *t)
+{
+	char	*val;
+
+	while (t)
+	{
+		val = t->value;
+		t->value = handle_node_quotes(val);
+		t = t->next;
+	}
 }

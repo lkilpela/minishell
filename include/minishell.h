@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 05:06:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 05:17:45 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void			extract_token(char *str, char **value, t_token_type *type);
 t_token_list	*new_tokenizer(char *str);
 void			exp_and_insert(t_token_list **lst);
 void			list_to_list(t_token_list **lst, t_token_list *add, t_token_list **index);
-
 t_quote_type	update_quote_type(t_quote_type quote_type, char c);
 
 // parser

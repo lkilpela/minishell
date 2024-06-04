@@ -60,3 +60,9 @@ Error: TOO_MANY_FUNCS       (line: 164, col:   1):      Too many functions in fi
 lalloc.c: Error!
 Error: TOO_MANY_FUNCS       (line:  65, col:   1):      Too many functions in file
 Error: TOO_MANY_FUNCS       (line:  77, col:   1):      Too many functions in file
+
+5. Builtins
+waiting for cleaning up
+
+6. env_var
+waiting for cleaning up

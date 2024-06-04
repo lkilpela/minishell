@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 04:16:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 04:24:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void			init_redir(t_cmd *cmd);
 
 // signals
 void			init_signals();
-void			sigint_handler(int sig);
+//void			sigint_handler(int sig);
 
 // lalloc
 int				same_ptr(void *ptr, void *ptr2);

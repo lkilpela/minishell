@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 04:22:30 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/06/04 04:24:50 by lkilpela         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
-void	sigint_handler(int sig)
+static void	sigint_handler(int sig)
 {
-    if (sig == SIGINT)
+	if (sig == SIGINT)
 	{
 		ft_putchar_fd('\n', 1);
 		rl_on_new_line();
@@ -11,7 +23,7 @@ void	sigint_handler(int sig)
 	}
 }
 
-void	init_signals()
+void	init_signals(void)
 {
 	signal(SIGINT, sigint_handler);
 	signal(SIGQUIT, SIG_IGN);

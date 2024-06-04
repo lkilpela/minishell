@@ -242,6 +242,52 @@ minishell: xxx: command not found
 ```
 < in xxx | /xxx/xxx > out
 ```
-bash: xxx: command not found
-bash: /xxx/xxx: No such file or directory
+minishell: xxx: command not found
+minishell: /xxx/xxx: No such file or directory
 ```
+
+### No such file or directory
+
+1. **Infile does not exist**
+
+< noinfile ls | wc > outfile
+
+`minishell: noinfile: No such file or directory`
+
+2. **Infile does not exist, invalid cmd1**
+
+< noinfile "xxx" | "wc" > outfile
+
+`minishell: noinfile: No such file or directory`
+
+3. **Invalid cmd1 or cmd2 path**
+
+< in /xxx/xxx | wc > outfile
+
+`minishell: /xxx/xxx: no such file or directory`
+
+### Is a directory
+1. **infile exists, cmd1 is a folder, valid cmd2**
+
+< in ./libft/ | ls > outfile
+
+`minishell: ./libft/: is a directory`
+
+2. Valid cmd1, cmd2 is folder 
+
+< in ls | ./libft/ > outfile
+
+`minishell: ./libft/: is a directory`
+
+### Permission denied
+
+1. chmod -r in
+< in grep Now | wc > outfile
+
+`minishell: in: Permission denied`
+
+2. chmod -w outfile
+
+< in grep Now | wc > outfile
+
+`minishell: outfile: Permission denied

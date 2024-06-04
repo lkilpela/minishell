@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 11:20:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:31:10 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ static int	is_directory(t_cmd *cmd)
 {
 	int	fd;
 
-	fd = open(cmd->command, O_DIRECTORY);
+	fd = open(cmd->exec_path, O_DIRECTORY);
 	if (fd != -1)
 	{
 		safe_close(fd);
 		return (1);
 	}
+	printf("dir: %s fd: %d\n", cmd->exec_path, fd);
 	return (0);
 }
 
@@ -87,9 +88,9 @@ void	validate_command(t_cmd *cmd)
 	cmd->exec_path = find_executable(cmd);
 	if (!validate_redir(&cmd->in_file) || !validate_redir(&cmd->out_file))
 		ms_exit(FATAL, E_CODE_FILE);
-	if (is_directory(cmd))
+	if (!is_directory(cmd))
 	{
-		print_args(cmd);
+		print_error(ERR_MS, cmd->exec_path, ERR_FILE, 0);
 		ms_exit(FATAL, E_CODE_CMD_NEXEC);
 	}
 	if (cmd->exec_path != NULL)

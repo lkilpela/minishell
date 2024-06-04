@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 15:02:36 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/04 15:11:29 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	expand_current_el(t_token_list **tokens, t_token_list **index)
 	if (ft_strchr(str, DOLLAR_SIGN))
 	{
 		new = exp_word(str);
+		new = handle_node_quotes(new);
 		new_tokens = new_tokenizer(new);
 		clear_token_quotes(new_tokens);
 		list_to_list(tokens, new_tokens, index);
@@ -83,6 +84,7 @@ t_cmd	*simple_cmd(t_token_list **tokens)
 	i = 0;
 	cmd = ft_safe_calloc(1, sizeof(t_cmd));
 	init_redir(cmd);
+	print_a_token(*tokens);
 	while ((*tokens) && (*tokens)->type != OP_PIPE)
 	{
 		if ((*tokens)->type >= OP_LESS && (*tokens)->type <= OP_DGREAT)

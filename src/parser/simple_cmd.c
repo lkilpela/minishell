@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 15:12:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:57:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	expand_current_el(t_token_list **tokens, t_token_list **index)
 	if (ft_strchr(str, DOLLAR_SIGN))
 	{
 		new = exp_word(str);
-		new = handle_node_quotes(new);
 		new_tokens = new_tokenizer(new);
 		clear_token_quotes(new_tokens);
 		list_to_list(tokens, new_tokens, index);

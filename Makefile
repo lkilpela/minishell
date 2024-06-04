@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
+#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/05/29 23:26:18 by aklein           ###   ########.fr        #
+#    Updated: 2024/06/04 04:48:50 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,7 @@ OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
 SRCS			=	minishell.c \
 					init.c \
-					extraction.c \
-					node_creation.c \
+					token_list.c \
 					tokenization.c \
 					token_utils.c \
 					token_utils2.c \
@@ -64,6 +63,7 @@ SRCS			=	minishell.c \
 					parsing.c \
 					redirection.c \
 					simple_cmd.c \
+					redir_utils.c \
 					print_and_free.c \
 					errors.c \
 					lalloc.c \

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 14:04:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:05:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,12 @@ void	validate_command(t_cmd *cmd)
 			if (errno == ENOENT)
 			{
 				print_error(ERR_MS, cmd->command, ERR_FILE, 0);
-				ms_exit(FATAL, E_CODE_CMD_NEXEC);
+				ms_exit(FATAL, ENOENT);
 			}
 			else if (errno == EACCES)
 			{
 				print_error(ERR_MS, cmd->command, ERR_PERM, 0);
-				ms_exit(FATAL, E_CODE_CMD_NEXEC);
+				ms_exit(FATAL, EACCES);
 			}
 		}
 	}

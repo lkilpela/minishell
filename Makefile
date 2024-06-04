@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/04 04:48:50 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/06/04 05:07:25 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRCS			=	minishell.c \
 					safe_alloc.c \
 					signals.c \
 					validate.c \
+					child.c \
 					exec.c \
 					path.c 
 

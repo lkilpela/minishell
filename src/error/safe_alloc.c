@@ -1,13 +1,16 @@
-#include <minishell.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   safe_alloc.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 05:32:49 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/06/04 05:33:28 by lkilpela         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void	ft_free(void **ptr)
-{
-	if (*ptr)
-	{
-		free_one_lal(*ptr);
-		*ptr = NULL;
-	}
-}
+#include <minishell.h>
 
 void	*ft_safe_calloc(size_t count, size_t size)
 {
@@ -73,48 +76,4 @@ char	*ft_safe_itoa(int n)
 		ft_error(E_CODE_ERRNO + errno);
 	add_to_lal((void *)str);
 	return (str);
-}
-
-void	*ft_safe_lstnew(void *content)
-{
-	t_list	*node;
-
-	node = ft_lstnew(content);
-	if (!node)
-		ft_error(E_CODE_ERRNO + errno);
-	add_to_lal((void *)node);
-	return (node);
-}
-
-void	safe_dup2(int fd, int fd2)
-{
-	if (dup2(fd, fd2) == -1)
-		ft_error(E_CODE_ERRNO + errno);
-}
-
-void	safe_close(int fd)
-{
-	if (fd == 0 || fd == 1 || fd == 2)
-		printf("closing %d, maybe not good?\n", fd);
-	if (fd != -1)
-	{
-		if (close(fd) == -1)
-			ft_error(E_CODE_ERRNO + errno);
-	}
-}
-
-void	safe_pipe(int *pipedes)
-{
-	if (pipe(pipedes) == -1)
-		ft_error(E_CODE_ERRNO + errno);
-}
-
-int	safe_fork(void)
-{
-	int	pid;
-
-	pid = fork();
-	if (pid == -1)
-		ft_error(E_CODE_ERRNO + errno);
-	return (pid);
 }

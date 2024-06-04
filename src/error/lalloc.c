@@ -61,3 +61,12 @@ void	add_to_lal(void *ptr)
 	lalloc = allocs();
 	ft_lstadd_front(lalloc, new_node);
 }
+
+void	ft_free(void **ptr)
+{
+	if (*ptr)
+	{
+		free_one_lal(*ptr);
+		*ptr = NULL;
+	}
+}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 05:25:06 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/06/04 05:28:20 by lkilpela         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 void	ft_error(int exit_code)
@@ -8,12 +20,12 @@ void	ft_error(int exit_code)
 
 void	clear_tokens(void)
 {
-	t_token_list *tokens;
+	t_token_list	*tokens;
 
 	tokens = ms()->tokens;
 	while (tokens)
 	{
-		ft_free((void**)&tokens->value);
+		ft_free((void **)&tokens->value);
 		ft_free((void **)&tokens);
 		tokens = tokens->next;
 	}
@@ -49,14 +61,12 @@ int	ms_exit(t_err type, int error_code)
 		ms()->exit = error_code;
 	if (type == RELINE)
 	{
-		//close FDs
 		clear_cmds();
 		clear_tokens();
 		return (0);
 	}
 	if (type == FATAL)
 	{
-		//close FDs
 		clear_lal();
 		exit(ms()->exit);
 	}
@@ -71,10 +81,12 @@ void	print_error(char *from, char *bad_arg, char *custom, int is_errno)
 		ft_putstr_fd(": ", 2);
 	}
 	if (is_errno)
+	{
 		if (bad_arg)
 			perror(bad_arg);
 		else
 			perror(NULL);
+	}
 	else
 	{
 		if (bad_arg)
@@ -164,11 +176,13 @@ int	near_token_errors(t_token_list *tokens)
 	{
 		near = tokens->next;
 		if (tokens->type != WORD)
+		{
 			if (!check_op_syntax(tokens))
 			{
 				print_near_error(near);
 				return (0);
 			}
+		}
 		tokens = tokens->next;
 	}
 	return (1);

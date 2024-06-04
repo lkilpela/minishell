@@ -43,3 +43,11 @@ Error: TOO_MANY_LINES       (line:  46, col:   1):      Function has more than 2
 parser_utils.c: Error!
 Error: TOO_MANY_FUNCS       (line:  96, col:   1):      Too many functions in file
 - UNUSED FUNC: void	clear_token_quotes(t_token_list *t)
+
+4. Error
+errors.c: Error!
+Error: TOO_MANY_FUNCS       (line: 101, col:   1):      Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 120, col:   1):      Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 131, col:   1):      Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 148, col:   1):      Too many functions in file
+Error: TOO_MANY_FUNCS       (line: 164, col:   1):      Too many functions in file

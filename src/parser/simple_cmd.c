@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 15:57:28 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 02:30:43 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ t_cmd	*simple_cmd(t_token_list **tokens)
 	i = 0;
 	cmd = ft_safe_calloc(1, sizeof(t_cmd));
 	init_redir(cmd);
-	print_a_token(*tokens);
 	while ((*tokens) && (*tokens)->type != OP_PIPE)
 	{
 		if ((*tokens)->type >= OP_LESS && (*tokens)->type <= OP_DGREAT)

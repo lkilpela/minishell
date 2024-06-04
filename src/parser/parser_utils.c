@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:06:04 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 05:18:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 05:20:46 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	is_ambiguous(char *val, t_token_list *tokens)
 static void	handle_quotes(char **val)
 {
 	char	quote;
-	
+
 	quote = **val;
 	ft_memmove(*val, *val + 1, ft_strlen(*val));
 	while (**val)
@@ -74,7 +74,7 @@ char	*handle_node_quotes(char *val)
 	char	*current;
 	char	*new_val;
 	size_t	len;
-	
+
 	len = ft_strlen(val);
 	current = val;
 	while (*current)

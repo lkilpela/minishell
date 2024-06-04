@@ -39,3 +39,7 @@ Error: TOO_MANY_LINES       (line:  84, col:   1):      Function has more than 2
 token_list.c: Error!
 Error: TOO_MANY_LINES       (line:  46, col:   1):      Function has more than 25 lines
 
+3. Parser
+parser_utils.c: Error!
+Error: TOO_MANY_FUNCS       (line:  96, col:   1):      Too many functions in file
+- UNUSED FUNC: void	clear_token_quotes(t_token_list *t)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
+#    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/04 05:45:07 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/06/05 02:24:14 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,8 @@ SRCS			=	minishell.c \
 					validate.c \
 					child.c \
 					exec.c \
-					path.c 
+					path.c \
+					merge_sort_vars.c
 
 ################################################################################
 # RULES

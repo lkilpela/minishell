@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 15:41:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 02:25:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-#define PERMISSION 0644
-#define O_INFILE O_RDONLY
-#define O_OUTFILE (O_CREAT | O_WRONLY | O_TRUNC)
-#define O_APPENDFILE (O_CREAT | O_WRONLY | O_APPEND)
 
 int	validate_redir(t_redir *file)
 {

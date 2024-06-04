@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 01:51:12 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 02:22:42 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@
 # include <structs.h>
 # include <errors.h>
 
-// # define GREEN "\001\e[0;32m\002"
-// # define RESET	"\001\e[0m\002"
-// # define BLUE "\001\e[0;34m\002"
-// # define CYAN "\001\e[0;36m\002"
+# define GREEN "\001\e[0;32m\002"
+# define RESET	"\001\e[0m\002"
+# define BLUE "\001\e[0;34m\002"
+# define CYAN "\001\e[0;36m\002"
 
-# define GREEN ""
-# define RESET ""
-# define BLUE ""
-# define CYAN ""
+#define PERMISSION 0644
+#define O_INFILE O_RDONLY
+#define O_OUTFILE (O_CREAT | O_WRONLY | O_TRUNC)
+#define O_APPENDFILE (O_CREAT | O_WRONLY | O_APPEND)
 
-# define PROMPT "minishell$ "
+# define PROMPT GREEN"minishell$ "RESET
 # define DOLLAR_SIGN '$'
 # define UNDERSCORE '_'
 # define EQUAL_SIGN '='

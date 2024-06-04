@@ -1,6 +1,14 @@
 # To-Do List
 
 ## validate
+- [ ] "$HOME here '$HOME' test": expanded single word with enclosed quotes. Print: minishell: /Users/lumik here '/Users/lumik' test: No such file or directory
+
+- [ ] "$HOME": expanded single word with enclosed quotes.
+Print: minishell: /Users/lumik: is a directory
+
+- [ ] "$HOME" here: two words, expanded var & arg here
+Print: minishell: /Users/lumik: is a directory
+
 - [x] validate command is a directory, error msg: bash is showing cmd not executable for this, which makes sense, so error code `E_CODE_CND_NEXEC = 126`
 - [x] validate command is not existed, error msg: `command not found - errcode: E_CODE_CMD_NFOUND = 127`
 - [x] validate command is not executable, error msg: `permission denied - errcode: E_CODE_CMD_NEXEC = 126`

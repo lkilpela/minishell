@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 03:41:14 by aklein            #+#    #+#             */
-/*   Updated: 2024/05/29 01:34:48 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/04 04:41:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
 // add a node to a list
-void	add_token_to_list(t_token_list **lst, t_token_list *node)
+static void	add_token_to_list(t_token_list **lst, t_token_list *node)
 {
 	t_token_list	*last;
 
@@ -29,7 +29,7 @@ void	add_token_to_list(t_token_list **lst, t_token_list *node)
 	}
 }
 
-t_token_list	*create_token(t_token_type type, char *value)
+static t_token_list	*create_token(t_token_type type, char *value)
 {
 	t_token_list	*node;
 
@@ -62,4 +62,21 @@ t_token_list	*new_tokenizer(char *str)
 		str += token_len(str);
 	}
 	return (lst);
+}
+
+void	exp_and_insert(t_token_list **lst)
+{
+	t_token_list	*current;
+	t_token_list	*new;
+
+	current = *lst;
+	while (current)
+	{
+		if (current->type == WORD && current->expand)
+		{
+			new = new_tokenizer(exp_word(current->value));
+			list_to_list(lst, new, &current);
+		}
+		current = current->next;
+	}
 }

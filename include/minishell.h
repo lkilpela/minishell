@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 04:24:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 04:40:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,19 +105,19 @@ int				env_exists(char *keyval);
 void			env_remove(char *keyval);
 void			env_add(char *keyval);
 
-// expand
-
+// expander
 char			*exp_next_var(char *var, char **start);
 char			*exp_word(char *str_start);
 char			*heredoc_exp(char *str_start);
-void			list_to_list(t_token_list **lst, t_token_list *add, t_token_list **index);
+
 
 // tokenizer
-t_token_list	*new_tokenizer(char *str);
-void			exp_and_insert(t_token_list **lst);
 int				token_len(char *str);
 void			extract_token(char *str, char **value, t_token_type *type);
-t_token_list	*create_token(t_token_type type, char *value);
+t_token_list	*new_tokenizer(char *str);
+void			exp_and_insert(t_token_list **lst);
+void			list_to_list(t_token_list **lst, t_token_list *add, t_token_list **index);
+
 t_quote_type	update_quote_type(t_quote_type quote_type, char c);
 
 // parser

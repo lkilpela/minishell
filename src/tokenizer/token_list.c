@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extraction.c                                       :+:      :+:    :+:   */
+/*   token_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 13:56:49 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 02:34:09 by aklein           ###   ########.fr       */
+/*   Created: 2024/05/23 14:03:33 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/06/04 04:42:25 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,40 @@ void	extract_token(char *str, char **value, t_token_type *type)
 	len = token_len(str);
 	*value = ft_safe_strndup(str, len);
 	*type = get_token_type(str);
+}
+
+static void	set_up_tail(t_token_list *add, t_token_list *index)
+{
+	while (add->next)
+		add = add->next;
+	add->next = index->next;
+	if (index->next)
+		index->next->prev = add;
+}
+
+void	list_to_list(t_token_list **lst, t_token_list *add,
+				t_token_list **index)
+{
+	if (!add)
+	{
+		if ((*index)->prev)
+			(*index)->prev->next = (*index)->next;
+		if ((*index)->next)
+			(*index)->next->prev = (*index)->prev;
+		if (*lst == *index)
+			*lst = (*index)->next;
+		*index = (*index)->next;
+	}
+	else
+	{
+		set_up_tail(add, *index);
+		if (*lst == *index)
+			*lst = add;
+		if ((*index)->prev)
+		{
+			(*index)->prev->next = add;
+			add->prev = (*index)->prev;
+		}
+		*index = add;
+	}
 }

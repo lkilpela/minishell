@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 04:16:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 04:17:28 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	expand_current_el(t_token_list **tokens, t_token_list **index)
 	char			*str;
 	char			*new;
 	t_token_list	*new_tokens;
-	
+
 	str = (*index)->value;
 	if (ft_strchr(str, DOLLAR_SIGN))
 	{

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 04:12:51 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 04:20:30 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,8 @@ static char	*heredoc(t_cmd *cmd)
 		return (str);
 	while (line)
 	{
-		if (!strcmp(line, cmd->heredoc_delim))
-		{
-			ft_free((void **)&line);
+		if (!ft_strcmp(line, cmd->heredoc_delim))
 			break ;
-		}
 		tmp = ft_safe_strjoin(str, line);
 		ft_free((void **)&str);
 		str = tmp;

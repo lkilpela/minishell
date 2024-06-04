@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/02 22:14:30 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/04 04:21:01 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_list *parser(t_token_list *tokens)
+t_list	*parser(t_token_list *tokens)
 {
 	t_cmd	*new_cmd;
 	t_list	*cmd_list;

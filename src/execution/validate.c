@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 13:36:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:04:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	is_directory(t_cmd *cmd)
 {
 	int	fd;
 
-	fd = open(cmd->exec_path, O_DIRECTORY);
+	fd = open(cmd->command, O_DIRECTORY);
 	if (fd != -1)
 	{
 		safe_close(fd);
@@ -87,17 +87,26 @@ void	validate_command(t_cmd *cmd)
 	cmd->exec_path = find_executable(cmd);
 	if (!validate_redir(&cmd->in_file) || !validate_redir(&cmd->out_file))
 		ms_exit(FATAL, E_CODE_FILE);
+	if (is_directory(cmd))
+	{
+		print_error(ERR_MS, cmd->command, ERR_FILE, 0);
+		ms_exit(FATAL, E_CODE_CMD_NEXEC);
+	}
 	if (cmd->exec_path != NULL)
 	{
-		if (!is_directory(cmd))
+		if (access(cmd->exec_path, X_OK) == -1)
 		{
-			print_error(ERR_MS, cmd->exec_path, ERR_FILE, 0);
-			ms_exit(FATAL, E_CODE_CMD_NEXEC);
-		}
-		else if (access(cmd->exec_path, X_OK) != 0)
-		{
-			print_error(ERR_MS, cmd->command, ERR_PERM, 0);
-			ms_exit(FATAL, E_CODE_CMD_NEXEC);
+			printf("errno: %d\n", errno);
+			if (errno == ENOENT)
+			{
+				print_error(ERR_MS, cmd->command, ERR_FILE, 0);
+				ms_exit(FATAL, E_CODE_CMD_NEXEC);
+			}
+			else if (errno == EACCES)
+			{
+				print_error(ERR_MS, cmd->command, ERR_PERM, 0);
+				ms_exit(FATAL, E_CODE_CMD_NEXEC);
+			}
 		}
 	}
 	else

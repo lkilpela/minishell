@@ -245,3 +245,10 @@ minishell: xxx: command not found
 bash: xxx: command not found
 bash: /xxx/xxx: No such file or directory
 ```
+
+### No such file or directory
+
+/home/lk here '/home/lk' there
+```
+minishell: /home/lk: no such file or directory
+```

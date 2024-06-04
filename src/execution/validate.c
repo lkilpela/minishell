@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 13:34:49 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 13:36:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int	is_directory(t_cmd *cmd)
 		safe_close(fd);
 		return (1);
 	}
-	printf("dir: %s fd: %d\n", cmd->exec_path, fd);
 	return (0);
 }
 

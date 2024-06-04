@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/02 23:24:17 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 00:26:00 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 \******************************************************************************/
 typedef struct s_var_list t_var_list;
 typedef struct s_token_list t_token_list;
+typedef struct s_cmd t_cmd;
 
 typedef struct s_ms
 {
@@ -36,6 +37,16 @@ typedef struct s_ms
 	char			*executable;
 	int				cmds_num;
 }					t_ms;
+
+/******************************************************************************\
+ * BUILTINS
+\******************************************************************************/
+typedef struct s_builtin
+{
+	char	*name;
+	void	(*func)(t_cmd *);
+	int		special;
+}	t_builtin;
 
 /******************************************************************************\
  * FILES
@@ -70,20 +81,6 @@ typedef enum e_token_type
 	UNKNOWN
 }			t_token_type;
 
-typedef enum e_quote_type
-{
-	NO_QUOTE,
-	SINGLE_QUOTE,
-	DOUBLE_QUOTE
-}			t_quote_type;
-
-typedef enum e_err
-{
-	FATAL,
-	WARNING,
-	RELINE
-}			t_err;
-
 // a token node in linked list
 typedef struct s_token_list
 {
@@ -94,14 +91,23 @@ typedef struct s_token_list
 	struct s_token_list	*prev;
 }				t_token_list;
 
-// variables
+/******************************************************************************\
+ * VARS
+\******************************************************************************/
 struct s_var_list
 {
-	char				*key;	// name of variable
-	char				*value;	// value of variable
+	char				*key;
+	char				*value;
 	struct s_var_list	*next; 
 	struct s_var_list	*previous; 
 };
+
+typedef enum e_quote_type
+{
+	NO_QUOTE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE
+}			t_quote_type;
 
 /******************************************************************************\
  * PARSER
@@ -118,5 +124,16 @@ typedef struct s_cmd
 	char	**args;
 	char	*exec_path;
 }			t_cmd;
+
+/******************************************************************************\
+ * ERROR
+\******************************************************************************/
+
+typedef enum e_err
+{
+	FATAL,
+	WARNING,
+	RELINE
+}			t_err;
 
 #endif

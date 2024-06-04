@@ -252,3 +252,10 @@ bash: /xxx/xxx: No such file or directory
 ```
 minishell: /home/lk: no such file or directory
 ```
+
+### Permission denied
+
+< in grep hello | wc -l > out
+```
+minishell: in: Permission denied
+```

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:13:10 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 05:13:21 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 01:51:40 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	builtin_cmd(t_cmd *cmd)
 		}
 		if (ft_strcmp(cmd->command, "pwd") == 0)
 		{
-			built_pwd();
+			built_pwd(cmd);
 			return (1);
 		}
 		if (ft_strcmp(cmd->command, "env") == 0)
 		{
-			built_env(0);
+			built_env(cmd);
 			return (1);
 		}
 		if (ft_strcmp(cmd->command, "echo") == 0)

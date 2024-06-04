@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/02 23:27:32 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 01:53:14 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,42 @@ int	check_key(char *arg)
 	return (1);
 }
 
+static t_var_list	*duplicate_var_list(t_var_list *vars)
+{
+	t_var_list	*result;
+	t_var_list	*node;
+
+	result = NULL;
+	while (vars)
+	{
+		node = create_var_node(vars->key, vars->value);
+		add_var_to_list(&result, node);
+		vars = vars->next;
+	}
+	return (result);
+}
+
+void	print_sorted_vars(t_var_list *vars)
+{
+	t_var_list	*dup;
+	t_var_list	*tmp;
+
+	dup = duplicate_var_list(vars);
+	merge_sort(&dup);
+	while (dup)
+	{
+		ft_printf("declare -x %s=\"%s\"\n", dup->key, dup->value);
+		tmp = dup;
+		dup = dup->next;
+		ft_free((void **)&tmp);
+	}
+}
+
 int	check_args(int	args)
 {
 	if (args == 1)
 	{
-		built_env(1);
+		print_sorted_vars(ms()->var_list);
 		return (0);
 	}
 	else

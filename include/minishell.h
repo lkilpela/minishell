@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 15:01:49 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 01:51:12 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@ int				safe_fork(void);
 t_var_list 		*get_envp(char **envp);
 void			extract_var(char *str, char **key, char **value);
 void			add_var(char *str);
+void			add_var_to_list(t_var_list **head, t_var_list *node);
+t_var_list		*create_var_node(char *key, char *value);
+void			merge_sort(t_var_list **vars);
 char			*lookup_var(char *var_name);
 void			var_remove(char *keyval);
 
@@ -136,10 +139,10 @@ void			validate_command(t_cmd *cmd);
 
 //builtins
 void			built_echo(t_cmd *cmds);
-void			built_pwd(void);
+void			built_pwd(t_cmd *cmds);
 void			built_exit(t_cmd *cmds);
 void			built_cd(t_cmd *cmds);
-void			built_env(int declare);
+void			built_env(t_cmd *cmds);
 void			built_export(t_cmd *cmds);
 void			built_unset(t_cmd *cmds);
 

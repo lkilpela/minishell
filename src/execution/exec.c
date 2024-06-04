@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 20:12:16 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/04 04:59:59 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-
 void	dupes(t_cmd *cmd)
 {
 	int	in;
-	int out;
+	int	out;
 
 	in = STDIN_FILENO;
 	out = STDOUT_FILENO;
@@ -52,11 +51,13 @@ void	exec_command(t_cmd *cmd)
 	}
 }
 
+//line 71: not first or coming from heredoc
+//line 76: not last
 void	child(t_list *cmds, int *pipe_in)
 {
 	t_cmd	*cmd;
 	int		heredoc_pipefd[2];
-	
+
 	cmd = (t_cmd *)cmds->content;
 	validate_command(cmd);
 	if (cmd->heredoc)
@@ -64,15 +65,15 @@ void	child(t_list *cmds, int *pipe_in)
 		safe_pipe(heredoc_pipefd);
 		write(heredoc_pipefd[P_WRITE], cmd->heredoc, ft_strlen(cmd->heredoc));
 		safe_close(heredoc_pipefd[P_WRITE]);
-		safe_close(*pipe_in);		
+		safe_close(*pipe_in);
 		*pipe_in = heredoc_pipefd[P_READ];
 	}
-	if (*pipe_in != -1) //not first or coming from heredoc
+	if (*pipe_in != -1)
 	{
 		safe_dup2(*pipe_in, STDIN_FILENO);
 		safe_close(*pipe_in);
 	}
-	if (cmds->next != NULL) //not last
+	if (cmds->next != NULL)
 	{
 		safe_close(ms()->pipefd[P_READ]);
 		safe_dup2(ms()->pipefd[P_WRITE], STDOUT_FILENO);
@@ -85,7 +86,7 @@ void	child(t_list *cmds, int *pipe_in)
 void	parent(t_list *cmds, int *pipe_in)
 {
 	t_cmd	*cmd;
-	
+
 	cmd = (t_cmd *)cmds->content;
 	safe_close(*pipe_in);
 	if (cmds->next != NULL)
@@ -109,7 +110,7 @@ void	wait_for_children(void)
 {
 	int	i;
 	int	status;
-	
+
 	i = 0;
 	while (i < ms()->cmds_num)
 	{

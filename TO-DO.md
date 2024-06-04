@@ -28,7 +28,7 @@ minishell: /Users/lumik: is a directory
 - [ ] need to be properly handled from execution
 - [ ] exit, cd, export, unset need to be not forked, to handle everythign properly
 - [ ] export without args needs to print sorted list of vars
-- [ ] .
+- [ ] exit and Ctr C not working properly, 
 
 
 ## NORM

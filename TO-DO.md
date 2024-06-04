@@ -18,6 +18,11 @@
 - [ ] builtins properly into exec
 - [ ] updated variables to be sent to the execve
 
+- [ ] input "$HOME here '$HOME' test"
+Expected output:
+bash: /Users/lumik here '/Users/lumik' test: No such file or directory
+Current output:
+minishell: /Users/lumik: is a directory
 
 ## builtins
 - [ ] need to be properly handled from execution

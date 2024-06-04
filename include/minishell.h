@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 04:40:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 05:04:39 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ int				is_ambiguous(char *val, t_token_list *tokens);
 // execution
 void			init_path_dirs(void);
 void			execute_commands(t_list *c);
-void			parent(t_list *cmds, int *pipe_in);
 void			child(t_list *cmds, int *pipe_in);
+
 int 			validate_redir(t_redir *file);
 int				builtin_cmd(t_cmd *cmd);
 void			validate_command(t_cmd *cmd);

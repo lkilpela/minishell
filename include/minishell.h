@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 04:14:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 04:16:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@
 
 // minishell
 t_ms			*ms(void);
+
+
+// init
 void			init_minishell(int argc, char **argv, char **envp);
+void			init_redir(t_cmd *cmd);
 
 // signals
 void			init_signals();

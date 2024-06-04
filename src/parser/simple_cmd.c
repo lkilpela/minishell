@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/02 22:14:07 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/04 04:16:40 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	expand_current_el(t_token_list **tokens, t_token_list **index)
+static void	expand_current_el(t_token_list **tokens, t_token_list **index)
 {
 	char			*str;
 	char			*new;
@@ -75,12 +75,6 @@ static void	parse_args(t_cmd *cmd, t_token_list **tokens)
 		cmd->args[0] = cmd->command;
 }
 
-void	init_redir(t_cmd *cmd)
-{
-	cmd->in_file.fd = -1;
-	cmd->out_file.fd = -1;
-}
-
 t_cmd	*simple_cmd(t_token_list **tokens)
 {
 	t_cmd	*cmd;
@@ -109,4 +103,3 @@ t_cmd	*simple_cmd(t_token_list **tokens)
 	}
 	return (cmd);
 }
-

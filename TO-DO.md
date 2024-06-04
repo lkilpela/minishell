@@ -27,9 +27,15 @@
 
 
 ## NORM
+1. Execution
 validate.c: Error!
 Error: PREPROC_CONSTANT     (line:  17, col:  19):      Preprocessor statement must only contain constant defines
 Error: PREPROC_CONSTANT     (line:  18, col:  22):      Preprocessor statement must only contain constant defines
 
+child.c: Error!
+Error: TOO_MANY_LINES       (line:  84, col:   1):      Function has more than 25 lines
+
+2. Tokenizer
 token_list.c: Error!
 Error: TOO_MANY_LINES       (line:  46, col:   1):      Function has more than 25 lines
+

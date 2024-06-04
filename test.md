@@ -282,6 +282,7 @@ minishell: /xxx/xxx: No such file or directory
 ### Permission denied
 
 1. chmod -r in
+
 < in grep Now | wc > outfile
 
 `minishell: in: Permission denied`
@@ -290,4 +291,12 @@ minishell: /xxx/xxx: No such file or directory
 
 < in grep Now | wc > outfile
 
-`minishell: outfile: Permission denied
+`minishell: outfile: Permission denied`
+
+### FULL PATH
+< in /bin/ls | wc > outfile
+
+unset PATH
+echo $PATH OLD_PATH=$PATH unset PATH export PATH=$OLD_PATH
+
+PATH envp does not exist ./pipex infile " ls" "wc" outfile < infile ls | wc outfile

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:06:04 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 05:45:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:00:33 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,14 @@ char	*handle_node_quotes(char *val)
 	return (val);
 }
 
-/*static void	clear_token_quotes(t_token_list *t)
+void	clear_token_quotes(t_token_list *tokens)
 {
 	char	*val;
 
-	while (t)
+	while (tokens)
 	{
-		val = t->value;
-		t->value = handle_node_quotes(val);
-		t = t->next;
+		val = tokens->value;
+		tokens->value = handle_node_quotes(val);
+		tokens = tokens->next;
 	}
-}*/
+}

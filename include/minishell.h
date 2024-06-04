@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 05:43:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 15:01:49 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ t_cmd			*simple_cmd(t_token_list **tokens);
 t_list			*parser(t_token_list *tokens);
 t_token_list	*get_redir(t_cmd *cmd, t_token_list *tokens);
 char			*handle_node_quotes(char *val);
+void			clear_token_quotes(t_token_list *tokens);
 int				has_quotes(char *value);
 int				is_ambiguous(char *val, t_token_list *tokens);
 

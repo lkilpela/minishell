@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 04:54:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 11:20:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,33 @@ static int	is_directory(t_cmd *cmd)
 	return (0);
 }
 
+void	print_args(t_cmd *cmd)
+{
+	int	i;
+	int	total_len;
+	char *args_str;
+
+	i = 0;
+	total_len = 0;
+	while (i < cmd->num_of_args)
+	{
+		total_len += ft_strlen(cmd->args[i]);
+		i++;
+	}
+	total_len += cmd->num_of_args - 1 + 1;
+	args_str = ft_safe_calloc(total_len, sizeof(char));
+	i = 0;
+	while (i < cmd->num_of_args)
+	{
+		ft_strlcat(args_str, cmd->args[i], total_len);
+		if (cmd->args[i + 1])
+			ft_strlcat(args_str, " ", total_len);
+		i++;
+	}
+	print_error(ERR_MS, args_str, ERR_DIR, 0);
+	ft_free((void **)&args_str);
+}
+
 void	validate_command(t_cmd *cmd)
 {
 	cmd->exec_path = find_executable(cmd);
@@ -62,7 +89,7 @@ void	validate_command(t_cmd *cmd)
 		ms_exit(FATAL, E_CODE_FILE);
 	if (is_directory(cmd))
 	{
-		print_error(ERR_MS, cmd->command, ERR_DIR, 0);
+		print_args(cmd);
 		ms_exit(FATAL, E_CODE_CMD_NEXEC);
 	}
 	if (cmd->exec_path != NULL)

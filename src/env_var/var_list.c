@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/26 22:07:31 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 01:39:13 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	extract_var(char *str, char **key, char **value)
 }
 
 // create a new t_var_list node
-static t_var_list	*create_var_node(char *key, char *value)
+t_var_list	*create_var_node(char *key, char *value)
 {
 	t_var_list	*node;
 
@@ -40,26 +40,23 @@ static t_var_list	*create_var_node(char *key, char *value)
 	return (node);
 }
 
-static t_var_list	*var_get_last(void)
+static t_var_list	*var_get_last(t_var_list *head)
 {
-	t_var_list	*last;
-
-	last = ms()->var_list;
-	while (last->next)
-		last = last->next;
-	return (last);
+	while (head->next)
+		head = head->next;
+	return (head);
 }
 
 // add new node to the end of list
-static void	add_var_to_list(t_var_list *node)
+void	add_var_to_list(t_var_list **head, t_var_list *node)
 {
 	t_var_list	*last;
 
-	if (ms()->var_list == NULL)
-		ms()->var_list = node;
+	if (*head == NULL)
+		*head = node;
 	else
 	{
-		last = var_get_last();
+		last = var_get_last(*head);
 		node->previous = last;
 		last->next = node;
 	}
@@ -89,5 +86,5 @@ void	add_var(char *str)
 		vars = vars->next;
 	}
 	node = create_var_node(key, value);
-	add_var_to_list(node);
+	add_var_to_list(&(ms()->var_list), node);
 }

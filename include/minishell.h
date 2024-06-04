@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 05:17:45 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 05:43:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ void			init_signals();
 //void			sigint_handler(int sig);
 
 // lalloc
-int				same_ptr(void *ptr, void *ptr2);
 void			add_to_lal(void *ptr);
 void			clear_lal();
-void			free_one_lal(void *ptr);
+void			ft_free(void **ptr);
 
 // error
 int				ms_exit(t_err type, int error_code);
@@ -81,8 +80,6 @@ void			*ft_safe_calloc(size_t count, size_t size);
 char			*ft_safe_substr(const char *s, unsigned int start, size_t len);
 void			*ft_safe_lstnew(void *content);
 char			*ft_safe_itoa(int n);
-void			ft_free(void **ptr);
-
 void			safe_dup2(int fd, int fd2);
 void			safe_close(int fd);
 void			safe_pipe(int *pipedes);

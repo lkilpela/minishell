@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lalloc.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/04 05:39:23 by lkilpela          #+#    #+#             */
+/*   Updated: 2024/06/04 05:42:46 by lkilpela         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <minishell.h>
 
 static void	free_content(void *content)
@@ -9,11 +21,11 @@ static void	free_content(void *content)
 	}
 }
 
-void	ft_lst_remove_if(t_list **lst, void *data_ref,
+static void	ft_lst_remove_if(t_list **lst, void *data_ref,
 							int (*cmp)(void *, void *), void (*del)(void *))
 {
 	t_list	*cur;
-	
+
 	if (lst == NULL || *lst == NULL)
 		return ;
 	cur = *lst;
@@ -30,19 +42,19 @@ void	ft_lst_remove_if(t_list **lst, void *data_ref,
 	}
 }
 
-int	same_ptr(void *ptr, void *ptr2)
+static int	same_ptr(void *ptr, void *ptr2)
 {
 	if (ptr == ptr2)
 		return (0);
 	return (1);
 }
 
-void	free_one_lal(void *ptr)
+static void	free_one_lal(void *ptr)
 {
 	ft_lst_remove_if(allocs(), ptr, same_ptr, free_content);
 }
 
-void	clear_lal()
+void	clear_lal(void)
 {
 	t_list	**lalloc;
 

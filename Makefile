@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/04 05:37:45 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/06/04 05:45:07 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRCS			=	minishell.c \
 					token_utils.c \
 					token_utils1.c \
 					token_utils2.c \
+					builtins.c \
 					built_pwd.c \
 					built_echo.c \
 					built_cd.c \
@@ -63,7 +64,7 @@ SRCS			=	minishell.c \
 					parsing.c \
 					redirection.c \
 					simple_cmd.c \
-					redir_utils.c \
+					parser_utils.c \
 					print_and_free.c \
 					errors.c \
 					lalloc.c \

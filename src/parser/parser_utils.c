@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:06:04 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 05:20:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/04 05:45:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*handle_node_quotes(char *val)
 	return (val);
 }
 
-static void	clear_token_quotes(t_token_list *t)
+/*static void	clear_token_quotes(t_token_list *t)
 {
 	char	*val;
 
@@ -103,4 +103,4 @@ static void	clear_token_quotes(t_token_list *t)
 		t->value = handle_node_quotes(val);
 		t = t->next;
 	}
-}
+}*/

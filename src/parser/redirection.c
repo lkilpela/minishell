@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/02 22:15:15 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/04 04:12:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,36 +43,7 @@ static char	*heredoc(t_cmd *cmd)
 	return (str);
 }
 
-int	has_quotes(char *value)
-{
-	while (*value)
-	{
-		if (is_quote(*value))
-			return (1);
-		value++;
-	}
-	return (0);
-}
-
-int	contains_space(char *var)
-{
-	char	quote;
-
-	quote = 0;
-	while (*var)
-	{
-		if (!quote && is_whitespace(*var))
-			return (1);
-		if (!quote && is_quote(*var))
-			quote = *var;
-		else if (quote && *var == quote)
-			quote = 0;
-		var++;
-	}
-	return (0);
-}
-
-t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens)
+static t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens)
 {
 	cmd->in_file.type = INFILE;
 	if (cmd->in_file.file)
@@ -89,18 +60,7 @@ t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens)
 	return (tokens->next);
 }
 
-int	is_ambiguous(char *val, t_token_list *tokens)
-{
-	if (contains_space(val))
-	{
-		print_error(ERR_MS, tokens->value, ERR_AMBIGUOUS, 0);
-		ms()->exit = 1;
-		return (1);
-	}
-	return (0);
-}
-
-t_token_list	*handle_input_redir(t_cmd *cmd, t_token_list *tokens)
+static t_token_list	*handle_input_redir(t_cmd *cmd, t_token_list *tokens)
 {
 	char	*val;
 
@@ -123,7 +83,7 @@ t_token_list	*handle_input_redir(t_cmd *cmd, t_token_list *tokens)
 	return (tokens);
 }
 
-t_token_list	*handle_output_redir(t_cmd *cmd, t_token_list *tokens)
+static t_token_list	*handle_output_redir(t_cmd *cmd, t_token_list *tokens)
 {
 	char	*val;
 

@@ -24,3 +24,12 @@
 - [ ] exit, cd, export, unset need to be not forked, to handle everythign properly
 - [ ] export without args needs to print sorted list of vars
 - [ ] .
+
+
+## NORM
+validate.c: Error!
+Error: PREPROC_CONSTANT     (line:  17, col:  19):      Preprocessor statement must only contain constant defines
+Error: PREPROC_CONSTANT     (line:  18, col:  22):      Preprocessor statement must only contain constant defines
+
+token_list.c: Error!
+Error: TOO_MANY_LINES       (line:  46, col:   1):      Function has more than 25 lines

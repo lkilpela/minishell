@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 20:11:40 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/04 04:54:33 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-# define PERMISSION 0644
-# define O_INFILE O_RDONLY
-# define O_OUTFILE (O_CREAT | O_WRONLY | O_TRUNC)
-# define O_APPENDFILE (O_CREAT | O_WRONLY | O_APPEND)
-
+#define PERMISSION 0644
+#define O_INFILE O_RDONLY
+#define O_OUTFILE (O_CREAT | O_WRONLY | O_TRUNC)
+#define O_APPENDFILE (O_CREAT | O_WRONLY | O_APPEND)
 
 int	validate_redir(t_redir *file)
 {
-	int oflags;
+	int	oflags;
+
 	if (file->type == INFILE)
-		oflags = O_INFILE;	
+		oflags = O_INFILE;
 	if (file->type == OUTFILE)
 		oflags = O_OUTFILE;
 	if (file->append)
@@ -64,7 +64,7 @@ void	validate_command(t_cmd *cmd)
 	{
 		print_error(ERR_MS, cmd->command, ERR_DIR, 0);
 		ms_exit(FATAL, E_CODE_CMD_NEXEC);
-	}		
+	}
 	if (cmd->exec_path != NULL)
 	{
 		if (access(cmd->exec_path, X_OK) != 0)

@@ -1,10 +1,5 @@
 # To-Do List
 
-#ms
-minishell$ <
-minishell: syntax error near unexpected token `newline'
-zsh: segmentation fault  ./minishell
-
 ## signals
 - [ ] signal handling in child process.
 - [ ] signal handling in heredoc.
@@ -50,6 +45,11 @@ minishell$ echo $USER
 lumik
 minishell$ unset USER
 minishell$ echo $USER
+zsh: segmentation fault  ./minishell
+```
+```
+minishell$ <
+minishell: syntax error near unexpected token `newline'
 zsh: segmentation fault  ./minishell
 ```
 

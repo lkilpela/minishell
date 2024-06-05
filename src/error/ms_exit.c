@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:09:37 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 13:16:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:45:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ static void	clear_lal(void)
 static void	clear_tokens(void)
 {
 	t_token_list	*tokens;
+	t_token_list	*next_token;
 
 	tokens = ms()->tokens;
 	while (tokens)
 	{
+		next_token = tokens->next;
 		ft_free((void **)&tokens->value);
 		ft_free((void **)&tokens);
-		tokens = tokens->next;
+		tokens = next_token;
 	}
 	ms()->tokens = NULL;
 }

@@ -1,5 +1,10 @@
 # To-Do List
 
+#ms
+minishell$ <
+minishell: syntax error near unexpected token `newline'
+zsh: segmentation fault  ./minishell
+
 ## signals
 - [ ] signal handling in child process.
 - [ ] signal handling in heredoc.

@@ -61,6 +61,12 @@ lumik$ unset PATH
 lumik$ echo $PATH
 bash: sed: No such file or directory
 ```
+
+- [ ] bash changes the current directory
+minishell$ cd .. hi
+
+
+
 ## NORM
 
 child.c: Error!

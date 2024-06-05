@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:26:42 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 09:04:21 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 21:26:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,13 @@ int	ft_strcmp(char *s1, char *s2)
 char	*ft_strndup(const char *str, size_t len)
 {
 	size_t	i;
+	size_t	str_len;
 	char	*dup;
 
 	i = 0;
+	str_len = ft_strlen(str);
+	if (len > str_len)
+		len = str_len;
 	dup = malloc(len + 1);
 	if (!dup)
 		return (NULL);

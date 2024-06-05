@@ -101,36 +101,18 @@ bash$ pwd
 
 ## NORM
 
-
-1. child.c: Error!
-Error: TOO_MANY_LINES       (line:  84, col:   1):      Function has more than 25 lines
+1. minishell.c
 
 2. Tokenizer
 token_list.c: Error!
 Error: TOO_MANY_LINES       (line:  46, col:   1):      Function has more than 25 lines
 
-3. Parser
-parser_utils.c: Error!
-Error: TOO_MANY_FUNCS       (line:  96, col:   1):      Too many 
-
-4. Error
-errors.c: Error!
-Error: TOO_MANY_FUNCS       (line: 101, col:   1):      Too many functions in file
-Error: TOO_MANY_FUNCS       (line: 120, col:   1):      Too many functions in file
-Error: TOO_MANY_FUNCS       (line: 131, col:   1):      Too many functions in file
-Error: TOO_MANY_FUNCS       (line: 148, col:   1):      Too many functions in file
-Error: TOO_MANY_FUNCS       (line: 164, col:   1):      Too many functions in file
-
-lalloc.c: Error!
-Error: TOO_MANY_FUNCS       (line:  65, col:   1):      Too many functions in file
-Error: TOO_MANY_FUNCS       (line:  77, col:   1):      Too many functions in file
-
-5. minishell.h
+3. minishell.h
 Error: PREPROC_CONSTANT     (line:  37, col:  20):      Preprocessor statement must only contain constant defines
 Error: PREPROC_CONSTANT     (line:  38, col:  23):      Preprocessor statement must only contain constant defines
 Error: PREPROC_CONSTANT     (line:  40, col:  22):      Preprocessor statement must only contain constant defines
 
-6. Unused function
+4. Unused function
 errors.c
 int	pipe_start_end(t_token_list *tokens)
 

@@ -6,7 +6,7 @@
 - [ ] probably more signal stuff.
 
 ## validate
-- [ ] split validate_command into smaller functions
+
 
 ## parse
 - [ ] in case of mutlple infiles when one file is invalid, it should NULL the command. (probably need to move file opening to parser then)
@@ -98,6 +98,7 @@ waiting for cleaning up
 #DONE
 
 ## validate
+- [x] split validate_command into smaller functions
 - [x] "$HOME here '$HOME' test": expanded single word with enclosed quotes. Print: minishell: /Users/lumik here '/Users/lumik' test: No such file or directory
 
 - [x] "$HOME": expanded single word with enclosed quotes.

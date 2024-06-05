@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 14:06:53 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 14:12:05 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static void	handle_heredoc_fd(t_cmd *cmd, int *pipe_in, int *heredoc_pipefd)
 	*pipe_in = heredoc_pipefd[P_READ];
 }
 
-//line 71: not first or coming from heredoc
-//line 76: not last
+//line 74: not first or coming from heredoc
+//line 79: not last
 void	child(t_list *cmds, int *pipe_in)
 {
 	t_cmd	*cmd;
@@ -85,5 +85,3 @@ void	child(t_list *cmds, int *pipe_in)
 	dupes(cmd);
 	exec_command(cmd);
 }
-
-

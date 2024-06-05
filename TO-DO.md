@@ -27,6 +27,28 @@ cat: invalid12.txt: No such file or directory
 minishell$ echo $?
 0
 ```
+- [ ] handle two infiles & heredoc
+```
+minishell$ cat <minishell.h <<HERE <missing | ls
+> HERE
+minishell: missing: No such file or directory
+```
+```
+minishell$ cat <minishell.h <<HERE | cat
+> HERE
+```
+Expected output: `bash: minishell.h: No such file or directory`
+```
+minishell$ cat <minishell.h <<HERE <missing <<DOC | echo oi
+> HERE
+> DOC
+> oi
+```
+Expected output:
+```
+bash: minishell.h: No such file or directory
+oi
+```
 
 - [ ] simple_cmd and maybe parser function refactor for readability and simplicity
 

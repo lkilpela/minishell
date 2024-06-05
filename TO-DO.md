@@ -75,14 +75,23 @@ https://github.com/lkilpela/minishell/commit/9ca9fad2ad6d794c093847263293970c69d
 - [ ] update $SHLVL properly
 - [ ] after `unset PATH` and then `echo $PATH` should give an error message
 ```
-lumik$ unset PATH
-lumik$ echo $PATH
+bash$ unset PATH
+bash$ echo $PATH
 bash: sed: No such file or directory
 ```
 
-- [ ] bash changes the current directory
+- [ ] bash changes the current directory 
+```
 minishell$ cd .. hi
-
+minishell: cd: too many arguments
+```
+```
+bash$ pwd
+/Users/lumik/workspace/git/minishell
+bash$ cd .. hi
+bash$ pwd
+/Users/lumik/workspace/git
+```
 
 
 ## NORM

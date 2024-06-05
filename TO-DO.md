@@ -21,7 +21,7 @@ minishell$ $EMPTY
 minishell$ echo $?
 139
 ```
-- [ ] SEGFAULT
+- [x] SEGFAULT
 ```
 minishell$ echo $USER
 lumik

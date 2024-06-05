@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 08:59:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 10:40:24 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static int	count_args(t_token_list **tokens)
 			if (current && current->type == WORD)
 				count++;
 		}
-		current = current->next;
+		if (current)
+			current = current->next;
 	}
 	return (count);
 }

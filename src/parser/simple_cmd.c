@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 02:30:43 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 08:59:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,11 @@ static void	parse_command(t_cmd *cmd, t_token_list **tokens)
 	if ((*tokens)->type == WORD)
 	{
 		expand_current_el(tokens, tokens);
-		cmd->command = (*tokens)->value;
-		(*tokens) = (*tokens)->next;
+		if (*tokens != NULL)
+		{
+			cmd->command = (*tokens)->value;
+			(*tokens) = (*tokens)->next;
+		}
 	}
 }
 

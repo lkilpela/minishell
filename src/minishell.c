@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 04:04:53 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 08:27:16 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ void	minishell_loop(void)
 		//printf(GREEN "Calling tokenizer: \n" RESET);
 		if (all_good)
 			ms()->tokens = new_tokenizer(input);
-		print_tokens(ms()->tokens);
+		//print_tokens(ms()->tokens);
 		if (all_good && !near_token_errors(ms()->tokens)) // check for errors in token list
 			all_good = ms_exit(RELINE, E_CODE_SYNTX);
 		if (all_good)
 		{
 			ms()->commands = parser(ms()->tokens);
 			init_path_dirs();
-			print_cmds(ms()->commands);
+			//print_cmds(ms()->commands);
 			// print_executable(ms()->commands);
 			// builtin_cmd(ms()->commands); //temp
 			execute_commands(ms()->commands);

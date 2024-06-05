@@ -7,13 +7,13 @@
 
 ## validate
 ## parse
-- [ ] in case of mutlple infiles when one file is invalid, it should NULL the command. (probably need to move file opening to parser then)
-- [ ] SEGFAULT with minishell$ cat `minishell$ cat <minishell.h <<HERE <missing | ls`
+- [x] in case of mutlple infiles when one file is invalid, it should NULL the command. (probably need to move file opening to parser then)
+- [x] SEGFAULT with minishell$ cat `minishell$ cat <minishell.h <<HERE <missing | ls`
 
 ## exec
 - [ ] make in our minishell does not work, not sure why
 - [ ] updated variables to be sent to the execve
-- [ ] bash has exit code `0` vs minishell has exit code `139`
+- [x] bash has exit code `0` vs minishell has exit code `139`
 ```
 minishell$ $EMPTY
 minishell$ echo $?
@@ -23,7 +23,7 @@ minishell$ echo $?
 ## builtins
 - [ ] update $OLDPWD and $PWD env variables when using 'cd'.
 - [ ] update $SHLVL properly
-- [ ] after `unset PATH` and then `echo $PATH` should give an error message
+- [ ] ~~after `unset PATH` and then `echo $PATH` should give an error message~~ I see still bash just printing newline / nothing just like ours
 ```
 bash$ unset PATH
 bash$ echo $PATH
@@ -42,6 +42,16 @@ bash$ cd .. hi
 bash$ pwd
 /Users/lumik/workspace/git
 ```
+different for me
+```
+a@Allar:~/minishell$ pwd
+/home/a/minishell
+a@Allar:~/minishell$ cd .. hi
+bash: cd: too many arguments
+a@Allar:~/minishell$ pwd
+/home/a/minishell
+a@Allar:~/minishell$
+```
 
 - [ ] bash does not return an error, it treats it as a request to export an exising shell var
 ```
@@ -53,7 +63,7 @@ bash$ echo $hello
 
 bash$ 
 ```
-- [ ] exit code should be 1 & ``A-'`
+- [x] exit code should be 1 & ``A-'`
 ```
 minishell$ export A-
 minishell: export: : A-: not a valid identifier

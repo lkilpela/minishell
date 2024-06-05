@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 08:41:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 23:01:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_key(char *arg)
 	char	*value;
 
 	extract_var(arg, &key, &value);
-	if (!ft_isalpha(*key) && *key != '_')
+	if (!key || (!ft_isalpha(*key) && *key != '_'))
 		return (0);
 	while (*++key)
 	{

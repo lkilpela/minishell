@@ -21,23 +21,14 @@ minishell$ $EMPTY
 minishell$ echo $?
 139
 ```
-- [ ] Minishell's ouput is missing `-`
+- [x] Minishell's ouput is missing `-`
 
 echo - "" "  " hello
 
 expected output: `- <empty>    hello`
+Current output:
 ```
 minishell$ echo - "" "  " hello
-a_token_value: echo                 a_token_type: WORD
-a_token_value: -                    a_token_type: WORD
-a_token_value: ""                   a_token_type: WORD
-a_token_value: "  "                 a_token_type: WORD
-a_token_value: hello                a_token_type: WORD
-Command 1:
-Input redirection: (null)
-Output redirection: (null)
-Command: echo
-Args (5): <echo> <-> <> <  > <hello> 
     hellominishell$ 
 ```
 

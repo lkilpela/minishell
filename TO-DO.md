@@ -10,6 +10,24 @@
 
 ## parse
 - [ ] in case of mutlple infiles when one file is invalid, it should NULL the command. (probably need to move file opening to parser then)
+
+**I CHECKED AND IT WORKED LIKE BASH. What case you meant need to be fixed?**
+```
+minishell$ echo "This is a valid file." > valid1.txt
+minishell$ echo "This is another valid file." > valid2.txt
+minishell$ touch invalid.txt
+minishell$ chmod -r invalid.txt
+minishell$ cat valid1.txt valid2.txt invalid.txt
+This is a valid file.
+This is another valid file.
+cat: invalid.txt: Permission denied
+minishell$ cat valid1.txt valid2.txt invalid12.txt | cat valid1.txt
+This is a valid file.
+cat: invalid12.txt: No such file or directory
+minishell$ echo $?
+0
+```
+
 - [ ] simple_cmd and maybe parser function refactor for readability and simplicity
 
 ## exec

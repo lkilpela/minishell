@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 10:40:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 15:20:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,20 +90,18 @@ t_cmd	*simple_cmd(t_token_list **tokens)
 	while ((*tokens) && (*tokens)->type != OP_PIPE)
 	{
 		if ((*tokens)->type >= OP_LESS && (*tokens)->type <= OP_DGREAT)
-		{
 			(*tokens) = get_redir(cmd, *tokens);
-			continue ;
-		}
-		if (cmd->command == NULL && (*tokens)->type == WORD)
+		else if ((*tokens)->type == WORD && cmd->command == NULL)
 		{
 			parse_command(cmd, tokens);
 			parse_args(cmd, tokens);
 			i = 1;
 			continue ;
 		}
-		if (cmd->command != NULL && (*tokens)->type == WORD)
+		else if ((*tokens)->type == WORD)
 			cmd->args[i++] = (*tokens)->value;
-		(*tokens) = (*tokens)->next;
+		if ((*tokens))
+			(*tokens) = (*tokens)->next;
 	}
 	return (cmd);
 }

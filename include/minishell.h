@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 19:28:07 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 22:08:58 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void			free_content(void *content);
 // error
 int				ms_exit(t_err type, int error_code);
 int				quote_match_check(char *input);
-int				pipe_start_end(t_token_list *tokens);
 int				near_token_errors(t_token_list *tokens);
 void			ft_error(int exit_code);
 t_list			**allocs(void);
@@ -103,7 +102,6 @@ char			*heredoc_exp(char *str_start);
 int				token_len(char *str);
 void			extract_token(char *str, char **value, t_token_type *type);
 t_token_list	*new_tokenizer(char *str);
-void			exp_and_insert(t_token_list **lst);
 void			list_to_list(t_token_list **lst,
 					t_token_list *add, t_token_list **index);
 

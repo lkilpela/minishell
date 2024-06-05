@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 02:22:42 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 04:21:15 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_ms			*ms(void);
 // init
 void			init_minishell(int argc, char **argv, char **envp);
 void			init_redir(t_cmd *cmd);
+void			init_builtins(void);
 
 // signals
 void			init_signals();
@@ -138,6 +139,9 @@ int 			validate_redir(t_redir *file);
 void			validate_command(t_cmd *cmd);
 
 //builtins
+int				execute_builtin(t_cmd *cmd);
+int				is_special_builtin(t_cmd *cmd);
+t_builtin 		get_builtin(t_cmd *cmd);
 void			built_echo(t_cmd *cmds);
 void			built_pwd(t_cmd *cmds);
 void			built_exit(t_cmd *cmds);

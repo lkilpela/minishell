@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 01:53:14 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 04:11:37 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	built_export(t_cmd *cmd)
 	int		i;
 
 	i = 1;
-	ms()->exit = 0;
 	if (check_args(cmd->num_of_args))
 	{
 		while (i < cmd->num_of_args)
@@ -84,11 +83,12 @@ void	built_export(t_cmd *cmd)
 			{
 				print_error("minishell: export: ", cmd->args[i], ERR_KEY_VALID, 0);
 				i++;
-				ms()->exit = 1;
+				ms()->exit = EXIT_FAILURE;
 				continue ;
 			}
 			add_var(cmd->args[i]);
 			i++;
 		}
 	}
+	ms()->exit = EXIT_SUCCESS;
 }

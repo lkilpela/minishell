@@ -6,51 +6,61 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:13:10 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 01:51:40 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 04:13:57 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	builtin_cmd(t_cmd *cmd)
+t_builtin get_builtin(t_cmd *cmd)
 {
-	if (cmd->command)
+	int	i;
+
+	i = 0;
+	while (ms()->builtins[i].name)
 	{
-		if (ft_strcmp(cmd->command, "exit") == 0)
-		{
-			built_exit(cmd);
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "pwd") == 0)
-		{
-			built_pwd(cmd);
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "env") == 0)
-		{
-			built_env(cmd);
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "echo") == 0)
-		{
-			built_echo(cmd);
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "export") == 0)
-		{
-			built_export(cmd);
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "unset") == 0)
-		{
-			built_unset(cmd);
-			return (1);
-		}
-		if (ft_strcmp(cmd->command, "cd") == 0)
-		{
-			built_cd(cmd);
-			return (1);
-		}
+		if (!ft_strcmp(ms()->builtins[i].name, cmd->command))
+			return (ms()->builtins[i]);
+		i++;
 	}
+	return (ms()->builtins[i]);
+}
+
+int	is_special_builtin(t_cmd *cmd)
+{
+	t_builtin	builtin;
+
+	builtin = get_builtin(cmd);
+	if (builtin.special)
+		return (1);
 	return (0);
+}
+
+int	execute_builtin(t_cmd *cmd)
+{
+	t_builtin	builtin;
+
+	builtin = get_builtin(cmd);
+	if (!builtin.name)
+		return (0);
+	
+	ft_printf("executing builtin: '%s'\n", cmd->command);
+	builtin.func(cmd);
+	return (1);
+}
+
+void	init_builtins(void)
+{
+	static t_builtin	builtins[] = {
+	{"cd", built_cd, 1},
+	{"echo", built_echo, 0},
+	{"env", built_env, 0},
+	{"exit", built_exit, 1},
+	{"export", built_export, 1},
+	{"pwd", built_pwd, 0},
+	{"unset", built_unset, 1},
+	{NULL, NULL, 0}
+	};
+
+	ms()->builtins = builtins;
 }

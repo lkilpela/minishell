@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 00:26:00 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 03:59:03 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_var_list t_var_list;
 typedef struct s_token_list t_token_list;
 typedef struct s_cmd t_cmd;
+typedef struct s_builtin t_builtin;
 
 typedef struct s_ms
 {
@@ -36,6 +37,7 @@ typedef struct s_ms
 	int				status;
 	char			*executable;
 	int				cmds_num;
+	const t_builtin		*builtins;
 }					t_ms;
 
 /******************************************************************************\

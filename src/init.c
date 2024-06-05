@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 05:23:39 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 04:01:31 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	init_minishell(int argc, char **argv, char **envp)
 	ms()->exit = 0;
 	ms()->executable = ft_strrchr(argv[0], '/') + 1;
 	get_envp(envp);
+	init_builtins();
 }
 
 t_ms	*ms(void)

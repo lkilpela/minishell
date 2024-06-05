@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/03 00:33:24 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 04:10:45 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	built_exit(t_cmd *cmd)
 	if (cmd->num_of_args > 2)
 	{
 		print_error("minishell: exit", NULL, "too many arguments", 0);
-		ms()->exit = 1;
+		ms()->exit = EXIT_FAILURE;
 		return ;
 	}
 	if (!non_numeric_exit(cmd->args[1]))

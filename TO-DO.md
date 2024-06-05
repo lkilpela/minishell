@@ -15,7 +15,10 @@ Print: minishell: /Users/lumik: is a directory
 - [x] validate command is not existed, error msg: `command not found - errcode: E_CODE_CMD_NFOUND = 127`
 - [x] validate command is not executable, error msg: `permission denied - errcode: E_CODE_CMD_NEXEC = 126`
 - [x] validate infile/outfile is not existed, error msg: (my bash is showing 1?)`No such file or directory - errcode: E_CODE_FILE = 1
-- [ ] in case of mutlple infiles
+- [ ] split validate_command into smaller functions
+
+## parse
+- [ ] in case of mutlple infiles when one file is invalid, it should NULL the command. (probably need to move file opening to parser then)
 
 ## exec
 - [x] for path finding, access() needs to be seperated to check for file existance and file access seperately to get the proper error message, even the possiblity of a same executable named file can be accessible in 1 folder, and not accessible in another folder, so I guess keep track of where the files exist and then find which one, if any, is accessible / executable.

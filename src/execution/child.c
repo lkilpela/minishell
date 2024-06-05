@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 13:20:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 04:15:16 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	dupes(t_cmd *cmd)
 
 static void	exec_command(t_cmd *cmd)
 {
-	if (builtin_cmd(cmd))
-		return ;
+	if (execute_builtin(cmd))
+		ms_exit(FATAL, -1);
 	if (cmd->exec_path == NULL)
 	{
 		print_error(cmd->command, NULL, ERR_CMD, 0);

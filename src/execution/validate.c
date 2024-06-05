@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 02:25:18 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 04:23:32 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,11 @@ void	print_args(t_cmd *cmd)
 
 void	validate_command(t_cmd *cmd)
 {
-	cmd->exec_path = find_executable(cmd);
 	if (!validate_redir(&cmd->in_file) || !validate_redir(&cmd->out_file))
 		ms_exit(FATAL, E_CODE_FILE);
+	if (get_builtin(cmd).name)
+		return ;
+	cmd->exec_path = find_executable(cmd);
 	if (is_directory(cmd))
 	{
 		print_error(ERR_MS, cmd->command, ERR_DIR, 0);

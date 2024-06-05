@@ -1,6 +1,9 @@
 # To-Do List
 
-- [ ] .
+## signals
+- [ ] signal handling in child process.
+- [ ] signal handling in heredoc.
+- [ ] probably more signal stuff.
 
 ## validate
 - [x] "$HOME here '$HOME' test": expanded single word with enclosed quotes. Print: minishell: /Users/lumik here '/Users/lumik' test: No such file or directory
@@ -19,11 +22,12 @@ Print: minishell: /Users/lumik: is a directory
 
 ## parse
 - [ ] in case of mutlple infiles when one file is invalid, it should NULL the command. (probably need to move file opening to parser then)
+- [ ] simple_cmd and maybe parser function refactor for readability and simplicity
 
 ## exec
 - [x] for path finding, access() needs to be seperated to check for file existance and file access seperately to get the proper error message, even the possiblity of a same executable named file can be accessible in 1 folder, and not accessible in another folder, so I guess keep track of where the files exist and then find which one, if any, is accessible / executable.
 - [ ] make in our minishell does not work, not sure why
-- [ ] builtins properly into exec
+- [x] builtins properly into exec
 - [ ] updated variables to be sent to the execve
 
 - [x] input "$HOME here '$HOME' test"
@@ -34,9 +38,10 @@ minishell: /Users/lumik: is a directory
 
 ## builtins
 - [x] export without args needs to print sorted list of vars
-- [ ] need to be properly handled from execution
-- [ ] exit, cd, export, unset need to be not forked, to handle everythign properly
-
+- [x] need to be properly handled from execution
+- [x] exit, cd, export, unset need to be not forked if they are the only command.
+- [ ] update $OLDPWD and $PWD env variables when using 'cd'.
+- [ ] update $SHLVL properly
 
 ## NORM
 

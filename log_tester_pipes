@@ -1,0 +1,11 @@
+———————————— pipes
+Test   1: ✅ env | sort | grep -v SHLVL | grep -v ^_ 
+Test   2: ✅ cat ./test_files/infile_big | grep oi 
+Test   3: ❌ cat minishell.h | grep ");"$ 
+mini exit code = 139
+bash exit code = 1
+mini error = ()
+bash error = ( No such file or directory)
+Test   4: ✅ export GHOST=123 | env | grep GHOST 
+3/4
+😭 😭 😭

@@ -1,0 +1,48 @@
+———————————— extras
+Test   1: ❌  
+mini exit code = 2
+bash exit code = 0
+Test   2: ✅ $PWD 
+Test   3: ❌ $EMPTY 
+mini exit code = 139
+bash exit code = 0
+Test   4: ❌ $EMPTY echo hi 
+mini output = ()
+bash output = (hi)
+mini exit code = 127
+bash exit code = 0
+mini error = ( command not found)
+bash error = ()
+Test   5: ❌ ./test_files/invalid_permission 
+mini exit code = 13
+bash exit code = 126
+mini error = ( permission denied)
+bash error = ( Permission denied)
+Test   6: ❌ ./missing.out 
+mini exit code = 2
+bash exit code = 127
+mini error = ( no such file or directory)
+bash error = ( No such file or directory)
+Test   7: ✅ missing.out 
+Test   8: ✅ "aaa" 
+Test   9: ❌ test_files 
+mini exit code = 126
+bash exit code = 127
+mini error = ( is a directory)
+bash error = ( command not found)
+Test  10: ✅ ./test_files 
+Test  11: ❌ /test_files 
+mini exit code = 2
+bash exit code = 127
+mini error = ( no such file or directory)
+bash error = ( No such file or directory)
+Test  12: ✅ minishell.h 
+Test  13: ❌ $ 
+mini exit code = 139
+bash exit code = 127
+mini error = ()
+bash error = ( command not found)
+Test  14: ✅ $? 
+Test  15: ✅ README.md 
+7/15
+😭 😭 😭

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 04:30:19 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:44:45 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,10 @@ char	*get_variable(char *var)
 	char	*end;
 
 	end = skip_variable(var);
-	key = ft_safe_strndup(var + 1,  end - var - 1);
+	key = ft_safe_strndup(var + 1, end - var - 1);
 	value = lookup_var(key);
 	ft_free((void **)&key);
-	return (value);	
+	return (value);
 }
 
 char	*exp_next_var(char *var, char **start)
@@ -84,7 +84,7 @@ char	*heredoc_exp(char *str_start)
 	str = str_start;
 	while (*str)
 	{
-		if(*str == '$')
+		if (*str == '$')
 			str = exp_next_var(str, &str_start);
 		else
 			str++;
@@ -98,7 +98,7 @@ char	*exp_word(char *str_start)
 	char			*str;
 
 	str = str_start;
-	quote = NO_QUOTE;	
+	quote = NO_QUOTE;
 	while (*str)
 	{
 		quote = update_quote_type(quote, *str);

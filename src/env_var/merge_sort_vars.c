@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   merge_sort_vars.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 01:50:07 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 01:50:31 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 12:43:44 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	split_list(t_var_list *head, t_var_list **front, t_var_list **back)
 {
-	t_var_list *fast;
-	t_var_list *slow;
+	t_var_list	*fast;
+	t_var_list	*slow;
 
 	slow = head;
 	fast = head->next;
@@ -37,7 +37,7 @@ static void	split_list(t_var_list *head, t_var_list **front, t_var_list **back)
 
 static t_var_list	*merge_sorted_list(t_var_list *a, t_var_list *b)
 {
-	t_var_list *result;
+	t_var_list	*result;
 
 	if (a == NULL)
 		return (b);
@@ -68,7 +68,7 @@ void	merge_sort(t_var_list **vars)
 
 	head = *vars;
 	if (head == NULL || head->next == NULL)
-		return;
+		return ;
 	split_list(head, &a, &b);
 	merge_sort(&a);
 	merge_sort(&b);

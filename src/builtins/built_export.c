@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 04:11:37 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 08:41:31 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	print_sorted_vars(t_var_list *vars)
 	}
 }
 
-int	check_args(int	args)
+int	check_args(int args)
 {
 	if (args == 1)
 	{
@@ -81,7 +81,8 @@ void	built_export(t_cmd *cmd)
 		{
 			if (!check_key(cmd->args[i]))
 			{
-				print_error("minishell: export: ", cmd->args[i], ERR_KEY_VALID, 0);
+				print_error("minishell: export: ",
+					cmd->args[i], ERR_KEY_VALID, 0);
 				i++;
 				ms()->exit = EXIT_FAILURE;
 				continue ;

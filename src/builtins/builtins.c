@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:13:10 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 08:28:14 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 08:40:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_builtin get_builtin(t_cmd *cmd)
+t_builtin	get_builtin(t_cmd *cmd)
 {
 	int	i;
 

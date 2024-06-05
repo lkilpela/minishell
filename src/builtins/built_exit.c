@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   built_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 04:10:45 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 08:42:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int str_is_number(char *str)
+int	str_is_number(char *str)
 {
 	if (*str == '-' || *str == '+')
 		str++;
@@ -76,7 +76,8 @@ void	built_exit(t_cmd *cmd)
 	}
 	if (!non_numeric_exit(cmd->args[1]))
 	{
-		print_error("minishell: exit", cmd->args[1], "numeric argument required", 0);
+		print_error("minishell: exit",
+			cmd->args[1], "numeric argument required", 0);
 		exit_code = 2;
 	}
 	else

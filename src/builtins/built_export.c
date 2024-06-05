@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 23:01:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 01:07:33 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,15 @@ void	built_export(t_cmd *cmd)
 	int		i;
 
 	i = 1;
+	ms()->exit = EXIT_SUCCESS;
 	if (check_args(cmd->num_of_args))
 	{
 		while (i < cmd->num_of_args)
 		{
 			if (!check_key(cmd->args[i]))
 			{
-				print_error("minishell: export: ",
-					cmd->args[i], ERR_KEY_VALID, 0);
+				print_error("minishell: export: ",	
+							cmd->args[i], ERR_KEY_VALID, 0);
 				i++;
 				ms()->exit = EXIT_FAILURE;
 				continue ;
@@ -91,5 +92,4 @@ void	built_export(t_cmd *cmd)
 			i++;
 		}
 	}
-	ms()->exit = EXIT_SUCCESS;
 }

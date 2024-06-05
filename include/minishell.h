@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 04:21:15 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 12:48:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void			safe_close(int fd);
 void			safe_pipe(int *pipedes);
 int				safe_fork(void);
 
-// vars list
+// vars
 t_var_list 		*get_envp(char **envp);
 void			extract_var(char *str, char **key, char **value);
 void			add_var(char *str);
@@ -96,21 +96,9 @@ void			merge_sort(t_var_list **vars);
 char			*lookup_var(char *var_name);
 void			var_remove(char *keyval);
 
-//env var
-int				env_array_size(char **envp);
-char			**env_array_dup(char **envp, int size, int cut);
-void			env_free_array(char **envp);
-int				env_key_len(char *env);
-int				env_is_env(char *env);
-int				env_exists(char *keyval);
-void			env_remove(char *keyval);
-void			env_add(char *keyval);
-
 // expander
-char			*exp_next_var(char *var, char **start);
 char			*exp_word(char *str_start);
 char			*heredoc_exp(char *str_start);
-
 
 // tokenizer
 int				token_len(char *str);
@@ -118,7 +106,6 @@ void			extract_token(char *str, char **value, t_token_type *type);
 t_token_list	*new_tokenizer(char *str);
 void			exp_and_insert(t_token_list **lst);
 void			list_to_list(t_token_list **lst, t_token_list *add, t_token_list **index);
-t_quote_type	update_quote_type(t_quote_type quote_type, char c);
 
 // parser
 t_cmd			*simple_cmd(t_token_list **tokens);

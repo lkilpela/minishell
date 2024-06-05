@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 12:44:45 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:49:42 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-t_quote_type	update_quote_type(t_quote_type quote_type, char c)
+static t_quote_type	update_quote_type(t_quote_type quote_type, char c)
 {
 	if (quote_type == NO_QUOTE)
 	{
@@ -28,23 +28,7 @@ t_quote_type	update_quote_type(t_quote_type quote_type, char c)
 	return (quote_type);
 }
 
-char	*lookup_var(char *var_name)
-{
-	t_var_list	*v;
-
-	v = ms()->var_list;
-	if (*var_name == '?')
-		return (ft_safe_itoa(ms()->exit));
-	while (v)
-	{
-		if (ft_strcmp(v->key, var_name) == 0)
-			return (ft_safe_strdup(v->value));
-		v = v->next;
-	}
-	return (ft_safe_strdup(""));
-}
-
-char	*get_variable(char *var)
+static char	*get_variable(char *var)
 {
 	char	*key;
 	char	*value;
@@ -57,7 +41,7 @@ char	*get_variable(char *var)
 	return (value);
 }
 
-char	*exp_next_var(char *var, char **start)
+static char	*exp_next_var(char *var, char **start)
 {
 	char	*new;
 	char	*beginning;

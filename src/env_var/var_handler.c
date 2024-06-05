@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:33:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/05/28 22:37:35 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 12:49:49 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,20 @@ void	var_remove(char *key)
 		}
 		vars = vars->next;
 	}
+}
+
+char	*lookup_var(char *var_name)
+{
+	t_var_list	*v;
+
+	v = ms()->var_list;
+	if (*var_name == '?')
+		return (ft_safe_itoa(ms()->exit));
+	while (v)
+	{
+		if (ft_strcmp(v->key, var_name) == 0)
+			return (ft_safe_strdup(v->value));
+		v = v->next;
+	}
+	return (ft_safe_strdup(""));
 }

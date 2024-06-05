@@ -15,11 +15,19 @@
 ## exec
 - [ ] make in our minishell does not work, not sure why
 - [ ] updated variables to be sent to the execve
-- [ ] SEGFAULT
+- [ ] bash has exit code `0` vs minishell has exit code `139`
+minishell$ $EMPTY
+minishell$ echo $?
+139
+
+
+
+- [x] SEGFAULT
 minishell$ doesntexist
 minishell: doesntexist: command not found
 minishell$ $EMPTY
 zsh: segmentation fault  ./minishell
+https://github.com/lkilpela/minishell/commit/9ca9fad2ad6d794c093847263293970c69d47c00
 
 ## builtins
 - [ ] update $OLDPWD and $PWD env variables when using 'cd'.

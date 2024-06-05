@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 20:23:18 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/06 00:55:15 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	child(t_list *cmds, int *pipe_in)
 	int		heredoc_pipefd[2];
 
 	cmd = (t_cmd *)cmds->content;
+	if (!cmd->command)
+		ms_exit(FATAL, EXIT_SUCCESS);
 	if (!validate_redir_list(cmd))
 		ms_exit(FATAL, EXIT_FAILURE);
 	validate_command(cmd);

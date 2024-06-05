@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 22:48:57 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 00:47:00 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ t_cmd	*simple_cmd(t_token_list **tokens)
 		else if ((*tokens)->type == WORD && cmd->command == NULL)
 		{
 			parse_command(cmd, tokens);
-			parse_args(cmd, tokens);
+			if (cmd->command)
+				parse_args(cmd, tokens);
 			i = 1;
 		}
 		else if ((*tokens)->type == WORD)

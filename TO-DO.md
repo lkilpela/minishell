@@ -16,11 +16,30 @@
 - [ ] make in our minishell does not work, not sure why
 - [ ] updated variables to be sent to the execve
 - [ ] bash has exit code `0` vs minishell has exit code `139`
+```
 minishell$ $EMPTY
 minishell$ echo $?
 139
+```
+- [ ] Minishell's ouput is missing `-`
 
+echo - "" "  " hello
 
+expected output: `- <empty>    hello`
+```
+minishell$ echo - "" "  " hello
+a_token_value: echo                 a_token_type: WORD
+a_token_value: -                    a_token_type: WORD
+a_token_value: ""                   a_token_type: WORD
+a_token_value: "  "                 a_token_type: WORD
+a_token_value: hello                a_token_type: WORD
+Command 1:
+Input redirection: (null)
+Output redirection: (null)
+Command: echo
+Args (5): <echo> <-> <> <  > <hello> 
+    hellominishell$ 
+```
 
 - [x] SEGFAULT
 minishell$ doesntexist

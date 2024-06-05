@@ -6,15 +6,17 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:06:24 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 08:40:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 10:17:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	check_flag(char *arg)
+/*int	check_flag(char *arg)
 {
 	if (*arg++ != '-')
+		return (0);
+	if (*arg == '\0')
 		return (0);
 	while (*arg)
 	{
@@ -22,6 +24,10 @@ int	check_flag(char *arg)
 			return (0);
 	}
 	return (1);
+}*/
+int	check_flag(char *arg)
+{
+	return (ft_strcmp(arg, "-n") == 0);
 }
 
 void	built_echo(t_cmd *cmd)

@@ -21,11 +21,24 @@ minishell$ $EMPTY
 minishell$ echo $?
 139
 ```
-- [x] Minishell's ouput is missing `-`
+- [ ] SEGFAULT
+```
+minishell$ echo $USER
+lumik
+minishell$ unset USER
+minishell$ echo $USER
+zsh: segmentation fault  ./minishell
+```
+
+- [x] Echo's ouput is missing `-`
 
 echo - "" "  " hello
 
-expected output: `- <empty>    hello`
+Expected output: 
+```
+-     hello
+```
+
 Current output:
 ```
 minishell$ echo - "" "  " hello

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 23:18:21 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 00:21:48 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ static char	*get_variable(char *var)
 	return (value);
 }
 
+int	special_case_dollar(char *var)
+{
+	if (*var == '$')
+	{
+		var++;
+		if (*var == 0)
+			return (1);
+		if (*var == '_')
+			return (0);
+		if (!ft_isalnum(*var))
+			return (2);
+	}
+	return (0);
+}
+
 static char	*exp_next_var(char *var, char **start)
 {
 	char	*new;
@@ -52,7 +67,7 @@ static char	*exp_next_var(char *var, char **start)
 	beginning = ft_safe_strndup(*start, var - *start);
 	value = get_variable(var);
 	new = ft_safe_strjoin(beginning, value);
-	ret_index = ft_strlen(new);
+	ret_index = ft_strlen(new) + special_case_dollar(var);
 	ft_free((void **)&beginning);
 	ft_free((void **)&value);
 	final = ft_safe_strjoin(new, skip_variable(var));
@@ -83,12 +98,6 @@ char	*exp_word(char *str_start)
 
 	str = str_start;
 	quote = NO_QUOTE;
-	if ((str[0] == '$' && str[1] == '\0') ||
-		(str[0] == '\'' && str[1] == '$' && str[2] == '\'' && str[3] == '\0') ||
-		(str[0] == '"' && str[1] == '$' && str[2] == '"' && str[3] == '\0'))
-	{
-		return (ft_strdup(str));
-	}
 	while (*str)
 	{
 		quote = update_quote_type(quote, *str);

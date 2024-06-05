@@ -6,7 +6,7 @@
 #    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/05 13:28:52 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/06/05 14:07:10 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,6 @@ SRCS			=	minishell.c \
 					print_err.c \
 					ms_exit.c \
 					lalloc.c \
-					safe_alloc.c \
 					safe_alloc1.c \
 					safe_alloc2.c \
 					signals.c \

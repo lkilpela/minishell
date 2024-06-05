@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 04:15:16 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 14:06:53 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,15 @@ static void	exec_command(t_cmd *cmd)
 	}
 }
 
+static void	handle_heredoc_fd(t_cmd *cmd, int *pipe_in, int *heredoc_pipefd)
+{
+	safe_pipe(heredoc_pipefd);
+	write(heredoc_pipefd[P_WRITE], cmd->heredoc, ft_strlen(cmd->heredoc));
+	safe_close(heredoc_pipefd[P_WRITE]);
+	safe_close(*pipe_in);
+	*pipe_in = heredoc_pipefd[P_READ];
+}
+
 //line 71: not first or coming from heredoc
 //line 76: not last
 void	child(t_list *cmds, int *pipe_in)
@@ -61,13 +70,7 @@ void	child(t_list *cmds, int *pipe_in)
 	cmd = (t_cmd *)cmds->content;
 	validate_command(cmd);
 	if (cmd->heredoc)
-	{
-		safe_pipe(heredoc_pipefd);
-		write(heredoc_pipefd[P_WRITE], cmd->heredoc, ft_strlen(cmd->heredoc));
-		safe_close(heredoc_pipefd[P_WRITE]);
-		safe_close(*pipe_in);
-		*pipe_in = heredoc_pipefd[P_READ];
-	}
+		handle_heredoc_fd(cmd, pipe_in, heredoc_pipefd);
 	if (*pipe_in != -1)
 	{
 		safe_dup2(*pipe_in, STDIN_FILENO);
@@ -82,3 +85,5 @@ void	child(t_list *cmds, int *pipe_in)
 	dupes(cmd);
 	exec_command(cmd);
 }
+
+

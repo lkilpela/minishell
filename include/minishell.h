@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 13:53:11 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:28:07 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ char			*find_executable(t_cmd *cmd);
 void			execute_commands(t_list *c);
 void			child(t_list *cmds, int *pipe_in);
 int				validate_redir(t_redir *file);
+int				validate_redir_list(t_cmd *cmd);
 void			validate_command(t_cmd *cmd);
 
 //builtins

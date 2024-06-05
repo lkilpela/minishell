@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 15:20:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:06:44 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static int	count_args(t_token_list **tokens)
 	t_token_list	*current;
 
 	current = *tokens;
+	current = current->next;
 	count = 0;
 	while (current && current->type != OP_PIPE)
 	{
@@ -66,7 +67,6 @@ static void	parse_command(t_cmd *cmd, t_token_list **tokens)
 		if (*tokens != NULL)
 		{
 			cmd->command = (*tokens)->value;
-			(*tokens) = (*tokens)->next;
 		}
 	}
 }
@@ -96,7 +96,6 @@ t_cmd	*simple_cmd(t_token_list **tokens)
 			parse_command(cmd, tokens);
 			parse_args(cmd, tokens);
 			i = 1;
-			continue ;
 		}
 		else if ((*tokens)->type == WORD)
 			cmd->args[i++] = (*tokens)->value;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 13:13:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:37:23 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_cmd
 	int		num_of_args;
 	t_redir	in_file;
 	t_redir	out_file;
+	t_list	*redirs;
 	char	*heredoc;
 	int		heredoc_expand;
 	char	*heredoc_delim;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 15:24:00 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:55:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	minishell_loop(void)
 		//printf(GREEN "Calling tokenizer: \n" RESET);
 		if (all_good)
 			ms()->tokens = new_tokenizer(input);
-		//print_tokens(ms()->tokens);
+		print_tokens(ms()->tokens);
 		if (all_good && !near_token_errors(ms()->tokens)) // check for errors in token list
 			all_good = ms_exit(RELINE, E_CODE_SYNTX);
 		if (all_good)

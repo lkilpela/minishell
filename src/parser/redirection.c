@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 02:51:47 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 19:56:55 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static char	*heredoc(t_cmd *cmd)
 static t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens)
 {
 	cmd->in_file.type = INFILE;
-	if (cmd->in_file.file)
-		ft_free((void **)&cmd->in_file.file);
 	if (cmd->heredoc)
 		ft_free((void **)&cmd->heredoc);
 	tokens = tokens->next;
@@ -54,7 +52,21 @@ static t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens)
 	tokens->value = handle_node_quotes(tokens->value);
 	cmd->heredoc_delim = ft_safe_strjoin(tokens->value, "\n");
 	cmd->heredoc = heredoc(cmd);
-	return (tokens->next);
+	return (tokens);
+}
+
+void	add_redir(t_redir *redir, t_cmd	*cmd)
+{
+	t_list	*node;
+	t_redir	*new;
+
+	if (redir->file)
+	{
+		new = ft_safe_calloc(1, sizeof(t_redir));
+		*new = *redir;
+		node = ft_safe_lstnew(new);
+		ft_lstadd_back(&cmd->redirs, node);
+	}
 }
 
 static t_token_list	*handle_input_redir(t_cmd *cmd, t_token_list *tokens)
@@ -76,7 +88,7 @@ static t_token_list	*handle_input_redir(t_cmd *cmd, t_token_list *tokens)
 			tokens->value = val;
 			cmd->in_file.file = tokens->value;
 		}
-		return (tokens->next);
+		add_redir(&cmd->in_file, cmd);
 	}
 	return (tokens);
 }
@@ -101,7 +113,7 @@ static t_token_list	*handle_output_redir(t_cmd *cmd, t_token_list *tokens)
 			tokens->value = val;
 			cmd->out_file.file = tokens->value;
 		}
-		return (tokens->next);
+		add_redir(&cmd->out_file, cmd);
 	}
 	return (tokens);
 }

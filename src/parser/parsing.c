@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 14:00:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:28:22 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-void	*ft_safe_lstnew(void *content)
-{
-	t_list	*node;
-
-	node = ft_lstnew(content);
-	if (!node)
-		ft_error(E_CODE_ERRNO + errno);
-	add_to_lal((void *)node);
-	return (node);
-}
 
 void	clear_token_quotes(t_token_list *tokens)
 {
@@ -44,7 +33,10 @@ t_list	*parser(t_token_list *tokens)
 	while (tokens)
 	{
 		new_cmd = simple_cmd(&tokens);
-		ft_lstadd_back(&cmd_list, ft_safe_lstnew(new_cmd));
+		if (!validate_redir_list(new_cmd))
+			ft_free((void **)&new_cmd);
+		else
+			ft_lstadd_back(&cmd_list, ft_safe_lstnew(new_cmd));
 		if (tokens)
 			tokens = tokens->next;
 	}

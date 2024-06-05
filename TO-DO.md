@@ -10,6 +10,7 @@
 
 ## parse
 - [ ] in case of mutlple infiles when one file is invalid, it should NULL the command. (probably need to move file opening to parser then)
+- [ ] SEGFAULT with minishell$ cat `minishell$ cat <minishell.h <<HERE <missing | ls`
 
 **I CHECKED AND IT WORKED LIKE BASH. What case you meant need to be fixed?**
 ```

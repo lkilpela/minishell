@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 13:52:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 20:06:12 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+int	validate_redir_list(t_cmd *cmd)
+{
+	t_redir	*redir;
+	t_list	*redirs;
+
+	redirs = cmd->redirs;
+	while (redirs)
+	{
+		redir = (t_redir *)redirs->content;
+		if (!validate_redir(redir))
+			return (0);
+		if (redir->type == INFILE)
+			cmd->in_file = *redir;
+		if (redir->type == OUTFILE)
+			cmd->out_file = *redir;
+		redirs = redirs->next;
+	}
+	return (1);
+}
 
 int	validate_redir(t_redir *file)
 {
@@ -78,8 +98,6 @@ static void	validate_executable(t_cmd *cmd)
 
 void	validate_command(t_cmd *cmd)
 {
-	if (!validate_redir(&cmd->in_file) || !validate_redir(&cmd->out_file))
-		ms_exit(FATAL, E_CODE_FILE);
 	if (get_builtin(cmd).name)
 		return ;
 	if (is_directory(cmd))

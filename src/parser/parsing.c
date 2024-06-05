@@ -6,11 +6,22 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 04:21:01 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:56:30 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+void	*ft_safe_lstnew(void *content)
+{
+	t_list	*node;
+
+	node = ft_lstnew(content);
+	if (!node)
+		ft_error(E_CODE_ERRNO + errno);
+	add_to_lal((void *)node);
+	return (node);
+}
 
 t_list	*parser(t_token_list *tokens)
 {

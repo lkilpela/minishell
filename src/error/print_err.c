@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_err.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:27:56 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 13:28:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 00:43:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	near_token_errors(t_token_list *tokens)
 	t_token_list	*near;
 
 	if (!tokens)
-		return (0);
+		return (1);
 	if (tokens->type == OP_PIPE)
 	{
 		print_near_error(tokens);

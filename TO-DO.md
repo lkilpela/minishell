@@ -53,7 +53,13 @@ bash$ echo $hello
 
 bash$ 
 ```
-
+- [ ] exit code should be 1 & ``A-'`
+```
+minishell$ export A-
+minishell: export: : A-: not a valid identifier
+minishell$ echo $?
+0
+```
 ## NORM
 
 1. minishell.c

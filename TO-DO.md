@@ -55,7 +55,12 @@ https://github.com/lkilpela/minishell/commit/9ca9fad2ad6d794c093847263293970c69d
 ## builtins
 - [ ] update $OLDPWD and $PWD env variables when using 'cd'.
 - [ ] update $SHLVL properly
-
+- [ ] after `unset PATH` and then `echo $PATH` should give an error message
+```
+lumik$ unset PATH
+lumik$ echo $PATH
+bash: sed: No such file or directory
+```
 ## NORM
 
 child.c: Error!

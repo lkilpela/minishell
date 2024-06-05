@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 04:23:32 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/05 11:59:55 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,30 @@ static int	is_directory(t_cmd *cmd)
 	return (0);
 }
 
-void	print_args(t_cmd *cmd)
+static void	validate_executable(t_cmd *cmd)
 {
-	int	i;
-	int	total_len;
-	char *args_str;
-
-	i = 0;
-	total_len = 0;
-	while (i < cmd->num_of_args)
+	cmd->exec_path = find_executable(cmd);
+	if (cmd->exec_path != NULL)
 	{
-		total_len += ft_strlen(cmd->args[i]);
-		i++;
+		if(access(cmd->exec_path, X_OK) == -1)
+		{
+			if (errno == ENOENT)
+			{
+				print_error(ERR_MS, cmd->command, ERR_FILE, 0);
+				ms_exit(FATAL, ENOENT);
+			}
+			else if (errno == EACCES)
+			{
+				print_error(ERR_MS, cmd->command, ERR_PERM, 0);
+				ms_exit(FATAL, EACCES);
+			}
+		}
 	}
-	total_len += cmd->num_of_args - 1 + 1;
-	args_str = ft_safe_calloc(total_len, sizeof(char));
-	i = 0;
-	while (i < cmd->num_of_args)
+	else
 	{
-		ft_strlcat(args_str, cmd->args[i], total_len);
-		if (cmd->args[i + 1])
-			ft_strlcat(args_str, " ", total_len);
-		i++;
+		print_error(ERR_MS, cmd->command, ERR_CMD, 0);
+		ms_exit(FATAL, E_CODE_CMD_NFOUND);
 	}
-	print_error(ERR_MS, args_str, ERR_DIR, 0);
-	ft_free((void **)&args_str);
 }
 
 void	validate_command(t_cmd *cmd)
@@ -83,31 +82,10 @@ void	validate_command(t_cmd *cmd)
 		ms_exit(FATAL, E_CODE_FILE);
 	if (get_builtin(cmd).name)
 		return ;
-	cmd->exec_path = find_executable(cmd);
 	if (is_directory(cmd))
 	{
 		print_error(ERR_MS, cmd->command, ERR_DIR, 0);
 		ms_exit(FATAL, E_CODE_CMD_NEXEC);
 	}
-	if (cmd->exec_path != NULL)
-	{
-		if(access(cmd->exec_path, X_OK) == -1)
-		{
-			if (errno == ENOENT)
-            {
-                print_error(ERR_MS, cmd->command, ERR_FILE, 0);
-                ms_exit(FATAL, ENOENT);
-            }
-            else if (errno == EACCES)
-            {
-                print_error(ERR_MS, cmd->command, ERR_PERM, 0);
-                ms_exit(FATAL, EACCES);
-            }
-		}
-	}
-	else
-	{
-		print_error(ERR_MS, cmd->command, ERR_CMD, 0);
-		ms_exit(FATAL, E_CODE_CMD_NFOUND);
-	}
+	validate_executable(cmd);
 }

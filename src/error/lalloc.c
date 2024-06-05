@@ -6,20 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:39:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 05:42:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:14:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static void	free_content(void *content)
-{
-	if (content != NULL)
-	{
-		free(content);
-		content = NULL;
-	}
-}
 
 static void	ft_lst_remove_if(t_list **lst, void *data_ref,
 							int (*cmp)(void *, void *), void (*del)(void *))
@@ -52,14 +43,6 @@ static int	same_ptr(void *ptr, void *ptr2)
 static void	free_one_lal(void *ptr)
 {
 	ft_lst_remove_if(allocs(), ptr, same_ptr, free_content);
-}
-
-void	clear_lal(void)
-{
-	t_list	**lalloc;
-
-	lalloc = allocs();
-	ft_lstclear(lalloc, free_content);
 }
 
 void	add_to_lal(void *ptr)

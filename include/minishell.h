@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 12:58:43 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:14:38 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ void			init_signals(void);
 
 // lalloc
 void			add_to_lal(void *ptr);
-void			clear_lal(void);
+//void			clear_lal(void);
 void			ft_free(void **ptr);
+void			free_content(void *content);
 
 // error
 int				ms_exit(t_err type, int error_code);

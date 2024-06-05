@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:25:06 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 05:28:20 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:09:51 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,60 +18,7 @@ void	ft_error(int exit_code)
 	ms_exit(FATAL, exit_code);
 }
 
-void	clear_tokens(void)
-{
-	t_token_list	*tokens;
 
-	tokens = ms()->tokens;
-	while (tokens)
-	{
-		ft_free((void **)&tokens->value);
-		ft_free((void **)&tokens);
-		tokens = tokens->next;
-	}
-	ms()->tokens = NULL;
-}
-
-void	clear_cmds(void)
-{
-	t_list	*cmds;
-	t_cmd	*cmd;
-	int		i;
-
-	cmds = ms()->commands;
-	while (cmds)
-	{
-		cmd = (t_cmd *)cmds->content;
-		ft_free((void **)&cmd->command);
-		ft_free((void **)&cmd->heredoc);
-		ft_free((void **)&cmd->heredoc_delim);
-		ft_free((void **)&cmd->exec_path);
-		i = 0;
-		while (cmd->args[i])
-			ft_free((void **)&cmd->args[i++]);
-		ft_free((void **)&cmd->args);
-		cmds = cmds->next;
-	}
-	ms()->commands = NULL;
-}
-
-int	ms_exit(t_err type, int error_code)
-{
-	if (error_code != -1)
-		ms()->exit = error_code;
-	if (type == RELINE)
-	{
-		clear_cmds();
-		clear_tokens();
-		return (0);
-	}
-	if (type == FATAL)
-	{
-		clear_lal();
-		exit(ms()->exit);
-	}
-	return (1);
-}
 
 void	print_error(char *from, char *bad_arg, char *custom, int is_errno)
 {

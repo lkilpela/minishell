@@ -106,8 +106,7 @@ Error: TOO_MANY_LINES       (line:  46, col:   1):      Function has more than 2
 
 3. Parser
 parser_utils.c: Error!
-Error: TOO_MANY_FUNCS       (line:  96, col:   1):      Too many functions in file
-- UNUSED FUNC: void	clear_token_quotes(t_token_list *t)
+Error: TOO_MANY_FUNCS       (line:  96, col:   1):      Too many 
 
 4. Error
 errors.c: Error!
@@ -121,13 +120,7 @@ lalloc.c: Error!
 Error: TOO_MANY_FUNCS       (line:  65, col:   1):      Too many functions in file
 Error: TOO_MANY_FUNCS       (line:  77, col:   1):      Too many functions in file
 
-5. Builtins
-waiting for cleaning up
-
-6. env_var
-waiting for cleaning up
-
-7. minishell.h
+5. minishell.h
 Error: PREPROC_CONSTANT     (line:  37, col:  20):      Preprocessor statement must only contain constant defines
 Error: PREPROC_CONSTANT     (line:  38, col:  23):      Preprocessor statement must only contain constant defines
 Error: PREPROC_CONSTANT     (line:  40, col:  22):      Preprocessor statement must only contain constant defines

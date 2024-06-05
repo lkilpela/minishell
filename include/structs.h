@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 13:02:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:13:50 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 /******************************************************************************\
  * MINISHELL
 \******************************************************************************/
+typedef struct s_var_list	t_var_list;
+typedef struct s_token_list	t_token_list;
+typedef struct s_cmd		t_cmd;
+typedef struct s_builtin	t_builtin;
+
 typedef struct s_ms
 {
 	char				**argv;

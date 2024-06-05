@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 11:59:55 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 13:52:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	validate_executable(t_cmd *cmd)
 	cmd->exec_path = find_executable(cmd);
 	if (cmd->exec_path != NULL)
 	{
-		if(access(cmd->exec_path, X_OK) == -1)
+		if (access(cmd->exec_path, X_OK) == -1)
 		{
 			if (errno == ENOENT)
 			{

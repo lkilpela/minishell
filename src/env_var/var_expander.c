@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 22:49:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 23:18:21 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ char	*exp_word(char *str_start)
 	str = str_start;
 	quote = NO_QUOTE;
 	if ((str[0] == '$' && str[1] == '\0') ||
-        (str[0] == '\'' && str[1] == '$' && str[2] == '\'' && str[3] == '\0') ||
-        (str[0] == '"' && str[1] == '$' && str[2] == '"' && str[3] == '\0'))
-    {
-        return (ft_strdup(str));
-    }
+		(str[0] == '\'' && str[1] == '$' && str[2] == '\'' && str[3] == '\0') ||
+		(str[0] == '"' && str[1] == '$' && str[2] == '"' && str[3] == '\0'))
+	{
+		return (ft_strdup(str));
+	}
 	while (*str)
 	{
 		quote = update_quote_type(quote, *str);

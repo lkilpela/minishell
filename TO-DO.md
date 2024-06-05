@@ -96,7 +96,8 @@ bash$ pwd
 
 ## NORM
 
-child.c: Error!
+
+1. child.c: Error!
 Error: TOO_MANY_LINES       (line:  84, col:   1):      Function has more than 25 lines
 
 2. Tokenizer
@@ -126,6 +127,10 @@ waiting for cleaning up
 6. env_var
 waiting for cleaning up
 
+7. minishell.h
+Error: PREPROC_CONSTANT     (line:  37, col:  20):      Preprocessor statement must only contain constant defines
+Error: PREPROC_CONSTANT     (line:  38, col:  23):      Preprocessor statement must only contain constant defines
+Error: PREPROC_CONSTANT     (line:  40, col:  22):      Preprocessor statement must only contain constant defines
 
 
 #DONE

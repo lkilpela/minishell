@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 12:48:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 12:58:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@
 # define BLUE "\001\e[0;34m\002"
 # define CYAN "\001\e[0;36m\002"
 
-#define PERMISSION 0644
-#define O_INFILE O_RDONLY
-#define O_OUTFILE (O_CREAT | O_WRONLY | O_TRUNC)
-#define O_APPENDFILE (O_CREAT | O_WRONLY | O_APPEND)
+# define PERMISSION 0644
+# define O_INFILE O_RDONLY
+# define O_OUTFILE (O_CREAT | O_WRONLY | O_TRUNC)
+# define O_APPENDFILE (O_CREAT | O_WRONLY | O_APPEND)
 
 # define PROMPT GREEN"minishell$ "RESET
 # define DOLLAR_SIGN '$'
@@ -49,19 +49,17 @@
 // minishell
 t_ms			*ms(void);
 
-
 // init
 void			init_minishell(int argc, char **argv, char **envp);
 void			init_redir(t_cmd *cmd);
 void			init_builtins(void);
 
 // signals
-void			init_signals();
-//void			sigint_handler(int sig);
+void			init_signals(void);
 
 // lalloc
 void			add_to_lal(void *ptr);
-void			clear_lal();
+void			clear_lal(void);
 void			ft_free(void **ptr);
 
 // error
@@ -71,7 +69,8 @@ int				pipe_start_end(t_token_list *tokens);
 int				near_token_errors(t_token_list *tokens);
 void			ft_error(int exit_code);
 t_list			**allocs(void);
-void			print_error(char *from, char *bad_arg, char *custom, int is_errno);
+void			print_error(char *from, char *bad_arg,
+					char *custom, int is_errno);
 
 // safe
 char			*ft_safe_strjoin(const char *s1, const char *s2);
@@ -87,7 +86,7 @@ void			safe_pipe(int *pipedes);
 int				safe_fork(void);
 
 // vars
-t_var_list 		*get_envp(char **envp);
+t_var_list		*get_envp(char **envp);
 void			extract_var(char *str, char **key, char **value);
 void			add_var(char *str);
 void			add_var_to_list(t_var_list **head, t_var_list *node);
@@ -105,7 +104,8 @@ int				token_len(char *str);
 void			extract_token(char *str, char **value, t_token_type *type);
 t_token_list	*new_tokenizer(char *str);
 void			exp_and_insert(t_token_list **lst);
-void			list_to_list(t_token_list **lst, t_token_list *add, t_token_list **index);
+void			list_to_list(t_token_list **lst,
+					t_token_list *add, t_token_list **index);
 
 // parser
 t_cmd			*simple_cmd(t_token_list **tokens);
@@ -121,14 +121,13 @@ void			init_path_dirs(void);
 char			*find_executable(t_cmd *cmd);
 void			execute_commands(t_list *c);
 void			child(t_list *cmds, int *pipe_in);
-int				builtin_cmd(t_cmd *cmd);
-int 			validate_redir(t_redir *file);
+int				validate_redir(t_redir *file);
 void			validate_command(t_cmd *cmd);
 
 //builtins
 int				execute_builtin(t_cmd *cmd);
 int				is_special_builtin(t_cmd *cmd);
-t_builtin 		get_builtin(t_cmd *cmd);
+t_builtin		get_builtin(t_cmd *cmd);
 void			built_echo(t_cmd *cmds);
 void			built_pwd(t_cmd *cmds);
 void			built_exit(t_cmd *cmds);
@@ -154,13 +153,13 @@ char			*ft_strndup(const char *str, size_t len);
 int				ft_strcmp(char *s1, char *s2);
 
 // FOR TESTING **REMOVE WHEN SUBMIT**
-void 			print_var_list(void);
-void			print_lalloc();
-void 			print_last_node(void);
-void 			print_tokens(t_token_list *lst);
+void			print_var_list(void);
+void			print_lalloc(void);
+void			print_last_node(void);
+void			print_tokens(t_token_list *lst);
 void			free_token_list(t_token_list **lst);
-void 			print_a_token(t_token_list *lst);
-void 			print_last_token_node(t_token_list *t);
+void			print_a_token(t_token_list *lst);
+void			print_last_token_node(t_token_list *t);
 char			*get_type_str(int e);
 void			print_cmds(t_list *cmd);
 void			print_executable(t_list *cmds);

@@ -15,6 +15,11 @@
 ## exec
 - [ ] make in our minishell does not work, not sure why
 - [ ] updated variables to be sent to the execve
+- [ ] SEGFAULT
+minishell$ doesntexist
+minishell: doesntexist: command not found
+minishell$ $EMPTY
+zsh: segmentation fault  ./minishell
 
 ## builtins
 - [ ] update $OLDPWD and $PWD env variables when using 'cd'.

@@ -43,7 +43,7 @@ minishell$ cat <minishell.h <<HERE | cat
 ```
 Expected output: `bash: minishell.h: No such file or directory`
 
-- [x] handle `cat <minishell.h <<HERE | cat`
+- [x] handle `cat <minishell.h <<HERE <missing <<DOC | echo oi`
 ```
 minishell$ cat <minishell.h <<HERE <missing <<DOC | echo oi
 > HERE

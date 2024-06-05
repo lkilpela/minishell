@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 14:12:05 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 20:23:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	child(t_list *cmds, int *pipe_in)
 	int		heredoc_pipefd[2];
 
 	cmd = (t_cmd *)cmds->content;
+	if (!validate_redir_list(cmd))
+		ms_exit(FATAL, EXIT_FAILURE);
 	validate_command(cmd);
 	if (cmd->heredoc)
 		handle_heredoc_fd(cmd, pipe_in, heredoc_pipefd);

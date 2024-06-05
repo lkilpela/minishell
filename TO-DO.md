@@ -125,6 +125,9 @@ Error: PREPROC_CONSTANT     (line:  37, col:  20):      Preprocessor statement m
 Error: PREPROC_CONSTANT     (line:  38, col:  23):      Preprocessor statement must only contain constant defines
 Error: PREPROC_CONSTANT     (line:  40, col:  22):      Preprocessor statement must only contain constant defines
 
+6. Unused function
+errors.c
+int	pipe_start_end(t_token_list *tokens)
 
 #DONE
 

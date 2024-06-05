@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
+#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/05 02:24:14 by aklein           ###   ########.fr        #
+#    Updated: 2024/06/05 12:41:56 by lkilpela         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,10 +57,10 @@ SRCS			=	minishell.c \
 					built_export.c \
 					built_unset.c \
 					built_exit.c \
-					env_handler.c \
 					var_expander.c \
 					var_handler.c \
 					var_list.c \
+					merge_sort_vars.c \
 					parsing.c \
 					redirection.c \
 					simple_cmd.c \
@@ -76,7 +76,6 @@ SRCS			=	minishell.c \
 					child.c \
 					exec.c \
 					path.c \
-					merge_sort_vars.c
 
 ################################################################################
 # RULES

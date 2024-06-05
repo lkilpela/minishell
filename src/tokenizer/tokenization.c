@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 03:41:14 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/04 04:41:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 03:02:34 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static t_token_list	*create_token(t_token_type type, char *value)
 	t_token_list	*node;
 
 	node = ft_safe_calloc(1, sizeof(t_token_list));
-	if (type != WORD)
-		handle_node_quotes(value);
 	if (type == WORD)
 		node->expand = 1;
 	node->type = type;

@@ -1,18 +1,21 @@
 # To-Do List
 
-## validate
-- [ ] "$HOME here '$HOME' test": expanded single word with enclosed quotes. Print: minishell: /Users/lumik here '/Users/lumik' test: No such file or directory
+- [ ] .
 
-- [ ] "$HOME": expanded single word with enclosed quotes.
+## validate
+- [x] "$HOME here '$HOME' test": expanded single word with enclosed quotes. Print: minishell: /Users/lumik here '/Users/lumik' test: No such file or directory
+
+- [x] "$HOME": expanded single word with enclosed quotes.
 Print: minishell: /Users/lumik: is a directory
 
-- [ ] "$HOME" here: two words, expanded var & arg here
+- [x] "$HOME" here: two words, expanded var & arg here
 Print: minishell: /Users/lumik: is a directory
 
 - [x] validate command is a directory, error msg: bash is showing cmd not executable for this, which makes sense, so error code `E_CODE_CND_NEXEC = 126`
 - [x] validate command is not existed, error msg: `command not found - errcode: E_CODE_CMD_NFOUND = 127`
 - [x] validate command is not executable, error msg: `permission denied - errcode: E_CODE_CMD_NEXEC = 126`
 - [x] validate infile/outfile is not existed, error msg: (my bash is showing 1?)`No such file or directory - errcode: E_CODE_FILE = 1
+- [ ] in case of mutlple infiles
 
 ## exec
 - [x] for path finding, access() needs to be seperated to check for file existance and file access seperately to get the proper error message, even the possiblity of a same executable named file can be accessible in 1 folder, and not accessible in another folder, so I guess keep track of where the files exist and then find which one, if any, is accessible / executable.
@@ -20,24 +23,19 @@ Print: minishell: /Users/lumik: is a directory
 - [ ] builtins properly into exec
 - [ ] updated variables to be sent to the execve
 
-- [ ] input "$HOME here '$HOME' test"
+- [x] input "$HOME here '$HOME' test"
 Expected output:
 bash: /Users/lumik here '/Users/lumik' test: No such file or directory
 Current output:
 minishell: /Users/lumik: is a directory
 
 ## builtins
+- [x] export without args needs to print sorted list of vars
 - [ ] need to be properly handled from execution
 - [ ] exit, cd, export, unset need to be not forked, to handle everythign properly
-- [ ] export without args needs to print sorted list of vars
-- [ ] exit and Ctr C not working properly, 
 
 
 ## NORM
-1. Execution
-validate.c: Error!
-Error: PREPROC_CONSTANT     (line:  17, col:  19):      Preprocessor statement must only contain constant defines
-Error: PREPROC_CONSTANT     (line:  18, col:  22):      Preprocessor statement must only contain constant defines
 
 child.c: Error!
 Error: TOO_MANY_LINES       (line:  84, col:   1):      Function has more than 25 lines

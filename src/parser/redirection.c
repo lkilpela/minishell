@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 04:20:30 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/05 02:51:47 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static t_token_list	*handle_input_redir(t_cmd *cmd, t_token_list *tokens)
 			cmd->in_file.file = NULL;
 		else
 		{
+			val = handle_node_quotes(val);
 			tokens->value = val;
 			cmd->in_file.file = tokens->value;
 		}
@@ -96,6 +97,7 @@ static t_token_list	*handle_output_redir(t_cmd *cmd, t_token_list *tokens)
 			cmd->out_file.file = NULL;
 		else
 		{
+			val = handle_node_quotes(val);
 			tokens->value = val;
 			cmd->out_file.file = tokens->value;
 		}

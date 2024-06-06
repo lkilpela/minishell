@@ -4,11 +4,10 @@
 - [ ] signal handling in child process.
 - [ ] signal handling in heredoc.
 - [ ] probably more signal stuff.
+- [ ] manual_tests/signals.txt 
 
 ## validate
 ## parse
-
-
 ## exec
 - [ ] make in our minishell does not work, not sure why
 - [ ] updated variables to be sent to the execve

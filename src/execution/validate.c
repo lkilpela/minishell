@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 20:06:12 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/06 15:40:15 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ static void	validate_executable(t_cmd *cmd)
 			if (errno == ENOENT)
 			{
 				print_error(ERR_MS, cmd->command, ERR_FILE, 0);
-				ms_exit(FATAL, ENOENT);
+				ms_exit(FATAL, E_CODE_CMD_NFOUND);
 			}
 			else if (errno == EACCES)
 			{
 				print_error(ERR_MS, cmd->command, ERR_PERM, 0);
-				ms_exit(FATAL, EACCES);
+				ms_exit(FATAL, E_CODE_CMD_NEXEC);
 			}
 		}
 	}

@@ -18,12 +18,21 @@
 - [ ] update $OLDPWD and $PWD env variables when using 'cd'.
 - [ ] update $SHLVL properly
 - [ ] specical case export `export whatever=test | grep ok | cat`
+- [ ] Test  40: ❌ cd $PWD hi 
+mini exit code = 1
+bash exit code = 0
+mini error = ( too many arguments)
+bash error = ()
 
+- [ ] Test  50: ❌ exit hello 
+mini exit code = 2
+bash exit code = 255
 
 
 - [ ] bash changes the current directory 
 ```
-minishell$ cd .. hi
+minishell$ 
+
 minishell: cd: too many arguments
 ```
 ```

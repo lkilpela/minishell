@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/06 11:04:11 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:32:27 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	extract_var(char *str, char **key, char **value)
 	if (!equal_sign)
 	{
 		*key = ft_safe_strdup(str);
+		*value = ft_safe_strdup("");
 		return ;
 	}
 	*key = ft_safe_strndup(str, equal_sign - str);
@@ -73,7 +74,7 @@ void	add_var(char *str)
 	char		*value;
 
 	extract_var(str, &key, &value);
-	if (!key || !*key)
+	if (!key || !*key || !value)
 		return ;
 	vars = ms()->var_list;
 	while (vars)

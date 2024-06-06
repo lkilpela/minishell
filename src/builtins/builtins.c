@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:13:10 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/06 09:10:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 10:14:09 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	execute_builtin(t_cmd *cmd)
 	builtin = get_builtin(cmd);
 	if (!builtin.name)
 		return (0);
-	ft_printf("executing builtin: '%s'\n", cmd->command);
+	//ft_printf("executing builtin: '%s'\n", cmd->command);
 	builtin.func(cmd);
 	return (1);
 }

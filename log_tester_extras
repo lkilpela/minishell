@@ -1,14 +1,28 @@
 ———————————— extras
-Test   4: ❌ $EMPTY echo hi 
-mini output = ()
-bash output = (hi)
-mini exit code = 127
-bash exit code = 0
-mini error = ( command not found)
-bash error = ()
-
-Test   9: ❌ test_files 
+Test   1: ✅  
+Test   2: ✅ $PWD 
+Test   3: ✅ $EMPTY 
+Test   4: ✅ $EMPTY echo hi 
+Test   5: ✅⚠️  ./test_files/invalid_permission 
+mini error = ( permission denied)
+bash error = ( Permission denied)
+Test   6: ✅⚠️  ./missing.out 
+mini error = ( no such file or directory)
+bash error = ( No such file or directory)
+Test   7: ✅ missing.out 
+Test   8: ✅ "aaa" 
+Test   9: ❌ test_files (WRONG, MS HAS THE SAME AS BASH)
 mini exit code = 126
 bash exit code = 127
 mini error = ( is a directory)
 bash error = ( command not found)
+Test  10: ✅ ./test_files 
+Test  11: ✅⚠️  /test_files 
+mini error = ( no such file or directory)
+bash error = ( No such file or directory)
+Test  12: ✅ minishell.h 
+Test  13: ✅ $ 
+Test  14: ✅ $? 
+Test  15: ✅ README.md 
+14/15
+😭 😭 😭

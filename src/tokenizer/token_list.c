@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:33 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 08:53:54 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:10:36 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ void	list_to_list(t_token_list **lst, t_token_list *add,
 			(*index)->next->prev = (*index)->prev;
 		if (*lst == *index)
 			*lst = (*index)->next;
-		if (*index != NULL)
-			*index = (*index)->next;
 	}
 	else
 	{

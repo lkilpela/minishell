@@ -7,22 +7,19 @@
 
 ## validate
 ## parse
-- [x] in case of mutlple infiles when one file is invalid, it should NULL the command. (probably need to move file opening to parser then)
-- [x] SEGFAULT with minishell$ cat `minishell$ cat <minishell.h <<HERE <missing | ls`
+
 
 ## exec
 - [ ] make in our minishell does not work, not sure why
 - [ ] updated variables to be sent to the execve
-- [x] bash has exit code `0` vs minishell has exit code `139`
-```
-minishell$ $EMPTY
-minishell$ echo $?
-139
-```
+
 
 ## builtins
 - [ ] update $OLDPWD and $PWD env variables when using 'cd'.
 - [ ] update $SHLVL properly
+- [ ] specical case export `export whatever=test | grep ok | cat`
+
+
 - [ ] ~~after `unset PATH` and then `echo $PATH` should give an error message~~ I see still bash just printing newline / nothing just like ours
 ```
 bash$ unset PATH
@@ -63,13 +60,7 @@ bash$ echo $hello
 
 bash$ 
 ```
-- [x] exit code should be 1 & ``A-'`
-```
-minishell$ export A-
-minishell: export: : A-: not a valid identifier
-minishell$ echo $?
-0
-```
+
 ## NORM
 
 1. minishell.c
@@ -87,7 +78,7 @@ Error: PREPROC_CONSTANT     (line:  40, col:  22):      Preprocessor statement m
 errors.c
 int	pipe_start_end(t_token_list *tokens)
 
-#DONE
+# DONE
 
 ## validate
 - [x] split validate_command into smaller functions
@@ -105,6 +96,12 @@ Print: minishell: /Users/lumik: is a directory
 - [x] validate infile/outfile is not existed, error msg: (my bash is showing 1?)`No such file or directory - errcode: E_CODE_FILE = 1
 
 ## exec
+- [x] bash has exit code `0` vs minishell has exit code `139`
+```
+minishell$ $EMPTY
+minishell$ echo $?
+139
+```
 - [x] SEGFAULT
 ```
 minishell$ echo $USER
@@ -151,9 +148,18 @@ minishell: /Users/lumik: is a directory
 ## builtins
 - [x] export without args needs to print sorted list of vars
 - [x] need to be properly handled from execution
-- [x] exit, cd, export, unset need to be not forked if they are 
+- [x] exit, cd, export, unset need to be not forked if they are
+- [x] exit code should be 1 & ``A-'`
+```
+minishell$ export A-
+minishell: export: : A-: not a valid identifier
+minishell$ echo $?
+0
+```
 
 ## parse
+- [x] in case of mutlple infiles when one file is invalid, it should NULL the command. (probably need to move file opening to parser then)
+- [x] SEGFAULT with minishell$ cat `minishell$ cat <minishell.h <<HERE <missing | ls`
 **I CHECKED AND IT WORKED LIKE BASH. What case you meant need to be fixed?**
 ```
 minishell$ echo "This is a valid file." > valid1.txt

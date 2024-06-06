@@ -1,9 +1,59 @@
+———————————— builtins
+Test   1: ✅ echo hello world 
+Test   2: ✅ echo "hello world" 
+Test   3: ✅ echo 'hello world' 
+Test   4: ✅ echo hello'world' 
+Test   5: ✅ echo hello""world 
+Test   6: ✅ echo '' 
+Test   7: ✅ echo "$PWD" 
+Test   8: ✅ echo '$PWD' 
+Test   9: ✅ echo "aspas ->'" 
+Test  10: ✅ echo "aspas -> ' " 
+Test  11: ✅ echo 'aspas ->"' 
+Test  12: ✅ echo 'aspas -> " ' 
+Test  13: ✅ echo "> >> < * ? [ ] | ; [ ] || && ( ) & # $  <<" 
+Test  14: ✅ echo '> >> < * ? [ ] | ; [ ] || && ( ) & # $  <<' 
+Test  15: ✅ echo "exit_code ->$? user ->$USER home -> $HOME" 
+Test  16: ✅ echo 'exit_code ->$? user ->$USER home -> $HOME' 
+Test  17: ✅ echo "$" 
+Test  18: ✅ echo '$' 
+Test  19: ✅ echo $ 
+Test  20: ✅ echo $? 
+Test  21: ✅ echo $?HELLO 
+Test  22: ✅ pwd 
+Test  23: ✅ pwd oi 
+Test  24: ✅ export hello 
+Test  25: ✅ export HELLO=123 
+Test  26: ✅ export A- 
+Test  27: ✅ export HELLO=123 A 
+Test  28: ✅ export HELLO="123 A-" 
+Test  29: ✅ export hello world 
+Test  30: ✅ export HELLO-=123 
+Test  31: ✅ export = 
+Test  32: ✅ export 123 
+Test  33: ✅ unset 
+Test  34: ✅ unset HELLO 
+Test  35: ✅ unset HELLO1 HELLO2 
+Test  36: ✅ unset HOME 
+Test  37: ✅ unset PATH 
+Test  38: ✅ unset SHELL 
+Test  39: ✅ cd $PWD 
 Test  40: ❌ cd $PWD hi 
 mini exit code = 1
 bash exit code = 0
 mini error = ( too many arguments)
 bash error = ()
-
-Test  50: ❌ exit hello 
-mini exit code = 2
-bash exit code = 255
+Test  41: ✅ cd 123123 
+Test  42: ✅ exit 123 
+Test  43: ✅ exit 298 
+Test  44: ✅ exit +100 
+Test  45: ✅ exit "+100" 
+Test  46: ✅ exit +"100" 
+Test  47: ✅ exit -100 
+Test  48: ✅ exit "-100" 
+Test  49: ✅ exit -"100" 
+Test  50: ✅ exit hello 
+Test  51: ✅ exit 42 world 
+Test  52: ✅  
+51/52
+😭 😭 😭

@@ -18,7 +18,7 @@
 - [ ] update $OLDPWD and $PWD env variables when using 'cd'.
 - [ ] update $SHLVL properly
 - [ ] specical case export `export whatever=test | grep ok | cat`
-- [ ] Test  40: ❌ cd $PWD hi 
+- [ ] Test  40: ❌ cd $PWD hi (NEED TO CHECK THE BASH VERSION OF SCHOOL COMPUTER)
 mini exit code = 1
 bash exit code = 0
 mini error = ( too many arguments)

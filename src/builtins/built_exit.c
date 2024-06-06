@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 08:42:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 22:44:43 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	built_exit(t_cmd *cmd)
 	{
 		print_error("minishell: exit",
 			cmd->args[1], "numeric argument required", 0);
-		exit_code = 2;
+		exit_code = 255;
 	}
 	else
 		exit_code = (uint8_t)ft_atoi(cmd->args[1]);

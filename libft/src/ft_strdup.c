@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:53:08 by aklein            #+#    #+#             */
-/*   Updated: 2024/02/14 19:47:08 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/06 11:11:53 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strdup(const char *s1)
 	char	*dup;
 	size_t	i;
 
+	if (!s1)
+		return (NULL);
 	i = 0;
 	dup = (char *)malloc(ft_strlen(s1) + 1);
 	if (!dup)

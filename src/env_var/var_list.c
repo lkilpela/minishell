@@ -6,13 +6,13 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/06 11:32:27 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:13:26 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	extract_var(char *str, char **key, char **value)
+void	extract_var(char *str, char **key, char **value, int *is_set)
 {
 	char	*equal_sign;
 
@@ -23,6 +23,7 @@ void	extract_var(char *str, char **key, char **value)
 	{
 		*key = ft_safe_strdup(str);
 		*value = ft_safe_strdup("");
+		*is_set = 0;
 		return ;
 	}
 	*key = ft_safe_strndup(str, equal_sign - str);
@@ -34,13 +35,14 @@ void	extract_var(char *str, char **key, char **value)
 }
 
 // create a new t_var_list node
-t_var_list	*create_var_node(char *key, char *value)
+t_var_list	*create_var_node(char *key, char *value, int is_set)
 {
 	t_var_list	*node;
 
 	node = ft_safe_calloc(1, sizeof(t_var_list));
 	node->key = key;
 	node->value = value;
+	node->is_set = is_set;
 	return (node);
 }
 
@@ -72,8 +74,10 @@ void	add_var(char *str)
 	t_var_list	*vars;
 	char		*key;
 	char		*value;
+	int			is_set;
 
-	extract_var(str, &key, &value);
+	is_set = 1;
+	extract_var(str, &key, &value, &is_set);
 	if (!key || !*key || !value)
 		return ;
 	vars = ms()->var_list;
@@ -85,10 +89,11 @@ void	add_var(char *str)
 			ft_free((void **)&vars->value);
 			vars->key = key;
 			vars->value = value;
+			vars->is_set = is_set;
 			return ;
 		}
 		vars = vars->next;
 	}
-	node = create_var_node(key, value);
+	node = create_var_node(key, value, is_set);
 	add_var_to_list(&(ms()->var_list), node);
 }

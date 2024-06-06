@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/06 11:36:27 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:13:13 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ int	check_key(char *arg)
 {
 	char	*key;
 	char	*value;
+	int		is_set;
 
-	extract_var(arg, &key, &value);
+	is_set = 1;
+	extract_var(arg, &key, &value, &is_set);
 	if (!key || (!ft_isalpha(*key) && *key != '_'))
 		return (0);
 	while (*++key)
@@ -36,7 +38,7 @@ static t_var_list	*duplicate_var_list(t_var_list *vars)
 	result = NULL;
 	while (vars)
 	{
-		node = create_var_node(vars->key, vars->value);
+		node = create_var_node(vars->key, vars->value, vars->is_set);
 		add_var_to_list(&result, node);
 		vars = vars->next;
 	}
@@ -52,7 +54,7 @@ void	print_sorted_vars(t_var_list *vars)
 	merge_sort(&dup);
 	while (dup)
 	{
-		if (dup->value && ft_strcmp(dup->value, "") != 0)
+		if (dup->is_set == 1)
 			ft_printf("declare -x %s=\"%s\"\n", dup->key, dup->value);
 		else
 			ft_printf("declare -x %s\n", dup->key);

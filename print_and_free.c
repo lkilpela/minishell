@@ -31,7 +31,7 @@ void print_var_list(void)
 	v = ms()->var_list;
 	while (v)
 	{
-		printf(CYAN "var_name: %s \t\t\t var_value: %s\n" RESET, v->key, v->value);
+		printf(CYAN "var_name: %s \t\t\t var_value: %s is_set: %d\n" RESET, v->key, v->value, v->is_set);
 		v = v->next;
 	}
 }

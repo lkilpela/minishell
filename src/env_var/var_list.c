@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/06 15:13:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 16:21:57 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,19 @@ void	add_var_to_list(t_var_list **head, t_var_list *node)
 	}
 }
 
+static void	modify_var(t_var_list *vars, int is_set, 
+									char *key, char *value)
+{
+	if (is_set >= vars->is_set)
+	{
+		ft_free((void **)&vars->key);
+		ft_free((void **)&vars->value);
+		vars->key = key;
+		vars->value = value;
+		vars->is_set = is_set;
+	}
+}
+
 void	add_var(char *str)
 {
 	t_var_list	*node;
@@ -85,11 +98,7 @@ void	add_var(char *str)
 	{
 		if (ft_strcmp(vars->key, key) == 0)
 		{
-			ft_free((void **)&vars->key);
-			ft_free((void **)&vars->value);
-			vars->key = key;
-			vars->value = value;
-			vars->is_set = is_set;
+			modify_var(vars, is_set, key, value);
 			return ;
 		}
 		vars = vars->next;

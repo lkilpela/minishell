@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/06 11:06:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/06 11:07:52 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	print_sorted_vars(t_var_list *vars)
 	while (dup)
 	{
 		if (dup->value)
-            ft_printf("declare -x %s=\"%s\"\n", dup->key, dup->value);
-        else
-            ft_printf("declare -x %s\n", dup->key);
+			ft_printf("declare -x %s=\"%s\"\n", dup->key, dup->value);
+		else
+			ft_printf("declare -x %s\n", dup->key);
 		tmp = dup;
 		dup = dup->next;
 		ft_free((void **)&tmp);

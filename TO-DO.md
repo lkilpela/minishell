@@ -24,7 +24,7 @@ bash exit code = 0
 mini error = ( too many arguments)
 bash error = ()
 
-- [ ] Test  50: ❌ exit hello 
+- [x] Test  50: ❌ exit hello 
 mini exit code = 2
 bash exit code = 255
 

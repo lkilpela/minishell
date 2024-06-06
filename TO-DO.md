@@ -24,11 +24,6 @@ bash exit code = 0
 mini error = ( too many arguments)
 bash error = ()
 
-- [x] Test  50: ❌ exit hello 
-mini exit code = 2
-bash exit code = 255
-
-
 - [ ] bash changes the current directory 
 ```
 minishell$ 
@@ -138,6 +133,9 @@ Current output:
 minishell: /Users/lumik: is a directory
 
 ## builtins
+- [x] Test  50: ❌ exit hello 
+mini exit code = 2
+bash exit code = 255
 - [x] bash does not return an error, it treats it as a request to export an exising shell var
 ```
 minishell$ export hello

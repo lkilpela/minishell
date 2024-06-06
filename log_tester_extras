@@ -1,11 +1,7 @@
 ———————————— extras
-Test   1: ❌  
-mini exit code = 2
-bash exit code = 0
+Test   1: ✅  
 Test   2: ✅ $PWD 
-Test   3: ❌ $EMPTY 
-mini exit code = 139
-bash exit code = 0
+Test   3: ✅ $EMPTY 
 Test   4: ❌ $EMPTY echo hi 
 mini output = ()
 bash output = (hi)
@@ -37,12 +33,8 @@ bash exit code = 127
 mini error = ( no such file or directory)
 bash error = ( No such file or directory)
 Test  12: ✅ minishell.h 
-Test  13: ❌ $ 
-mini exit code = 139
-bash exit code = 127
-mini error = ()
-bash error = ( command not found)
+Test  13: ✅ $ 
 Test  14: ✅ $? 
 Test  15: ✅ README.md 
-7/15
+10/15
 😭 😭 😭

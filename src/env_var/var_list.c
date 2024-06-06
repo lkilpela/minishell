@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 01:39:13 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/06 11:04:11 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	extract_var(char *str, char **key, char **value)
 	*value = NULL;
 	equal_sign = ft_strchr(str, EQUAL_SIGN);
 	if (!equal_sign)
+	{
+		*key = ft_safe_strdup(str);
 		return ;
+	}
 	*key = ft_safe_strndup(str, equal_sign - str);
 	if (!*key)
 		return ;
@@ -70,7 +73,7 @@ void	add_var(char *str)
 	char		*value;
 
 	extract_var(str, &key, &value);
-	if (!key || !*key || !value)
+	if (!key || !*key)
 		return ;
 	vars = ms()->var_list;
 	while (vars)

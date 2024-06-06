@@ -20,12 +20,6 @@
 - [ ] specical case export `export whatever=test | grep ok | cat`
 
 
-- [ ] ~~after `unset PATH` and then `echo $PATH` should give an error message~~ I see still bash just printing newline / nothing just like ours
-```
-bash$ unset PATH
-bash$ echo $PATH
-bash: sed: No such file or directory
-```
 
 - [ ] bash changes the current directory 
 ```
@@ -48,17 +42,6 @@ bash: cd: too many arguments
 a@Allar:~/minishell$ pwd
 /home/a/minishell
 a@Allar:~/minishell$
-```
-
-- [ ] bash does not return an error, it treats it as a request to export an exising shell var
-```
-minishell$ export hello
-minishell: export: : hello: not a valid identifier
-
-bash$ export hello
-bash$ echo $hello
-
-bash$ 
 ```
 
 ## NORM
@@ -146,6 +129,16 @@ Current output:
 minishell: /Users/lumik: is a directory
 
 ## builtins
+- [x] bash does not return an error, it treats it as a request to export an exising shell var
+```
+minishell$ export hello
+minishell: export: : hello: not a valid identifier
+
+bash$ export hello
+bash$ echo $hello
+
+bash$ 
+```
 - [x] export without args needs to print sorted list of vars
 - [x] need to be properly handled from execution
 - [x] exit, cd, export, unset need to be not forked if they are
@@ -156,6 +149,13 @@ minishell: export: : A-: not a valid identifier
 minishell$ echo $?
 0
 ```
+- [x] ~~after `unset PATH` and then `echo $PATH` should give an error message~~ I see still bash just printing newline / nothing just like ours
+```
+bash$ unset PATH
+bash$ echo $PATH
+bash: sed: No such file or directory
+```
+
 
 ## parse
 - [x] in case of mutlple infiles when one file is invalid, it should NULL the command. (probably need to move file opening to parser then)

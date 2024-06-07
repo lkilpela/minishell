@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/07 14:50:50 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 22:11:45 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	extract_var(char *str, char **key, char **value, int *is_set)
 }
 
 // create a new t_var_list node
-t_var_list	*create_var_node(char *key, char *value, int is_set)
+t_var_list	*create_var_node(char *key, char *value, int is_set, int is_local)
 {
 	t_var_list	*node;
 
@@ -43,6 +43,7 @@ t_var_list	*create_var_node(char *key, char *value, int is_set)
 	node->key = key;
 	node->value = value;
 	node->is_set = is_set;
+	node->is_local = is_local;
 	return (node);
 }
 
@@ -79,6 +80,8 @@ static void	modify_var(t_var_list *vars, int is_set,
 		vars->value = value;
 		vars->is_set = is_set;
 	}
+	else if (vars->is_local)
+		vars->is_local = 0;
 }
 
 void	add_var(char *str, int is_local)
@@ -103,7 +106,7 @@ void	add_var(char *str, int is_local)
 		}
 		vars = vars->next;
 	}
-	node = create_var_node(key, value, is_set);
+	node = create_var_node(key, value, is_set, is_local);
 	if (is_local)
 		node->is_local = 1;
 	add_var_to_list(&(ms()->var_list), node);

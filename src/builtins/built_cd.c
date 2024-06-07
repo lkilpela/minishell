@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 23:39:12 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 23:52:36 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	update_pwd(void)
 	ft_free((void **)&new_pwd);
 	add_var(pwd, 1);
 	add_var(old_pwd, 1);
+	ft_printf("PWD: %s\n", lookup_var("PWD"));
+	ft_printf("OLDPWD: %s\n", lookup_var("OLDPWD"));
 }
 
 void	built_cd(t_cmd *cmd)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:18 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/03 20:19:05 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 08:13:35 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define ERR_KEY_VALID "not a valid identifier"
 # define ERR_AMBIGUOUS "ambiguous redirect"
 # define ERR_CD_ARGS "too many arguments"
-# define ERR_CD_HOME "HOME variable not set"
+# define ERR_CD_HOME "HOME not set"
 # define NL	"newline"
 # define ERR_PIPE "pipe failed"
 # define ERR_DUP2 "dup2 failed"

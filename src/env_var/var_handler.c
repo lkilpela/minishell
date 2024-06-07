@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:33:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/07 14:48:28 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 22:24:00 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,32 @@ void	var_remove(char *key)
 	}
 }
 
-char	*lookup_var(char *var_name)
+char	*lookup_var(char *key)
 {
 	t_var_list	*v;
 
 	v = ms()->var_list;
-	if (*var_name == '?')
+	if (*key == '?')
 		return (ft_safe_itoa(ms()->exit));
 	while (v)
 	{
-		if (ft_strcmp(v->key, var_name) == 0)
+		if (ft_strcmp(v->key, key) == 0)
 			return (ft_safe_strdup(v->value));
 		v = v->next;
 	}
 	return (ft_safe_strdup(""));
+}
+
+int	var_declared(char *key)
+{
+	t_var_list	*vars;
+
+	vars = ms()->var_list;
+	while (vars)
+	{
+		if (ft_strcmp(vars->key, key) == 0)
+			return (1);
+		vars = vars->next;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 15:30:22 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/07 15:51:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ void	update_pwd(void)
 	char		*pwd;
 	t_var_list	*var;
 
-	ms()->current_pwd = getcwd(NULL, 0);		
+			
 	var = ms()->var_list;
-	pwd = lookup_var("PWD");
-	old_pwd = lookup_var("OLDWD");
+	pwd = ft_safe_strdup(lookup_var("PWD"));
+	old_pwd = ft_safe_strdup(lookup_var("OLDPWD"));
 	if (ft_strcmp(old_pwd, "") == 0)
 	{
+		ft_free((void **)&old_pwd);
 		old_pwd = ft_safe_strjoin("OLDPWD=", pwd);
 		add_var(old_pwd);
 	}
@@ -40,12 +41,16 @@ void	update_pwd(void)
 		{
 			ft_free((void **)&var->value);
 			var->value = ft_safe_strdup(ms()->current_pwd);
+			printf("PWD <%s>\n", var->value);
 		}
+		
 		if (ft_strcmp(var->key, "OLDPWD") == 0)
 		{
 			ft_free((void **)&var->value);
 			var->value = ft_safe_strdup(pwd);
+			printf("OLDPWD: <%s>\n", var->value);
 		}
+		
 		var = var->next;
 	}
 	ft_free((void **)&pwd);
@@ -66,6 +71,7 @@ void	built_cd(t_cmd *cmd)
 			return (error_ret(ERR_CD_HOME));
 		if (chdir(home) == 0)
 		{
+			ms()->current_pwd = getcwd(NULL, 0);
 			update_pwd();
 			ft_free((void **)&home);
 		}
@@ -78,6 +84,7 @@ void	built_cd(t_cmd *cmd)
 			ms()->exit = EXIT_FAILURE;
 			return ;
 		}
+		ms()->current_pwd = getcwd(NULL, 0);
 		update_pwd();
 	}
 	ms()->exit = EXIT_SUCCESS;

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 11:16:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/07 15:17:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,42 @@ void	error_ret(char *msg)
 
 void	update_pwd(void)
 {
-	char	*old_pwd;
-	char	*pwd;
+	char		*old_pwd;
+	char		*pwd;
+	t_var_list	*var;
 
-	ms()->current_pwd = getcwd(NULL, 0);
+	var = ms()->var_list;
 	pwd = lookup_var("PWD");
-	if (pwd && ft_strcmp(pwd, ms()->current_pwd) != 0)
+	old_pwd = lookup_var("OLDWD");
+	if (ft_strcmp(old_pwd, "") == 0)
 	{
-		old_pwd = lookup_var("OLDPWD");
-		if (ft_strcmp(old_pwd, "") == 0)
-		{
-			old_pwd = ft_safe_strjoin("OLDPWD=", pwd);
-			add_var(old_pwd);
-			ft_free((void **)&old_pwd);
-		}
-		ft_free((void **)&pwd);
-		pwd = ft_safe_strdup(ms()->current_pwd);
+		old_pwd = ft_safe_strjoin("OLDPWD=", pwd);
+		add_var(old_pwd);
 	}
+	while (var)
+	{
+		if (ft_strcmp(var->key, "PWD") == 0
+			&& ft_strcmp(pwd, ms()->current_pwd) != 0)
+		{
+			ft_free((void **)&var->value);
+			var->value = ft_safe_strdup(ms()->current_pwd);
+		}
+		if (ft_strcmp(var->key, "OLDPWD") == 0)
+		{
+			ft_free((void **)&var->value);
+			var->value = ft_safe_strdup(pwd);
+		}
+		var = var->next;
+	}
+	ft_free((void **)&pwd);
+	ft_free((void **)&old_pwd);
 }
 
 void	built_cd(t_cmd *cmd)
 {
 	char	*home;
 	
-	//ms()->current_pwd = getcwd(NULL, 0);
+	ms()->current_pwd = getcwd(NULL, 0);
 	if (cmd->num_of_args > 2)
 		return (error_ret(ERR_CD_ARGS));
 	if (cmd->num_of_args == 1)

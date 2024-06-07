@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 21:42:19 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 22:15:03 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	local_variables(void)
 			return ;
 		if (ms()->cmds_num == 0)
 			add_var(cmd->args[0], 1);
-		ft_free((void **)&cmd);
 		locals = locals->next;
 	}
 	ft_lstclear(&ms()->local_var_assign, NULL);
@@ -65,9 +64,9 @@ void	minishell_loop(void)
 		{
 			ms()->commands = parser(ms()->tokens);
 			init_path_dirs();
-			t_list *cmds;
-			cmds = ms()->commands;
-			print_cmds(cmds);
+			// t_list *cmds;
+			// cmds = ms()->commands;
+			// print_cmds(cmds);
 			//print_executable(ms()->commands);
 			// builtin_cmd(ms()->commands); //temp
 			local_variables();

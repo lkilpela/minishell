@@ -14,6 +14,9 @@
 
 
 ## builtins
+- [ ] some variables are considered "read-only" and cannot be unset or modified: BASH, BASH_VERSION, HOME, PATH, PWD, UID, HOSTNAME. Check if we are able to unset or modify these at school? At home, we has admin right.
+example: export HOME="", unset HOME
+
 - [ ] update $OLDPWD and $PWD env variables when using 'cd'.
 - [ ] update $SHLVL properly
 - [ ] specical case export `export whatever=test | grep ok | cat`

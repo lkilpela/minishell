@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 11:11:48 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/07 11:16:59 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,20 @@ void	update_pwd(void)
 {
 	char	*old_pwd;
 	char	*pwd;
-	t_var_list *var;
 
 	ms()->current_pwd = getcwd(NULL, 0);
-	var = ms()->var_list;
 	pwd = lookup_var("PWD");
-	if (pwd && ft_strcmp(var->value, ms()->current_pwd) != 0)
+	if (pwd && ft_strcmp(pwd, ms()->current_pwd) != 0)
 	{
 		old_pwd = lookup_var("OLDPWD");
 		if (ft_strcmp(old_pwd, "") == 0)
 		{
-			old_pwd = ft_safe_strjoin("OLDPWD=", var->value);
+			old_pwd = ft_safe_strjoin("OLDPWD=", pwd);
 			add_var(old_pwd);
 			ft_free((void **)&old_pwd);
 		}
-		ft_free((void **)&var->value);
-		var->value = ft_safe_strdup(ms()->current_pwd);
+		ft_free((void **)&pwd);
+		pwd = ft_safe_strdup(ms()->current_pwd);
 	}
 }
 

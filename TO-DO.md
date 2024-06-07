@@ -14,6 +14,20 @@
 
 
 ## builtins
+
+bash-3.2$ unset PWD
+bash-3.2$ echo $PWD
+
+bash-3.2$ cd ..
+bash-3.2$ echo $PWD
+/Users
+bash-3.2$ env | grep PWD
+bash-3.2$ env | grep OLDPWD
+bash-3.2$ export PWD
+bash-3.2$ env | grep PWD
+PWD=/Users
+
+
 - [ ] some variables are considered "read-only" and cannot be unset or modified: BASH, BASH_VERSION, HOME, PATH, PWD, UID, HOSTNAME. Check if we are able to unset or modify these at school? At home, we has admin right.
 example: export HOME="", unset HOME
 

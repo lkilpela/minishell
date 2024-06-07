@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 23:00:32 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 23:01:26 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,10 @@ t_var_list		*get_envp(char **envp);
 void			extract_var(char *str, char **key, char **value, int *is_set);
 void			add_var(char *str, int is_local);
 void			add_var_to_list(t_var_list **head, t_var_list *node);
-t_var_list		*create_var_node(char *key, char *value, int is_set);
+t_var_list		*create_var_node(char *key, char *value, int is_set, int is_local);
 void			merge_sort(t_var_list **vars);
-char			*lookup_var(char *var_name);
+int				var_declared(char *key);
+char			*lookup_var(char *key);
 void			var_remove(char *keyval);
 
 // expander

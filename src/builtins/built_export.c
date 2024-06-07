@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/06 15:13:13 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/07 14:48:14 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	built_export(t_cmd *cmd)
 				ms()->exit = EXIT_FAILURE;
 				continue ;
 			}
-			add_var(cmd->args[i]);
+			add_var(cmd->args[i], 0);
 			i++;
 		}
 	}

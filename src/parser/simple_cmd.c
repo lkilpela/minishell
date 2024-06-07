@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/06 00:47:00 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 21:11:32 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ static int	count_args(t_token_list **tokens)
 	return (count);
 }
 
+static void	init_args(t_cmd *cmd, t_token_list **tokens)
+{
+	cmd->num_of_args = count_args(tokens) + 1;
+	cmd->args = ft_safe_calloc(cmd->num_of_args + 1, sizeof(char *));
+	if (cmd->command)
+		cmd->args[0] = cmd->command;
+}
+
 static void	parse_command(t_cmd *cmd, t_token_list **tokens)
 {
 	if ((*tokens)->type == WORD)
@@ -69,37 +77,68 @@ static void	parse_command(t_cmd *cmd, t_token_list **tokens)
 			cmd->command = (*tokens)->value;
 		}
 	}
+	if (cmd->command)
+		init_args(cmd, tokens);
 }
 
-static void	parse_args(t_cmd *cmd, t_token_list **tokens)
+int	local_var(t_cmd *cmd)
 {
-	cmd->num_of_args = count_args(tokens) + 1;
-	cmd->args = ft_safe_calloc(cmd->num_of_args + 1, sizeof(char *));
-	if (cmd->command)
-		cmd->args[0] = cmd->command;
+	if (cmd->command && ft_strchr(cmd->command, EQUAL_SIGN))
+	{
+		cmd->num_of_args = 1;
+		cmd->command = ft_strdup("=");
+		return (1);
+	}
+	return (0);
+}
+
+// int next_token(t_token_list **tokens, t_cmd **cmd)
+// {
+// 	if ((*tokens))
+// 	{
+// 		(*tokens) = (*tokens)->next;
+// 	}
+// 	if (local_var(cmd))
+// 		return (0);
+// 	return (1);
+// }
+
+void	get_all_redir(t_token_list *tokens, t_cmd *cmd)
+{
+	while (tokens && tokens->type != OP_PIPE)
+	{
+		if (tokens->type >= OP_LESS && tokens->type <= OP_DGREAT)
+			tokens = get_redir(cmd, tokens);
+		if (tokens)
+			tokens = tokens->next;
+	}
 }
 
 t_cmd	*simple_cmd(t_token_list **tokens)
 {
 	t_cmd	*cmd;
-	int		i;
+	t_token_list	*head;
 
-	i = 0;
-	cmd = ft_safe_calloc(1, sizeof(t_cmd));
-	init_redir(cmd);
+	head = *tokens;
+	cmd = init_cmd(*tokens);
 	while ((*tokens) && (*tokens)->type != OP_PIPE)
 	{
 		if ((*tokens)->type >= OP_LESS && (*tokens)->type <= OP_DGREAT)
-			(*tokens) = get_redir(cmd, *tokens);
+			(*tokens) = (*tokens)->next;
 		else if ((*tokens)->type == WORD && cmd->command == NULL)
-		{
 			parse_command(cmd, tokens);
-			if (cmd->command)
-				parse_args(cmd, tokens);
-			i = 1;
-		}
 		else if ((*tokens)->type == WORD)
-			cmd->args[i++] = (*tokens)->value;
+			cmd->args[cmd->arg_index++] = (*tokens)->value;
+		if (local_var(cmd))
+		{
+			list_to_list(&head, NULL, tokens);
+			*tokens = head;
+			safe_close(cmd->in_file.fd);
+			safe_close(cmd->out_file.fd);
+			ft_lstadd_back(&ms()->local_var_assign, ft_safe_lstnew(cmd));
+			cmd = init_cmd(*tokens);
+			continue ;
+		}
 		if ((*tokens))
 			(*tokens) = (*tokens)->next;
 	}

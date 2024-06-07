@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 14:26:44 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/06 16:21:57 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 14:50:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	modify_var(t_var_list *vars, int is_set,
 	}
 }
 
-void	add_var(char *str)
+void	add_var(char *str, int is_local)
 {
 	t_var_list	*node;
 	t_var_list	*vars;
@@ -104,5 +104,7 @@ void	add_var(char *str)
 		vars = vars->next;
 	}
 	node = create_var_node(key, value, is_set);
+	if (is_local)
+		node->is_local = 1;
 	add_var_to_list(&(ms()->var_list), node);
 }

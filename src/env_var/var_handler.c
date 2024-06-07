@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:33:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 12:49:49 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/07 14:48:28 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_var_list	*get_envp(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		add_var(envp[i]);
+		add_var(envp[i], 0);
 		i++;
 	}
 	return (ms()->var_list);

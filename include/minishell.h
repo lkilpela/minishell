@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 10:53:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/07 23:00:32 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_ms			*ms(void);
 
 // init
 void			init_minishell(int argc, char **argv, char **envp);
-void			init_redir(t_cmd *cmd);
+t_cmd			*init_cmd(t_token_list *tokens);
 void			init_builtins(void);
 
 // signals
@@ -87,7 +87,7 @@ int				safe_fork(void);
 // vars
 t_var_list		*get_envp(char **envp);
 void			extract_var(char *str, char **key, char **value, int *is_set);
-void			add_var(char *str);
+void			add_var(char *str, int is_local);
 void			add_var_to_list(t_var_list **head, t_var_list *node);
 t_var_list		*create_var_node(char *key, char *value, int is_set);
 void			merge_sort(t_var_list **vars);
@@ -108,6 +108,7 @@ void			list_to_list(t_token_list **lst,
 // parser
 t_cmd			*simple_cmd(t_token_list **tokens);
 t_list			*parser(t_token_list *tokens);
+void			get_all_redir(t_token_list *tokens, t_cmd *cmd);
 t_token_list	*get_redir(t_cmd *cmd, t_token_list *tokens);
 char			*handle_node_quotes(char *val);
 void			clear_token_quotes(t_token_list *tokens);

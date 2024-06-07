@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/07 09:28:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/07 23:00:52 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_ms
 	t_var_list			*var_list;
 	t_token_list		*tokens;
 	t_list				*commands;
+	t_list				*local_var_assign;
 	pid_t				*pids;
 	pid_t				pid;
 	int					pipefd[2];
@@ -100,6 +101,7 @@ typedef struct s_var_list
 	char				*key;
 	char				*value;
 	int					is_set;
+	int					is_local;
 	struct s_var_list	*next;
 	struct s_var_list	*previous;
 }				t_var_list;
@@ -125,6 +127,7 @@ typedef struct s_cmd
 	int		heredoc_expand;
 	char	*heredoc_delim;
 	char	**args;
+	int		arg_index;
 	char	*exec_path;
 }			t_cmd;
 

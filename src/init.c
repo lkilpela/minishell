@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 04:01:31 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 21:03:41 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,16 @@ t_ms	*ms(void)
 	return (&ms);
 }
 
-void	init_redir(t_cmd *cmd)
+t_cmd	*init_cmd(t_token_list *tokens)
 {
+	t_cmd	*cmd;
+
+	cmd = ft_safe_calloc(1, sizeof(t_cmd));
+	cmd->arg_index = 1;
 	cmd->in_file.fd = -1;
 	cmd->out_file.fd = -1;
+	get_all_redir(tokens, cmd);
+	return (cmd);
 }
 
 t_list	**allocs(void)

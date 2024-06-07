@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/06 20:54:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/07 21:42:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,25 @@ void	rl_history(char *input)
 	ft_free((void **)&last);
 	last = ft_safe_strdup(input);
 	write_history(NULL); //temp
+}
+
+void	local_variables(void)
+{
+	t_list	*locals;
+	t_cmd	*cmd;
+	
+	locals = ms()->local_var_assign;
+	while (locals)
+	{
+		cmd = (t_cmd *)locals->content;
+		if (cmd->num_of_args > 1)
+			return ;
+		if (ms()->cmds_num == 0)
+			add_var(cmd->args[0], 1);
+		ft_free((void **)&cmd);
+		locals = locals->next;
+	}
+	ft_lstclear(&ms()->local_var_assign, NULL);
 }
 
 void	minishell_loop(void)
@@ -46,12 +65,15 @@ void	minishell_loop(void)
 		{
 			ms()->commands = parser(ms()->tokens);
 			init_path_dirs();
-			//print_cmds(ms()->commands);
+			t_list *cmds;
+			cmds = ms()->commands;
+			print_cmds(cmds);
 			//print_executable(ms()->commands);
 			// builtin_cmd(ms()->commands); //temp
+			local_variables();
 			execute_commands(ms()->commands);
 		}
-		ft_free((void **)&input);
+		ms_exit(RELINE, EXIT_SUCCESS); //maybe -1 for not touching the ms().exit code
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 23:02:25 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 23:39:12 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,25 @@ void	error_ret(char *msg)
 void	update_pwd(void)
 {
 	char		*old_pwd;
+	char		*last_pwd;
 	char		*pwd;
-	t_var_list	*var;
+	char		*new_pwd;
 
-			
-	var = ms()->var_list;
-	pwd = ft_safe_strdup(lookup_var("PWD"));
-	old_pwd = ft_safe_strdup(lookup_var("OLDPWD"));
-	if (ft_strcmp(old_pwd, "") == 0)
+	last_pwd = lookup_var("PWD");
+	if (last_pwd && *last_pwd != 0)
+		last_pwd = ft_safe_strjoin("=", last_pwd);
+	old_pwd = ft_safe_strjoin("OLDPWD", last_pwd);
+	ft_free((void **)&last_pwd);
+	new_pwd = getcwd(NULL, 0);
+	if (!new_pwd)
 	{
-		ft_free((void **)&old_pwd);
-		old_pwd = ft_safe_strjoin("OLDPWD=", pwd);
-		add_var(old_pwd, 1);
+		print_error("minishell: cd", "getcwd", NULL, 1);
+		ms_exit(FATAL, -1);
 	}
-	while (var)
-	{
-		if (ft_strcmp(var->key, "PWD") == 0
-			&& ft_strcmp(pwd, ms()->current_pwd) != 0)
-		{
-			ft_free((void **)&var->value);
-			var->value = ft_safe_strdup(ms()->current_pwd);
-			printf("PWD <%s>\n", var->value);
-		}
-		
-		if (ft_strcmp(var->key, "OLDPWD") == 0)
-		{
-			ft_free((void **)&var->value);
-			var->value = ft_safe_strdup(pwd);
-			printf("OLDPWD: <%s>\n", var->value);
-		}
-		
-		var = var->next;
-	}
-	ft_free((void **)&pwd);
-	ft_free((void **)&old_pwd);
+	pwd = ft_safe_strjoin("PWD=", new_pwd);
+	ft_free((void **)&new_pwd);
+	add_var(pwd, 1);
+	add_var(old_pwd, 1);
 }
 
 void	built_cd(t_cmd *cmd)
@@ -71,7 +56,6 @@ void	built_cd(t_cmd *cmd)
 			return (error_ret(ERR_CD_HOME));
 		if (chdir(home) == 0)
 		{
-			ms()->current_pwd = getcwd(NULL, 0);
 			update_pwd();
 			ft_free((void **)&home);
 		}
@@ -84,7 +68,6 @@ void	built_cd(t_cmd *cmd)
 			ms()->exit = EXIT_FAILURE;
 			return ;
 		}
-		ms()->current_pwd = getcwd(NULL, 0);
 		update_pwd();
 	}
 	ms()->exit = EXIT_SUCCESS;

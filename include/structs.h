@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/07 23:00:52 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 23:21:33 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_ms
 	int					status;
 	char				*executable;
 	int					cmds_num;
-	char				*current_pwd;
 	const t_builtin		*builtins;
 }					t_ms;
 

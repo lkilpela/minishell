@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 15:17:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/07 15:30:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	update_pwd(void)
 	char		*pwd;
 	t_var_list	*var;
 
+	ms()->current_pwd = getcwd(NULL, 0);		
 	var = ms()->var_list;
 	pwd = lookup_var("PWD");
 	old_pwd = lookup_var("OLDWD");
@@ -55,7 +56,7 @@ void	built_cd(t_cmd *cmd)
 {
 	char	*home;
 	
-	ms()->current_pwd = getcwd(NULL, 0);
+	
 	if (cmd->num_of_args > 2)
 		return (error_ret(ERR_CD_ARGS));
 	if (cmd->num_of_args == 1)

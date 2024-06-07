@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/02 23:33:44 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/07 10:47:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,36 @@ void	error_ret(char *msg)
 	ms()->exit = EXIT_FAILURE;
 }
 
+void	update_pwd(t_cmd *cmd, t_var_list *var)
+{
+	char	*old_pwd;
+
+	ms()->current_pwd = getcwd(NULL, 0);
+	while (var)
+	{
+		if (!ft_strcmp(var->key,"PWD") &&
+			ft_strcmp(var->value, ms()->current_pwd) != 0)
+		{
+			old_pwd = ft_safe_strjoin("OLDPWD=", var->value);
+			ft_free((void **)&var->value);
+			var->value = ft_safe_strdup(ms()->current_pwd);
+		}
+		var = var->next;
+	}
+	if (old_pwd)
+	{
+		add_var(old_pwd);
+		ft_free((void **)&old_pwd);
+	}
+}
+
 void	built_cd(t_cmd *cmd)
 {
 	char	*home;
+	char	*old_pwd;
+	char	*pwd;
 
+	old_pwd = getcwd(NULL, 0);
 	if (cmd->num_of_args > 2)
 		return (error_ret(ERR_CD_ARGS));
 	if (cmd->num_of_args == 1)
@@ -41,5 +67,6 @@ void	built_cd(t_cmd *cmd)
 			return ;
 		}
 	}
+	pwd = getcwd(NULL, 0);
 	ms()->exit = EXIT_SUCCESS;
 }

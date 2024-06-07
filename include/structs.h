@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/06 13:15:42 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/07 09:28:46 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_ms
 	int					status;
 	char				*executable;
 	int					cmds_num;
+	char				*current_pwd;
 	const t_builtin		*builtins;
 }					t_ms;
 

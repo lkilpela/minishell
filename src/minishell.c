@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/09 04:58:07 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/09 19:33:48 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	local_variables(void)
 	t_list	*locals;
 	t_list	*tmp;
 	t_cmd	*cmd;
-	
+
 	locals = ms()->local_var_assign;
 	while (locals)
 	{
@@ -54,7 +54,7 @@ void	minishell_loop(void)
 		all_good = 1;
 		input = readline(PROMPT);
 		if (input == NULL)
-			ms_exit(FATAL, ms()->exit);
+			built_exit(NULL);
 		rl_history(input);
 		if (all_good && !quote_match_check(input)) // ensure quotes are balanced
 			all_good = ms_exit(RELINE, E_CODE_SYNTX);
@@ -74,7 +74,7 @@ void	minishell_loop(void)
 			local_variables();
 			execute_commands(ms()->commands);
 		}
-		ms_exit(RELINE, EXIT_SUCCESS); //maybe -1 for not touching the ms().exit code
+		ms_exit(RELINE, -1);
 	}
 }
 

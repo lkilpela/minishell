@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 22:02:48 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/09 19:21:06 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_var_list	*duplicate_var_list(t_var_list *vars)
 	result = NULL;
 	while (vars)
 	{
-		node = create_var_node(vars->key, vars->value, 
+		node = create_var_node(vars->key, vars->value,
 								vars->is_set, vars->is_local);
 		add_var_to_list(&result, node);
 		vars = vars->next;
@@ -91,7 +91,7 @@ void	built_export(t_cmd *cmd)
 		{
 			if (!check_key(cmd->args[i]))
 			{
-				print_error("minishell: export: ",	
+				print_error("minishell: export",
 							cmd->args[i], ERR_KEY_VALID, 0);
 				i++;
 				ms()->exit = EXIT_FAILURE;

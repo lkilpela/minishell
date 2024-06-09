@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:09:37 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/09 03:30:11 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/09 04:55:40 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	clear_tokens(void)
 static void	clear_cmds(void)
 {
 	t_list	*cmds;
+	t_list	*tmp;
 	t_cmd	*cmd;
 	int		i;
 
@@ -62,7 +63,9 @@ static void	clear_cmds(void)
 		while (cmd->args[i])
 			ft_free((void **)&cmd->args[i++]);
 		ft_free((void **)&cmd->args);
-		cmds = cmds->next;
+		tmp = cmds->next;
+		ft_free((void **)&cmds);
+		cmds = tmp;
 	}
 	ms()->commands = NULL;
 }

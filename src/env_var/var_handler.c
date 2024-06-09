@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:33:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/09 02:46:28 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 01:37:26 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,6 @@ t_var_list	*get_envp(char **envp)
 		i++;
 	}
 	return (ms()->var_list);
-}
-
-void	var_remove(char *key)
-{
-	t_var_list	*vars;
-
-	vars = ms()->var_list;
-	if (!key)
-		return ;
-	while (vars)
-	{
-		if (ft_strcmp(key, vars->key) == 0)
-		{
-			if (vars->previous)
-				vars->previous->next = vars->next;
-			if (vars->next)
-				vars->next->previous = vars->previous;
-			ft_free((void **)&vars);
-			vars = NULL;
-			return ;
-		}
-		vars = vars->next;
-	}
 }
 
 char	*lookup_var(char *key)

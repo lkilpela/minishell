@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/06 15:58:08 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/10 01:38:30 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*get_variable(char *var)
 	return (value);
 }
 
-int	special_case_dollar(char *var)
+static int	special_case_dollar(char *var)
 {
 	if (*var == '$')
 	{
@@ -56,7 +56,7 @@ int	special_case_dollar(char *var)
 	return (0);
 }
 
-static char	*exp_next_var(char *var, char **start)
+char	*exp_next_var(char *var, char **start)
 {
 	char	*new;
 	char	*beginning;
@@ -74,21 +74,6 @@ static char	*exp_next_var(char *var, char **start)
 	ft_free((void **)&new);
 	*start = final;
 	return (*start + ret_index);
-}
-
-char	*heredoc_exp(char *str_start)
-{
-	char	*str;
-
-	str = str_start;
-	while (*str)
-	{
-		if (*str == '$')
-			str = exp_next_var(str, &str_start);
-		else
-			str++;
-	}
-	return (str_start);
 }
 
 char	*exp_word(char *str_start)

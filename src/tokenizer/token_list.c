@@ -3,19 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   token_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:33 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/06 22:17:24 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/10 02:31:14 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+static int	check_for_ending(char *str, int len)
+{
+	if (is_operator(*str) || is_double_operator(str) || !is_word(*str))
+	{
+		if (len > 0)
+			return (len);
+		if (is_double_operator(str))
+			return (2);
+		return (1);
+	}
+	return (0);
+}
+
 int	token_len(char *str)
 {
 	char	inquote;
 	int		len;
+	int		end;
 
 	len = 0;
 	inquote = 0;
@@ -30,14 +44,9 @@ int	token_len(char *str)
 		}
 		else if (!inquote)
 		{
-			if (is_operator(*str) || is_double_operator(str) || !is_word(*str))
-			{
-				if (len > 0)
-					break ;
-				if (is_double_operator(str))
-					return (2);
-				return (1);
-			}
+			end = check_for_ending(str, len);
+			if (end > 0)
+				return (end);
 		}
 		len++;
 		str++;
@@ -61,10 +70,8 @@ static t_token_type	get_token_type(char *str)
 		return (OP_GREAT);
 	else if (*str == '|')
 		return (OP_PIPE);
-	else if (is_word(*str))
-		return (WORD);
 	else
-		return (UNKNOWN);
+		return (WORD);
 }
 
 void	extract_token(char *str, char **value, t_token_type *type)
@@ -74,41 +81,4 @@ void	extract_token(char *str, char **value, t_token_type *type)
 	len = token_len(str);
 	*value = ft_safe_strndup(str, len);
 	*type = get_token_type(str);
-}
-
-static void	set_up_tail(t_token_list *add, t_token_list *index)
-{
-	while (add->next)
-		add = add->next;
-	add->next = index->next;
-	if (index->next)
-		index->next->prev = add;
-}
-
-void	list_to_list(t_token_list **lst, t_token_list *add,
-				t_token_list **index)
-{
-	if (!add)
-	{
-		if ((*index)->prev)
-			(*index)->prev->next = (*index)->next;
-		if ((*index)->next)
-			(*index)->next->prev = (*index)->prev;
-		if (*lst == *index)
-			*lst = (*index)->next;
-		else if (*index != NULL)
-			*index = (*index)->next;
-	}
-	else
-	{
-		set_up_tail(add, *index);
-		if (*lst == *index)
-			*lst = add;
-		if ((*index)->prev)
-		{
-			(*index)->prev->next = add;
-			add->prev = (*index)->prev;
-		}
-		*index = add;
-	}
 }

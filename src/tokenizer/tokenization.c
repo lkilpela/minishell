@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 03:41:14 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 22:08:27 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/10 02:07:34 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-// add a node to a list
 static void	add_token_to_list(t_token_list **lst, t_token_list *node)
 {
 	t_token_list	*last;

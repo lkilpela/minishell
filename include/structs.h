@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/09 03:18:28 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 02:31:33 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ typedef enum e_token_type
 	OP_GREAT,	// redirect output to a file (>), overwriting file if exists
 	OP_DLESS,	// denote heredoc (<<)
 	OP_DGREAT,	// redirect output to a file (>>), appending to file if exists
-	UNKNOWN
 }			t_token_type;
 
 // a token node in linked list

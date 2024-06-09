@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/09 03:26:13 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 02:38:08 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ char			*ft_safe_strjoin(const char *s1, const char *s2);
 char			*ft_safe_strndup(const char *s1, size_t len);
 char			*ft_safe_strdup(const char *s1);
 void			*ft_safe_calloc(size_t count, size_t size);
-char			*ft_safe_substr(const char *s, unsigned int start, size_t len);
 void			*ft_safe_lstnew(void *content);
 char			*ft_safe_itoa(int n);
 void			safe_dup2(int fd, int fd2);
@@ -93,11 +92,13 @@ t_var_list		*create_var_node(char *key, char *value, int is_set, int is_local);
 void			merge_sort(t_var_list **vars);
 int				var_declared(char *key);
 char			*lookup_var(char *key);
-void			var_remove(char *keyval);
+void			local_variables(void);
+int				local_var(t_cmd *cmd);
+void			shlvl(void);
 
 // expander
 char			*exp_word(char *str_start);
-char			*heredoc_exp(char *str_start);
+char			*exp_next_var(char *var, char **start);
 
 // tokenizer
 int				token_len(char *str);
@@ -112,7 +113,6 @@ t_list			*parser(t_token_list *tokens);
 void			get_all_redir(t_token_list *tokens, t_cmd *cmd);
 void			add_redir(t_redir *redir, t_cmd	*cmd);
 t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens);
-t_token_list	*get_redir(t_cmd *cmd, t_token_list *tokens);
 char			*handle_node_quotes(char *val);
 void			clear_token_quotes(t_token_list *tokens);
 int				has_quotes(char *value);
@@ -151,6 +151,7 @@ char			*skip_word(char *str);
 char			*skip_op(char *str);
 char			*skip_quote(char *str);
 char			*skip_variable(char *str);
+int				str_is_number(char *str);
 
 // utils2
 char			*ft_strndup(const char *str, size_t len);

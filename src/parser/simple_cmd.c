@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/09 04:20:19 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 02:00:14 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,39 +79,6 @@ static void	parse_command(t_cmd *cmd, t_token_list **tokens)
 	}
 	if (cmd->command)
 		init_args(cmd, tokens);
-}
-
-int	local_var(t_cmd *cmd)
-{
-	if (cmd->command && ft_strchr(cmd->command, EQUAL_SIGN))
-	{
-		cmd->num_of_args = 1;
-		cmd->command = ft_strdup("=");
-		return (1);
-	}
-	return (0);
-}
-
-// int next_token(t_token_list **tokens, t_cmd **cmd)
-// {
-// 	if ((*tokens))
-// 	{
-// 		(*tokens) = (*tokens)->next;
-// 	}
-// 	if (local_var(cmd))
-// 		return (0);
-// 	return (1);
-// }
-
-void	get_all_redir(t_token_list *tokens, t_cmd *cmd)
-{
-	while (tokens && tokens->type != OP_PIPE)
-	{
-		if (tokens->type >= OP_LESS && tokens->type <= OP_DGREAT)
-			tokens = get_redir(cmd, tokens);
-		if (tokens)
-			tokens = tokens->next;
-	}
 }
 
 t_cmd	*simple_cmd(t_token_list **tokens)

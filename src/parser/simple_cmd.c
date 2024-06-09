@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 21:11:32 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/09 04:20:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,6 @@ t_cmd	*simple_cmd(t_token_list **tokens)
 		{
 			list_to_list(&head, NULL, tokens);
 			*tokens = head;
-			safe_close(cmd->in_file.fd);
-			safe_close(cmd->out_file.fd);
 			ft_lstadd_back(&ms()->local_var_assign, ft_safe_lstnew(cmd));
 			cmd = init_cmd(*tokens);
 			continue ;

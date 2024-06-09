@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/07 23:21:33 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/09 03:18:28 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ typedef struct s_builtin
 typedef enum e_file
 {
 	INFILE,
-	OUTFILE
+	OUTFILE,
+	HEREDOC
 }			t_file;
 
 typedef struct s_redir
@@ -122,7 +123,6 @@ typedef struct s_cmd
 	t_redir	in_file;
 	t_redir	out_file;
 	t_list	*redirs;
-	char	*heredoc;
 	int		heredoc_expand;
 	char	*heredoc_delim;
 	char	**args;

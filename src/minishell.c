@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 22:15:03 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/09 04:25:25 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ void	minishell_loop(void)
 			// t_list *cmds;
 			// cmds = ms()->commands;
 			// print_cmds(cmds);
-			//print_executable(ms()->commands);
-			// builtin_cmd(ms()->commands); //temp
+			//print_executable(cmds);
 			local_variables();
 			execute_commands(ms()->commands);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:09:37 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 13:45:09 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/09 03:30:11 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	clear_cmds(void)
 	{
 		cmd = (t_cmd *)cmds->content;
 		ft_free((void **)&cmd->command);
-		ft_free((void **)&cmd->heredoc);
 		ft_free((void **)&cmd->heredoc_delim);
 		ft_free((void **)&cmd->exec_path);
 		i = 0;

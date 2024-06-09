@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/09 02:42:52 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/09 03:26:13 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ void			list_to_list(t_token_list **lst,
 t_cmd			*simple_cmd(t_token_list **tokens);
 t_list			*parser(t_token_list *tokens);
 void			get_all_redir(t_token_list *tokens, t_cmd *cmd);
+void			add_redir(t_redir *redir, t_cmd	*cmd);
+t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens);
 t_token_list	*get_redir(t_cmd *cmd, t_token_list *tokens);
 char			*handle_node_quotes(char *val);
 void			clear_token_quotes(t_token_list *tokens);

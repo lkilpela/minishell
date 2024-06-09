@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/09 02:42:29 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/09 03:35:24 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,16 @@ static void	exec_command(t_cmd *cmd)
 
 static void	handle_heredoc_fd(t_cmd *cmd, int *pipe_in, int *heredoc_pipefd)
 {
+	char	*heredoc;
+
+	heredoc = cmd->in_file.file;
 	safe_pipe(heredoc_pipefd);
-	write(heredoc_pipefd[P_WRITE], cmd->heredoc, ft_strlen(cmd->heredoc));
+	write(heredoc_pipefd[P_WRITE], heredoc, ft_strlen(heredoc));
 	safe_close(heredoc_pipefd[P_WRITE]);
 	safe_close(*pipe_in);
 	*pipe_in = heredoc_pipefd[P_READ];
 }
 
-//line 74: not first or coming from heredoc
-//line 79: not last
 void	child(t_list *cmds, int *pipe_in)
 {
 	t_cmd	*cmd;
@@ -73,7 +74,7 @@ void	child(t_list *cmds, int *pipe_in)
 	if (!validate_redir_list(cmd))
 		ms_exit(FATAL, EXIT_FAILURE);
 	validate_command(cmd);
-	if (cmd->heredoc)
+	if (cmd->in_file.type == HEREDOC)
 		handle_heredoc_fd(cmd, pipe_in, heredoc_pipefd);
 	if (*pipe_in != -1)
 	{

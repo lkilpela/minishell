@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/06 15:40:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/09 04:14:01 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static void	new_redir(t_cmd *cmd, t_redir *new)
+{
+	if (new->type == INFILE || new->type == HEREDOC)
+	{
+		safe_close(cmd->in_file.fd);
+		cmd->in_file = *new;
+	}
+	else
+	{
+		safe_close(cmd->out_file.fd);
+		cmd->out_file = *new;
+	}
+}
 
 int	validate_redir_list(t_cmd *cmd)
 {
@@ -23,10 +37,7 @@ int	validate_redir_list(t_cmd *cmd)
 		redir = (t_redir *)redirs->content;
 		if (!validate_redir(redir))
 			return (0);
-		if (redir->type == INFILE)
-			cmd->in_file = *redir;
-		if (redir->type == OUTFILE)
-			cmd->out_file = *redir;
+		new_redir(cmd, redir);
 		redirs = redirs->next;
 	}
 	return (1);
@@ -36,6 +47,8 @@ int	validate_redir(t_redir *file)
 {
 	int	oflags;
 
+	if (file->type == HEREDOC)
+		return (1);
 	if (file->type == INFILE)
 		oflags = O_INFILE;
 	if (file->type == OUTFILE)
@@ -44,13 +57,13 @@ int	validate_redir(t_redir *file)
 		oflags = O_APPENDFILE;
 	if (file->file)
 	{
-		safe_close(file->fd);
 		file->fd = open(file->file, oflags, PERMISSION);
 		if (file->fd == -1)
 		{
 			print_error(ERR_MS, file->file, NULL, 1);
 			return (0);
 		}
+		ft_printf("opened %s at fd: %d\n", file->file, file->fd);
 	}
 	else
 		file->fd = -1;

@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/09 18:16:18 by aklein           ###   ########.fr        #
+#    Updated: 2024/06/10 02:38:46 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,11 +48,22 @@ OBJECTS			=	$(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 SRC_DIR			=	./src
 SRCS			=	minishell.c \
 					init.c \
-					token_list.c \
 					tokenization.c \
+					token_list.c \
 					token_utils.c \
 					token_utils1.c \
 					token_utils2.c \
+					var_expander.c \
+					var_handler.c \
+					var_list.c \
+					var_misc.c \
+					merge_sort_vars.c \
+					list_to_list.c \
+					parsing.c \
+					parser_utils.c \
+					simple_cmd.c \
+					redirection.c \
+					heredoc.c \
 					builtins.c \
 					built_pwd.c \
 					built_echo.c \
@@ -61,28 +72,18 @@ SRCS			=	minishell.c \
 					built_export.c \
 					built_unset.c \
 					built_exit.c \
-					var_expander.c \
-					var_handler.c \
-					var_list.c \
-					merge_sort_vars.c \
-					parsing.c \
-					redirection.c \
-					heredoc.c \
-					simple_cmd.c \
-					parser_utils.c \
-					print_and_free.c \
+					path.c \
+					exec.c \
+					child.c \
+					validate.c \
+					signals.c \
 					errors.c \
 					print_err.c \
 					ms_exit.c \
 					lalloc.c \
 					safe_alloc1.c \
 					safe_alloc2.c \
-					safe_alloc3.c \
-					signals.c \
-					validate.c \
-					child.c \
-					exec.c \
-					path.c \
+					print_and_free.c \
 
 ################################################################################
 # RULES

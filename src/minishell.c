@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/09 19:33:48 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 02:37:13 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,6 @@ void	rl_history(char *input)
 	ft_free((void **)&last);
 	last = ft_safe_strdup(input);
 	write_history(NULL); //temp
-}
-
-void	local_variables(void)
-{
-	t_list	*locals;
-	t_list	*tmp;
-	t_cmd	*cmd;
-
-	locals = ms()->local_var_assign;
-	while (locals)
-	{
-		cmd = (t_cmd *)locals->content;
-		if (cmd->num_of_args > 1)
-			return ;
-		if (ms()->cmds_num == 0)
-			add_var(cmd->args[0], 1);
-		tmp = locals->next;
-		ft_free((void **)&locals);
-		locals = tmp;
-	}
-	ms()->local_var_assign = NULL;
 }
 
 void	minishell_loop(void)
@@ -81,6 +60,7 @@ void	minishell_loop(void)
 int	main(int argc, char **argv, char **envp)
 {
 	init_minishell(argc, argv, envp);
-	read_history(NULL);
+	shlvl();
+	read_history(NULL); //temp
 	minishell_loop();
 }

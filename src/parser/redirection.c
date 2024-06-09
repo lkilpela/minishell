@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/09 03:20:40 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 01:57:21 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static t_token_list	*handle_output_redir(t_cmd *cmd, t_token_list *tokens)
 	return (tokens);
 }
 
-t_token_list	*get_redir(t_cmd *cmd, t_token_list *t)
+static t_token_list	*get_redir(t_cmd *cmd, t_token_list *t)
 {
 	if (t->type == OP_DLESS)
 		t = handle_heredoc(cmd, t);
@@ -82,4 +82,15 @@ t_token_list	*get_redir(t_cmd *cmd, t_token_list *t)
 	else if (t->type == OP_GREAT || t->type == OP_DGREAT)
 		t = handle_output_redir(cmd, t);
 	return (t);
+}
+
+void	get_all_redir(t_token_list *tokens, t_cmd *cmd)
+{
+	while (tokens && tokens->type != OP_PIPE)
+	{
+		if (tokens->type >= OP_LESS && tokens->type <= OP_DGREAT)
+			tokens = get_redir(cmd, tokens);
+		if (tokens)
+			tokens = tokens->next;
+	}
 }

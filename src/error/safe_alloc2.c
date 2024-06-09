@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe_alloc2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:36:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/04 05:36:59 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/10 02:35:34 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,6 @@ char	*ft_safe_strjoin(const char *s1, const char *s2)
 	return (str);
 }
 
-char	*ft_safe_substr(const char *s, unsigned int start, size_t len)
-{
-	char	*str;
-
-	str = ft_substr(s, start, len);
-	if (!str)
-		ft_error(E_CODE_ERRNO + errno);
-	add_to_lal((void *)str);
-	return (str);
-}
-
 char	*ft_safe_itoa(int n)
 {
 	char	*str;
@@ -65,4 +54,15 @@ char	*ft_safe_itoa(int n)
 		ft_error(E_CODE_ERRNO + errno);
 	add_to_lal((void *)str);
 	return (str);
+}
+
+void	*ft_safe_lstnew(void *content)
+{
+	t_list	*node;
+
+	node = ft_lstnew(content);
+	if (!node)
+		ft_error(E_CODE_ERRNO + errno);
+	add_to_lal((void *)node);
+	return (node);
 }

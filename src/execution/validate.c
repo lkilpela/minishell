@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/09 04:14:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/09 04:59:30 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	validate_redir(t_redir *file)
 			print_error(ERR_MS, file->file, NULL, 1);
 			return (0);
 		}
-		ft_printf("opened %s at fd: %d\n", file->file, file->fd);
 	}
 	else
 		file->fd = -1;

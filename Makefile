@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/09 03:22:42 by aklein           ###   ########.fr        #
+#    Updated: 2024/06/09 18:16:18 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@
 CC				=	cc
 CC_STRICT		=	-Wall -Wextra -Werror
 DB_FLAGS		=	-g #-fsanitize=leak
-HEADERS			=	-I $(LIBFT_INCLUDES) -I $(INCLUDES) -I/opt/homebrew/opt/readline/include
+HEADERS			=	-I $(LIBFT_INCLUDES) -I $(INCLUDES) \
+					-I/opt/homebrew/opt/readline/include \
+					-I ~/.brew/Cellar/readline/8.2.10/include
 CC_FULL			=	$(CC) $(CC_STRICT) $(DB_FLAGS) $(HEADERS)
 
 ################################################################################
@@ -29,7 +31,9 @@ LIBFT_INCLUDES	=	./libft/include
 ################################################################################
 # READLINE
 ################################################################################
-READLINE		=	-L/opt/homebrew/opt/readline/lib -lreadline
+READLINE		=	-L/opt/homebrew/opt/readline/lib \
+					-L ~/.brew/Cellar/readline/8.2.10/lib \
+					-lreadline
 
 ################################################################################
 # MANDATORY

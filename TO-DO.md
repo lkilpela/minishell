@@ -4,7 +4,7 @@
 - [ ] signal handling in child process.
 - [ ] signal handling in heredoc.
 - [ ] probably more signal stuff.
-- [ ] manual_tests/signals.txt 
+- [ ] manual_tests/signals.txt
 
 ## validate
 - [x] fixed a bug with multiple redirections in the same command (heredoc was getting overwritten by a normal input file, when it shouldn't be)
@@ -12,6 +12,14 @@
 ## exec
 - [x] make in our minishell does not work, not sure why (started working because of proper envp values to execve)
 - [x] updated variables to be sent to the execve
+- [ ]   ```
+        mdkir test_folder
+        test_folder
+        ```
+        errors for minishell: test_folder: is a directory
+        which means its looking into current directory as if its part of the $PATH when looking for the executable.
+        it should be just looking for the executable from path called test_folder which doesnt exist (most likely).
+        so need to fix the find_executable function to only look for the PATH folders in that case.
 
 
 ## builtins
@@ -41,9 +49,9 @@ bash exit code = 0
 mini error = ( too many arguments)
 bash error = ()
 
-- [ ] bash changes the current directory 
+- [ ] bash changes the current directory
 ```
-minishell$ 
+minishell$
 
 minishell: cd: too many arguments
 ```
@@ -124,7 +132,7 @@ zsh: segmentation fault  ./minishell
 
 echo - "" "  " hello
 
-Expected output: 
+Expected output:
 ```
 -     hello
 ```
@@ -132,7 +140,7 @@ Expected output:
 Current output:
 ```
 minishell$ echo - "" "  " hello
-    hellominishell$ 
+    hellominishell$
 ```
 
 - [x] SEGFAULT
@@ -150,7 +158,7 @@ Current output:
 minishell: /Users/lumik: is a directory
 
 ## builtins
-- [x] Test  50: ❌ exit hello 
+- [x] Test  50: ❌ exit hello
 mini exit code = 2
 bash exit code = 255
 - [x] bash does not return an error, it treats it as a request to export an exising shell var
@@ -161,7 +169,7 @@ minishell: export: : hello: not a valid identifier
 bash$ export hello
 bash$ echo $hello
 
-bash$ 
+bash$
 ```
 - [x] export without args needs to print sorted list of vars
 - [x] need to be properly handled from execution

@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/10 02:38:46 by aklein           ###   ########.fr        #
+#    Updated: 2024/06/10 02:54:00 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRCS			=	minishell.c \
 					var_expander.c \
 					var_handler.c \
 					var_list.c \
+					var_list_utils.c \
 					var_misc.c \
 					merge_sort_vars.c \
 					list_to_list.c \

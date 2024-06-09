@@ -7,10 +7,11 @@
 - [ ] manual_tests/signals.txt 
 
 ## validate
+- [x] fixed a bug with multiple redirections in the same command (heredoc was getting overwritten by a normal input file, when it shouldn't be)
 ## parse
 ## exec
-- [ ] make in our minishell does not work, not sure why
-- [ ] updated variables to be sent to the execve
+- [x] make in our minishell does not work, not sure why (started working because of proper envp values to execve)
+- [x] updated variables to be sent to the execve
 
 
 ## builtins
@@ -31,7 +32,7 @@ PWD=/Users
 - [ ] some variables are considered "read-only" and cannot be unset or modified: BASH, BASH_VERSION, HOME, PATH, PWD, UID, HOSTNAME. Check if we are able to unset or modify these at school? At home, we has admin right.
 example: export HOME="", unset HOME
 
-- [ ] update $OLDPWD and $PWD env variables when using 'cd'.
+- [x] update $OLDPWD and $PWD env variables when using 'cd'.
 - [ ] update $SHLVL properly
 - [ ] specical case export `export whatever=test | grep ok | cat`
 - [ ] Test  40: ❌ cd $PWD hi (NEED TO CHECK THE BASH VERSION OF SCHOOL COMPUTER)

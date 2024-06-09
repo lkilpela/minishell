@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 23:01:26 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/09 02:42:52 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int				is_ambiguous(char *val, t_token_list *tokens);
 // execution
 void			init_path_dirs(void);
 char			*find_executable(t_cmd *cmd);
+char			**build_envp();
 void			execute_commands(t_list *c);
 void			child(t_list *cmds, int *pipe_in);
 int				validate_redir(t_redir *file);

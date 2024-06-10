@@ -8,7 +8,7 @@
 
 ## validate
 ## parse
-- [ ] some issues with export and local variable assignments when the variable values have spaces ie `export PATH=$PATH:$PWD` gives errors because its in multiple tokens I guess, same for `export PATH=$PATH:$PWD`
+- [x] some issues with export and local variable assignments when the variable values have spaces ie `export PATH=$PATH:$PWD` gives errors because its in multiple tokens I guess, same for `export PATH=$PATH:$PWD`
 somehow `export PATH=$PATH:/home/a/testpath` works as intended. also `export "PATH=$PATH:$PWD"` quoting to make sure its 1 token in tokenizer works
 ## path
 - [x] ms().paths is not updated correctly when new path is added to $PATH can test when you go to any of the past project folders that has the executable in there, like push_swap then: `export "PATH=$PATH:$PWD"` check if your new folder is in the end of the path with `echo $PATH`

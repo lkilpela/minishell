@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 07:28:17 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 08:13:42 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_cmd	*simple_cmd(t_token_list **tokens)
 			parse_command(cmd, tokens);
 		else if ((*tokens)->type == WORD)
 			cmd->args[cmd->arg_index++] = (*tokens)->value;
-		if (*cmd->command == '=')
+		if (cmd->command && *cmd->command == '=')
 		{
 			list_to_list(tokens, NULL, tokens);
 			ft_lstadd_back(&ms()->local_var_assign, ft_safe_lstnew(cmd));

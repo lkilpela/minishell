@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 03:54:06 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 09:10:53 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	execute_commands(t_list *cmds)
 	i = 0;
 	pipe_in = -1;
 	ms()->pids = ft_safe_calloc(ms()->cmds_num, sizeof(pid_t));
-	if (ms()->cmds_num == 1 && is_special_builtin(cmds->content))
+	if (ms()->cmds_num == 1 && cmds && is_special_builtin(cmds->content))
 	{
 		execute_builtin(cmds->content);
 		return ;

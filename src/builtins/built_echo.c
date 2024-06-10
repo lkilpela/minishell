@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_echo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:06:24 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/05 10:30:26 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/10 09:24:48 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 
 int	check_flag(char *arg)
 {
-	return (ft_strcmp(arg, "-n") == 0);
+	if (*arg++ != '-')
+		return (0);
+	if (*arg == '\0')
+		return (0);
+	while (*arg)
+	{
+		if (*arg++ != 'n')
+			return (0);
+	}
+	return (1);
 }
 
 void	built_echo(t_cmd *cmd)

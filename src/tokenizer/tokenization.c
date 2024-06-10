@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 03:41:14 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 02:07:34 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 10:12:31 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_token_list	*create_token(t_token_type type, char *value)
 	return (node);
 }
 
-t_token_list	*new_tokenizer(char *str)
+t_token_list	*new_tokenizer(char *str, int ops)
 {
 	t_token_list	*lst;
 	t_token_list	*node;
@@ -54,6 +54,8 @@ t_token_list	*new_tokenizer(char *str)
 		if (!*str)
 			break ;
 		extract_token(str, &value, &type);
+		if (!ops)
+			type = WORD;
 		node = create_token(type, value);
 		add_token_to_list(&lst, node);
 		str += token_len(str);

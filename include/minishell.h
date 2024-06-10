@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 07:25:44 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 10:10:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void			special_export(t_cmd *cmd, t_token_list **tokens);
 // tokenizer
 int				token_len(char *str);
 void			extract_token(char *str, char **value, t_token_type *type);
-t_token_list	*new_tokenizer(char *str);
+t_token_list	*new_tokenizer(char *str, int ops);
 void			list_to_list(t_token_list **lst,
 					t_token_list *add, t_token_list **index);
 

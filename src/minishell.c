@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 08:47:51 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 10:10:40 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	minishell_loop(void)
 		if (all_good && !quote_match_check(input)) // ensure quotes are balanced
 			all_good = ms_exit(RELINE, E_CODE_SYNTX);
 		if (all_good)
-			ms()->tokens = new_tokenizer(input);
+			ms()->tokens = new_tokenizer(input, 1);
 		//print_tokens(ms()->tokens);
 		if (all_good && !near_token_errors(ms()->tokens)) // check for errors in token list
 			all_good = ms_exit(RELINE, E_CODE_SYNTX);

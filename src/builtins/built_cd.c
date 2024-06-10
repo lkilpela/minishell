@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/09 19:25:48 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 02:58:53 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@ void	built_cd(t_cmd *cmd)
 {
 	char	*home;
 
-
-	if (cmd->num_of_args > 2)
-		return (error_ret(ERR_CD_ARGS));
 	if (cmd->num_of_args == 1)
 	{
 		home = lookup_var("HOME");
@@ -60,7 +57,7 @@ void	built_cd(t_cmd *cmd)
 			ft_free((void **)&home);
 		}
 	}
-	if (cmd->num_of_args == 2)
+	if (cmd->num_of_args >= 2)
 	{
 		if (chdir(cmd->args[1]) != 0)
 		{

@@ -6,12 +6,11 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 03:20:47 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 01:35:14 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 03:04:32 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
 
 static char	*heredoc_exp(char *str_start)
 {

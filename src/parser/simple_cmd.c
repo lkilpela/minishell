@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 02:00:14 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 03:04:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	parse_command(t_cmd *cmd, t_token_list **tokens)
 
 t_cmd	*simple_cmd(t_token_list **tokens)
 {
-	t_cmd	*cmd;
+	t_cmd			*cmd;
 	t_token_list	*head;
 
 	head = *tokens;

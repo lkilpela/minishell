@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:33:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 01:37:26 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 03:04:57 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	vars_length(t_var_list *vars)
 	return (len);
 }
 
-char	**build_envp()
+char	**build_envp(void)
 {
 	t_var_list	*vars;
 	char		**envs;

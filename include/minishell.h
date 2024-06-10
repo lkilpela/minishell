@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 02:38:08 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 02:57:45 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_var_list		*get_envp(char **envp);
 void			extract_var(char *str, char **key, char **value, int *is_set);
 void			add_var(char *str, int is_local);
 void			add_var_to_list(t_var_list **head, t_var_list *node);
-t_var_list		*create_var_node(char *key, char *value, int is_set, int is_local);
+t_var_list		*create_var_node(char *key, char *value, int set, int local);
 void			merge_sort(t_var_list **vars);
 int				var_declared(char *key);
 char			*lookup_var(char *key);
@@ -121,7 +121,7 @@ int				is_ambiguous(char *val, t_token_list *tokens);
 // execution
 void			init_path_dirs(void);
 char			*find_executable(t_cmd *cmd);
-char			**build_envp();
+char			**build_envp(void);
 void			execute_commands(t_list *c);
 void			child(t_list *cmds, int *pipe_in);
 int				validate_redir(t_redir *file);

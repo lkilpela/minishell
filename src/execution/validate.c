@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/09 04:59:30 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 03:16:34 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,16 @@ void	validate_command(t_cmd *cmd)
 		return ;
 	if (is_directory(cmd))
 	{
-		print_error(ERR_MS, cmd->command, ERR_DIR, 0);
-		ms_exit(FATAL, E_CODE_CMD_NEXEC);
+		if (ft_strchr(cmd->command, '/'))
+		{
+			print_error(ERR_MS, cmd->command, ERR_DIR, 0);
+			ms_exit(FATAL, E_CODE_CMD_NEXEC);
+		}
+		else
+		{
+			print_error(ERR_MS, cmd->command, ERR_CMD, 0);
+			ms_exit(FATAL, E_CODE_CMD_NFOUND);
+		}
 	}
 	validate_executable(cmd);
 }

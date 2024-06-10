@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:09:37 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/09 04:55:40 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 21:08:49 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	clear_cmds(void)
 		ft_free((void **)&cmd->heredoc_delim);
 		ft_free((void **)&cmd->exec_path);
 		i = 0;
-		while (cmd->args[i])
+		while (cmd->args && cmd->args[i])
 			ft_free((void **)&cmd->args[i++]);
 		ft_free((void **)&cmd->args);
 		tmp = cmds->next;

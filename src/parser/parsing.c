@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 09:15:49 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 21:07:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ t_list	*parser(t_token_list *tokens)
 		new_cmd = simple_cmd(&tokens);
 		if (!validate_redir_list(new_cmd))
 			ms_exit(WARNING, EXIT_FAILURE);
-		if (new_cmd->command)
-			ft_lstadd_back(&cmd_list, ft_safe_lstnew(new_cmd));
+		ft_lstadd_back(&cmd_list, ft_safe_lstnew(new_cmd));
 		if (tokens)
 			tokens = tokens->next;
 	}

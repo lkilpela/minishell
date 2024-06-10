@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/03 15:11:04 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/10 03:35:05 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static char	**get_path_dirs(void)
 
 void	init_path_dirs(void)
 {
-	if (!ms()->paths)
-		ms()->paths = get_path_dirs();
+	ms()->paths = get_path_dirs();
 }
 
 char	*find_executable(t_cmd *cmd)

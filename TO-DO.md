@@ -8,10 +8,10 @@
 
 ## validate
 ## parse
-- [ ] some issues with export and local variable assignments when the variable values have spaces ie `PATH=$PATH:$PWD` gives errors because its in multiple tokens I guess, same for `export PATH=$PATH:$PWD`
-somehow `export PATH=$PATH:/home/a/testpath` works as intended
+- [ ] some issues with export and local variable assignments when the variable values have spaces ie `export PATH=$PATH:$PWD` gives errors because its in multiple tokens I guess, same for `export PATH=$PATH:$PWD`
+somehow `export PATH=$PATH:/home/a/testpath` works as intended. also `export "PATH=$PATH:$PWD"` quoting to make sure its 1 token in tokenizer works
 ## path
-- [x] ms().paths is not updated correctly when new path is added to $PATH can test when you go to any of the past project folders that has the executable in there, like push_swap then: `PATH=$PATH:$PWD` check if your new folder is in the end of the path with `echo $PATH`
+- [x] ms().paths is not updated correctly when new path is added to $PATH can test when you go to any of the past project folders that has the executable in there, like push_swap then: `export "PATH=$PATH:$PWD"` check if your new folder is in the end of the path with `echo $PATH`
 now push_swap should be possible to be run from anywhere as a command, so go back to minishell folder or home folder or anything, and try running `push_swap 5 1 3 4` fixed it for now by removing the if statement and always updating the paths from the vars_list.
 - [ ] ms().paths is causing memory leaks, cause its not getting freed and its not following the lalloc ( list allocation) logic with the safe commands so either need to free it normally in case of error or exit or make safe_allocation for it (should probably free the last ms().paths before it gets updated either way)
 ## exec

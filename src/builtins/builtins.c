@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:13:10 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 02:58:03 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 23:58:06 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ int	is_special_builtin(t_cmd *cmd)
 	t_builtin	builtin;
 
 	builtin = get_builtin(cmd);
+	if (ft_strcmp(builtin.name, "export") == 0)
+	{
+		if (cmd->num_of_args == 1)
+			return (0);
+	}
 	if (builtin.special)
 		return (1);
 	return (0);

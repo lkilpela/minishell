@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:03:33 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 10:00:23 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 10:51:22 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ static int	check_for_ending(char *str, int len)
 {
 	if (is_operator(*str) || is_double_operator(str) || !is_word(*str))
 	{
-		if (is_double_operator(str))
-			return (2);
 		if (len > 0)
 			return (len);
+		if (is_double_operator(str))
+			return (2);
 		return (1);
 	}
 	return (0);

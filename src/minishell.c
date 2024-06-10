@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 08:28:02 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 08:47:51 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void	minishell_loop(void)
 		if (isatty(fileno(stdin)))
 			input = readline(PROMPT);
 		else
-			{
-				char *line;
-				line = get_next_line(fileno(stdin));
-				input = ft_strtrim(line, "\n");
-				free(line);
-			}
+		{
+			char *line;
+			line = get_next_line(fileno(stdin));
+			input = ft_strtrim(line, "\n");
+			free(line);
+		}
 		if (input == NULL)
 			built_exit(NULL);
 		rl_history(input);

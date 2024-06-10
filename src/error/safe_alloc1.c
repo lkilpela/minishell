@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   safe_alloc1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:31:25 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 13:56:44 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/10 08:54:31 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ void	safe_dup2(int fd, int fd2)
 
 void	safe_close(int fd)
 {
-	if (fd == 0 || fd == 1 || fd == 2)
-		printf("closing %d, maybe not good?\n", fd);
 	if (fd != -1)
 	{
 		if (close(fd) == -1)

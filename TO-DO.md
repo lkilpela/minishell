@@ -4,24 +4,19 @@
 - [ ] signal handling in child process.
 - [ ] signal handling in heredoc.
 - [ ] probably more signal stuff.
-- [ ] manual_tests/signals.txt
+- [ ] manual_tests/signals.txt 
 
 ## validate
-- [x] fixed a bug with multiple redirections in the same command (heredoc was getting overwritten by a normal input file, when it shouldn't be)
 ## parse
 ## exec
-- [x] make in our minishell does not work, not sure why (started working because of proper envp values to execve)
-- [x] updated variables to be sent to the execve
 - [ ]   ```
         mdkir test_folder
         test_folder
         ```
         errors for minishell: test_folder: is a directory
         which means its looking into current directory as if its part of the $PATH when looking for the executable.
-        it should be just looking for the executable from path called test_folder which doesnt exist (most likely).
+        it should be just looking for the executable from path called test_folder which doesnt exist.
         so need to fix the find_executable function to only look for the PATH folders in that case.
-
-
 ## builtins
 
 bash-3.2$ unset PWD
@@ -40,38 +35,9 @@ PWD=/Users
 - [ ] some variables are considered "read-only" and cannot be unset or modified: BASH, BASH_VERSION, HOME, PATH, PWD, UID, HOSTNAME. Check if we are able to unset or modify these at school? At home, we has admin right.
 example: export HOME="", unset HOME
 
-- [x] update $OLDPWD and $PWD env variables when using 'cd'.
-- [ ] update $SHLVL properly
-- [ ] specical case export `export whatever=test | grep ok | cat`
-- [ ] Test  40: ❌ cd $PWD hi (NEED TO CHECK THE BASH VERSION OF SCHOOL COMPUTER)
-mini exit code = 1
-bash exit code = 0
-mini error = ( too many arguments)
-bash error = ()
 
-- [ ] bash changes the current directory
-```
-minishell$
-
-minishell: cd: too many arguments
-```
-```
-bash$ pwd
-/Users/lumik/workspace/git/minishell
-bash$ cd .. hi
-bash$ pwd
-/Users/lumik/workspace/git
-```
-different for me
-```
-a@Allar:~/minishell$ pwd
-/home/a/minishell
-a@Allar:~/minishell$ cd .. hi
-bash: cd: too many arguments
-a@Allar:~/minishell$ pwd
-/home/a/minishell
-a@Allar:~/minishell$
-```
+- [x] update $SHLVL properly
+- [x] ~~specical case export `export whatever=test | grep ok | cat`~~ this seems to be something that was mistaken, its not special case at all, works as bash does, think we had some buggy terminals when testing this before
 
 ## NORM
 
@@ -86,13 +52,11 @@ Error: PREPROC_CONSTANT     (line:  37, col:  20):      Preprocessor statement m
 Error: PREPROC_CONSTANT     (line:  38, col:  23):      Preprocessor statement must only contain constant defines
 Error: PREPROC_CONSTANT     (line:  40, col:  22):      Preprocessor statement must only contain constant defines
 
-4. Unused function
-errors.c
-int	pipe_start_end(t_token_list *tokens)
 
 # DONE
 
 ## validate
+- [x] fixed a bug with multiple redirections in the same command (heredoc was getting overwritten by a normal input file, when it shouldn't be)
 - [x] split validate_command into smaller functions
 - [x] "$HOME here '$HOME' test": expanded single word with enclosed quotes. Print: minishell: /Users/lumik here '/Users/lumik' test: No such file or directory
 
@@ -108,6 +72,9 @@ Print: minishell: /Users/lumik: is a directory
 - [x] validate infile/outfile is not existed, error msg: (my bash is showing 1?)`No such file or directory - errcode: E_CODE_FILE = 1
 
 ## exec
+- [x] make in our minishell does not work, not sure why (started working because of proper envp values to execve)
+- [x] updated variables to be sent to the execve
+
 - [x] bash has exit code `0` vs minishell has exit code `139`
 ```
 minishell$ $EMPTY
@@ -132,7 +99,7 @@ zsh: segmentation fault  ./minishell
 
 echo - "" "  " hello
 
-Expected output:
+Expected output: 
 ```
 -     hello
 ```
@@ -140,7 +107,7 @@ Expected output:
 Current output:
 ```
 minishell$ echo - "" "  " hello
-    hellominishell$
+    hellominishell$ 
 ```
 
 - [x] SEGFAULT
@@ -158,7 +125,38 @@ Current output:
 minishell: /Users/lumik: is a directory
 
 ## builtins
-- [x] Test  50: ❌ exit hello
+- [x] update $OLDPWD and $PWD env variables when using 'cd'.
+- [x] Test  40: ❌ cd $PWD hi (NEED TO CHECK THE BASH VERSION OF SCHOOL COMPUTER)
+mini exit code = 1
+bash exit code = 0
+mini error = ( too many arguments)
+bash error = ()
+
+- [x] bash changes the current directory 
+```
+minishell$ 
+
+minishell: cd: too many arguments
+```
+```
+bash$ pwd
+/Users/lumik/workspace/git/minishell
+bash$ cd .. hi
+bash$ pwd
+/Users/lumik/workspace/git
+```
+different for me
+```
+a@Allar:~/minishell$ pwd
+/home/a/minishell
+a@Allar:~/minishell$ cd .. hi
+bash: cd: too many arguments
+a@Allar:~/minishell$ pwd
+/home/a/minishell
+a@Allar:~/minishell$
+```
+
+- [x] Test  50: ❌ exit hello 
 mini exit code = 2
 bash exit code = 255
 - [x] bash does not return an error, it treats it as a request to export an exising shell var
@@ -169,7 +167,7 @@ minishell: export: : hello: not a valid identifier
 bash$ export hello
 bash$ echo $hello
 
-bash$
+bash$ 
 ```
 - [x] export without args needs to print sorted list of vars
 - [x] need to be properly handled from execution

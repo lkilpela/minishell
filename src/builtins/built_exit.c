@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 08:49:12 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/11 00:53:08 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	str_is_number(char *str)
 {
+	if (!*str)
+		return (0);
 	if (*str == '-' || *str == '+')
 		str++;
 	while (*str)
@@ -68,17 +70,17 @@ void	built_exit(t_cmd *cmd)
 	// ft_putendl_fd("exit", 1);
 	if (!cmd || cmd->num_of_args == 1)
 		ms_exit(FATAL, ms()->exit);
-	if (cmd->num_of_args > 2)
-	{
-		print_error("minishell: exit", NULL, "too many arguments", 0);
-		ms()->exit = EXIT_FAILURE;
-		return ;
-	}
 	if (!non_numeric_exit(cmd->args[1]))
 	{
 		print_error("minishell: exit",
 			cmd->args[1], "numeric argument required", 0);
-		exit_code = 255;
+		exit_code = 2;
+	}
+	else if (cmd->num_of_args > 2)
+	{
+		print_error("minishell: exit", NULL, "too many arguments", 0);
+		ms()->exit = EXIT_FAILURE;
+		return ;
 	}
 	else
 		exit_code = (uint8_t)ft_atoi(cmd->args[1]);

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 02:38:32 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 06:00:31 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 06:44:48 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ void	shlvl(void)
 	add_var(next_level, 0);
 }
 
-int	local_var(t_cmd *cmd)
+int	local_var(t_cmd *cmd, char *str)
 {
-	if (cmd->command && ft_strchr(cmd->command, EQUAL_SIGN))
+	if (str && ft_strchr(str, EQUAL_SIGN))
 	{
+		cmd->args = ft_safe_calloc(1, sizeof(char *));
 		cmd->num_of_args = 1;
 		cmd->command = ft_safe_strdup("=");
 		return (1);

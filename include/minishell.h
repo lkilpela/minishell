@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 02:57:45 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 07:25:44 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,15 @@ void			merge_sort(t_var_list **vars);
 int				var_declared(char *key);
 char			*lookup_var(char *key);
 void			local_variables(void);
-int				local_var(t_cmd *cmd);
+int				local_var(t_cmd *cmd, char *str);
 void			shlvl(void);
 
 // expander
 char			*exp_word(char *str_start);
 char			*exp_next_var(char *var, char **start);
+void			expand_current_el(t_token_list **tokens, t_token_list **index);
+int				special_local_var(t_cmd *cmd, t_token_list **tokens);
+void			special_export(t_cmd *cmd, t_token_list **tokens);
 
 // tokenizer
 int				token_len(char *str);

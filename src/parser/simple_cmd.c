@@ -6,13 +6,13 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 03:04:20 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 07:28:17 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-static void	expand_current_el(t_token_list **tokens, t_token_list **index)
+void	expand_current_el(t_token_list **tokens, t_token_list **index)
 {
 	char			*str;
 	char			*new;
@@ -71,22 +71,25 @@ static void	parse_command(t_cmd *cmd, t_token_list **tokens)
 {
 	if ((*tokens)->type == WORD)
 	{
+		if (special_local_var(cmd, tokens))
+			return ;
 		expand_current_el(tokens, tokens);
 		if (*tokens != NULL)
 		{
 			cmd->command = (*tokens)->value;
+			special_export(cmd, tokens);
 		}
 	}
 	if (cmd->command)
+	{
 		init_args(cmd, tokens);
+	}
 }
 
 t_cmd	*simple_cmd(t_token_list **tokens)
 {
-	t_cmd			*cmd;
-	t_token_list	*head;
+	t_cmd	*cmd;
 
-	head = *tokens;
 	cmd = init_cmd(*tokens);
 	while ((*tokens) && (*tokens)->type != OP_PIPE)
 	{
@@ -96,10 +99,9 @@ t_cmd	*simple_cmd(t_token_list **tokens)
 			parse_command(cmd, tokens);
 		else if ((*tokens)->type == WORD)
 			cmd->args[cmd->arg_index++] = (*tokens)->value;
-		if (local_var(cmd))
+		if (*cmd->command == '=')
 		{
-			list_to_list(&head, NULL, tokens);
-			*tokens = head;
+			list_to_list(tokens, NULL, tokens);
 			ft_lstadd_back(&ms()->local_var_assign, ft_safe_lstnew(cmd));
 			cmd = init_cmd(*tokens);
 			continue ;

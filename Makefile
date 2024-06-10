@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/10 02:54:00 by aklein           ###   ########.fr        #
+#    Updated: 2024/06/10 07:25:00 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ SRCS			=	minishell.c \
 					parsing.c \
 					parser_utils.c \
 					simple_cmd.c \
+					special_expand.c \
 					redirection.c \
 					heredoc.c \
 					builtins.c \

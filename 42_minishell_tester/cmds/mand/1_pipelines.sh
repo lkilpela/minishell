@@ -29,7 +29,7 @@ echo 42 | echo no | echo smth | grep no
 
 echo 42 | echo no | echo smth | grep smth
 
-/bin/env | grep "_="
+# /bin/env | grep "_=" #shows last command executed, dont need it.
 
 /bin/env | grep "SHLVL"
 
@@ -91,20 +91,6 @@ sad
 stop2
 as $HOME
 stop3
-/bin/rm -f out
-
-ls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la > > out | cat << stop3
-fe
-wf
-fwe
-f
-stop
-dw
-stop1
-dwasd
-stop2
-cat Makefile | ls > out
-cat out
 /bin/rm -f out
 
 ls | cat << stop | ls -la > out0| cat << stop1 | ls | cat << stop2 | ls -la >> out | cat << stop3

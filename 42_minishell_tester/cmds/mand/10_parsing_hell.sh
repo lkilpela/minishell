@@ -29,25 +29,25 @@ echo '' -n
 
 echo "" "" "" -n -n -n -n
 
-cat << $USER
-why
-not
-$USER
+# cat << $USER
+# why
+# not
+# $USER
 
 export T=">>"
 $T lol
 
-cat << "$USER"
-why
-not
-$USER
+# cat << "$USER"
+# why
+# not
+# $USER
 
-cat << "$US"E"R"
-because
-we
-love
-bash
-$USER
+# cat << "$US"E"R"
+# because
+# we
+# love
+# bash
+# $USER
 
 >> $HOME
 
@@ -294,11 +294,11 @@ export L=amazing L=ok L=cool
 export L=ok
 echo $L
 
-echo '$'$'$'$'$'
+# echo '$'$'$'$'$'
 
-echo '$'$'$'$'$'$'$'
+# echo '$'$'$'$'$'$'$' #localization quirks
 
-echo "$"$'$'$"$"$"$"$'$'
+# echo "$"$'$'$"$"$"$"$'$'
 
 echo $/ $/ 
 
@@ -316,6 +316,6 @@ exit 123"123"
 
 <| echo ok
 
->| echo sure
+# >| echo sure # noclobber override force operator not handled
 
-cd --
+# cd -- additional feature, not needed

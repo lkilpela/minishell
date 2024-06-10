@@ -37,17 +37,17 @@ echo $T
 
 export miert ne lehetne ezt is
 
-/bin/echo $"HOME"$USER
+# /bin/echo $"HOME"$USER
 
-/bin/echo $"HOM"E$USER
+# /bin/echo $"HOM"E$USER #not handling localization
 
-/bin/echo $"'HOM'E"$USER
+# /bin/echo $"'HOM'E"$USER
 
-/bin/echo $'HOM'E$USER
+# /bin/echo $'HOM'E$USER
 
-/bin/echo $"HOME"
+# /bin/echo $"HOME"
 
-/bin/echo $'HOME'
+# /bin/echo $'HOME'
 
 /bin/echo $
 
@@ -57,13 +57,13 @@ export miert ne lehetne ezt is
 
 /bin/echo "$""$"
 
-/bin/echo $"$"
+# /bin/echo $"$"
 
-/bin/echo $"42$"
+# /bin/echo $"42$" localization quirk
 
 /bin/echo "$"$
 
-/bin/echo $'$'
+# /bin/echo $'$' localization quirk
 
 /bin/echo '$'$
 

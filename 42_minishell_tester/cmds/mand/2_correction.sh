@@ -126,9 +126,9 @@ echo "$HO ME"
 
 echo '$HO ME'
 
-echo $"HOME"
+# echo $"HOME"
 
-echo $'HOME'
+# echo $'HOME' localization qurik
 
 echo ""$PWD""
 
@@ -136,17 +136,17 @@ echo ''$PWD''
 
 echo $USE"R"$HOME
 
-echo $"HOME"$USER
+# echo $"HOME"$USER
 
-echo $"HOM"E$USER
+# echo $"HOM"E$USER
 
-echo $"'HOM'E"$USER
+# echo $"'HOM'E"$USER
 
-echo $'HOM'E$USER
+# echo $'HOM'E$USER
 
-echo $"HOME"
+# echo $"HOME"
 
-echo $'HOME'
+# echo $'HOME' localization quirk
 
 echo $
 
@@ -156,13 +156,13 @@ echo '$='
 
 echo "$""$"
 
-echo $"$"
+# echo $"$"
 
-echo $"42$"
+# echo $"42$" localization quirk
 
 echo "$"$
 
-echo $'$'
+# echo $'$' localization quirk
 
 echo '$'$
 

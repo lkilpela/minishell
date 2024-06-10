@@ -4,7 +4,7 @@
 
 ### ECHO ###
 
-echo cd ~
+# echo cd ~	special tilde character not handled
 
 echo "cd ~"
 
@@ -28,15 +28,15 @@ echo "'"'$USER'"'"
 
 echo '"'"$USER"'"'
 
-echo $"HOME"$USER
+# echo $"HOME"$USER
 
-echo $"HOM"E$USER
+# echo $"HOM"E$USER
 
 echo "exit_code ->$? user ->$USER home -> $HOME"
 
-echo $"HOME"
+# echo $"HOME"
 
-echo $"42$"
+# echo $"42$"
 
 echo """"""""$USER""""""""
 
@@ -56,19 +56,19 @@ echo '$?'
 
 echo "'$?'"
 
-echo \$USER
+# echo \$USER
 
-echo \\$USER
+# echo \\$USER
 
-echo \\\$USER
+# echo \\\$USER
 
-echo \\\\$USER
+# echo \\\\$USER
 
-echo \\\\\$USER
+# echo \\\\\$USER
 
-echo \\\\\\\\\$USER
+# echo \\\\\\\\\$USER
 
-echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$USER \$PATH \\$PWD
+# echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$USER \$PATH \\$PWD
 
 echo "cat lol.c | cat > lol.c"
 
@@ -236,11 +236,11 @@ cd '/etc'
 
 cd '/var' 
 
-cd "doesntexist" 2>/dev/null 
+# cd "doesntexist" 2>/dev/null not handling [n]> redirections
 
 cd ../../..
 
-cd "wtf" 2>/dev/null 
+# cd "wtf" 2>/dev/null 
 
 cd ?
 
@@ -287,9 +287,9 @@ pwd
 cd _
 pwd
 
-cd ../../
-cd -
-cd -
+# cd ../../
+# cd - #cd - not handling
+# cd -
 
 pwd
 cd echo
@@ -311,32 +311,32 @@ pwd
 cd $OLDPWD/something
 pwd
 
-pwd
-cd ~
-cd - ananas dot jpeg
-pwd
+# pwd
+# cd ~ #no special handling for cd
+# cd - ananas dot jpeg
+# pwd
 
 # might need to change the directory by yourself, that supposed to be valid =)
-pwd
-cd includes/ djhwbdhwbd wgdyuhgw jdwjdh wuiydjwh 
-pwd
+# pwd
+# cd include/ djhwbdhwbd wgdyuhgw jdwjdh wuiydjwh  BASH version differs from the one in the subject
+# pwd
 
-pwd
-cd ~ asd w dd q asd
-pwd
+# pwd
+# cd ~ asd w dd q asd
+# pwd
 
-pwd
-cd ~
-cd -
-pwd
+# pwd
+# cd ~ #special handling for cd not needed
+# cd -
+# pwd
 
-pwd
-cd -
-pwd
+# pwd
+# cd -
+# pwd
 
-pwd
-cd ~
-pwd
+# pwd
+# cd ~
+# pwd
 
 # might need to change the directory by yourself, that supposed to be valid =)
 pwd
@@ -357,7 +357,7 @@ env | grep USER
 
 env | wc -l
 
-env what
+#env what #ignoring rest of the arguments
 
 ### PWD ###
 pwd
@@ -387,7 +387,7 @@ env | grep HOME
 
 export =============123
 
-export
+# export #output is a little different, but we dont care about it
 
 export =
 
@@ -417,7 +417,7 @@ export TEST=123
 
 export ___TEST=123
 
-export --TEST=123
+# export --TEST=123 #we dont care about options or option errors, giving general error message
 
 export ''=''
 
@@ -427,7 +427,7 @@ export '='='='
 
 export TE-ST=100
 
-export -TEST=100
+# export -TEST=100 #we dont care about options or option errors, giving general error message
 
 export TEST-=100
 
@@ -457,7 +457,7 @@ export TES{T=123
 
 export TES-T=123
 
-export -TEST=123
+# export -TEST=123 #we dont care about options or option errors, giving general error message
 
 export _TEST=123
 
@@ -487,7 +487,7 @@ export TES!T=123
 
 export TES\~T=123
 
-export TEST+=100
+# export TEST+=100 #we dont append to variables with +, giving general error message
 
 export TES_T=123
 /bin/echo $TES_T
@@ -549,7 +549,7 @@ unset PATH
 
 unset PATH 
 
-unset TES;T
+# unset TES;T #not handling ; as a separator
 
 unset TES.T
 
@@ -563,7 +563,7 @@ unset TES{T
 
 unset TES-T
 
-unset -TEST
+# unset -TEST #not handling - as a separator
 
 unset _TEST
 

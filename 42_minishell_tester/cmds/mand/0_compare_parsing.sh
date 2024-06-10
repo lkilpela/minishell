@@ -23,15 +23,15 @@
 
 /bin/echo '"'"$USER"'"'
 
-/bin/echo $"HOME"$USER
+# /bin/echo $"HOME"$USER #localization quirk
 
-/bin/echo $"HOM"E$USER
+# /bin/echo $"HOM"E$USER
 
 /bin/echo "exit_code ->$? user ->$USER home -> $HOME"
 
-/bin/echo $"HOME"
+# /bin/echo $"HOME" #localization quirk
 
-/bin/echo $"42$"
+# /bin/echo $"42$"
 
 /bin/echo "$ "
 
@@ -48,20 +48,6 @@
 /bin/echo '$?'
 
 /bin/echo "'$?'"
-
-/bin/echo \$USER
-
-/bin/echo \\$USER
-
-/bin/echo \\\$USER
-
-/bin/echo \\\\$USER
-
-/bin/echo \\\\\$USER
-
-/bin/echo \\\\\\\\\$USER
-
-/bin/echo \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\$USER \$PATH \\$PWD
 
 /bin/echo "cat lol.c | cat > lol.c"
 

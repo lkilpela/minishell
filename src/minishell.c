@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 02:37:13 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 07:37:46 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	minishell_loop(void)
 int	main(int argc, char **argv, char **envp)
 {
 	init_minishell(argc, argv, envp);
-	shlvl();
 	read_history(NULL); //temp
 	minishell_loop();
 }

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 03:16:34 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 10:56:05 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	validate_redir_list(t_cmd *cmd)
 
 int	validate_redir(t_redir *file)
 {
-	int	oflags;
+	int		oflags;
+	char	*path;
 
 	if (file->type == HEREDOC)
 		return (1);
@@ -57,7 +58,9 @@ int	validate_redir(t_redir *file)
 		oflags = O_APPENDFILE;
 	if (file->file)
 	{
-		file->fd = open(file->file, oflags, PERMISSION);
+		path = ft_safe_strjoin("./", file->file);
+		file->fd = open(path, oflags, PERMISSION);
+		ft_free((void **)&path);
 		if (file->fd == -1)
 		{
 			print_error(ERR_MS, file->file, NULL, 1);

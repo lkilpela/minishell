@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 22:11:38 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 23:22:04 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,6 @@ void	update_pwd(void)
 	add_var(old_pwd, 1);
 }
 
-char	*fix_tilde(char *path)
-{
-	char	*str;
-	char	*home;
-
-	home = getenv("HOME");
-	if (*path && *path == '~')
-	{
-		if (home)
-		{
-			str = ft_safe_strjoin(home, path + 1);
-			ft_free((void **)&path);
-			free(home);
-			return (str);
-		}
-	}
-	return (path);
-}
-
 void	built_cd(t_cmd *cmd)
 {
 	char	*home;
@@ -78,7 +59,6 @@ void	built_cd(t_cmd *cmd)
 	}
 	if (cmd->num_of_args >= 2)
 	{
-		cmd->args[1] = fix_tilde(cmd->args[1]);
 		if (chdir(cmd->args[1]) != 0)
 		{
 			print_error("minishell: cd", cmd->args[1], NULL, 1);

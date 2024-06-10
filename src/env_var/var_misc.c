@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 02:38:32 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 02:51:08 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 06:00:31 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	local_var(t_cmd *cmd)
 	if (cmd->command && ft_strchr(cmd->command, EQUAL_SIGN))
 	{
 		cmd->num_of_args = 1;
-		cmd->command = ft_strdup("=");
+		cmd->command = ft_safe_strdup("=");
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:35:42 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 22:37:06 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/11 01:11:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static char *fix_path(char *file)
 	if (*file != '/')
 	{
 		str = ft_safe_strjoin("./", file);
-		ft_free((void **)&file);
 		return (str);
 	}
 	return (file);
@@ -42,6 +41,7 @@ static char *fix_path(char *file)
 static int	validate_redir(t_redir *file)
 {
 	int		oflags;
+	char	*path;
 
 	if (file->type == HEREDOC)
 		return (1);
@@ -53,8 +53,9 @@ static int	validate_redir(t_redir *file)
 		oflags = O_APPENDFILE;
 	if (file->file)
 	{
-		file->file = fix_path(file->file);
-		file->fd = open(file->file, oflags, PERMISSION);
+		path = fix_path(file->file);
+		file->fd = open(path, oflags, PERMISSION);
+		ft_free((void **)&path);
 		if (file->fd == -1)
 		{
 			print_error(ERR_MS, file->file, NULL, 1);

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 10:10:18 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 22:38:08 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ char			*find_executable(t_cmd *cmd);
 char			**build_envp(void);
 void			execute_commands(t_list *c);
 void			child(t_list *cmds, int *pipe_in);
-int				validate_redir(t_redir *file);
 int				validate_redir_list(t_cmd *cmd);
 void			validate_command(t_cmd *cmd);
 

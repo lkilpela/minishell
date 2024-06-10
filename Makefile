@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/10 07:25:00 by aklein           ###   ########.fr        #
+#    Updated: 2024/06/10 22:38:03 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRCS			=	minishell.c \
 					simple_cmd.c \
 					special_expand.c \
 					redirection.c \
+					validate_redir.c \
 					heredoc.c \
 					builtins.c \
 					built_pwd.c \

@@ -6,71 +6,11 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 10:56:05 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 22:36:41 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static void	new_redir(t_cmd *cmd, t_redir *new)
-{
-	if (new->type == INFILE || new->type == HEREDOC)
-	{
-		safe_close(cmd->in_file.fd);
-		cmd->in_file = *new;
-	}
-	else
-	{
-		safe_close(cmd->out_file.fd);
-		cmd->out_file = *new;
-	}
-}
-
-int	validate_redir_list(t_cmd *cmd)
-{
-	t_redir	*redir;
-	t_list	*redirs;
-
-	redirs = cmd->redirs;
-	while (redirs)
-	{
-		redir = (t_redir *)redirs->content;
-		if (!validate_redir(redir))
-			return (0);
-		new_redir(cmd, redir);
-		redirs = redirs->next;
-	}
-	return (1);
-}
-
-int	validate_redir(t_redir *file)
-{
-	int		oflags;
-	char	*path;
-
-	if (file->type == HEREDOC)
-		return (1);
-	if (file->type == INFILE)
-		oflags = O_INFILE;
-	if (file->type == OUTFILE)
-		oflags = O_OUTFILE;
-	if (file->append)
-		oflags = O_APPENDFILE;
-	if (file->file)
-	{
-		path = ft_safe_strjoin("./", file->file);
-		file->fd = open(path, oflags, PERMISSION);
-		ft_free((void **)&path);
-		if (file->fd == -1)
-		{
-			print_error(ERR_MS, file->file, NULL, 1);
-			return (0);
-		}
-	}
-	else
-		file->fd = -1;
-	return (1);
-}
 
 static int	is_directory(t_cmd *cmd)
 {

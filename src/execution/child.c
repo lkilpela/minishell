@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 08:51:29 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 22:31:07 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	child(t_list *cmds, int *pipe_in)
 
 	cmd = (t_cmd *)cmds->content;
 	if (!cmd->command)
-		ms_exit(FATAL, EXIT_SUCCESS);
+		ms_exit(FATAL, -1);
 	validate_command(cmd);
 	if (cmd->in_file.type == HEREDOC)
 		handle_heredoc_fd(cmd, pipe_in, heredoc_pipefd);

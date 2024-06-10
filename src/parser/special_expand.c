@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_expand.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 07:23:21 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 07:27:44 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/10 10:12:50 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static char	*add_quotes(char *str)
 	char	*tmp;
 	char	*final;
 
+	final = NULL;
 	if (!is_quoted(str))
 	{
 		tmp = ft_safe_strjoin("\"", str);

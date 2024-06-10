@@ -37,6 +37,13 @@
 | 8 | `"hello"'$HOME'` | hello$HOME | WORD |
 | 9 | `"hello"$HOME"test""test2"` | hello/Users/lumiktesttest2 | WORD |
 
+## LOCAL/ENV VARS
+| # | Input | Expected output | extra |
+| 1 | `"ARG=test echo lol \| ARG=lol ARG=what cat"` | `lol` | `echo $ARG` prints new line, no ARG is set |
+| 2 | `"ARG=$PATH:$PWD"` | `Nothing` | `echo $ARG` shows old path + current PWD added to PATH seperated by colon, `env` and `export` have no sign of $ARG |
+| 3 | `"export PATH=$PATH:$PWD"` | `""` | `echo $ARG` shows old path + current PWD added to PATH seperated by colon, `env` and `export` show ARG in the environment variables |
+| 4 | `ARG=test`<br>`export ARG` | `""` | `env` and `export` show ARG in the env variables with the value "test"
+
 test'okayy' "TEST'inner'Test $HOME" | test <what <<okay
 ```
 a_token_value: test'okayy'          a_token_type: WORD

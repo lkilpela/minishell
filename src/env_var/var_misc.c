@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 02:38:32 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 06:44:48 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/11 04:23:19 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	local_variables(void)
 		cmd = (t_cmd *)locals->content;
 		if (cmd->num_of_args > 1)
 			return ;
-		if (ms()->cmds_num == 0)
+		if (ms()->cmds_num == 1)
 			add_var(cmd->args[0], 1);
 		tmp = locals->next;
 		ft_free((void **)&locals);

@@ -561,7 +561,7 @@ unset TES}T
 
 unset TES{T
 
-unset TES-T
+unset TES{T
 
 # unset -TEST #not handling - as a separator
 

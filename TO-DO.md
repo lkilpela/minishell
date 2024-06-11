@@ -1,5 +1,61 @@
 # To-Do List
 
+## TESTER
+
+1. Builtins : Special characters?
+
+unset TES.T 
+unset TES+T
+unset TES=T
+unset TES}T
+unset TES{T
+unset TES{T
+unset TE*ST
+unset TES#T
+unset TES@T
+unset TES!T
+unset ============
+unset +++++++
+unset TES^T
+unset TES!T
+unset TES\~T
+
+[ minishell(2)  bash(255) ]
+```
+bash-3.2$ exit something somethingv2
+exit
+bash: exit: something: numeric argument required
+
+minishell$ exit something somethingv2
+minishell: exit: something: numeric argument required
+```
+
+exit "" 
+exit +++++
+exit ++++++
+exit ++1
+exit ++12560
+exit -----
+exit ------
+exit --1
+exit --12560
+exit A
+exit A 2 3
+exit "A"
+exit "+++"
+exit ++++3193912939
+exit +++000
+exit ++++000
+exit ---000
+exit ----000
+exit "something"
+exit x
+exit echo
+exit cd ..
+exit exit
+
+
+----------------------------------------------------
 ## signals
 - [ ] signal handling in child process.
 - [ ] signal handling in heredoc.

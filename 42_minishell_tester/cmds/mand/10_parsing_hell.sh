@@ -29,7 +29,7 @@ echo '' -n
 
 echo "" "" "" -n -n -n -n
 
-cat << $USER
+cat << $USER  #same ouput as bash but show error
 why
 not
 $USER
@@ -37,12 +37,12 @@ $USER
 export T=">>"
 $T lol
 
-cat << "$USER"
+cat << "$USER" #same ouput as bash but show error
 why
 not
 $USER
 
-cat << "$US"E"R"
+cat << "$US"E"R" #same ouput as bash but show error
 because
 we
 love
@@ -186,7 +186,7 @@ pwd
 
 pwD
 
-ENV
+ENV 
 
 CAT
 

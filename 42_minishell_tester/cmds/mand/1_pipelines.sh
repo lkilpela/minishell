@@ -52,11 +52,11 @@ rm -rf tmp_lol.c
 
 ls | cat asd
 
-ls | cat << stop | grep "asd"
+ls | cat << stop | grep "asd" # dont show difference
 is this good
 stop
 
-ls | cat << stop | ls -la | cat << stop1
+ls | cat << stop | ls -la | cat << stop1 # dont show difference
 12
 32232
 23
@@ -65,7 +65,7 @@ awdaw
 daswd
 stop1
 
-ls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la | cat << stop3
+ls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la | cat << stop3 # dont show difference
 $USER
 ad
 as $HOME
@@ -81,7 +81,7 @@ wd
 wf$PWDdqwdwqd
 stop3
 
-ls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la > out | cat << 'stop3'
+ls | cat << stop | ls -la | cat << stop1 | ls | cat << stop2 | ls -la > out | cat << 'stop3' # dont show difference
 $USER
 ad
 stop
@@ -93,7 +93,7 @@ as $HOME
 stop3
 /bin/rm -f out
 
-ls | cat << stop | ls -la > out0| cat << stop1 | ls | cat << stop2 | ls -la >> out | cat << stop3
+ls | cat << stop | ls -la > out0| cat << stop1 | ls | cat << stop2 | ls -la >> out | cat << stop3 # dont show difference
 fe
 wf
 fwe
@@ -134,7 +134,7 @@ ls|cat Makefile|>> out
 /bin/rm -f out
 
 
-ls|cat Makefile|cat<<asd>out
+ls|cat Makefile|cat<<asd>out # dont show difference
 $USER
 asd
 /bin/rm -f out

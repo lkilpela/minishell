@@ -344,9 +344,9 @@ cd ../libft
 pwd
 
 # might need to change the directory by yourself, that supposed to be valid =)
-pwd
-cd ../libft ojid iowjiojwoid joijd owjoid jwojd 
-pwd
+# pwd
+# cd ../libft ojid iowjiojwoid joijd owjoid jwojd 
+# pwd
 
 ### ENV ###
 env | grep DOESNT_EXIST

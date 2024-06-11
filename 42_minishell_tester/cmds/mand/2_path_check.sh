@@ -40,7 +40,7 @@ export PATH=1
 echo $PATH
 echo 1
 
-env | grep HOME #fixed removing -i which we arent handling
+env | grep HOME
 cd /bin/
 ls
 

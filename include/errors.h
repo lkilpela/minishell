@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:18 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/07 08:13:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/12 01:11:34 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define ERR_CMD "command not found"
 # define ERR_DIR "is a directory"
 # define ERR_PERM "permission denied"
+# define ERR_HD_EOF "here-document at line 1 delimited by end-of-file (wanted `"
+
 
 # define E_CODE_CMD_NEXEC 126
 # define E_CODE_CMD_NFOUND 127

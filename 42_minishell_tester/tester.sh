@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Change if you store the tester in another PATH
-export MINISHELL_PATH=$HOME/minishell
+export MINISHELL_PATH=$HOME/workspace/git/minishell
 export EXECUTABLE=minishell
-RUNDIR=$HOME/minishell/42_minishell_tester
+RUNDIR=$HOME//workspace/git/minishell/42_minishell_tester
 NL=$'\n'
 TAB=$'\t'
 

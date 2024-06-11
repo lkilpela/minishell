@@ -29,8 +29,8 @@ cd .
 
 #cd ~ #not required
 
-cd ~/Desktop/
-pwd
+#cd ~/Desktop/ #not required
+#pwd
 
 export PATH=
 echo $PATH

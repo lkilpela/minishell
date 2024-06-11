@@ -139,12 +139,12 @@ $USER
 asd
 /bin/rm -f out
 
-ls|cat Makefile|cat<<'asd'>out
+ls|cat Makefile|cat<<'asd'>out  # dont show difference
 $USER
 asd
 /bin/rm -f out
 
-ls|cat Makefile|cat<<"asd">out
+ls|cat Makefile|cat<<"asd">out # dont show difference
 $USER
 asd
 /bin/rm -f out

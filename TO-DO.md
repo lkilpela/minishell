@@ -54,6 +54,9 @@ exit echo
 exit cd ..
 exit exit
 
+cd ~/Desktop/
+pwd
+
 
 ----------------------------------------------------
 ## signals

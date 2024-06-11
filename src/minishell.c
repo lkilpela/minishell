@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/11 04:13:19 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/11 04:32:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ void	minishell_loop(void)
 	while (42)
 	{
 		all_good = 1;
-		// if (isatty(fileno(stdin)))
-		input = readline(PROMPT);
-		// else
-		// {
-		// 	char *line;
-		// 	line = get_next_line(fileno(stdin));
-		// 	input = ft_strtrim(line, "\n");
-		// 	free(line);
-		// }
+		if (isatty(fileno(stdin)))
+			input = readline(PROMPT);
+		else
+		{
+			char *line;
+			line = get_next_line(fileno(stdin));
+			input = ft_strtrim(line, "\n");
+			free(line);
+		}
 		if (input == NULL)
 			built_exit(NULL);
 		rl_history(input);

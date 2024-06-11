@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:35:42 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/11 01:11:18 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/11 14:50:10 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	new_redir(t_cmd *cmd, t_redir *new)
 	}
 }
 
-static char *fix_path(char *file)
+static char	*fix_path(char *file)
 {
 	char	*str;
 

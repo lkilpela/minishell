@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/11 04:32:27 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/11 14:48:08 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,16 @@ void	minishell_loop(void)
 		if (input == NULL)
 			built_exit(NULL);
 		rl_history(input);
-		if (all_good && !quote_match_check(input)) // ensure quotes are balanced
+		if (all_good && !quote_match_check(input))
 			all_good = ms_exit(RELINE, E_CODE_SYNTX);
 		if (all_good)
 			ms()->tokens = new_tokenizer(input, 1);
-		//print_tokens(ms()->tokens);
-		if (all_good && !near_token_errors(ms()->tokens)) // check for errors in token list
+		if (all_good && !near_token_errors(ms()->tokens))
 			all_good = ms_exit(RELINE, E_CODE_SYNTX);
 		if (all_good)
 		{
 			ms()->commands = parser(ms()->tokens);
 			init_path_dirs();
-			// t_list *cmds;
-			// cmds = ms()->commands;
-			// print_cmds(cmds);
-			//print_executable(cmds);
 			local_variables();
 			execute_commands(ms()->commands);
 		}

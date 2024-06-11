@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/11 00:53:08 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/11 14:46:17 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	built_exit(t_cmd *cmd)
 {
 	uint8_t	exit_code;
 
-	// ft_putendl_fd("exit", 1);
 	if (!cmd || cmd->num_of_args == 1)
 		ms_exit(FATAL, ms()->exit);
 	if (!non_numeric_exit(cmd->args[1]))

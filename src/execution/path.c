@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/11 02:12:48 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/11 14:47:18 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	fix_null_path(void)
 {
 	char	*cwd;
 
-	if (ms()->paths ==  NULL)
+	if (ms()->paths == NULL)
 	{
 		cwd = getcwd(NULL, 0);
 		ms()->paths = ft_safe_calloc(2, sizeof(char *));

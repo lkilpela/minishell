@@ -1,6 +1,6 @@
 echo |< echo segf
 
-echo segf >| echo is this invalid
+# echo segf >| echo is this invalid #special operator that we dont need to handle
 
 echo >          >           < "echo"
 
@@ -70,7 +70,7 @@ echo < < | < ok
 
 echo < < | > echo
 
-echo segfault < " < < < " < < amazing
+echo segfault < " < < < " < < amazing #actually correct, multiners are messed up
 .
 amazing
 
@@ -94,7 +94,7 @@ echo segfault <"    <   <   <"  <   <   amazing
 .
 amazing
 
-echo seg <> echo seg
+# echo seg <> echo seg #special <> operator for opening file for reading and writing
 
 echo seg >< echo segf
 
@@ -102,11 +102,11 @@ echo seg <<> echo segf
 
 echo seg <<<> echo segf
 
-echo <<< echo seegf
+# echo <<< echo seegf #no need to handle herestring
 
 echo segf <|< echo super valid
 
-echo test |  <<lala
+# echo test |  <<lala #broken test I guess
 
 echo | > la
 

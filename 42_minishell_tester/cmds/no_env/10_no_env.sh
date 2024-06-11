@@ -35,11 +35,11 @@ exit 5
 exit 5 asd
 
 unset OLDPWD
-cd -
+cd ..
 pwd
 
 cd
-cd ~
+cd ..
 
 /bin/ls
 
@@ -72,25 +72,25 @@ exit
 
 unset PATH
 pwd
-cd
+cd ..
 pwd
 
 unset PATH
 pwd
-cd -
+cd $HOME
 pwd
 exit
 
 unset PATH
 pwd
-cd ~
+cd ..
 pwd
 
 unset PATH
 pwd
-cd ~
+cd ..
 pwd
-cd -
+cd $HOME
 pwd
 
 /bin/cat Makefile > out >>out1 >out2

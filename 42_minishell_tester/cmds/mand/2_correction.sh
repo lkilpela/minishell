@@ -168,7 +168,7 @@ echo '$'$
 
 env | grep HOME
 
-env | grep $USER
+env | grep $HOME #errors cause of some usernames (ie if username is just 'a') so changed $USER to $HOME 
 
 export USER=
 env | grep USER

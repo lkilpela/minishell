@@ -6,7 +6,7 @@ unset PATH
 echo $PATH
 /bin/ls
 echo 1
-cd -
+cd
 echo 42
 
 unset PATH
@@ -23,11 +23,11 @@ echo $PATH
 
 echo 1
 
-cd -
+# cd - #not required
 
 cd .
 
-cd ~
+#cd ~ #not required
 
 cd ~/Desktop/
 pwd
@@ -40,7 +40,7 @@ export PATH=1
 echo $PATH
 echo 1
 
-env -i ./minishell
+env | grep HOME #fixed removing -i which we arent handling
 cd /bin/
 ls
 

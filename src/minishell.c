@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 11:50:36 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 13:15:50 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	minishell_loop(void)
 		set_signals(SIG_MAIN);
 		all_good = 1;
 		if (isatty(fileno(stdin)))
-			input = readline(PROMPT);
+			input = readline(GREEN PROMPT RESET);
 		else
 		{
 			char *line;

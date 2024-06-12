@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 10:11:57 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 13:15:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define BLUE "\001\e[0;34m\002"
 # define CYAN "\001\e[0;36m\002"
 
-# define PROMPT GREEN"minishell$ "RESET
+# define PROMPT "minishell$ "
 # define DOLLAR_SIGN '$'
 # define UNDERSCORE '_'
 # define EQUAL_SIGN '='

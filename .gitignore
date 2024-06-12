@@ -4,3 +4,4 @@ archive/
 *.a
 a.out
 history_file.txt
+.DS_Store

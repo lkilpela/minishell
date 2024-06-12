@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 01:57:21 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 11:44:01 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	get_all_redir(t_token_list *tokens, t_cmd *cmd)
 	{
 		if (tokens->type >= OP_LESS && tokens->type <= OP_DGREAT)
 			tokens = get_redir(cmd, tokens);
+		if (ms()->interrupt)
+			break ;
 		if (tokens)
 			tokens = tokens->next;
 	}

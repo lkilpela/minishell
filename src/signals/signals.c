@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:22:30 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/12 09:19:37 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/12 12:14:24 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static void	heredoc_signal_handler(int sig)
 	if (sig == SIGINT)
 	{
 		ft_putchar_fd('\n', 1);
-		ms_exit(FATAL, EXIT_SUCCESS);
+		ms()->interrupt = 1;
+		close(0);
 	}
 	if (sig == SIGQUIT)
 	{
@@ -49,6 +50,7 @@ void	set_signals(t_signal mode)
 {
 	if (mode == SIG_MAIN)
 	{
+		ms()->interrupt = 0;
 		signal(SIGQUIT, SIG_IGN);
 		signal(SIGINT, main_sigint_handler);
 	}

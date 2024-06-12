@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:14:03 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 10:10:56 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 11:46:22 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ t_cmd	*simple_cmd(t_token_list **tokens)
 	t_cmd	*cmd;
 
 	cmd = init_cmd(*tokens);
+	if (ms()->interrupt)
+		return (NULL);
 	while ((*tokens) && (*tokens)->type != OP_PIPE)
 	{
 		if ((*tokens)->type >= OP_LESS && (*tokens)->type <= OP_DGREAT)

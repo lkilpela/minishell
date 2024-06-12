@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/12 09:33:20 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 11:30:39 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,9 @@ static void	dupes(t_cmd *cmd)
 	if (cmd->out_file.fd != -1)
 		out = cmd->out_file.fd;
 	if (in != STDIN_FILENO)
-	{
 		safe_dup2(in, STDIN_FILENO);
-		safe_close(in);
-	}
 	if (out != STDOUT_FILENO)
-	{
 		safe_dup2(out, STDOUT_FILENO);
-		safe_close(out);
-	}
 }
 
 static void	exec_command(t_cmd *cmd)
@@ -75,15 +69,11 @@ void	child(t_list *cmds, int *pipe_in)
 	if (cmd->in_file.type == HEREDOC)
 		handle_heredoc_fd(cmd, pipe_in, heredoc_pipefd);
 	if (*pipe_in != -1)
-	{
 		safe_dup2(*pipe_in, STDIN_FILENO);
-		safe_close(*pipe_in);
-	}
 	if (cmds->next != NULL)
 	{
 		safe_close(ms()->pipefd[P_READ]);
 		safe_dup2(ms()->pipefd[P_WRITE], STDOUT_FILENO);
-		safe_close(ms()->pipefd[P_WRITE]);
 	}
 	dupes(cmd);
 	exec_command(cmd);

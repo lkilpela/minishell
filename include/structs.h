@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/12 06:46:21 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 11:38:10 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_ms
 	pid_t				pid;
 	int					pipefd[2];
 	int					status;
+	sig_atomic_t		interrupt;
 	char				*executable;
 	int					cmds_num;
 	const t_builtin		*builtins;

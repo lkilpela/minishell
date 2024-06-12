@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:31:25 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 08:54:31 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 11:30:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	safe_dup2(int fd, int fd2)
 {
 	if (dup2(fd, fd2) == -1)
 		ft_error(E_CODE_ERRNO + errno);
+	safe_close(fd);
 }
 
 void	safe_close(int fd)

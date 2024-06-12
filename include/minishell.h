@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 09:34:41 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 10:11:57 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@
 # define D_QUOTE '"'
 # define P_WRITE 1
 # define P_READ 0
-
-extern sig_atomic_t g_signal;
 
 // minishell
 t_ms			*ms(void);

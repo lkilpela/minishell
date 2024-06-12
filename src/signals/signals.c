@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:22:30 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/12 08:01:41 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 09:19:37 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static void	fork_signal_handler(int sig)
 		ft_putchar_fd('\n', 1);
 	if (sig == SIGQUIT)
 		ft_putstr_fd(ERR_FORK_QUIT, 1);
-	
 }
 
 static void	heredoc_signal_handler(int sig)

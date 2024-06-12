@@ -6,11 +6,20 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 03:20:47 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 01:21:42 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 07:24:58 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static char	*ft_strjoin_free(char *free_me, char const *dont_free_me)
+{
+	char	*new_string;
+
+	new_string = ft_strjoin(free_me, dont_free_me);
+	free(free_me);
+	return (new_string);
+}
 
 static char	*heredoc_exp(char *str_start)
 {
@@ -27,48 +36,44 @@ static char	*heredoc_exp(char *str_start)
 	return (str_start);
 }
 
-char	*heredoc_gnl(t_cmd *cmd)
+void	check_line(t_cmd *cmd, char *line)
 {
-	char	*line;
-	char	*error;
-	char	*error_end;
+	static int	line_count = 0;
 
-
-	line = get_next_line(0);
+	line_count++;
 	if (!line)
 	{
-		cmd->heredoc_delim[ft_strlen(cmd->heredoc_delim) - 1] = 0;
-		error = ft_safe_strjoin(ERR_HD_EOF, cmd->heredoc_delim);
-		error_end = ft_safe_strjoin(error, "')");
-		print_error(ERR_MS, "warning", error_end, 0);
-		ft_free((void **)&error);
-		ft_free((void **)&error_end);
-		return (NULL);
+		ft_putstr_fd(HD_EOF1, 2);
+		ft_putnbr_fd(line_count, 2);
+		ft_putstr_fd(HD_EOF2, 2);
+		ft_putstr_fd(cmd->heredoc_delim, 2);
+		ft_putendl_fd(HD_EOF3, 2);
+		ms_exit(FATAL, EXIT_SUCCESS);
 	}
-	add_to_lal(line);
-	return (line);
 }
 
-static char	*heredoc(t_cmd *cmd)
+char	*heredoc(t_cmd *cmd)
 {
 	char	*line;
-	char	*tmp;
 	char	*str;
+	char	*tmp;
 
-	ft_putstr_fd("> ", 1);
-	line = heredoc_gnl(cmd);
 	str = ft_safe_calloc(1, sizeof(char));
-	while (line)
+	set_signals(SIG_HD);
+	while (42)
 	{
-		if (!ft_strcmp(line, cmd->heredoc_delim))
+		line = readline("> ");
+		check_line(cmd, line);
+		if (ft_strcmp(line, cmd->heredoc_delim) == 0)
+		{
+			free(line);
 			break ;
-		tmp = ft_safe_strjoin(str, line);
+		}
+		tmp = ft_safe_strjoin(str, ft_strjoin_free(line, "\n"));
 		ft_free((void **)&str);
 		str = tmp;
-		ft_putstr_fd("> ", 1);
-		ft_free((void **)&line);
-		line = heredoc_gnl(cmd);
 	}
+	set_signals(SIG_FORK);
 	if (cmd->heredoc_expand)
 		str = heredoc_exp(str);
 	return (str);
@@ -82,8 +87,8 @@ t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens)
 	if (!has_quotes(tokens->value))
 		cmd->heredoc_expand = 1;
 	tokens->value = handle_node_quotes(tokens->value);
-	cmd->heredoc_delim = ft_safe_strjoin(tokens->value, "\n");
-	cmd->in_file.file = heredoc(cmd);
+	cmd->heredoc_delim = tokens->value;
+	cmd->in_file.file = tokens->value;
 	cmd->in_file.fd = -1;
 	add_redir(&cmd->in_file, cmd);
 	return (tokens);

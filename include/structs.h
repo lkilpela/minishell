@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 02:31:33 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 06:46:21 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,13 @@ typedef enum e_file
 	OUTFILE,
 	HEREDOC
 }			t_file;
+
+typedef enum e_signal
+{
+	SIG_MAIN,
+	SIG_FORK,
+	SIG_HD
+}			t_signal;
 
 typedef struct s_redir
 {

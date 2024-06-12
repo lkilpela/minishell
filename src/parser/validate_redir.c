@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:35:42 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/11 14:50:10 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/12 07:23:23 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ static int	validate_redir(t_redir *file)
 	if (file->type == HEREDOC)
 		return (1);
 	if (file->type == INFILE)
-		oflags = O_INFILE;
+		oflags = O_RDONLY;
 	if (file->type == OUTFILE)
-		oflags = O_OUTFILE;
+		oflags = (O_CREAT | O_WRONLY | O_TRUNC);
 	if (file->append)
-		oflags = O_APPENDFILE;
+		oflags = (O_CREAT | O_WRONLY | O_APPEND);
 	if (file->file)
 	{
 		path = fix_path(file->file);
-		file->fd = open(path, oflags, PERMISSION);
+		file->fd = open(path, oflags, 0644);
 		ft_free((void **)&path);
 		if (file->fd == -1)
 		{
@@ -67,7 +67,7 @@ static int	validate_redir(t_redir *file)
 	return (1);
 }
 
-int	validate_redir_list(t_cmd *cmd)
+void	validate_redir_list(t_cmd *cmd)
 {
 	t_redir	*redir;
 	t_list	*redirs;
@@ -77,9 +77,10 @@ int	validate_redir_list(t_cmd *cmd)
 	{
 		redir = (t_redir *)redirs->content;
 		if (!validate_redir(redir))
-			return (0);
+			ms_exit(FATAL, EXIT_FAILURE);
+		if (redir->type == HEREDOC)
+			redir->file = heredoc(cmd);
 		new_redir(cmd, redir);
 		redirs = redirs->next;
 	}
-	return (1);
 }

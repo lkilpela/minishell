@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 22:38:08 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 08:01:25 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@
 # define BLUE "\001\e[0;34m\002"
 # define CYAN "\001\e[0;36m\002"
 
-# define PERMISSION 0644
-# define O_INFILE O_RDONLY
-# define O_OUTFILE (O_CREAT | O_WRONLY | O_TRUNC)
-# define O_APPENDFILE (O_CREAT | O_WRONLY | O_APPEND)
-
 # define PROMPT GREEN"minishell$ "RESET
 # define DOLLAR_SIGN '$'
 # define UNDERSCORE '_'
@@ -55,7 +50,7 @@ t_cmd			*init_cmd(t_token_list *tokens);
 void			init_builtins(void);
 
 // signals
-void			init_signals(void);
+void			set_signals(t_signal mode);
 
 // lalloc
 void			add_to_lal(void *ptr);
@@ -127,7 +122,8 @@ char			*find_executable(t_cmd *cmd);
 char			**build_envp(void);
 void			execute_commands(t_list *c);
 void			child(t_list *cmds, int *pipe_in);
-int				validate_redir_list(t_cmd *cmd);
+void			validate_redir_list(t_cmd *cmd);
+char			*heredoc(t_cmd *cmd);
 void			validate_command(t_cmd *cmd);
 
 //builtins

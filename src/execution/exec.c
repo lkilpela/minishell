@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 09:10:53 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 06:49:04 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	execute_commands(t_list *cmds)
 	{
 		if (cmds->next != NULL)
 			safe_pipe(ms()->pipefd);
+		set_signals(SIG_FORK);
 		ms()->pids[i] = safe_fork();
 		if (ms()->pids[i] == 0)
 			child(cmds, &pipe_in);

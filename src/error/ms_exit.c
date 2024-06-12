@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:09:37 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 21:08:49 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 06:37:51 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	ms_exit(t_err type, int error_code)
 	{
 		clear_lal();
 		exit(ms()->exit);
+		rl_clear_history();
 	}
 	return (1);
 }

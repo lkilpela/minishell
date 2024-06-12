@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/11 04:55:22 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 06:53:39 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_minishell(int argc, char **argv, char **envp)
 {
-	init_signals();
 	ms()->argc = argc;
 	ms()->argv = argv;
 	ms()->envp = NULL;

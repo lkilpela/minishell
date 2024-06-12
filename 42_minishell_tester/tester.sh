@@ -4,6 +4,10 @@
 export MINISHELL_PATH=$HOME/workspace/git/minishell
 export EXECUTABLE=minishell
 RUNDIR=$HOME//workspace/git/minishell/42_minishell_tester
+if [[ ! -f $MINISHELL_PATH/$EXECUTABLE ]] ; then
+	export MINISHELL_PATH=$HOME/minishell
+	RUNDIR=$HOME//minishell/42_minishell_tester
+fi
 NL=$'\n'
 TAB=$'\t'
 

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:18 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 01:11:34 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 06:49:55 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@
 # define ERR_CMD "command not found"
 # define ERR_DIR "is a directory"
 # define ERR_PERM "permission denied"
-# define ERR_HD_EOF "here-document at line 1 delimited by end-of-file (wanted `"
-
+# define HD_EOF1 "here-document at line "
+# define HD_EOF2 " delimited by end-of-file (wanted `"
+# define HD_EOF3 "')"
+# define ERR_FORK_QUIT "Quit (core dumped)\n"
 
 # define E_CODE_CMD_NEXEC 126
 # define E_CODE_CMD_NFOUND 127

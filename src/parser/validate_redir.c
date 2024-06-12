@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:35:42 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 07:23:23 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 09:35:00 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	validate_redir(t_redir *file)
 	return (1);
 }
 
-void	validate_redir_list(t_cmd *cmd)
+int	validate_redir_list(t_cmd *cmd)
 {
 	t_redir	*redir;
 	t_list	*redirs;
@@ -77,10 +77,9 @@ void	validate_redir_list(t_cmd *cmd)
 	{
 		redir = (t_redir *)redirs->content;
 		if (!validate_redir(redir))
-			ms_exit(FATAL, EXIT_FAILURE);
-		if (redir->type == HEREDOC)
-			redir->file = heredoc(cmd);
+			return (0);
 		new_redir(cmd, redir);
 		redirs = redirs->next;
 	}
+	return (1);
 }

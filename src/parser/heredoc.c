@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 03:20:47 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 07:24:58 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 09:32:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens)
 		cmd->heredoc_expand = 1;
 	tokens->value = handle_node_quotes(tokens->value);
 	cmd->heredoc_delim = tokens->value;
-	cmd->in_file.file = tokens->value;
+	cmd->in_file.file = heredoc(cmd);
 	cmd->in_file.fd = -1;
 	add_redir(&cmd->in_file, cmd);
 	return (tokens);

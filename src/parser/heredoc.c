@@ -6,20 +6,11 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 03:20:47 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 12:00:37 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/12 12:25:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static char	*ft_strjoin_free(char *free_me, char const *dont_free_me)
-{
-	char	*new_string;
-
-	new_string = ft_strjoin(free_me, dont_free_me);
-	free(free_me);
-	return (new_string);
-}
 
 static char	*heredoc_exp(char *str_start)
 {
@@ -79,7 +70,7 @@ char	*heredoc(t_cmd *cmd)
 			free(line);
 			break ;
 		}
-		tmp = ft_safe_strjoin(str, ft_strjoin_free(line, "\n"));
+		tmp = ft_safe_strjoin(str, ft_safe_strjoin(line, "\n"));
 		ft_free((void **)&str);
 		str = tmp;
 	}

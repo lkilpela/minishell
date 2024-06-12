@@ -60,9 +60,9 @@ pwd
 
 ----------------------------------------------------
 ## signals
-- [ ] signal handling in child process.
-- [ ] signal handling in heredoc.
-- [ ] probably more signal stuff.
+- [x] signal handling in child process.
+- [x] signal handling in heredoc.
+- [x] probably more signal stuff.
 - [ ] manual_tests/signals.txt 
 
 ## validate

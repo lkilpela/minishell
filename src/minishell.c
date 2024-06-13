@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 22:35:32 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 22:37:46 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	rl_history(char *input)
 	}
 }
 
-static void	run_commands()
+static void	run_commands(void)
 {
 	ms()->commands = parser(ms()->tokens);
 	ms()->paths = get_path_dirs();

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 14:09:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:17:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ void	minishell_loop(void)
 	{
 		set_signals(SIG_MAIN);
 		all_good = 1;
-		//if (isatty(fileno(stdin)))
-		input = readline(GREEN PROMPT RESET);
-		//else
-		//{
-		//	char *line;
-		//	line = get_next_line(fileno(stdin));
-		//input = ft_strtrim(line, "\n");
-		//	free(line);
-		//}
+		if (isatty(fileno(stdin)))
+			input = readline(GREEN PROMPT RESET);
+		else
+		{
+			char *line;
+			line = get_next_line(fileno(stdin));
+		input = ft_strtrim(line, "\n");
+			free(line);
+		}
 		if (input == NULL)
 			built_exit(NULL);
 		rl_history(input);
@@ -57,9 +57,6 @@ void	minishell_loop(void)
 			ms()->commands = parser(ms()->tokens);
 			init_path_dirs();
 			local_variables();
-			//t_list *cmds;
-			//cmds = ms()->commands;
-			//print_cmds(cmds);
 			execute_commands(ms()->commands);
 		}
 		free(input);

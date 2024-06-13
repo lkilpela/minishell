@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/12 11:38:10 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 21:09:51 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ typedef struct s_cmd
 typedef enum e_err
 {
 	FATAL,
-	WARNING,
 	RELINE
 }			t_err;
 

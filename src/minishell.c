@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 22:37:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/14 01:03:35 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,24 @@ static void	run_commands(void)
 	execute_commands(ms()->commands);
 }
 
-static void	minishell_loop(void)
+void	minishell_loop(void)
 {
-	char	*input;
-	int		all_good;
+	char			*input;
+	int				all_good;
 
 	while (42)
 	{
 		set_signals(SIG_MAIN);
 		all_good = 1;
-		input = readline(GREEN PROMPT RESET);
+		if (isatty(fileno(stdin)))
+			input = readline(GREEN PROMPT RESET);
+		else
+		{
+			char *line;
+			line = get_next_line(fileno(stdin));
+			input = ft_strtrim(line, "\n");
+			free(line);
+		}
 		if (input == NULL)
 			built_exit(NULL);
 		rl_history(input);

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 14:18:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:25:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	minishell_loop(void)
 			init_path_dirs();
 			local_variables();
 			execute_commands(ms()->commands);
+			printf("Child process PID: %d\n", getpid());
 		}
 		free(input);
 		ms_exit(RELINE, -1);

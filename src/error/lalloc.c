@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lalloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:39:23 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 13:14:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 03:43:32 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	add_to_lal(void *ptr)
 
 	new_node = ft_lstnew(ptr);
 	if (!new_node)
-		ft_error(E_CODE_ERRNO + errno);
+		ft_error(EXIT_FAILURE);
 	lalloc = allocs();
 	ft_lstadd_front(lalloc, new_node);
 }

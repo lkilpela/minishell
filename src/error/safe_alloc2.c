@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:36:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 02:35:34 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 03:43:32 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_safe_strdup(const char *s1)
 
 	str = ft_strdup(s1);
 	if (!str)
-		ft_error(E_CODE_ERRNO + errno);
+		ft_error(EXIT_FAILURE);
 	add_to_lal((void *)str);
 	return (str);
 }
@@ -29,7 +29,7 @@ char	*ft_safe_strndup(const char *s1, size_t len)
 
 	str = ft_strndup(s1, len);
 	if (!str)
-		ft_error(E_CODE_ERRNO + errno);
+		ft_error(EXIT_FAILURE);
 	add_to_lal((void *)str);
 	return (str);
 }
@@ -40,7 +40,7 @@ char	*ft_safe_strjoin(const char *s1, const char *s2)
 
 	str = ft_strjoin(s1, s2);
 	if (!str)
-		ft_error(E_CODE_ERRNO + errno);
+		ft_error(EXIT_FAILURE);
 	add_to_lal((void *)str);
 	return (str);
 }
@@ -51,7 +51,7 @@ char	*ft_safe_itoa(int n)
 
 	str = ft_itoa(n);
 	if (!str)
-		ft_error(E_CODE_ERRNO + errno);
+		ft_error(EXIT_FAILURE);
 	add_to_lal((void *)str);
 	return (str);
 }
@@ -62,7 +62,7 @@ void	*ft_safe_lstnew(void *content)
 
 	node = ft_lstnew(content);
 	if (!node)
-		ft_error(E_CODE_ERRNO + errno);
+		ft_error(EXIT_FAILURE);
 	add_to_lal((void *)node);
 	return (node);
 }

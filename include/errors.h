@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:18 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 06:49:55 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 03:43:37 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,4 @@
 # define E_CODE_SIG 128
 # define E_CODE_SYNTX 2
 # define E_CODE_FILE 1
-# define E_CODE_ERRNO 160
 #endif

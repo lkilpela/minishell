@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/12 11:30:39 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 03:43:32 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	exec_command(t_cmd *cmd)
 	if (execve(cmd->exec_path, cmd->args, build_envp()) != 0)
 	{
 		print_error(cmd->command, NULL, NULL, 1);
-		ms_exit(FATAL, E_CODE_ERRNO + errno);
+		ms_exit(FATAL, EXIT_FAILURE);
 	}
 }
 

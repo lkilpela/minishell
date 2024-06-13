@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 13:15:50 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 04:52:29 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ void	rl_history(char *input)
 {
 	static char	*last = NULL;
 
-	if (!last || ft_strcmp(last, input) != 0)
+	if (*input && (!last ||  ft_strcmp(last, input)))
+	{
 		add_history(input);
-	ft_free((void **)&last);
-	last = ft_safe_strdup(input);
+		ft_free((void **)&last);
+		last = ft_safe_strdup(input);
+	}
 	write_history(NULL); //temp
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/11 14:47:18 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 03:56:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,13 @@ char	*find_executable(t_cmd *cmd)
 		if (access(tmp, F_OK) == 0)
 		{
 			cmd->exec_path = tmp;
+			ft_printf("found path @ %s\n", cmd->exec_path);
 			return (cmd->exec_path);
 		}
 		ft_free((void **)&tmp);
 		i++;
 	}
+	ft_printf("couldnt find path for %s\n", command);
 	ft_free((void **)&command);
 	return (NULL);
 }

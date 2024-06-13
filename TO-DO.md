@@ -2,6 +2,20 @@
 
 ## TESTER
 
+- [ ] new validate command bug to fix. for some reason its saying the command does not exist whenever a folder/directory with that name is in the current directory, which should not matter at all. perhaps it is meant to be checking if the executable that it found is actually directory,
+to replicate the bug:
+```
+cd to any folder, home for example
+cd
+mkdir ls
+ls
+```
+this will say command not found, because validation is buggy.
+it should of course find the ls in path first, then check if THAT path is a directory or not I guess?
+of course there might be some special behaviours other than that.
+
+- [ ] in ms().paths ft_split is causing memory leaks, cause its not getting freed and its not following the lalloc ( list allocation) logic with the safe commands so either need to free it normally in case of error or exit or make safe_allocation for it (should probably free the last ms().paths before it gets updated either way)
+
 1. Builtins : Special characters?
 
 unset TES.T 
@@ -72,7 +86,6 @@ somehow `export PATH=$PATH:/home/a/testpath` works as intended. also `export "PA
 ## path
 - [x] ms().paths is not updated correctly when new path is added to $PATH can test when you go to any of the past project folders that has the executable in there, like push_swap then: `export "PATH=$PATH:$PWD"` check if your new folder is in the end of the path with `echo $PATH`
 now push_swap should be possible to be run from anywhere as a command, so go back to minishell folder or home folder or anything, and try running `push_swap 5 1 3 4` fixed it for now by removing the if statement and always updating the paths from the vars_list.
-- [ ] ms().paths is causing memory leaks, cause its not getting freed and its not following the lalloc ( list allocation) logic with the safe commands so either need to free it normally in case of error or exit or make safe_allocation for it (should probably free the last ms().paths before it gets updated either way)
 ## exec
 - [x]   ```
         mdkir test_folder

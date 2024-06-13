@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:09:37 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 20:00:06 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 23:27:45 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	ms_exit(t_err type, int error_code)
 	}
 	if (type == FATAL)
 	{
+		close_fds();
 		clear_lal();
 		exit(ms()->exit);
 		rl_clear_history();

@@ -122,15 +122,6 @@ example: export HOME="", unset HOME
 
 1. minishell.c
 
-2. Tokenizer
-token_list.c: Error!
-Error: TOO_MANY_LINES       (line:  46, col:   1):      Function has more than 25 lines
-
-3. minishell.h
-Error: PREPROC_CONSTANT     (line:  37, col:  20):      Preprocessor statement must only contain constant defines
-Error: PREPROC_CONSTANT     (line:  38, col:  23):      Preprocessor statement must only contain constant defines
-Error: PREPROC_CONSTANT     (line:  40, col:  22):      Preprocessor statement must only contain constant defines
-
 
 # DONE
 

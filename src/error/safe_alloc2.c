@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:36:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 14:36:40 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:39:22 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,4 @@ void	*ft_safe_lstnew(void *content)
 		ft_error(EXIT_FAILURE);
 	add_to_lal((void *)node);
 	return (node);
-}
-
-char **ft_safe_split(const char *s, char c)
-{
-	char	**str_arr;
-	int		i;
-
-	i = 0;
-	str_arr = ft_split(s, c);
-	if (!str_arr)
-		ft_error(EXIT_FAILURE);
-	while (str_arr[i])
-	{
-		add_to_lal((void *)str_arr[i]);
-		i++;
-	}
-	return (str_arr);
 }

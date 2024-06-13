@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 13:15:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:05:17 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void			ft_error(int exit_code);
 t_list			**allocs(void);
 void			print_error(char *from, char *bad_arg,
 					char *custom, int is_errno);
+void			clear_paths(void);
 
 // safe
 char			*ft_safe_strjoin(const char *s1, const char *s2);
@@ -117,7 +118,7 @@ int				has_quotes(char *value);
 int				is_ambiguous(char *val, t_token_list *tokens);
 
 // execution
-void			init_path_dirs(void);
+char			**get_path_dirs(void);
 char			*find_executable(t_cmd *cmd);
 char			**build_envp(void);
 void			execute_commands(t_list *c);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 17:55:35 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:02:13 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	minishell_loop(void)
 		if (all_good)
 		{
 			ms()->commands = parser(ms()->tokens);
-			init_path_dirs();
+			ms()->paths = get_path_dirs();
 			local_variables();
 			execute_commands(ms()->commands);
 			//printf("Child process PID: %d\n", getpid());

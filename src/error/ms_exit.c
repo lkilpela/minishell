@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:09:37 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 17:25:46 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:00:06 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,9 @@ int	ms_exit(t_err type, int error_code)
 {
 	if (error_code != -1)
 		ms()->exit = error_code;
-	if (ms()->paths)
-		free(ms()->paths);
 	if (type == RELINE)
 	{
+		clear_paths();
 		clear_cmds();
 		clear_tokens();
 		return (0);

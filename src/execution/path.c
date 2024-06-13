@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 17:57:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 20:02:50 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,26 @@ static char	**ft_safe_split(const char *s, char c)
 		add_to_lal((void *)str_arr[i]);
 		i++;
 	}
+	add_to_lal((void *)str_arr);
 	return (str_arr);
 }
 
-static char	**get_path_dirs(void)
+void	clear_paths(void)
+{
+	int	i;
+
+	if (!ms()->paths)
+		return ;
+	i = 0;
+	while (ms()->paths[i])
+	{
+		ft_free((void **)&ms()->paths[i]);
+		i++;
+	}
+	ft_free((void **)&ms()->paths);
+}
+
+char	**get_path_dirs(void)
 {
 	t_var_list	*var;
 
@@ -41,11 +57,6 @@ static char	**get_path_dirs(void)
 		var = var->next;
 	}
 	return (NULL);
-}
-
-void	init_path_dirs(void)
-{
-	ms()->paths = get_path_dirs();
 }
 
 void	fix_null_path(void)

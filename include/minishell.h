@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/14 02:23:46 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/14 02:48:24 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include <readline/history.h> //readline
 # include <stdlib.h> //malloc, free
 # include <unistd.h> //write, access, getcwd, chdir
-# include <string.h> //strerror
 # include <errno.h> //errno
 # include <signal.h> //signal, sigaction
 # include <sys/wait.h> //waitpid
+# include <sys/stat.h> //stat
 
 # include <libft.h>
 # include <structs.h>

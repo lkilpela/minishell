@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 23:22:04 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 17:35:33 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	update_pwd(void)
 		ms_exit(FATAL, -1);
 	}
 	pwd = ft_safe_strjoin("PWD=", new_pwd);
-	ft_free((void **)&new_pwd);
+	free(new_pwd);
 	add_var(pwd, 1);
 	add_var(old_pwd, 1);
 }

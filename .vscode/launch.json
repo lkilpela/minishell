@@ -45,5 +45,20 @@
 			// }
 			]
 		},
+		{
+			"name": "(gdb) Attach to Process",
+			"type": "cppdbg",
+			"request": "attach",
+			"program": "${workspaceFolder}/minishell",
+			"processId": "${command:pickProcess}",
+			"MIMode": "gdb",
+			"setupCommands": [
+				{
+					"description": "Enable pretty-printing for gdb",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				}
+			]
+		}
 	]
 }

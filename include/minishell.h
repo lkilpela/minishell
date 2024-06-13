@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/14 00:50:12 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/14 02:23:46 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char			*ft_safe_strdup(const char *s1);
 void			*ft_safe_calloc(size_t count, size_t size);
 void			*ft_safe_lstnew(void *content);
 char			*ft_safe_itoa(int n);
+char			**ft_safe_split(const char *s, char c);
 int				safe_dup(int fd);
 void			safe_dup2(int fd, int fd2);
 int				safe_open(char *file, int oflags, int mode);

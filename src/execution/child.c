@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 23:34:00 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 23:40:02 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,6 @@ static void	handle_heredoc_fd(t_cmd *cmd, int *pipe_in, int *heredoc_pipefd)
 	safe_close(heredoc_pipefd[P_WRITE]);
 	safe_close(*pipe_in);
 	*pipe_in = heredoc_pipefd[P_READ];
-}
-
-void	close_fds(void)
-{
-	int	fd;
-
-	fd = 3;
-	while (fd <= 256)
-	{
-		safe_close(fd);
-		fd++;
-	}
 }
 
 void	child(t_list *cmds, int *pipe_in)

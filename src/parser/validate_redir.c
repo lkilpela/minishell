@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:35:42 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 09:35:00 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 23:39:56 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,18 @@ static int	validate_redir(t_redir *file)
 	else
 		file->fd = -1;
 	return (1);
+}
+
+void	close_fds(void)
+{
+	int	fd;
+
+	fd = 3;
+	while (fd <= 256)
+	{
+		safe_close(fd);
+		fd++;
+	}
 }
 
 int	validate_redir_list(t_cmd *cmd)

@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 14:17:56 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:18:06 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	minishell_loop(void)
 		{
 			char *line;
 			line = get_next_line(fileno(stdin));
-		input = ft_strtrim(line, "\n");
+			input = ft_strtrim(line, "\n");
 			free(line);
 		}
 		if (input == NULL)

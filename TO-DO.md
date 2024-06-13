@@ -15,7 +15,7 @@ this will say command not found, because validation is buggy.
 it should of course find the ls in path first, then check if THAT path is a directory or not I guess?
 of course there might be some special behaviours other than that.
 
-- [ ] in ms().paths ft_split is causing memory leaks, cause its not getting freed and its not following the lalloc ( list allocation) logic with the safe commands so either need to free it normally in case of error or exit or make safe_allocation for it (should probably free the last ms().paths before it gets updated either way)
+- [x] in ms().paths ft_split is causing memory leaks, cause its not getting freed and its not following the lalloc ( list allocation) logic with the safe commands so either need to free it normally in case of error or exit or make safe_allocation for it (should probably free the last ms().paths before it gets updated either way)
 
 1. Builtins : Special characters?
 

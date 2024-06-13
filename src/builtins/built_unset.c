@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:00 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 01:37:36 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 04:32:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	var_remove(char *key)
 		{
 			if (vars->previous)
 				vars->previous->next = vars->next;
+			else
+				ms()->var_list = vars->next;
 			if (vars->next)
 				vars->next->previous = vars->previous;
 			ft_free((void **)&vars);

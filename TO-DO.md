@@ -2,7 +2,7 @@
 
 ## TESTER
 
-- [x] Fixed: Added the condition check when the directory is not executable.
+- [x] 
 new validate command bug to fix. for some reason its saying the command does not exist whenever a folder/directory with that name is in the current directory, which should not matter at all. perhaps it is meant to be checking if the executable that it found is actually directory,
 to replicate the bug:
 ```

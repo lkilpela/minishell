@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/14 00:50:12 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/14 02:48:24 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include <readline/history.h> //readline
 # include <stdlib.h> //malloc, free
 # include <unistd.h> //write, access, getcwd, chdir
-# include <string.h> //strerror
 # include <errno.h> //errno
 # include <signal.h> //signal, sigaction
 # include <sys/wait.h> //waitpid
+# include <sys/stat.h> //stat
 
 # include <libft.h>
 # include <structs.h>
@@ -74,6 +74,7 @@ char			*ft_safe_strdup(const char *s1);
 void			*ft_safe_calloc(size_t count, size_t size);
 void			*ft_safe_lstnew(void *content);
 char			*ft_safe_itoa(int n);
+char			**ft_safe_split(const char *s, char c);
 int				safe_dup(int fd);
 void			safe_dup2(int fd, int fd2);
 int				safe_open(char *file, int oflags, int mode);

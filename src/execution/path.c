@@ -3,32 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 23:20:21 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/14 02:47:02 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-static char	**ft_safe_split(const char *s, char c)
-{
-	char	**str_arr;
-	int		i;
-
-	i = 0;
-	str_arr = ft_split(s, c);
-	if (!str_arr)
-		ft_error(EXIT_FAILURE);
-	while (str_arr[i])
-	{
-		add_to_lal((void *)str_arr[i]);
-		i++;
-	}
-	add_to_lal((void *)str_arr);
-	return (str_arr);
-}
 
 void	clear_paths(void)
 {
@@ -71,6 +53,17 @@ static void	fix_null_path(void)
 	}
 }
 
+static int	is_executable_file(const char *path)
+{
+	struct stat	path_stat;
+
+	if (stat(path, &path_stat) != 0)
+		return (0);
+	if (S_ISREG(path_stat.st_mode) && (path_stat.st_mode & S_IXUSR))
+		return (1);
+	return (0);
+}
+
 char	*find_executable(t_cmd *cmd)
 {
 	char	*command;
@@ -80,18 +73,15 @@ char	*find_executable(t_cmd *cmd)
 	command = NULL;
 	tmp = NULL;
 	i = 0;
-	if (!ft_strchr(cmd->command, '/'))
-		command = ft_safe_strjoin("/", cmd->command);
-	else
-		return (ft_safe_strdup(cmd->command));
+	command = ft_safe_strjoin("/", cmd->command);
 	fix_null_path();
 	while (ms()->paths[i])
 	{
 		tmp = ft_safe_strjoin(ms()->paths[i], command);
-		if (access(tmp, F_OK) == 0)
+		if (is_executable_file(tmp))
 		{
-			cmd->exec_path = tmp;
-			return (cmd->exec_path);
+			ft_free((void **)&command);
+			return (tmp);
 		}
 		ft_free((void **)&tmp);
 		i++;

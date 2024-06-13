@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 14:04:56 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 12:03:37 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 04:59:26 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_list	*parser(t_token_list *tokens)
 	while (tokens)
 	{
 		new_cmd = simple_cmd(&tokens);
+		ms()->exit = EXIT_SUCCESS;
 		if (ms()->interrupt)
 		{
 			ms()->exit = E_CODE_SIG + SIGINT;

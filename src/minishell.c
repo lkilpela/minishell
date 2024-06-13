@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 12:44:15 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 13:13:19 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	minishell_loop(void)
 			ms()->commands = parser(ms()->tokens);
 			init_path_dirs();
 			local_variables();
-			t_list *cmds;
-			cmds = ms()->commands;
-			print_cmds(cmds);
+			//t_list *cmds;
+			//cmds = ms()->commands;
+			//print_cmds(cmds);
 			execute_commands(ms()->commands);
 		}
 		free(input);

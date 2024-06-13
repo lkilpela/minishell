@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 20:05:17 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 22:03:04 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,17 +155,5 @@ int				str_is_number(char *str);
 // utils2
 char			*ft_strndup(const char *str, size_t len);
 int				ft_strcmp(char *s1, char *s2);
-
-// FOR TESTING **REMOVE WHEN SUBMIT**
-void			print_var_list(void);
-void			print_lalloc(void);
-void			print_last_node(void);
-void			print_tokens(t_token_list *lst);
-void			free_token_list(t_token_list **lst);
-void			print_a_token(t_token_list *lst);
-void			print_last_token_node(t_token_list *t);
-char			*get_type_str(int e);
-void			print_cmds(t_list *cmd);
-void			print_executable(t_list *cmds);
 
 #endif

@@ -267,7 +267,7 @@ minishell: /xxx/xxx: No such file or directory
 
 `minishell: noinfile: No such file or directory`
 
-3. **Invalid cmd1 or cmd2 path**
+3. **valid infile, Invalid cmd1 or cmd2 path**
 
 < in /xxx/xxx | wc > outfile
 

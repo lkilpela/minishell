@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 14:11:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:13:07 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	dupes(t_cmd *cmd)
 
 static void	exec_command(t_cmd *cmd)
 {
-	//printf("exec_command\n");
 	if (execute_builtin(cmd))
 		ms_exit(FATAL, -1);
 	if (cmd->exec_path == NULL)
@@ -39,7 +38,6 @@ static void	exec_command(t_cmd *cmd)
 		print_error(cmd->command, NULL, ERR_CMD, 0);
 		ms_exit(FATAL, E_CODE_CMD_NFOUND);
 	}
-	printf("befin execve\n");
 	if (execve(cmd->exec_path, cmd->args, build_envp()) != 0)
 	{
 		print_error(cmd->command, NULL, NULL, 1);

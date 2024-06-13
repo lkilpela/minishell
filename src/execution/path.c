@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 14:07:58 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 14:35:20 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	**get_path_dirs(void)
 	while (var)
 	{
 		if (ft_strcmp(var->key, "PATH") == 0)
-			return (ft_split(var->value, ':'));
+			return (ft_safe_split(var->value, ':'));
 		var = var->next;
 	}
 	return (NULL);

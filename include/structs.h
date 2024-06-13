@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 21:09:51 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/14 00:37:57 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_ms
 	uint8_t				exit;
 	t_var_list			*var_list;
 	t_token_list		*tokens;
+	int					max_fd;
 	t_list				*commands;
 	t_list				*local_var_assign;
 	pid_t				*pids;

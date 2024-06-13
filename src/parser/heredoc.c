@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/09 03:20:47 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/12 12:25:20 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/14 00:52:06 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*heredoc(t_cmd *cmd)
 	char	*tmp;
 	int		stdin_backup;
 
-	stdin_backup = dup(0);
+	stdin_backup = safe_dup(0);
 	str = ft_safe_calloc(1, sizeof(char));
 	while (42)
 	{

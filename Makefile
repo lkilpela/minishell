@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+         #
+#    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/13 22:35:52 by lkilpela         ###   ########.fr        #
+#    Updated: 2024/06/14 00:54:10 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,18 +86,12 @@ SRCS			=	minishell.c \
 					lalloc.c \
 					safe_alloc1.c \
 					safe_alloc2.c \
+					safe_files.c \
 
 ################################################################################
 # RULES
 ################################################################################
 
-#this means that every time its looking for a match for %.c
-#													in there
-#											$(OBJ_DIR)/%.o: %.c $(M_HEADERS)
-#
-#it will look throuhg all these directories to find the file
-#this way we dont have to specify folders in front of each file
-#just have to make sure each file in the $(SRCS) is a unique name
 vpath %.c $(SRC_DIR) $(SRC_DIR)/tokenizer \ $(SRC_DIR)/execution\
 			$(SRC_DIR)/env_var $(SRC_DIR)/parser $(SRC_DIR)/builtins \
 			$(SRC_DIR)/error $(SRC_DIR)/signals
@@ -138,10 +132,10 @@ re: fclean all
 # NORM
 ################################################################################
 norm:
-	norminette . $(LIBFT_DIR) | grep -v "OK!" || true
+	norminette . | grep -v "OK!" || true
 
 norm2:
-	norminette . $(LIBFT_DIR)
+	norminette .
 
 ################################################################################
 # PHONY
@@ -164,6 +158,7 @@ VG = valgrind
 VG_FLAGS = --leak-check=full \
 	--show-leak-kinds=all \
 	--trace-children=yes \
+	--track-fds=yes \
 	--suppressions=readline.supp
 
 VG_LOG_FLAGS = $(VG_FLAGS) \

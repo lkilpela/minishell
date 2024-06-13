@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/26 14:38:41 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 15:48:25 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/14 00:51:54 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	parent(t_list *cmds, int *pipe_in)
 	if (cmds->next != NULL)
 	{
 		safe_close(ms()->pipefd[P_WRITE]);
-		*pipe_in = dup(ms()->pipefd[P_READ]);
+		*pipe_in = safe_dup(ms()->pipefd[P_READ]);
 		safe_close(ms()->pipefd[P_READ]);
 	}
 	safe_close(cmd->in_file.fd);

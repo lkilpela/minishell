@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 20:58:22 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 04:52:29 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 05:27:37 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	rl_history(char *input)
 {
 	static char	*last = NULL;
 
-	if (*input && (!last ||  ft_strcmp(last, input)))
+	if (*input && (!last || ft_strcmp(last, input)))
 	{
 		add_history(input);
 		ft_free((void **)&last);

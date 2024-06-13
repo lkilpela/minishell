@@ -6,7 +6,7 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 13:13:06 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/13 13:22:55 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	validate_command(t_cmd *cmd)
 		return ;
 	if (is_directory(cmd))
 	{
+		printf("command: %s\n", cmd->command);
 		if (ft_strchr(cmd->command, '/'))
 		{
 			print_error(ERR_MS, cmd->command, ERR_DIR, 0);

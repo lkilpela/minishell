@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:18 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 03:43:37 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/13 13:24:03 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define ERR_FORK "fork failed"
 # define ERR_EXECVE "execve failed"
 # define ERR_WAITPID "waitpid failed"
-# define ERR_FILE "no such file or directory"
+# define ERR_FILE "No such file or directory"
 # define ERR_CMD "command not found"
 # define ERR_DIR "is a directory"
 # define ERR_PERM "permission denied"

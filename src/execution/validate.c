@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:51 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/14 02:46:32 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/14 03:01:41 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,20 @@ static int	is_directory(char *cmd)
 
 static void	direct_path(t_cmd *cmd)
 {
-	if (access(cmd->command, F_OK) == -1)
+	cmd->exec_path = ft_safe_strdup(cmd->command);
+	if (access(cmd->exec_path, F_OK) == -1)
 	{
-		print_error(ERR_MS, cmd->command, ERR_FILE, 0);
+		print_error(ERR_MS, cmd->exec_path, ERR_FILE, 0);
 		ms_exit(FATAL, E_CODE_CMD_NFOUND);
 	}
 	if (is_directory(cmd->exec_path))
 	{
-		print_error(ERR_MS, cmd->command, ERR_DIR, 0);
+		print_error(ERR_MS, cmd->exec_path, ERR_DIR, 0);
 		ms_exit(FATAL, E_CODE_CMD_NEXEC);
 	}
 	if (access(cmd->exec_path, X_OK) == -1)
 	{
-		print_error(ERR_MS, cmd->command, ERR_PERM, 0);
+		print_error(ERR_MS, cmd->exec_path, ERR_PERM, 0);
 		ms_exit(FATAL, E_CODE_CMD_NEXEC);
 	}
 }

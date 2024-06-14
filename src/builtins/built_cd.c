@@ -6,19 +6,19 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 17:35:33 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/14 10:17:00 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	error_ret(char *msg)
+static void	error_ret(char *msg)
 {
 	print_error(ERR_MS, "cd", msg, 0);
 	ms()->exit = EXIT_FAILURE;
 }
 
-void	update_pwd(void)
+static void	update_pwd(void)
 {
 	char		*old_pwd;
 	char		*last_pwd;

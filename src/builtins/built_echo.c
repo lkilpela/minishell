@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   built_echo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:06:24 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 09:24:48 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/14 10:18:25 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	check_flag(char *arg)
+static int	check_flag(char *arg)
 {
 	if (*arg++ != '-')
 		return (0);

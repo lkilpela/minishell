@@ -6,22 +6,22 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/14 02:48:24 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/14 03:06:03 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h> //readline
-# include <readline/readline.h> //readline
-# include <readline/history.h> //readline
-# include <stdlib.h> //malloc, free
-# include <unistd.h> //write, access, getcwd, chdir
-# include <errno.h> //errno
-# include <signal.h> //signal, sigaction
-# include <sys/wait.h> //waitpid
-# include <sys/stat.h> //stat
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <errno.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
 
 # include <libft.h>
 # include <structs.h>

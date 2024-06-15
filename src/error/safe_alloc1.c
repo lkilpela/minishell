@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:31:25 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/14 02:23:06 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/15 12:49:10 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,17 @@ char	**ft_safe_split(const char *s, char c)
 	}
 	add_to_lal((void *)str_arr);
 	return (str_arr);
+}
+
+char	*safe_getcwd(void)
+{
+	char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	if (!pwd)
+		ft_error(EXIT_FAILURE);
+	add_to_lal((void *)pwd);
+	return (pwd);
 }
 
 void	safe_pipe(int *pipedes)

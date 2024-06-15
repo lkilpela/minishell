@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/14 10:25:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/15 12:49:36 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void			*ft_safe_calloc(size_t count, size_t size);
 void			*ft_safe_lstnew(void *content);
 char			*ft_safe_itoa(int n);
 char			**ft_safe_split(const char *s, char c);
+char			*safe_getcwd(void);
 int				safe_dup(int fd);
 void			safe_dup2(int fd, int fd2);
 int				safe_open(char *file, int oflags, int mode);

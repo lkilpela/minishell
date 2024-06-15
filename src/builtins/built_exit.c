@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/15 11:19:13 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/15 11:20:42 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	built_exit(t_cmd *cmd)
 
 	if (!cmd || cmd->num_of_args == 1)
 	{
-		ft_putendl_fd("exit", STDOUT_FILENO);
+		// ft_putendl_fd("exit", STDOUT_FILENO);
 		ms_exit(FATAL, ms()->exit);
 	}
 	if (!non_numeric_exit(cmd->args[1]))
@@ -71,6 +71,6 @@ void	built_exit(t_cmd *cmd)
 	}
 	else
 		exit_code = (uint8_t)ft_atoi(cmd->args[1]);
-	ft_putendl_fd("exit", STDOUT_FILENO);
+	// ft_putendl_fd("exit", STDOUT_FILENO);
 	ms_exit(FATAL, exit_code);
 }

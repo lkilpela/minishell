@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:27:56 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/06 00:43:27 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/15 22:33:41 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,20 @@ void	print_error(char *from, char *bad_arg, char *custom, int is_errno)
 		ft_putstr_fd(from, 2);
 		ft_putstr_fd(": ", 2);
 	}
+	if (bad_arg)
+	{
+		ft_putstr_fd(bad_arg, 2);
+		ft_putstr_fd(": ", 2);
+	}
+	if (custom)
+	{
+		ft_putstr_fd(custom, 2);
+		ft_putstr_fd(": ", 2);
+	}
 	if (is_errno)
-	{
-		if (bad_arg)
-			perror(bad_arg);
-		else
-			perror(NULL);
-	}
+		perror(NULL);
 	else
-	{
-		if (bad_arg)
-		{
-			ft_putstr_fd(bad_arg, 2);
-			ft_putstr_fd(": ", 2);
-		}
-		ft_putendl_fd(custom, 2);
-	}
+		ft_putstr_fd("\n", 2);
 }
 
 int	quote_match_check(char *input)

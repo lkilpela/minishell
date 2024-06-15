@@ -41,7 +41,9 @@ typedef struct s_ms
 	char				*executable;
 	int					cmds_num;
 	const t_builtin		*builtins;
-}					t_ms;
+	char				*pwd;
+	char				*oldpwd;
+}			t_ms;
 
 /******************************************************************************\
  * BUILTINS
@@ -51,7 +53,7 @@ typedef struct s_builtin
 	char	*name;
 	void	(*func)(t_cmd *);
 	int		special;
-}				t_builtin;
+}			t_builtin;
 
 /******************************************************************************\
  * FILES
@@ -61,7 +63,7 @@ typedef enum e_file
 	INFILE,
 	OUTFILE,
 	HEREDOC
-}			t_file;
+}	t_file;
 
 typedef enum e_signal
 {
@@ -76,22 +78,21 @@ typedef struct s_redir
 	t_file	type;
 	int		append;
 	int		fd;
-}				t_redir;
+}			t_redir;
 
 /******************************************************************************\
  * TOKENIZER
 \******************************************************************************/
 typedef enum e_token_type
 {
-	WORD,		// a command (ls) or argument (-l)
-	OP_PIPE,	// pipe output of one cmd into another (|)
-	OP_LESS,	// redirect input from a file (<)
-	OP_GREAT,	// redirect output to a file (>), overwriting file if exists
-	OP_DLESS,	// denote heredoc (<<)
-	OP_DGREAT,	// redirect output to a file (>>), appending to file if exists
-}			t_token_type;
+	WORD,
+	OP_PIPE,
+	OP_LESS,
+	OP_GREAT,
+	OP_DLESS,
+	OP_DGREAT,
+}	t_token_type;
 
-// a token node in linked list
 typedef struct s_token_list
 {
 	char				*value;
@@ -99,7 +100,7 @@ typedef struct s_token_list
 	int					expand;
 	struct s_token_list	*next;
 	struct s_token_list	*prev;
-}				t_token_list;
+}			t_token_list;
 
 /******************************************************************************\
  * VARS
@@ -112,14 +113,14 @@ typedef struct s_var_list
 	int					is_local;
 	struct s_var_list	*next;
 	struct s_var_list	*previous;
-}				t_var_list;
+}			t_var_list;
 
 typedef enum e_quote_type
 {
 	NO_QUOTE,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE
-}			t_quote_type;
+}	t_quote_type;
 
 /******************************************************************************\
  * PARSER

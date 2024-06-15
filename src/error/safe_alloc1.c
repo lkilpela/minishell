@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:31:25 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/15 12:49:10 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/15 22:36:26 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ char	*safe_getcwd(void)
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		ft_error(EXIT_FAILURE);
+	{
+		if (errno != ENOENT)
+			ft_error(EXIT_FAILURE);
+		print_error(ERR_CD1, "getcwd", ERR_CD2, 1);
+		return (NULL);
+	}
 	add_to_lal((void *)pwd);
 	return (pwd);
 }

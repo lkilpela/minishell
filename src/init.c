@@ -20,6 +20,7 @@ void	init_minishell(int argc, char **argv, char **envp)
 	ms()->paths = NULL;
 	ms()->exit = 0;
 	ms()->executable = ft_strrchr(argv[0], '/') + 1;
+	ms()->pwd = safe_getcwd();
 	get_envp(envp);
 	init_builtins();
 	shlvl();

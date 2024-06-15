@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/14 02:47:02 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/15 09:43:20 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ static void	fix_null_path(void)
 		cwd = getcwd(NULL, 0);
 		ms()->paths = ft_safe_calloc(2, sizeof(char *));
 		ms()->paths[0] = ft_safe_strdup(cwd);
+		free(cwd);
 	}
 }
 

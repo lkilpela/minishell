@@ -6,26 +6,11 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/11 14:46:17 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/14 10:21:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-int	str_is_number(char *str)
-{
-	if (!*str)
-		return (0);
-	if (*str == '-' || *str == '+')
-		str++;
-	while (*str)
-	{
-		if (!ft_isdigit(*str))
-			return (0);
-		str++;
-	}
-	return (1);
-}
 
 static int	neg_limit(char *str)
 {
@@ -54,7 +39,7 @@ static int	pos_limit(char *str)
 	return (0);
 }
 
-int	non_numeric_exit(char *arg)
+static int	non_numeric_exit(char *arg)
 {
 	if (!str_is_number(arg))
 		return (0);

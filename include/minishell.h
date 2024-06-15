@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/14 03:06:03 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/14 10:25:34 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,13 +135,13 @@ void			close_fds(void);
 int				execute_builtin(t_cmd *cmd);
 int				is_special_builtin(t_cmd *cmd);
 t_builtin		get_builtin(t_cmd *cmd);
-void			built_echo(t_cmd *cmds);
-void			built_pwd(t_cmd *cmds);
-void			built_exit(t_cmd *cmds);
-void			built_cd(t_cmd *cmds);
-void			built_env(t_cmd *cmds);
-void			built_export(t_cmd *cmds);
 void			built_unset(t_cmd *cmds);
+void			built_cd(t_cmd *cmds);
+void			built_echo(t_cmd *cmds);
+void			built_env(t_cmd *cmds);
+void			built_exit(t_cmd *cmds);
+void			built_export(t_cmd *cmds);
+void			built_pwd(t_cmd *cmds);
 
 // utils
 int				is_word(char c);
@@ -154,6 +154,7 @@ char			*skip_word(char *str);
 char			*skip_op(char *str);
 char			*skip_quote(char *str);
 char			*skip_variable(char *str);
+
 int				str_is_number(char *str);
 
 // utils2

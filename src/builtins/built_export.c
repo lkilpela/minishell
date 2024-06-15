@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:18:43 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/10 03:03:50 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/14 10:23:37 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	check_key(char *arg)
+static int	check_key(char *arg)
 {
 	char	*key;
 	char	*value;
@@ -46,7 +46,7 @@ static t_var_list	*duplicate_var_list(t_var_list *vars)
 	return (result);
 }
 
-void	print_sorted_vars(t_var_list *vars)
+static void	print_sorted_vars(t_var_list *vars)
 {
 	t_var_list	*dup;
 	t_var_list	*tmp;
@@ -68,7 +68,7 @@ void	print_sorted_vars(t_var_list *vars)
 	}
 }
 
-int	check_args(int args)
+static int	check_args(int args)
 {
 	if (args == 1)
 	{

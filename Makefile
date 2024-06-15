@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/14 00:54:10 by aklein           ###   ########.fr        #
+#    Updated: 2024/06/15 10:35:22 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ CC				=	cc
 CC_STRICT		=	-Wall -Wextra -Werror
 DB_FLAGS		=	-g #-fsanitize=leak
 HEADERS			=	-I $(LIBFT_INCLUDES) -I $(INCLUDES) \
-					-I/opt/homebrew/opt/readline/include \
 					-I ~/.brew/Cellar/readline/8.2.10/include
 CC_FULL			=	$(CC) $(CC_STRICT) $(DB_FLAGS) $(HEADERS)
 
@@ -31,8 +30,7 @@ LIBFT_INCLUDES	=	./libft/include
 ################################################################################
 # READLINE
 ################################################################################
-READLINE		=	-L/opt/homebrew/opt/readline/lib \
-					-L ~/.brew/Cellar/readline/8.2.10/lib \
+READLINE		=	-L ~/.brew/Cellar/readline/8.2.10/lib \
 					-lreadline
 
 ################################################################################
@@ -159,6 +157,7 @@ VG_FLAGS = --leak-check=full \
 	--show-leak-kinds=all \
 	--trace-children=yes \
 	--track-fds=yes \
+	--quiet \
 	--suppressions=readline.supp
 
 VG_LOG_FLAGS = $(VG_FLAGS) \

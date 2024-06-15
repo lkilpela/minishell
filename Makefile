@@ -6,7 +6,7 @@
 #    By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/12 14:15:32 by aklein            #+#    #+#              #
-#    Updated: 2024/06/15 10:35:22 by aklein           ###   ########.fr        #
+#    Updated: 2024/06/15 13:04:08 by aklein           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,6 @@ SRCS			=	minishell.c \
 ################################################################################
 # RULES
 ################################################################################
-
 vpath %.c $(SRC_DIR) $(SRC_DIR)/tokenizer \ $(SRC_DIR)/execution\
 			$(SRC_DIR)/env_var $(SRC_DIR)/parser $(SRC_DIR)/builtins \
 			$(SRC_DIR)/error $(SRC_DIR)/signals
@@ -99,13 +98,13 @@ all: $(NAME)
 $(NAME): $(LIBFT) $(OBJECTS)
 	@echo "--------------------------------------------"
 	@$(CC_FULL) $(OBJECTS) $(LIBFT) $(READLINE) -o $(NAME)
-	@echo "[$(NAME)] $(BLUE)Built target $(NAME)$(RESET)"
+	@echo "[$(NAME)] $(B)Built target $(NAME)$(RC)"
 	@echo "--------------------------------------------"
 
 $(OBJ_DIR)/%.o: %.c $(M_HEADERS)
 	@mkdir -p $(@D)
 	@$(CC_FULL) -c $< -o $@
-	@echo "$(GREEN)Compiled: $< $(RESET)"
+	@echo "$(G)Compiled: $< $(RC)"
 
 $(LIBFT): libft_force
 	@make -C $(LIBFT_DIR)
@@ -136,21 +135,8 @@ norm2:
 	norminette .
 
 ################################################################################
-# PHONY
-################################################################################
-.PHONY: all bonus re clean fclean libft_force db
-
-GREEN = \033[0;32m
-RED = \033[0;31m
-RESET = \033[0m
-BLUE = \033[34m
-
-################################################################################
 # VALGRIND
 ################################################################################
-
-CC_VG = $(CC) $(CC_STRICT) $(HEADERS)
-
 VG = valgrind
 
 VG_FLAGS = --leak-check=full \
@@ -168,6 +154,8 @@ VG_LOG_FLAGS = $(VG_FLAGS) \
 
 VG_LOG = valgrind_leaks.log
 
+VG_ARGS = 
+
 vg: vg_build
 	$(VG) $(VG_FLAGS) ./$(NAME) $(VG_ARGS)
 
@@ -179,3 +167,32 @@ vg_build: $(OBJECTS)
 
 vglog_clean: fclean
 	rm -f $(VG_LOG)
+
+################################################################################
+# PHONY
+################################################################################
+.PHONY: all bonus re clean fclean libft_force db vg vglog vglog_clean norm norm2
+
+################################################################################
+# Colors
+################################################################################
+# Black, Red, Green, Yellow, Blue, Purple, Cyan, White
+BK = \033[0;30m
+R = \033[0;31m
+G = \033[0;32m
+Y = \033[0;33m
+B = \033[0;34m
+P = \033[0;35m
+C = \033[0;36m
+W = \033[0;37m
+# Bold
+BKB = \033[1;30m
+RB = \033[1;31m
+GB = \033[1;32m
+YB = \033[1;33m
+BB = \033[1;34m
+PB = \033[1;35m
+CB = \033[1;36m
+WB = \033[1;37m
+# Reset Color
+RC = \033[0m

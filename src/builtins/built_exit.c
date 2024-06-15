@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:19:27 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/14 10:21:34 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/15 11:19:13 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,10 @@ void	built_exit(t_cmd *cmd)
 	uint8_t	exit_code;
 
 	if (!cmd || cmd->num_of_args == 1)
+	{
+		ft_putendl_fd("exit", STDOUT_FILENO);
 		ms_exit(FATAL, ms()->exit);
+	}
 	if (!non_numeric_exit(cmd->args[1]))
 	{
 		print_error("minishell: exit",
@@ -68,5 +71,6 @@ void	built_exit(t_cmd *cmd)
 	}
 	else
 		exit_code = (uint8_t)ft_atoi(cmd->args[1]);
+	ft_putendl_fd("exit", STDOUT_FILENO);
 	ms_exit(FATAL, exit_code);
 }

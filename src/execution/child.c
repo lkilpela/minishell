@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/13 23:40:02 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/15 11:02:32 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void	child(t_list *cmds, int *pipe_in)
 		safe_dup2(ms()->pipefd[P_WRITE], STDOUT_FILENO);
 	}
 	dupes(cmd);
+	close_fds();
 	exec_command(cmd);
 }

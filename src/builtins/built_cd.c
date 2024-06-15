@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/14 10:17:00 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/15 12:47:57 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,9 @@ static void	update_pwd(void)
 		last_pwd = ft_safe_strjoin("=", last_pwd);
 	old_pwd = ft_safe_strjoin("OLDPWD", last_pwd);
 	ft_free((void **)&last_pwd);
-	new_pwd = getcwd(NULL, 0);
-	if (!new_pwd)
-	{
-		print_error("minishell: cd", "getcwd", NULL, 1);
-		ms_exit(FATAL, -1);
-	}
+	new_pwd = safe_getcwd();
 	pwd = ft_safe_strjoin("PWD=", new_pwd);
-	free(new_pwd);
+	ft_free((void **)&new_pwd);
 	add_var(pwd, 1);
 	add_var(old_pwd, 1);
 }

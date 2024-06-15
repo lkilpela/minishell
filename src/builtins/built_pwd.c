@@ -14,11 +14,7 @@
 
 void	built_pwd(t_cmd *cmds)
 {
-	char	*pwd;
-
 	(void)cmds;
-	pwd = safe_getcwd();
-	ft_printf("%s\n", pwd);
-	ft_free((void **)&pwd);
+	ft_printf("%s\n", ms()->pwd);
 	ms()->exit = EXIT_SUCCESS;
 }

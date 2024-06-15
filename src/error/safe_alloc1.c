@@ -47,7 +47,12 @@ char	*safe_getcwd(void)
 
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
-		ft_error(EXIT_FAILURE);
+	{
+		if (errno != ENOENT)
+			ft_error(EXIT_FAILURE);
+		print_error(ERR_CD1, "getcwd", ERR_CD2, 1);
+		return (NULL);
+	}
 	add_to_lal((void *)pwd);
 	return (pwd);
 }

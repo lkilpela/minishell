@@ -35,6 +35,8 @@
 # define HD_EOF1 "here-document at line "
 # define HD_EOF2 " delimited by end-of-file (wanted `"
 # define HD_EOF3 "')"
+# define ERR_CD1 "cd: error retrieving current directory"
+# define ERR_CD2 "cannot access parent directories"
 # define ERR_FORK_QUIT "Quit (core dumped)\n"
 
 # define E_CODE_CMD_NEXEC 126

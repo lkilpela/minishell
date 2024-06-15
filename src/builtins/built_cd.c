@@ -18,23 +18,30 @@ static void	error_ret(char *msg)
 	ms()->exit = EXIT_FAILURE;
 }
 
-static void	update_pwd(void)
+static void	update_pwd(char *added)
 {
 	char		*old_pwd;
-	char		*last_pwd;
-	char		*pwd;
 	char		*new_pwd;
+	char		*pwd_var;
+	char		*tmp;
 
-	last_pwd = lookup_var("PWD");
-	if (last_pwd && *last_pwd != 0)
-		last_pwd = ft_safe_strjoin("=", last_pwd);
-	old_pwd = ft_safe_strjoin("OLDPWD", last_pwd);
-	ft_free((void **)&last_pwd);
-	new_pwd = safe_getcwd();
-	pwd = ft_safe_strjoin("PWD=", new_pwd);
-	ft_free((void **)&new_pwd);
-	add_var(pwd, 1);
+	pwd_var = lookup_var("PWD");
+	ft_free((void **)&ms()->oldpwd);
+	ms()->oldpwd = ms()->pwd;
+	ms()->pwd = safe_getcwd();
+	if (!ms()->pwd)
+	{
+		tmp = ft_safe_strjoin("/", added);
+		ms()->pwd = ft_safe_strjoin(ms()->oldpwd, tmp);
+		ft_free((void **)&tmp);
+	}
+	new_pwd = ft_safe_strjoin("PWD=", ms()->pwd);
+	old_pwd = ft_safe_strjoin("OLDPWD=", pwd_var);
+	ft_free((void **)&pwd_var);
+	add_var(new_pwd, 1);
 	add_var(old_pwd, 1);
+	ft_free((void **)&new_pwd);
+	ft_free((void **)&old_pwd);
 }
 
 void	built_cd(t_cmd *cmd)
@@ -48,7 +55,7 @@ void	built_cd(t_cmd *cmd)
 			return (error_ret(ERR_CD_HOME));
 		if (chdir(home) == 0)
 		{
-			update_pwd();
+			update_pwd(NULL);
 			ft_free((void **)&home);
 		}
 	}
@@ -60,7 +67,7 @@ void	built_cd(t_cmd *cmd)
 			ms()->exit = EXIT_FAILURE;
 			return ;
 		}
-		update_pwd();
+		update_pwd(cmd->args[1]);
 	}
 	ms()->exit = EXIT_SUCCESS;
 }

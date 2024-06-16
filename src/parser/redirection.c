@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 12:04:59 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/12 11:44:01 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/17 00:01:49 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,11 @@ static t_token_list	*handle_input_redir(t_cmd *cmd, t_token_list *tokens)
 	tokens = tokens->next;
 	if (tokens->type == WORD)
 	{
+		cmd->in_file.key = ft_safe_strdup(tokens->value);
 		val = exp_word(tokens->value);
-		if (is_ambiguous(val, tokens))
-			cmd->in_file.file = NULL;
-		else
-		{
-			val = handle_node_quotes(val);
-			tokens->value = val;
-			cmd->in_file.file = tokens->value;
-		}
+		val = handle_node_quotes(val);
+		tokens->value = val;
+		cmd->in_file.file = tokens->value;
 		add_redir(&cmd->in_file, cmd);
 	}
 	return (tokens);
@@ -59,15 +55,11 @@ static t_token_list	*handle_output_redir(t_cmd *cmd, t_token_list *tokens)
 	tokens = tokens->next;
 	if (tokens->type == WORD)
 	{
+		cmd->out_file.key = ft_safe_strdup(tokens->value);
 		val = exp_word(tokens->value);
-		if (is_ambiguous(val, tokens))
-			cmd->out_file.file = NULL;
-		else
-		{
-			val = handle_node_quotes(val);
-			tokens->value = val;
-			cmd->out_file.file = tokens->value;
-		}
+		val = handle_node_quotes(val);
+		tokens->value = val;
+		cmd->out_file.file = tokens->value;
 		add_redir(&cmd->out_file, cmd);
 	}
 	return (tokens);

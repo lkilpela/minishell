@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 04:06:04 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/05 13:59:31 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/16 23:58:18 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static int	contains_space(char *var)
 	return (0);
 }
 
-int	is_ambiguous(char *val, t_token_list *tokens)
+int	is_ambiguous(char *val, char *key)
 {
-	if (contains_space(val))
+	if (contains_space(val) || (val && !*val && key && *key == '$'))
 	{
-		print_error(ERR_MS, tokens->value, ERR_AMBIGUOUS, 0);
+		print_error(ERR_MS, key, ERR_AMBIGUOUS, 0);
 		ms()->exit = 1;
 		return (1);
 	}

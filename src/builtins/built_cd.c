@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 01:16:39 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/15 22:36:18 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/16 08:00:10 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	update_pwd(char *added)
 	ms()->pwd = safe_getcwd();
 	if (!ms()->pwd)
 	{
+		print_error(ERR_CD1, "getcwd", ERR_CD2, 1);
 		tmp = ft_safe_strjoin("/", added);
 		ms()->pwd = ft_safe_strjoin(ms()->oldpwd, tmp);
 		ft_free((void **)&tmp);

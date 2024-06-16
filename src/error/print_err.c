@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:27:56 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/15 22:33:41 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/16 07:42:21 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void	print_error(char *from, char *bad_arg, char *custom, int is_errno)
 		ft_putstr_fd(": ", 2);
 	}
 	if (custom)
-	{
 		ft_putstr_fd(custom, 2);
-		ft_putstr_fd(": ", 2);
-	}
 	if (is_errno)
+	{
+		ft_putstr_fd(": ", 2);
 		perror(NULL);
+	}
 	else
 		ft_putstr_fd("\n", 2);
 }

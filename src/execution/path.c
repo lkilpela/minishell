@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/16 08:26:47 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/17 01:19:06 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,18 @@ static void	fix_null_path(t_cmd *cmd)
 	}
 }
 
-static int	is_executable_file(const char *path)
+static int	is_executable_file(const char *path, t_cmd *cmd)
 {
 	struct stat	path_stat;
 
 	if (stat(path, &path_stat) != 0)
 		return (0);
-	if (S_ISREG(path_stat.st_mode) && (path_stat.st_mode & S_IXUSR))
-		return (1);
+	if (S_ISREG(path_stat.st_mode))
+	{
+		cmd->null_path = 2;
+		if (path_stat.st_mode & S_IXUSR)
+			return (1);
+	}
 	return (0);
 }
 
@@ -82,7 +86,7 @@ char	*find_executable(t_cmd *cmd)
 	while (ms()->paths[i])
 	{
 		tmp = ft_safe_strjoin(ms()->paths[i], command);
-		if (is_executable_file(tmp))
+		if (is_executable_file(tmp, cmd))
 		{
 			ft_free((void **)&command);
 			return (tmp);

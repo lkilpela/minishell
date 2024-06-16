@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:35:42 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/14 00:49:21 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/17 00:26:40 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,37 +30,50 @@ static char	*fix_path(char *file)
 {
 	char	*str;
 
-	if (*file != '/')
+	if (*file == '/')
+		return (ft_safe_strdup(*file));
+	if (*file)
 	{
 		str = ft_safe_strjoin("./", file);
 		return (str);
 	}
-	return (file);
+	return (ft_safe_strdup(""));
+}
+
+int	get_oflags(t_redir *file)
+{
+	if (file->append)
+		return ((O_CREAT | O_WRONLY | O_APPEND));
+	if (file->type == OUTFILE)
+		return ((O_CREAT | O_WRONLY | O_TRUNC));
+	if (file->type == INFILE)
+		return (O_RDONLY);
+	return (1);
 }
 
 static int	validate_redir(t_redir *file)
 {
-	int		oflags;
 	char	*path;
 
 	if (file->type == HEREDOC)
 		return (1);
-	if (file->type == INFILE)
-		oflags = O_RDONLY;
-	if (file->type == OUTFILE)
-		oflags = (O_CREAT | O_WRONLY | O_TRUNC);
-	if (file->append)
-		oflags = (O_CREAT | O_WRONLY | O_APPEND);
 	if (file->file)
 	{
+		if (is_ambiguous(file->file, file->key))
+			return (0);
 		path = fix_path(file->file);
-		file->fd = safe_open(path, oflags, 0644);
-		ft_free((void **)&path);
+		file->fd = safe_open(path, get_oflags(file), 0644);
 		if (file->fd == -1)
 		{
-			print_error(ERR_MS, file->file, NULL, 1);
+			if (errno == EACCES)
+				print_error(ERR_MS, file->file, NULL, 1);
+			else if (is_dir(path))
+				print_error(ERR_MS, file->file, ERR_DIR, 0);
+			else
+				print_error(ERR_MS, file->file, ERR_FILE, 0);
 			return (0);
 		}
+		ft_free((void **)&path);
 	}
 	else
 		file->fd = -1;

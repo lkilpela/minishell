@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/12 06:53:39 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/16 22:24:53 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ t_cmd	*init_cmd(t_token_list *tokens)
 	cmd->arg_index = 1;
 	cmd->in_file.fd = -1;
 	cmd->out_file.fd = -1;
+	cmd->out_file.key = NULL;
+	cmd->in_file.key = NULL;
 	get_all_redir(tokens, cmd);
 	return (cmd);
 }

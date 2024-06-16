@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:28 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/15 12:49:36 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/16 23:55:27 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ t_token_list	*handle_heredoc(t_cmd *cmd, t_token_list *tokens);
 char			*handle_node_quotes(char *val);
 void			clear_token_quotes(t_token_list *tokens);
 int				has_quotes(char *value);
-int				is_ambiguous(char *val, t_token_list *tokens);
+int				is_ambiguous(char *val, char *key);
+int				is_dir(const char *path);
 
 // execution
 char			**get_path_dirs(void);

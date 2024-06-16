@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 22:35:42 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/17 00:26:40 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/17 00:31:36 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*fix_path(char *file)
 	char	*str;
 
 	if (*file == '/')
-		return (ft_safe_strdup(*file));
+		return (ft_safe_strdup(file));
 	if (*file)
 	{
 		str = ft_safe_strjoin("./", file);

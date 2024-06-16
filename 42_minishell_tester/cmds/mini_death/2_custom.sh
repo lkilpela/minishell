@@ -23,3 +23,26 @@ echo $?
 PATH=$HOME
 grep
 echo $?
+
+<$a cat
+
+>$daw cat
+
+>>$wwdaa cat
+
+>>"" cat
+
+>"" cat
+
+>'' cat
+
+>>'' cat
+
+<"" cat
+
+<'' cat
+
+export m="echo lol"
+<$m cat
+>$m cat
+>>$m cat

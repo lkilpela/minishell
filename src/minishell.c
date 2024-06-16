@@ -44,6 +44,7 @@ static void	minishell_loop(void)
 		input = readline(GREEN PROMPT RESET);
 		if (input == NULL)
 			built_exit(NULL);
+		add_to_lal(input);
 		rl_history(input);
 		if (all_good && !quote_match_check(input))
 			all_good = ms_exit(RELINE, E_CODE_SYNTX);
@@ -53,7 +54,7 @@ static void	minishell_loop(void)
 			all_good = ms_exit(RELINE, E_CODE_SYNTX);
 		if (all_good)
 			run_commands();
-		free(input);
+		ft_free((void **)&input);
 		ms_exit(RELINE, -1);
 	}
 }

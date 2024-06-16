@@ -23,6 +23,9 @@ THREE=0
 GOOD_TEST=0
 LEAKS=0
 
+STDOUT_LOG="stdout.log"
+STDERR_LOG="stderr.log"
+
 main() {
 	if [[ ! -f $MINISHELL_PATH/$EXECUTABLE ]] ; then
 		echo -e "\033[1;31m# **************************************************************************** #"
@@ -100,6 +103,8 @@ test_mandatory_leaks() {
 
 test_mandatory() {
 	FILES="${RUNDIR}/cmds/mand/*"
+	rm -f $STDOUT_LOG
+	rm -f $STDERR_LOG
 	for file in $FILES
 	do
 		test_from_file $file
@@ -108,6 +113,8 @@ test_mandatory() {
 
 test_mini_death() {
 	FILES="${RUNDIR}/cmds/mini_death/*"
+	rm -f $STDOUT_LOG
+	rm -f $STDERR_LOG
 	for file in $FILES
 	do
 		test_from_file $file
@@ -188,6 +195,33 @@ test_from_file() {
 				end_of_file=$?
 				((line_count++))
 			done
+			# Log the input
+			echo "" >> "$STDOUT_LOG"
+			echo "# **************************************************************************** #" >> "$STDOUT_LOG"
+			echo "" >> "$STDERR_LOG"
+			echo "# **************************************************************************** #" >> "$STDERR_LOG"
+			echo "Test $i - Input:" >> "$STDOUT_LOG"
+			echo -e "$INPUT" >> "$STDOUT_LOG"
+			echo "Test $i - Input:" >> "$STDERR_LOG"
+			echo -e "$INPUT" >> "$STDERR_LOG"
+
+			# Execute and capture outputs
+			echo -n "$INPUT" | $MINISHELL_PATH/$EXECUTABLE 2>tmp_err_minishell >tmp_out_minishell
+			exit_minishell=$?
+			echo -n "enable -n .$NL$INPUT" | bash 2>tmp_err_bash >tmp_out_bash
+			exit_bash=$?
+			
+			# Log the outputs
+			echo "Test $i - Minishell Output:" >> "$STDOUT_LOG"
+			cat tmp_out_minishell >> "$STDOUT_LOG"
+			echo "Test $i - Bash Output:" >> "$STDOUT_LOG"
+			cat tmp_out_bash >> "$STDOUT_LOG"
+			
+			echo "Test $i - Minishell Error:" >> "$STDERR_LOG"
+			cat tmp_err_minishell >> "$STDERR_LOG"
+			echo "Test $i - Bash Error:" >> "$STDERR_LOG"
+			cat tmp_err_bash >> "$STDERR_LOG"
+
 			# INPUT=${INPUT%?}
 			echo -n "$INPUT" | $MINISHELL_PATH/$EXECUTABLE 2>tmp_err_minishell >tmp_out_minishell
 			exit_minishell=$?

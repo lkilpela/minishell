@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 10:11:14 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/14 00:37:57 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/16 08:25:21 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ typedef enum e_quote_type
 typedef struct s_cmd
 {
 	char	*command;
+	int		null_path;
 	int		num_of_args;
 	t_redir	in_file;
 	t_redir	out_file;

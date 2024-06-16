@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:16:21 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/16 07:39:04 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/16 08:26:47 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ char	**get_path_dirs(void)
 	return (NULL);
 }
 
-static void	fix_null_path(void)
+static void	fix_null_path(t_cmd *cmd)
 {
 	char	*cwd;
 
 	if (ms()->paths == NULL)
 	{
+		cmd->null_path = 1;
 		cwd = safe_getcwd();
 		ms()->paths = ft_safe_calloc(2, sizeof(char *));
 		if (!cwd)
@@ -77,7 +78,7 @@ char	*find_executable(t_cmd *cmd)
 	tmp = NULL;
 	i = 0;
 	command = ft_safe_strjoin("/", cmd->command);
-	fix_null_path();
+	fix_null_path(cmd);
 	while (ms()->paths[i])
 	{
 		tmp = ft_safe_strjoin(ms()->paths[i], command);

@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 05:02:31 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/16 08:29:05 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/17 00:54:39 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ static void	exec_command(t_cmd *cmd)
 	if (cmd->exec_path == NULL)
 	{
 		if (cmd->null_path)
-			print_error(ERR_MS, cmd->command, NULL, 1);
-		else
-			print_error(cmd->command, NULL, ERR_CMD, 0);
+		{
+			print_error(ERR_MS, cmd->command, ERR_PERM, 0);
+			ms_exit(FATAL, E_CODE_CMD_NEXEC);
+		}
+		print_error(cmd->command, NULL, ERR_CMD, 0);
 		ms_exit(FATAL, E_CODE_CMD_NFOUND);
 	}
 	if (execve(cmd->exec_path, cmd->args, build_envp()) != 0)

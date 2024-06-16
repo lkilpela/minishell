@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/02 22:50:18 by aklein            #+#    #+#             */
-/*   Updated: 2024/06/13 13:24:03 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/17 00:50:54 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define ERR_WAITPID "waitpid failed"
 # define ERR_FILE "No such file or directory"
 # define ERR_CMD "command not found"
-# define ERR_DIR "is a directory"
-# define ERR_PERM "permission denied"
+# define ERR_DIR "Is a directory"
+# define ERR_PERM "Permission denied"
 # define HD_EOF1 "here-document at line "
 # define HD_EOF2 " delimited by end-of-file (wanted `"
 # define HD_EOF3 "')"

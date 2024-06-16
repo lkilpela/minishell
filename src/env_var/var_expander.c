@@ -6,7 +6,7 @@
 /*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/15 10:30:18 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/16 21:58:13 by aklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ char	*exp_next_var(char *var, char **start)
 	ft_free((void **)&value);
 	final = ft_safe_strjoin(new, skip_variable(var));
 	ft_free((void **)&new);
-	ft_free((void **)start);
 	*start = final;
 	return (*start + ret_index);
 }

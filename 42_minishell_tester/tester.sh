@@ -5,6 +5,7 @@ export EXECUTABLE=minishell
 export MINISHELL_PATH=$HOME/workspace/git/minishell
 if [[ ! -f $MINISHELL_PATH/$EXECUTABLE ]] ; then
 	export MINISHELL_PATH=/workspaces/minishell
+fi
 if [[ ! -f $MINISHELL_PATH/$EXECUTABLE ]] ; then
 	export MINISHELL_PATH=$HOME/minishell
 RUNDIR=$MINISHELL_PATH/42_minishell_tester

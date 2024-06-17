@@ -62,3 +62,7 @@ unset PWD
 export grep PWD
 /workspaces/minishell/minishell
 export grep PWD
+
+echo $" "'$HOME $PWD'
+
+echo $""

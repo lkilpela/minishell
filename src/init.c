@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/16 22:24:53 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/17 12:50:23 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	init_minishell(int argc, char **argv, char **envp)
 	ms()->exit = 0;
 	ms()->executable = ft_strrchr(argv[0], '/') + 1;
 	ms()->pwd = safe_getcwd();
+	if (!var_declared("PWD"))
+		add_var(ft_safe_strjoin("PWD=", ms()->pwd), 0);
+	if (!var_declared("OLDPWD"))
+		add_var("OLDPWD", 0);
 	get_envp(envp);
 	init_builtins();
 	shlvl();

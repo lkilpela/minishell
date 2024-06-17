@@ -46,3 +46,19 @@ export m="echo lol"
 <$m cat
 >$m cat
 >>$m cat
+
+/workspaces/minishell/minishell
+cd ..
+export | grep PWD
+unset OLDPWD
+export | grep PWD
+/workspaces/minishell/minishell
+export | grep PWD
+env | grep PWD
+
+/workspaces/minishell/minishell
+export | grep PWD
+unset PWD
+export grep PWD
+/workspaces/minishell/minishell
+export grep PWD

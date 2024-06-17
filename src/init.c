@@ -6,11 +6,26 @@
 /*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 11:04:00 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/17 12:50:23 by lkilpela         ###   ########.fr       */
+/*   Updated: 2024/06/17 17:29:05 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static void	init_pwd(void)
+{
+	char	*tmp;
+
+	ms()->pwd = safe_getcwd();
+	if (!var_declared("PWD"))
+	{
+		tmp = ft_safe_strjoin("PWD=", ms()->pwd);
+		add_var(tmp, 0);
+		ft_free((void **)&tmp);
+	}
+	if (!var_declared("OLDPWD"))
+		add_var("OLDPWD", 0);
+}
 
 void	init_minishell(int argc, char **argv, char **envp)
 {
@@ -20,12 +35,8 @@ void	init_minishell(int argc, char **argv, char **envp)
 	ms()->paths = NULL;
 	ms()->exit = 0;
 	ms()->executable = ft_strrchr(argv[0], '/') + 1;
-	ms()->pwd = safe_getcwd();
-	if (!var_declared("PWD"))
-		add_var(ft_safe_strjoin("PWD=", ms()->pwd), 0);
-	if (!var_declared("OLDPWD"))
-		add_var("OLDPWD", 0);
 	get_envp(envp);
+	init_pwd();
 	init_builtins();
 	shlvl();
 }

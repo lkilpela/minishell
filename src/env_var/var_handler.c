@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 11:33:55 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/10 03:04:57 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/17 17:24:29 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,12 @@ char	**build_envp(void)
 	{
 		if (!vars->is_local)
 		{
-			tmp = ft_safe_strjoin(vars->key, "=");
-			envs[i++] = ft_safe_strjoin(tmp, vars->value);
-			ft_free((void **)&tmp);
+			if (vars->is_set && *vars->value)
+			{
+				tmp = ft_safe_strjoin(vars->key, "=");
+				envs[i++] = ft_safe_strjoin(tmp, vars->value);
+				ft_free((void **)&tmp);
+			}
 		}
 		vars = vars->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expander.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aklein <aklein@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: lkilpela <lkilpela@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 11:41:46 by lkilpela          #+#    #+#             */
-/*   Updated: 2024/06/16 21:58:13 by aklein           ###   ########.fr       */
+/*   Updated: 2024/06/17 13:34:40 by lkilpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	special_case_dollar(char *var)
 	if (*var == '$')
 	{
 		var++;
-		if (*var == 0)
+		if (*var == 0 || *var == '\'' || *var == '\"')
 			return (1);
 		if (*var == '_' || *var == '?')
 			return (0);

@@ -56,3 +56,9 @@ You'll be greeted by the MiniShell prompt, where you can start typing and execut
 
 
 ### 🧑‍💻 Peer Evaluations (3/3)
+
+> **Peer 1**: "Great job! Your code is well organized and you were able to provide good explanations. There was one leak from readline which is explictly mentioned in the subject as not your problem. No other leaks were found. We tried a lot of different combinations of redirections, heredocs and pipes and everything works well. Good job with env variable handling as well. Good luck on the next project."
+
+> **Peer 2**: "This project was really well done! They both show good commands/knowledge about the program that they wrote. Also, because I am also currently working on this project, so it helped me clear with some ideas/approach with my own program as well! We went through the evaluation sheet and tested each cases according the sheet. I didn't know much of the edge cases so I was only testing based on the sheets and they handled all the tests that I did and more! good job!"
+
+> **Peer 3**: "Very nice looking minishell. Clever way of using a function that returns a pointer to their struct and allowed handling signals without using a global variable. Tested all cases in the evaluation sheet and then some more. They also handled local variables. Valgrind only showed readline leaking. We briefly looked at the code as well. Keep up the good work!"

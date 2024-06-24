@@ -28,7 +28,7 @@ The MiniShell project is a hands-on initiative aimed at creating a simple, yet f
 
 ### Mindmap
 
-![MindMap](doc/Mind Maps.jpg "This is project mindmap")
+![MindMap](doc/Mind_Maps.jpg "This is project mindmap")
 
 ## 🏁 Getting Started
 ### Prerequisites

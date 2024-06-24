@@ -26,6 +26,10 @@ This project is co-written by Allar K. & Lumi K.
 
 The MiniShell project is a hands-on initiative aimed at creating a simple, yet functional shell, similar to a lightweight bash. This project is an excellent opportunity to delve into the intricacies of processes and file descriptors, offering a practical learning experience in system programming and command line interface development.
 
+### Mindmap
+
+![MindMap](doc/Mind Maps.jpg "This is project mindmap")
+
 ## 🏁 Getting Started
 ### Prerequisites
 - `gcc` or `clang`

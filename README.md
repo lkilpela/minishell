@@ -22,7 +22,7 @@
 
 ## 🐚 About The Project
 
-This project is co-written by Allar K. & Lumi K.
+**This project is co-written by Allar K. & Lumi K.**
 
 The MiniShell project is a hands-on initiative aimed at creating a simple, yet functional shell, similar to a lightweight bash. This project is an excellent opportunity to delve into the intricacies of processes and file descriptors, offering a practical learning experience in system programming and command line interface development.
 
@@ -53,6 +53,31 @@ After compiling the project, you can start the MiniShell by running the followin
 You'll be greeted by the MiniShell prompt, where you can start typing and executing commands, exploring the functionalities of your custom shell.
 
 ## 📝 Evaluation Requirements
+
+The MiniShell project will be evaluated based on the following criteria:
+
+1. **Functionality**: 
+   - Correct implementation of basic shell commands (e.g., `cd`, `ls`, `echo`).
+   - Ability to execute external programs.
+   - Proper handling of environment variables.
+
+2. **Process Management**:
+   - Correct implementation of process creation and management.
+   - Implementation of job control, including foreground and background processes.
+
+3. **File Descriptor and Redirection**:
+   - Proper handling of standard input, output, and error redirections.
+   - Implementation of pipelines between commands.
+
+4. **Signal Handling**:
+   - Correct handling of signals such as `SIGINT` (Ctrl+C) and `SIGQUIT` (Ctrl+\).
+
+5. **Memory Management**:
+   - Efficient memory usage and no memory leaks.
+
+6. **Coding Style and Documentation**:
+   - Code should be well-organized and readable.
+   - Adequate documentation and comments explaining the logic and flow of the program.
 
 
 ### 🧑‍💻 Peer Evaluations (3/3)
